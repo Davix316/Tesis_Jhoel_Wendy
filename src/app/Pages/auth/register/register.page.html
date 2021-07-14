@@ -5,5 +5,54 @@
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="myFormUser" (ngSubmit)="register(myFormUser.value)" >
+    <ion-item lines="full">
+      <ion-label position="floating" >Nombre</ion-label>
+      <ion-input type="text" class="" required formControlName="nombre"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Apellido</ion-label>
+      <ion-input type="text" required formControlName="apellido"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Numero Unico</ion-label>
+      <ion-input type="number" required placeholder="Num unico EPN" formControlName="numUnico"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Carrera</ion-label>
+      <ion-select class="custom-options" formControlName="carrera">
+        <ion-select-option value="TSASA">TSASA - Agua y Saneamiento Ambiental</ion-select-option>
+        <ion-select-option value="TSDS">TSDS - Desarrollo de Software</ion-select-option>
+        <ion-select-option value="TSRT">TSRT - Redes y Telecomunicaciones </ion-select-option>
+        <ion-select-option value="TSEM">TSEM - Electromecánica</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input type="email" class="form-control" required placeholder="Email" formControlName="email"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Password</ion-label>
+      <ion-input type="password" required formControlName="password"></ion-input>
+    </ion-item>
+    <ion-item>
+      
+    <ion-label>
+      <h3 position="floating">Rol</h3>
+      <p>Estudiante</p>
+    </ion-label>
+  </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" [disabled]="!myFormUser.valid" color="primary" expand="block">Enviar</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
 
 </ion-content>
