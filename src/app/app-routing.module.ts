@@ -20,9 +20,10 @@ const routes: Routes = [
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
-    path: 'register',
-    loadChildren: () => import('./Pages/auth/register/register.module').then( m => m.RegisterPageModule)
-  }
+    path: 'reset-password',
+    loadChildren: () => import('./Pages/auth/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+  },
+
 ];
 
 @NgModule({

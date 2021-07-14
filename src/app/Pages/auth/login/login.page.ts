@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FireauthService } from 'src/app/services/fireauth.service';
 
@@ -8,13 +9,13 @@ import { FireauthService } from 'src/app/services/fireauth.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
+formLogin=new FormGroup({});
   constructor( public authService: FireauthService,public router: Router) { }
 
   ngOnInit() {
   }
   logIn(email, password) {
-    this.authService.SignIn(email.value, password.value)
+    this.authService.signIn(email.value, password.value)
       .then((res) => {
         if(res) {
           this.router.navigate(['menu']);
