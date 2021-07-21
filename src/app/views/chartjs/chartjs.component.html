@@ -1,0 +1,48 @@
+<div class="animated fadeIn">
+  <div>
+    <div class="card">
+      <div class="card-header" style="text-align: center;">
+        <h2>Administradores</h2>
+      </div>
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-2">
+            <a href="#/theme/colors">
+              <button type="button" class="btn btn-success">Agregar nuevo</button>
+            </a>
+          </div>
+        </div>
+        <br>
+
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Start Date</th>
+                <th class="d-none d-sm-block" scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="table-info" *ngFor="let item of [0,1,2,3,4]">
+              </tr>
+              <tr class="table-info">
+                <th scope="row">JJAS</th>
+                <td>J</td>
+                <td>DATE</td>
+                <td class="bnt-group d-none d-sm-block" role="group">
+                  <button type="button" class="btn btn-outline-warning m-1" (click)="onGoToEdit(item)">Edit</button>
+                  <button type="button" class="btn btn-outline-warning m-1" (click)="onGoToSee(item)">See</button>
+                  <button type="button" class="btn btn-outline-danger m-1" (click)="onGoToDelete(item.id)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

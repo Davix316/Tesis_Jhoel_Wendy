@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "tesis-3fc38": {
+      "hosting": {
+        "ng": [
+          "tesis-3fc38"
+        ]
+      }
+    }
+  }
+}

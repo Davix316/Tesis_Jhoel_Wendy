@@ -1,0 +1,80 @@
+<div class="animated fadeIn">
+  <div>
+    <div class="card">
+      <div class="card-header" style="text-align: center;">
+        <h2>PERFIL</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-4">
+            <div class="card" style="width: 15rem;">
+              <img src="assets/img/imagenes/user.png" class="img-fluid" alt="imagen">
+              <div class="card-body">
+                <h5 class="card-title">{{name}}</h5>
+                <input type="file" class="form-control-file" id="foto">
+                <br>
+                <button class="btn-danger"><i class="cil-trash"></i> Eliminar</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-8">
+            <form>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="exampleFormControlInput1">Nombres</label>
+                  <input type="text" class="form-control" id="names" placeholder="Juan Francisco" required>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="exampleFormControlInput1">Apellidos</label>
+                  <input type="text" class="form-control" id="lastnames" placeholder="Haro Sánchez" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="exampleFormControlInput1">Fecha de Nacimiento</label>
+                  <input class="form-control" type="date" value="2000-01-01" id="fechaNacimiento">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="exampleFormControlInput1">Teléfono</label>
+                  <input class="form-control" type="tel" placeholder="0987654321" id="telef">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="exampleFormControlInput1">Email</label>
+                  <input class="form-control" type="email" placeholder="ejemplo@hotmail.com" id="email">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="carrera">Carrera</label>
+                  <select class="form-control" id="carrera">
+                    <option>ASI</option>
+                    <option>ET</option>
+                    <option>ASA</option>
+                    <option>TELE</option>
+                    <option>5</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="exampleFormControlInput1">Semestre referencial</label>
+                  <input class="form-control" type="number" placeholder="4" id="semestre">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <button class="btn btn-success" type="submit">Guardar Cambios</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/.row-->
+</div>

@@ -1,0 +1,75 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header" style="text-align: center;">
+       <h2><i class="cil-plus"></i> Nuevo Estudiante</h2> 
+    </div>
+    <div class="card-body">
+      <form>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="exampleFormControlInput1">Nombres</label>
+            <input type="text" class="form-control" id="names" placeholder="Juan Francisco" required >
+          </div>
+          <div class="form-group col-md-6">
+            <label for="exampleFormControlInput1">Apellidos</label>
+            <input type="text" class="form-control" id="lastnames" placeholder="Haro Sánchez" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="exampleFormControlInput1">Fecha de Nacimiento</label>
+            <input class="form-control" type="date" value="2000-01-01" id="fechaNacimiento">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="exampleFormControlInput1">Teléfono</label>
+            <input class="form-control" type="tel" placeholder="0987654321" id="telef">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="exampleFormControlInput1">Email</label>
+            <input class="form-control" type="email" placeholder="ejemplo@hotmail.com" id="email">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="exampleFormControlInput1">Código único EPN</label>
+            <input class="form-control" type="number" placeholder="201521843" id="codEpn">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="carrera">Carrera</label>
+            <select class="form-control" id="carrera">
+              <option>ASI</option>
+              <option>ET</option>
+              <option>ASA</option>
+              <option>TELE</option>
+              <option>5</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="exampleFormControlInput1">Semestre referencial</label>
+            <input class="form-control" type="number" placeholder="4" id="semestre">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="foto">Foto de perfil</label>
+            <input type="file" class="form-control-file" id="foto">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <button class="btn btn-success" type="submit">Crear cuenta</button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,96 @@
+<div class="app-body" style="background-color: white;">
+  <main class="main align-items-center">
+    <div style="text-align: center; margin: auto; padding: 10px 0px;">
+      <div class="row">
+        <div class="col-4">
+          <img src="assets/img/imagenes/epn_logo.png" style="max-width: 40%" alt="epn_logo">
+        </div>
+        <div class="col-4" style="margin: auto;">
+          <h1>HOLA MUNDO</h1>
+        </div>
+        <div class="col-4">
+          <img src="assets/img/imagenes/esfot_logo.png" style="max-width: 40%" alt="esfot_logo">
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align: center; max-height: 20%;">
+      <img src="assets/img/imagenes/estudiante.jpg" style="max-width: 33%" alt="est1">
+      <img src="assets/img/imagenes/estudiante1.jpg" style="max-width: 33%" alt="est2">
+      <img src="assets/img/imagenes/estudiante2.jpg" style="max-width: 33%" alt="est3">
+    </div>
+
+    <div style="margin:50px 15% -100px 15%;">
+      <div class="row" style="margin-bottom: -100px;">
+        <div class="col-md-6" style="padding-right: 0px;">
+          <div class="card text-white" style="width:100%; background-color: rgb(81, 136, 184);">
+            <div class="card-body text-center">
+              <div>
+                <h2>¿Quiénes Somos?</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                  et
+                  dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                  incididunt ut labore et
+                  dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                  incididunt ut labore et
+                  dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                  incididunt ut labore et
+                  dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                  incididunt ut labore et
+                  dolore magna aliqua.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6" style="padding-left: 0px;">
+          <div class="card p-4" style="width:100%; text-align: center;">
+            <div class="card-body">
+
+
+              <form [formGroup]="myFormUser" (ngSubmit)="loginUser()">
+                <h3 class="box-title m-b-20">Iniciar Sesión</h3>
+                <div class="form-group">
+                  <div class="col-xs-12">
+                    <input class="form-control" type="email" required placeholder="Correo" formControlName="usuarioF"
+                      [class]="isValidField('usuarioF')">
+
+                    <div class="invalid-feedback">
+                      <span *ngIf="myFormUser.get('usuarioF').errors?.required">
+                        Ingrese tu poli-email.
+                      </span>
+                      <span *ngIf="myFormUser.get('usuarioF').errors?.pattern">
+                        Ingrese un poli-email que sea valido.
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div class="col-xs-12">
+                    <input class="form-control" type="password" placeholder="Contraseña" required
+                      formControlName="passwordF"  [class]="isValidField('passwordF')">
+                      <div class="invalid-feedback">
+                        <span *ngIf="myFormUser.get('passwordF').errors?.required">
+                          Ingrese la contraseña.
+                        </span>
+                      </div>
+                  </div>
+                </div>
+
+                <div class="form-group text-center">
+                  <div class="col-xs-12 p-b-20">
+                    <button class="btn btn-block btn-lg btn-primary btn-rounded" type="submit">Ingresar</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
