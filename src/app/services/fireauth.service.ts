@@ -32,7 +32,7 @@ signIn(email,password){
        //add the user to the database
        this.firestore.collection('Usuarios').add(usuario)
        .then(user => {
-        this.router.navigate(['menu']);
+        this.router.navigate(['/login']);
          user.get().then(x => {
           //return the user data
           console.log(x.data());

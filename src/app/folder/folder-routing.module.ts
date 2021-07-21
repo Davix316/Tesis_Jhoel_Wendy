@@ -5,9 +5,36 @@ import { FolderPage } from './folder.page';
 
 const routes: Routes = [
   {
-    path: '',
-    component: FolderPage
-  }
+    path: 'menu',
+    component: FolderPage,
+    children:[
+      {
+        path: 'news',
+        loadChildren: () => import('./news/news.module').then( m => m.NewsPageModule)
+      },
+      {
+        path: 'materias',
+        loadChildren: () => import('./materias/materias.module').then( m => m.MateriasPageModule)
+      },
+      {
+        path: 'favoritos',
+        loadChildren: () => import('./favoritos/favoritos.module').then( m => m.FavoritosPageModule)
+      },
+      {
+        path: 'chat',
+        loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
+      },
+      {
+        path: 'perfil',
+        loadChildren: () => import('../Pages/auth/perfil/perfil.module').then( m => m.PerfilPageModule)
+      },
+      {
+        path: '',
+        redirectTo: '/menu/news',
+        pathMatch: 'full'
+      }
+    ]
+  },
 ];
 
 @NgModule({

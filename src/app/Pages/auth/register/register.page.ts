@@ -16,10 +16,13 @@ export class RegisterPage implements OnInit {
   public myFormUser=new FormGroup({
     nombre: new FormControl('',[Validators.required]),
     apellido: new FormControl('',[Validators.required]),
+    telefono: new FormControl('',[Validators.required]),
     numUnico: new FormControl('',[Validators.required]),
     carrera: new FormControl('',[Validators.required]),
     email: new FormControl('',[Validators.required, Validators.pattern(this.emailPattern)]),
     password: new FormControl('',[Validators.required,Validators.minLength(6)]),
+    semestreRef: new FormControl('',[Validators.required]),
+    foto: new FormControl('',[Validators.required]),
     rol: new FormControl('',[Validators.required]),
 
   });

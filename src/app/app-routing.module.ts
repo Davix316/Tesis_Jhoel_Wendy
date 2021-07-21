@@ -11,18 +11,35 @@ const routes: Routes = [
     path: 'register', loadChildren:()=>import('./Pages/auth/register/register.module').then(m=>m.RegisterPageModule)
   },
   {path:'', redirectTo:'login', pathMatch:'full'},
-  {
+  /* {
     path: 'menu',
-    redirectTo: 'folder/Inbox'
-  },
+    redirectTo: 'news'
+  }, */
   {
-    path: 'folder/:id',
+    path: '',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
   {
     path: 'reset-password',
     loadChildren: () => import('./Pages/auth/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
   },
+
+    /*{
+   path: 'news',
+    loadChildren: () => import('./folder/news/news.module').then(m=>m.NewsPageModule)
+  },
+  {
+    path: 'materias',
+    loadChildren: () => import('./folder/materias/materias.module').then(m=>m.MateriasPageModule)
+  },
+  {
+    path: 'mensajes',
+    loadChildren: () => import('./folder/chat/chat.module').then( m => m.ChatPageModule)
+  },
+  {
+    path: 'favoritos',
+    loadChildren: () => import('./folder/favoritos/favoritos.module').then( m => m.FavoritosPageModule)
+  }, */
 
 ];
 
