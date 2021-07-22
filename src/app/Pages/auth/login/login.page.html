@@ -1,26 +1,41 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
+
 </ion-header>
 
-<ion-content>
-  <form >
-    <ion-item lines="full">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="text" #email required></ion-input>
-    </ion-item>
+<ion-content >
+  <img src="/assets/background/login.png"  alt="">
+  <br>
+  <div class="container">
+  <ion-row>
+    <ion-col routerLink="/login" routerLinkActive="activo"><b>Login</b></ion-col>
+    <ion-col routerLink="/register"><b>Registro</b></ion-col>
+  </ion-row>
+</div>
 
-    <ion-item lines="full">
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" #password required></ion-input>
-    </ion-item>
-    <ion-row>
-      <ion-col>
-      <ion-button type="submit" (click)="logIn(email, password)" expand="full" fill="outline">Login</ion-button>
-      </ion-col>
-    </ion-row>
-    </form>
+<ion-card>
+  <ion-card-header>
+    <ion-card-title> <b>LOGIN</b></ion-card-title>
+  </ion-card-header>
 
-  <ion-button expand="full" fill="outline"  routerLink="/register">Registrarse</ion-button>
+  <ion-card-content>
+    <form >
+      <ion-item lines="full">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="text" #email required></ion-input>
+      </ion-item>
+
+      <ion-item lines="full">
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" #password required></ion-input>
+      </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" (click)="logIn(email, password)" expand="block" class="boton" >Ingresar</ion-button>
+        </ion-col>
+      </ion-row>
+
+      </form>
+  </ion-card-content>
+</ion-card>
+
 </ion-content>

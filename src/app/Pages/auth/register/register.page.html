@@ -1,77 +1,91 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>register</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Registro</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="myFormUser" (ngSubmit)="register(myFormUser.value)" >
-    <ion-item lines="full">
-      <ion-label position="floating" >Nombre</ion-label>
-      <ion-input type="text" class="" required formControlName="nombre"></ion-input>
-    </ion-item>
+  <ion-card>
+      <ion-card-content>
 
-    <ion-item lines="full">
-      <ion-label position="floating">Apellido</ion-label>
-      <ion-input type="text" required formControlName="apellido"></ion-input>
-    </ion-item>
-    <ion-item lines="full">
-      <ion-label position="floating">teléfono</ion-label>
-      <ion-input type="number" required formControlName="telefono"></ion-input>
-    </ion-item>
+        <form [formGroup]="myFormUser" (ngSubmit)="register(myFormUser.value)" >
 
-    <ion-item lines="full">
-      <ion-label position="floating">Numero Unico</ion-label>
-      <ion-input type="number" required placeholder="Num unico EPN" formControlName="numUnico"></ion-input>
-    </ion-item>
+          <ion-item lines="full">
+            <ion-label position="floating" >Nombre</ion-label>
+            <ion-input type="text" class="" required formControlName="nombre"></ion-input>
+          </ion-item>
 
-    <ion-item lines="full">
-      <ion-label position="floating">Carrera</ion-label>
-      <ion-select class="custom-options" formControlName="carrera">
-        <ion-select-option value="TSASA">TSASA - Agua y Saneamiento Ambiental</ion-select-option>
-        <ion-select-option value="TSDS">TSDS - Desarrollo de Software</ion-select-option>
-        <ion-select-option value="TSRT">TSRT - Redes y Telecomunicaciones </ion-select-option>
-        <ion-select-option value="TSEM">TSEM - Electromecánica</ion-select-option>
-      </ion-select>
-    </ion-item>
 
-    <ion-item lines="full">
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" class="form-control" required placeholder="Email" formControlName="email"></ion-input>
-    </ion-item>
 
-    <ion-item lines="full">
-      <ion-label position="floating">Password</ion-label>
-      <ion-input type="password" required formControlName="password"></ion-input>
-    </ion-item>
+          <ion-item lines="full">
+            <ion-label position="floating">Apellido</ion-label>
+            <ion-input type="text" required formControlName="apellido"></ion-input>
+          </ion-item>
 
-       <ion-item lines="full">
-      <ion-label position="floating">Semestre referencial</ion-label>
-      <ion-select required formControlName="semestreRef">
-        <ion-select-option value="1">1ro</ion-select-option>
-        <ion-select-option value="2">2do</ion-select-option>
-        <ion-select-option value="3">3ro</ion-select-option>
-        <ion-select-option value="4">4to</ion-select-option>
-        <ion-select-option value="5">5to</ion-select-option>
-        <ion-select-option value="graduado">Graduado</ion-select-option>
-      </ion-select>
-    </ion-item>
 
-    <ion-item >
-      <ion-label >Foto de perfil</ion-label><p>
-      <ion-input  required class="form-control form-control-sm " id="formFileSm" type="file"></ion-input>
-    </ion-item>
+          <ion-item lines="full">
+            <ion-label position="floating">teléfono</ion-label>
+            <ion-input type="number" required formControlName="telefono"></ion-input>
+          </ion-item>
 
-    <ion-row>
-      <ion-col >
-        <ion-button type="submit"  color="primary" expand="block">Enviar</ion-button>
-      </ion-col>
-    </ion-row>
+          <ion-item lines="full">
+            <ion-label position="floating">Numero Unico</ion-label>
+            <ion-input type="number" required placeholder="Num unico EPN" formControlName="numUnico"></ion-input>
+          </ion-item>
 
-    <ion-col>
-      <a routerLink="/login" color="primary" expand="block">Iniciar Sesión</a>
-    </ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating">Carrera</ion-label>
+            <ion-select class="custom-options" formControlName="carrera">
+              <ion-select-option value="TSASA">TSASA - Agua y Saneamiento Ambiental</ion-select-option>
+              <ion-select-option value="TSDS">TSDS - Desarrollo de Software</ion-select-option>
+              <ion-select-option value="TSRT">TSRT - Redes y Telecomunicaciones </ion-select-option>
+              <ion-select-option value="TSEM">TSEM - Electromecánica</ion-select-option>
+            </ion-select>
+          </ion-item>
 
-  </form>
+          <ion-item lines="full">
+            <ion-label position="floating">Email</ion-label>
+            <ion-input type="email"  required formControlName="email"></ion-input>
+          </ion-item>
+
+          <ion-item lines="full">
+            <ion-label position="floating">Password</ion-label>
+            <ion-input type="password" required formControlName="password"></ion-input>
+          </ion-item>
+
+             <ion-item lines="full">
+            <ion-label position="floating">Semestre referencial</ion-label>
+            <ion-select required formControlName="semestreRef">
+              <ion-select-option value="1">1ro</ion-select-option>
+              <ion-select-option value="2">2do</ion-select-option>
+              <ion-select-option value="3">3ro</ion-select-option>
+              <ion-select-option value="4">4to</ion-select-option>
+              <ion-select-option value="5">5to</ion-select-option>
+              <ion-select-option value="graduado">Graduado</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item >
+            <div class="mb-3">
+              <label for="formFileSm" class="form-label">Foto</label>
+              <input class="form-control form-control-sm" id="formFileSm" type="file">
+            </div>
+          </ion-item>
+
+          <ion-row>
+            <ion-col >
+              <ion-button type="submit"  expand="block">Enviar</ion-button>
+            </ion-col>
+          </ion-row>
+
+
+        </form>
+
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

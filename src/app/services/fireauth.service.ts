@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 import { User } from '../shared/userinterface';
 
-
+import { first, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -50,5 +50,14 @@ signIn(email,password){
      });
 
     }
+
+    //TRAER USUARIO ACTUAL
+
+getCurrentUser(){
+
+  return this.fAuth.authState.pipe(first()).toPromise();
+
+}
+
 }
 
