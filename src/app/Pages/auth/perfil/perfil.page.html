@@ -10,17 +10,78 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content >
     <!-- Content -->
-    <span class="d-none d-sm-inline-block">{{usuario}}</span>
-    <div class="card" style="width: 18rem;">
-      <img src="..." class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
+    <ion-row>
+
+      <ion-col>
+        <div class="position-absolute top-100 start-50 translate-middle "><ion-avatar class="ion-margin-start">
+          <img src="/assets/img/marty-avatar.png">
+        </ion-avatar></div>
+      </ion-col>
+
+    </ion-row>
+
+
+
+    <ion-row class="bnt-perfil">
+      <ion-col >
+
+        <div class="ion-text-center">
+          <i class="fas fa-comment"></i>
+          <br>
+          <ion-label>Mensajes</ion-label>
+        </div>
+      </ion-col>
+
+      <ion-col>
+        <div class="ion-text-center">
+          <i class="fas fa-file-alt"></i>
+          <br>
+          <ion-label>Archivos subidos</ion-label>
+
+        </div>
+      </ion-col>
+
+      <ion-col>
+        <div class="ion-text-center">
+          <i class="fas fa-star"></i>
+          <br>
+          <ion-label>Puntuación</ion-label>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-card>
+      <ion-card-header>
+
+        <ion-card-subtitle> <span >{{usuario}}</span></ion-card-subtitle>
+        <ion-card-title>{{user.nombre}} {{user.apellido}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Telefono</ion-label>
+          <ion-note slot="end">{{user.telefono}}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Num.Unico</ion-label>
+          <ion-note slot="end">{{user.numeroUnico}}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Carrera</ion-label>
+          <ion-note slot="end">{{user.carrera}}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Semestre</ion-label>
+          <ion-note slot="end">{{user.semestreRef}}</ion-note>
+        </ion-item>
+        <ion-item>
+          <ion-label>Password</ion-label>
+          <ion-note slot="end" type="password">{{user.password}}</ion-note>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
 
 
 </ion-content>

@@ -67,10 +67,10 @@
         <ion-menu-toggle auto-hide="false" *ngFor="let nav of option">
           <ion-item
             routerDirection="root"
-             [routerLink]="nav.link"
+             [routerLink]="nav.link" routerLinkActive="activo"
              [class.active-menu]="active === nav.link">
               {{nav.name}}
-              <ion-icon slot="start" [ios]="nav.icon + '-outline'" [md]="nav.icon + '-sharp'"></ion-icon>
+              <ion-icon   class="icon" slot="start" [ios]="nav.icon + '-outline'" [md]="nav.icon + '-sharp'"></ion-icon>
           </ion-item>
         </ion-menu-toggle>
       </ion-list>
