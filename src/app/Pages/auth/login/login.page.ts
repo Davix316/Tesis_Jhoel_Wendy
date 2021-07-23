@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { FireauthService } from 'src/app/services/fireauth.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { FireauthService } from 'src/app/services/fireauth.service';
 })
 export class LoginPage implements OnInit {
 formLogin=new FormGroup({});
-  constructor( public authService: FireauthService,public router: Router) { }
+  constructor( public authService: FireauthService,public router: Router, private alertController: AlertController) { }
 
   ngOnInit() {
   }
@@ -24,7 +25,23 @@ formLogin=new FormGroup({});
           return false;
         }
       }).catch((error) => {
-        window.alert(error.message);
+        this.presentAlert();
+        //window.alert(error.message);
       });
   }
+
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Error',
+      message: 'Llene los campos!',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+
+  }
+
+
 }
