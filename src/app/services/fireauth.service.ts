@@ -59,5 +59,14 @@ getCurrentUser(){
 
 }
 
+//RECUPERAR CONTRASEñA
+async resetPassword(email: string): Promise<void> {
+  try {
+    return this.fAuth.sendPasswordResetEmail(email);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 }
 
