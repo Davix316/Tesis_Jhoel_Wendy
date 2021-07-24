@@ -8,11 +8,7 @@ export interface User {
   email: string;
   password: string;
   semestreRef: number;
-  foto: string;
+  foto?: string;
   rol: string;
 }
 
-export interface Roles {
-  estudiante?: boolean;
-  administrador?: boolean;
-}

@@ -11,8 +11,18 @@
 </ion-header>
 
 <ion-content>
-    <!-- Content -->
+  <ion-list lines="none" class="app-list">
 
-    Hey
-    contenido de chat
+    <ion-item *ngFor="let chat of chatList" (click)="showConversationPage()">
+      <ion-avatar slot="start">
+        <img [src]="chat.user.avatar">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ chat.user.name }}</h2>
+        <p>{{ chat.message.snippet }}</p>
+        <p item-end class="text-ellipsis">{{ chat.message.created }}</p>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
 </ion-content>

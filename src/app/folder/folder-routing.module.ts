@@ -32,7 +32,11 @@ const routes: Routes = [
         path: '',
         redirectTo: '/menu/news',
         pathMatch: 'full'
-      }
+      },
+      {
+        path: 'conversacion',
+        loadChildren: () => import('../Pages/conversacion/conversacion.module').then( m => m.ConversacionPageModule)
+      },
     ]
   },
 ];

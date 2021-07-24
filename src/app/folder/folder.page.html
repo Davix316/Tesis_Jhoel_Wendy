@@ -65,7 +65,7 @@
     <ion-content>
       <ion-list>
         <ion-menu-toggle auto-hide="false" *ngFor="let nav of option">
-          <ion-item
+          <ion-item  lines="none"
             routerDirection="root"
              [routerLink]="nav.link" routerLinkActive="activo"
              [class.active-menu]="active === nav.link">
@@ -77,9 +77,10 @@
 <!-- Salir sesion -->
 <hr>
       <ion-list >
-        <ion-item  lines="none">
+        <ion-item  lines="none" class="logout" type="button">
           <ion-icon slot="start" name="log-out-outline"></ion-icon>
-          <a (click)="onlogout()">Salir</a>
+          <a (click)="onlogout()" >Salir</a>
+
         </ion-item>
 
       </ion-list>

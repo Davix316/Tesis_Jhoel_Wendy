@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import firebase from 'firebase';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { User } from 'src/app/shared/userinterface';
 
@@ -27,6 +28,7 @@ export class PerfilPage implements OnInit {
   foto: '',
   rol: '',
   };
+
   constructor(private serviceauth: FireauthService, private firestore: AngularFirestore) { }
 
   ngOnInit() {
@@ -47,6 +49,7 @@ try{
 }
 
 getuser(){
+
   this.firestore.collection('Usuarios').ref.where('id', '==', this.id)
   .get()
   .then((querySnapshot) => {

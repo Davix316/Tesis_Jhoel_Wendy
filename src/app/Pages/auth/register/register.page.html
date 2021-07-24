@@ -34,7 +34,7 @@
 
           <ion-item lines="full">
             <ion-label position="floating">Numero Unico</ion-label>
-            <ion-input type="number" required placeholder="Num unico EPN" formControlName="numUnico"></ion-input>
+            <ion-input type="number" required placeholder="Num unico EPN" formControlName="numUnico" ></ion-input>
           </ion-item>
 
           <ion-item lines="full">
@@ -50,12 +50,32 @@
           <ion-item lines="full">
             <ion-label position="floating">Email</ion-label>
             <ion-input type="email"  required formControlName="email"></ion-input>
+
           </ion-item>
+
+          <small class="alert-danger" *ngIf="emailF.invalid && (emailF.dirty || emailF.touched)">
+            <div class="div container-error-message" *ngIf="emailF.errors.required">
+                Email es requerido
+            </div>
+            <div class="div container-error-message" *ngIf="emailF.errors.pattern">
+                Ingrese un email EPN valido.
+            </div>
+        </small>
 
           <ion-item lines="full">
             <ion-label position="floating">Password</ion-label>
-            <ion-input type="password" required formControlName="password"></ion-input>
+            <ion-input type="password"  required formControlName="password"></ion-input>
           </ion-item>
+
+          <small class="alert-danger" *ngIf="passwordF.invalid && (passwordF.dirty || passwordF.touched)">
+            <div class="div container-error-message" *ngIf="passwordF.errors.required">
+                El password es requerido
+            </div>
+            <div class="div container-error-message" *ngIf="passwordF.errors?.minlength">
+                El password debe tener una longitud de 6 caracteres
+            </div>
+        </small>
+
 
              <ion-item lines="full">
             <ion-label position="floating">Semestre referencial</ion-label>
@@ -72,7 +92,8 @@
           <ion-item >
             <div class="mb-3">
               <label for="formFileSm" class="form-label">Foto</label>
-              <input class="form-control form-control-sm" id="formFileSm" type="file">
+              <input class=" form-control-sm" id="formFileSm" accept=".png, .jpg, jpeg" formControlName="foto"  type="file">
+
             </div>
           </ion-item>
 

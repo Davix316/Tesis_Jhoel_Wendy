@@ -7,6 +7,7 @@ import { User } from '../shared/userinterface';
 
 import { first, map } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { AlertController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,13 @@ export class FireauthService {
   currentUser: any;
   token: string;
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  constructor(private fAuth: AngularFireAuth,public router: Router,public firestore: AngularFirestore) {
+
+  constructor(
+    private fAuth: AngularFireAuth,
+    public router: Router,
+    public firestore: AngularFirestore,
+    private alertController: AlertController
+    ) {
     }
 
 
@@ -23,11 +30,33 @@ export class FireauthService {
       return this.loggedIn.asObservable();
     }
 
-signIn(email,password){
+
+/* signIn(email,password){
   //Logeado =true
   this.loggedIn.next(true);
     return this.fAuth.signInWithEmailAndPassword(email, password);
-  }
+  } */
+
+  login(email: string, password: string) {
+    this.fAuth.signInWithEmailAndPassword(email, password)
+        .then((response) => {
+                this.firestore.collection('Usuarios').ref.where('email', '==', response.user.email).onSnapshot(snap =>{
+                  snap.forEach(userRef =>{
+                    this.currentUser = userRef.data();
+                   console.log('ROLE CURRENT',this.currentUser.rol);
+                   if(this.currentUser.rol==='estudiante'){
+                      this.router.navigate(['menu']);
+                   }
+                  else{
+                    this.presentAlert();
+                    this.router.navigate(['/register']);
+                  }
+                  });
+                });
+            }
+        );
+}
+
 
 
   //REGISTRAR USUARIO
@@ -36,7 +65,6 @@ signIn(email,password){
      .then((userResponse)=>{
        // add the user to the "users" database
        usuario.id=userResponse.user.uid;
-       usuario.rol='estudiante';
        //add the user to the database
        this.firestore.collection('Usuarios').add(usuario)
        .then(user => {
@@ -89,8 +117,18 @@ async logout(){
   }
 
 }
-//-----verificar si esta autenticado
 
+//PRESENTAR ALERTA
+async presentAlert() {
+  const alert = await this.alertController.create({
+    cssClass: 'my-custom-class',
+    header: 'Usuario restringido',
+    message: 'No es un usuario estudiante',
+    buttons: ['OK']
+  });
+
+  await alert.present();
+}
 
 
 }

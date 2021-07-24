@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { FireauthService } from 'src/app/services/fireauth.service';
@@ -10,24 +10,23 @@ import { FireauthService } from 'src/app/services/fireauth.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-formLogin=new FormGroup({});
+formLogin=new FormGroup({
+  emailF: new FormControl('',[Validators.required]),
+  passwordF: new FormControl('',[Validators.required])
+});
   constructor( public authService: FireauthService,public router: Router, private alertController: AlertController) { }
 
   ngOnInit() {
   }
-  logIn(email, password) {
-    this.authService.signIn(email.value, password.value)
-      .then((res) => {
-        if(res) {
-          this.router.navigate(['menu']);
-        } else {
-          window.alert('Email is not verified');
-          return false;
-        }
-      }).catch((error) => {
-        this.presentAlert();
-        //window.alert(error.message);
-      });
+  logIn() {
+    if(this.formLogin.valid){
+      const{emailF, passwordF}=this.formLogin.value;
+      this.authService.login(emailF,passwordF);
+    }
+    else{
+      this.presentAlert();
+    }
+
   }
 
 
@@ -40,7 +39,6 @@ formLogin=new FormGroup({});
     });
 
     await alert.present();
-
   }
 
 

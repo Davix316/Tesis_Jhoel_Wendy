@@ -25,19 +25,19 @@
     </ion-card-header>
 
     <ion-card-content>
-      <form>
+      <form [formGroup]="formLogin" (ngSubmit)="logIn()">
         <ion-item lines="full">
           <ion-label position="floating">Email</ion-label>
-          <ion-input type="text" #email required></ion-input>
+          <ion-input type="text" formControlName="emailF" required></ion-input>
         </ion-item>
 
         <ion-item lines="full">
           <ion-label position="floating">Password</ion-label>
-          <ion-input type="password" #password required></ion-input>
+          <ion-input type="password" formControlName="passwordF" required></ion-input>
         </ion-item>
         <ion-row>
           <ion-col>
-            <ion-button type="submit" (click)="logIn(email, password)" expand="block" class="boton">Ingresar
+            <ion-button type="submit"  expand="block" class="boton">Ingresar
             </ion-button>
           </ion-col>
         </ion-row>
