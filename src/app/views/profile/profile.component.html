@@ -6,11 +6,10 @@
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-4">
+          <div class="col-md-4">
             <div class="card" style="width: 15rem;">
               <img src="assets/img/imagenes/user.png" class="img-fluid" alt="imagen">
               <div class="card-body">
-                <h5 class="card-title">{{name}}</h5>
                 <input type="file" class="form-control-file" id="foto">
                 <br>
                 <button class="btn-danger"><i class="cil-trash"></i> Eliminar</button>
@@ -22,46 +21,56 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="exampleFormControlInput1">Nombres</label>
-                  <input type="text" class="form-control" id="names" placeholder="Juan Francisco" required>
+                  <input type="text" class="form-control" id="names" value="{{admin.nombre}}" required>
                 </div>
                 <div class="form-group col-md-6">
                   <label for="exampleFormControlInput1">Apellidos</label>
-                  <input type="text" class="form-control" id="lastnames" placeholder="Haro Sánchez" required>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="exampleFormControlInput1">Fecha de Nacimiento</label>
-                  <input class="form-control" type="date" value="2000-01-01" id="fechaNacimiento">
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="exampleFormControlInput1">Teléfono</label>
-                  <input class="form-control" type="tel" placeholder="0987654321" id="telef">
+                  <input type="text" class="form-control" id="lastnames" value="{{admin.apellido}}" required>
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="exampleFormControlInput1">Email</label>
-                  <input class="form-control" type="email" placeholder="ejemplo@hotmail.com" id="email">
+                  <input class="form-control" type="email" value="{{admin.email}}" id="email" disabled>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="carrera">Carrera</label>
-                  <select class="form-control" id="carrera">
-                    <option>ASI</option>
+                  <label for="exampleFormControlInput1">Teléfono</label>
+                  <input class="form-control" type="text" value="{{admin.telefono}}" id="telef">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="exampleFormControlInput1">Número Único</label>
+                  <input class="form-control" type="text" value="{{admin.numUnico}}" id="numUnico">
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="exampleFormControlInput1">Contraseña</label>
+                  <input class="form-control" type="password" value="{{admin.password}}" id="password">
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="semestreRef">semestreRef</label>
+                  <select class="form-control" id="semestreRef">
+                    <option>{{admin.semestreRef}}</option>
                     <option>ET</option>
                     <option>ASA</option>
                     <option>TELE</option>
                     <option>5</option>
                   </select>
                 </div>
-              </div>
-
-              <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="exampleFormControlInput1">Semestre referencial</label>
-                  <input class="form-control" type="number" placeholder="4" id="semestre">
+                  <label for="carrera">Carrera</label>
+                  <select class="form-control" id="carrera">
+                    <option>{{admin.carrera}}</option>
+                    <option>ET</option>
+                    <option>ASA</option>
+                    <option>TELE</option>
+                    <option>5</option>
+                  </select>
                 </div>
               </div>
 
@@ -76,5 +85,4 @@
       </div>
     </div>
   </div>
-  <!--/.row-->
 </div>

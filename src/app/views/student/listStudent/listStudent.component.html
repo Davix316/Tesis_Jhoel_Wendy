@@ -2,7 +2,7 @@
   <div>
     <div class="card">
       <div class="card-header" style="text-align: center;">
-        <h2>Administradores</h2>
+        <h2>Estudiantes</h2>
       </div>
 
       <div class="card-body">
@@ -19,14 +19,13 @@
             <thead class="table-dark">
               <tr>
                 <th scope="col">Nombre</th>
-                <th  scope="col">Acciones</th>
+                <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="table-info" *ngFor="let item of Usuarios$ | async"
-               >
+              <tr class="table-info" *ngFor="let item of Usuarios$ | async">
                 <th scope="row">{{ item.nombre}} {{item.apellido}}</th>
-                <td  role="group">
+                <td role="group">
                   <button type="button" class="btn btn-outline-success m-1" (click)="onGoToSee(item)">
                     <i class="cil-info" style="color: green;"> Ver Información</i>
                   </button>
@@ -34,7 +33,11 @@
                   <button type="button" class="btn btn-outline-warning m-1" (click)="onGoToEdit(item)">                      
                     <i class="cil-pencil" style="color: #c29305;"> Editar</i>
                   </button>
-                  
+
+                  <button type="button" class="btn btn-outline-dark m-1" (click)="onGoToBlock(item)">
+                    <i class="cil-ban" style="color: black;"> Bloquear</i>
+                  </button>
+
                   <button type="button" class="btn btn-outline-danger m-1" (click)="onGoToDelete(item.id)">
                     <i class="cil-trash" style="color: red;"> Eliminar</i>
                   </button>

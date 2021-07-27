@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import { navItems } from '../../_nav';
 import { FirebaseauthService } from '../../views/services/firebaseauth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +14,7 @@ export class DefaultLayoutComponent {
   public navItems = navItems;
   name: string;
 
-  constructor(private serviceAuth : FirebaseauthService) {
+  constructor(private serviceAuth : FirebaseauthService, private afAuth: AngularFireAuth, private router:Router) {
      }
 
      ngOnInit() {
@@ -22,5 +24,11 @@ export class DefaultLayoutComponent {
     }
   toggleMinimize(e) {
     this.sidebarMinimized = e;
+  }
+
+  async salir() {
+    this.serviceAuth.logout();
+    console.log("Cerro Sesión")
+    this.router.navigate(['/login'])
   }
 }

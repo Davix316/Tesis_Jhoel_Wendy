@@ -13,7 +13,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Estudiantes',
-    url: '/buttons',
+    url: '/listStudent',
     icon: 'icon-calculator',
   },
   {
@@ -23,7 +23,7 @@ export const navItems: INavData[] = [
   },
   {
     name: 'Perfil',
-    url: '/base',
+    url: '/perfil',
     icon: 'icon-ban',
   }
 ];

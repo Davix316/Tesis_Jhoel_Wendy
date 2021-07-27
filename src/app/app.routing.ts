@@ -51,12 +51,8 @@ export const routes: Routes = [
     },
     children: [
       {
-        path: 'base',
+        path: 'perfil',
         loadChildren: () => import('./views/profile/profile.module').then(m => m.ProfileModule)
-      },
-      {
-        path: 'buttons',
-        loadChildren: () => import('./views/buttons/buttons.module').then(m => m.ButtonsModule)
       },
       {
         path: 'dashboard',
@@ -73,13 +69,11 @@ export const routes: Routes = [
       {
         path: 'list',
         loadChildren: () => import('./views/admin/list/list.module').then(m => m.ListModule)
-      },
-      {
+      },{
         path: 'newAdmin', loadChildren: () => import('./views/admin/newAdmin/newAdmin.module').then(m => m.NewAdminModule),
         data: {
           title: 'Nuevo Administrador'
-        }
-      },
+        }},
       { path: 'edit', loadChildren: () => import('./views/admin/edit/edit.module').then(m => m.EditModule),
       data: {
         title: 'Editar Administrador'
@@ -87,7 +81,29 @@ export const routes: Routes = [
       { path: 'details', loadChildren: () => import('./views/admin/details/details.module').then(m => m.DetailsModule),
       data: {
         title: 'Detalle de Administrador'
+      } }
+      ,
+      {
+        path: 'listStudent',
+        loadChildren: () => import('./views/student/listStudent/listStudent.module').then(m => m.ListStudenttModule)
+      },{
+        path: 'newStudent', loadChildren: () => import('./views/student/newStudent/newStudent.module').then(m => m.NewStudentModule),
+        data: {
+          title: 'Nuevo Estudiante'
+        }},
+      { path: 'editStudent', loadChildren: () => import('./views/student/editStudent/editStudent.module').then(m => m.EditStudentModule),
+      data: {
+        title: 'Editar Estudiante'
       } },
+      { path: 'detailsStudent', loadChildren: () => import('./views/student/detailsStudent/detailsStudent.module').then(m => m.DetailsStudentModule),
+      data: {
+        title: 'Detalle de Estudiante'
+      } }
+      ,{ path: 'blockStudent', loadChildren: () => import('./views/student/block/blockStudent.module').then(m => m.BlockStudentModule),
+      data: {
+        title: 'Bloqueo de Estudiante'
+      } }
+      ,
       {
         path: 'carreras',
         loadChildren: () => import('./views/carreras/carreras.module').then(m => m.CarrerasModule)
