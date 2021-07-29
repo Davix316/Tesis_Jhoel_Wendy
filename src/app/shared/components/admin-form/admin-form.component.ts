@@ -25,18 +25,10 @@ export class AdminFormComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if (typeof this.admin === 'undefined') {
       this.router.navigate(['newAdmin']);
-    } else {
-      this.adminForm.patchValue(this.admin);
-    }
+    
   }
 
-
-  imagen(event){
-    console.log(event.target.files);
-  }
-  
    onSave(): void {
 
     if (this.adminForm.valid) {

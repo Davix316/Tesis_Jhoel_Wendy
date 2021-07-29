@@ -45,4 +45,13 @@ export class FirebaseauthService {
   getCurrentUser() {
     return this.afAuth.authState;
   }
+
+  //RECUPERAR CONTRASEñA
+  async resetPassword(email: string): Promise<void> {
+    try {
+      return this.afAuth.sendPasswordResetEmail(email);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

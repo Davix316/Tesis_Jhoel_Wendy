@@ -44,7 +44,13 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/dashboard'])
     } else{
       this.errorMessage;
-      console.log("Inicio de Sesión fallido")
+      console.log("Inicio de Sesión fallido");
+      window.alert("Credenciales incorrectas")
     }    
+  }
+
+  async reset() {
+    console.log("Recuperar contraseña")
+    this.router.navigate(['/reset-password'])
   }
 }
