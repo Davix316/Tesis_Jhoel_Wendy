@@ -49,6 +49,7 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {environment} from '../environments/environment';
 import { AdminFormModule } from './shared/components/admin-form/admin-form.module';
+import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 
 
 @NgModule({
@@ -80,6 +81,7 @@ import { AdminFormModule } from './shared/components/admin-form/admin-form.modul
     P500Component,
     LoginComponent,
     RegisterComponent,
+    ForgotPasswordComponent,
   ],
   providers: [
     {
