@@ -39,11 +39,10 @@
 
           <ion-item lines="full">
             <ion-label position="floating">Carrera</ion-label>
-            <ion-select class="custom-options" formControlName="carrera">
-              <ion-select-option value="TSASA">TSASA - Agua y Saneamiento Ambiental</ion-select-option>
-              <ion-select-option value="TSDS">TSDS - Desarrollo de Software</ion-select-option>
-              <ion-select-option value="TSRT">TSRT - Redes y Telecomunicaciones </ion-select-option>
-              <ion-select-option value="TSEM">TSEM - Electromecánica</ion-select-option>
+            <ion-select class="custom-options" formControlName="carrera" >
+              <ion-list *ngFor="let item of listacarrera">
+                <ion-select-option  value={{item.id}}>{{item.nombre}}</ion-select-option>
+              </ion-list>
             </ion-select>
           </ion-item>
 

@@ -7,6 +7,15 @@ import { FireauthService } from 'src/app/services/fireauth.service';
 import { User } from 'src/app/shared/userinterface';
 import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/storage';
 import { ToastController } from '@ionic/angular';
+import { MateriasService } from 'src/app/services/materias.service';
+
+//INTERFAZ DE CARRERAS
+interface Carreras {
+  id?: string;
+  nombre: string;
+  numMaterias: number;
+  numNiveles: number;
+  }
 
 @Component({
   selector: 'app-register',
@@ -18,6 +27,11 @@ import { ToastController } from '@ionic/angular';
 export class RegisterPage implements OnInit {
   //emailPattern: any = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
   emailPattern: any =/^\w+([\.-]?\w+)*@epn.edu.ec+$/;
+
+carreras=Array[0]=[];
+
+  listacarrera: Carreras[];
+
   public myFormUser=new FormGroup({
     nombre: new FormControl('',[Validators.required]),
     apellido: new FormControl('',[Validators.required]),
@@ -36,11 +50,12 @@ export class RegisterPage implements OnInit {
     public router: Router,
     private alertController: AlertController,
     private storage: AngularFireStorage,
-    public toastController: ToastController,
+    private materiasServ: MateriasService,
     ) { }
 
 
   ngOnInit() {
+    this.getCarrera();
   }
 
     register(user: User){
@@ -50,8 +65,6 @@ export class RegisterPage implements OnInit {
         //user.foto=this.inputImageUser.nativeElement.value;
         user.rol='estudiante';
         this.authService.registrar(user);
-        this.successToast('Usuario registrado!');
-        this.router.navigate(['/login']);
         }
         else{
           this.presentAlert();
@@ -61,6 +74,17 @@ export class RegisterPage implements OnInit {
         console.error(error);
       }
   }
+
+  /// LEER CARRERAS
+getCarrera(){
+
+this.materiasServ.getCollection<Carreras>('Carreras').subscribe(res=>{
+if(res){
+  this.listacarrera=res;
+  console.log(res);
+}
+});
+}
 
   //SUBIR IMAGEN
   /* upload(event) {
@@ -95,14 +119,7 @@ get emailF() {return this.myFormUser.get('email');}
 get passwordF() {return this.myFormUser.get('password');}
 
 
-async successToast(text) {
-  const toast = await this.toastController.create({
-    message: text,
-    duration: 2000,
-    color: 'success'
-  });
-  toast.present();
-}
+
 
 }
 

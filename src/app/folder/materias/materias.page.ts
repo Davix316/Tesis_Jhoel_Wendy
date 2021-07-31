@@ -1,13 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import { VariableAst } from '@angular/compiler';
+
 import { Component, OnInit, Input, ViewChild, Query } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { MateriasService } from 'src/app/services/materias.service';
 import { MateriasInterface } from 'src/app/shared/materias-interface';
-import { User } from 'src/app/shared/userinterface';
-import { FolderPage } from '../folder.page';
 
 
 @Component({
@@ -89,6 +86,8 @@ materias: any;
 const path='Materias';
 this.materiasServ.getCollection<MateriasInterface>(path).subscribe(res=>{
 this.listaMaterias=res.filter(e => idC===e.idCarrera);
+console.log(this.listaMaterias);
+
 });
 }
 

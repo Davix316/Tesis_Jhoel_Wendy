@@ -1,10 +1,6 @@
-import { Injectable, Query } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { MateriasInterface } from '../shared/materias-interface';
-import { FireauthService } from './fireauth.service';
+import { Injectable } from '@angular/core';
+import { AngularFirestore} from '@angular/fire/firestore';
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +15,7 @@ materias: any;
 
   getCollection<Tipo>(path: string){
     const collection = this.firestore.collection<Tipo>(path);
-    console.log('collecc', collection);
+    //console.log('collecc', collection);
     return collection.valueChanges();
   }
 

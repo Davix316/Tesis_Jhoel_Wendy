@@ -7,7 +7,7 @@ import { User } from '../shared/userinterface';
 
 import { first, map } from 'rxjs/operators';
 import { BehaviorSubject, Subject } from 'rxjs';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,8 @@ export class FireauthService {
     private fAuth: AngularFireAuth,
     public router: Router,
     public firestore: AngularFirestore,
-    private alertController: AlertController
+    private alertController: AlertController,
+    public toastController: ToastController,
     ) {
     }
 
@@ -71,7 +72,10 @@ export class FireauthService {
        //id del documento
       this.idDoc=userResponse.user.uid;
        //add the user to the database
-       this.firestore.collection('Usuarios').doc(this.idDoc).set(usuario);
+       this.firestore.collection('Usuarios').doc(this.idDoc).set(usuario).then(ref=>{
+        this.presentToast('Usuario registrado!');
+        this.router.navigate(['/login']);
+       });
       /*  .then(user => {
         window.
         alert('usuario registrado');
@@ -89,6 +93,7 @@ export class FireauthService {
      })
      .catch((err)=>{
         console.log('error de registro: ', err);
+        this.failToast(err.message);
      });
 
     }
@@ -141,7 +146,24 @@ async presentAlert() {
 
   await alert.present();
 }
-
+//PRESENTAR ALERTA REGISTRO existoso
+async presentToast(text) {
+  const toast = await this.toastController.create({
+    message: text,
+    duration: 2000,
+    color: 'success'
+  });
+  toast.present();
+}
+//PRESENTAR ALERTA REGISTRO fallido
+async failToast(text) {
+  const toast = await this.toastController.create({
+    message: text,
+    duration: 2000,
+    color: 'danger'
+  });
+  toast.present();
+}
 
 }
 
