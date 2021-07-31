@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { User } from '../shared/userinterface';
 
 import { first, map } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { AlertController } from '@ionic/angular';
 
 @Injectable({
@@ -15,7 +15,10 @@ import { AlertController } from '@ionic/angular';
 export class FireauthService {
   currentUser: any;
   token: string;
+  idDoc: string;
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+
 
   constructor(
     private fAuth: AngularFireAuth,
@@ -65,19 +68,22 @@ export class FireauthService {
      .then((userResponse)=>{
        // add the user to the "users" database
        usuario.id=userResponse.user.uid;
+       //id del documento
+      this.idDoc=userResponse.user.uid;
        //add the user to the database
-       this.firestore.collection('Usuarios').add(usuario)
-       .then(user => {
+       this.firestore.collection('Usuarios').doc(this.idDoc).set(usuario);
+      /*  .then(user => {
+        window.
+        alert('usuario registrado');
         this.router.navigate(['/login']);
          user.get().then(x => {
           //return the user data
           console.log(x.data());
           this.currentUser = x.data();
-          window.alert('usuario registrado');
         });
        }).catch(err => {
          console.log(err);
-       });
+       }); */
 
 
      })
@@ -94,6 +100,12 @@ getCurrentUser(){
   return this.fAuth.authState.pipe(first()).toPromise();
 
 }
+
+//RETORNA UID DE USUARIO
+stateAuth(){
+  return this.fAuth.authState;
+}
+
 
 //RECUPERAR CONTRASEñA
 async resetPassword(email: string): Promise<void> {

@@ -12,7 +12,7 @@
 
 <ion-content>
     <!-- Content -->
-    <ion-app>
+   <!--  <ion-app>
 
     <ion-grid>
       <ion-row>
@@ -45,5 +45,20 @@
         </ion-col>
       </ion-row>
       </ion-grid>
-    </ion-app>
+    </ion-app> -->
+
+<img src="" alt="">
+    <ion-row>
+      <ion-col *ngFor="let item of listaMaterias let i = index" >
+        <ion-badge color="warning">{{i+1}}</ion-badge>
+        <ion-avatar>
+          <img src="/assets/img/logo.png">
+        </ion-avatar>
+        <h6>{{item.nombre}}</h6>
+        <small>Nivel: {{item.nivel}}</small>
+      </ion-col>
+
+    </ion-row>
 </ion-content>
+
+

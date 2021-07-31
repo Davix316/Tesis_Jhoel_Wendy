@@ -6,9 +6,8 @@ import { AlertController } from '@ionic/angular';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { User } from 'src/app/shared/userinterface';
 import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/storage';
-import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
-import  firebase from 'firebase';
+import { ToastController } from '@ionic/angular';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -36,7 +35,9 @@ export class RegisterPage implements OnInit {
     public authService: FireauthService,
     public router: Router,
     private alertController: AlertController,
-    private storage: AngularFireStorage) { }
+    private storage: AngularFireStorage,
+    public toastController: ToastController,
+    ) { }
 
 
   ngOnInit() {
@@ -49,6 +50,8 @@ export class RegisterPage implements OnInit {
         //user.foto=this.inputImageUser.nativeElement.value;
         user.rol='estudiante';
         this.authService.registrar(user);
+        this.successToast('Usuario registrado!');
+        this.router.navigate(['/login']);
         }
         else{
           this.presentAlert();
@@ -90,5 +93,16 @@ export class RegisterPage implements OnInit {
 
 get emailF() {return this.myFormUser.get('email');}
 get passwordF() {return this.myFormUser.get('password');}
+
+
+async successToast(text) {
+  const toast = await this.toastController.create({
+    message: text,
+    duration: 2000,
+    color: 'success'
+  });
+  toast.present();
+}
+
 }
 

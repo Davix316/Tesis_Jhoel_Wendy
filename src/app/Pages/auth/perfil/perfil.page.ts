@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import firebase from 'firebase';
@@ -28,6 +28,7 @@ export class PerfilPage implements OnInit {
   foto: '',
   rol: '',
   };
+
 
   constructor(private serviceauth: FireauthService, private firestore: AngularFirestore) { }
 
@@ -67,7 +68,7 @@ getuser(){
         this.user.rol=this.userLogIn.rol;
         //this.user.nombre=this.userLogIn.nombre;
 
-          console.log(doc.id, ' => ', doc.data());
+          //console.log(doc.id, ' => ', doc.data());
       });
   })
   .catch((error) => {

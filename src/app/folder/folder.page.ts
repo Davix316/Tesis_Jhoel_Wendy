@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { ActivatedRoute, Router, RouterEvent } from '@angular/router';
 import { FireauthService } from '../services/fireauth.service';
+import { User } from '../shared/userinterface';
 
 @Component({
   selector: 'app-folder',
@@ -11,9 +13,10 @@ export class FolderPage implements OnInit {
   //public folder: string;
   active = '';
 
+
   option = [
     {
-      name: 'Noticias',
+      name: 'Publicaciones',
       link: '/menu/news',
       icon: 'newspaper',
     },
@@ -39,20 +42,23 @@ export class FolderPage implements OnInit {
     },
 
   ];
-  constructor(/* private activatedRoute: ActivatedRoute, */ private router: Router, private serviceauth: FireauthService) {
+  constructor( private router: Router,private serviceauth: FireauthService,) {
     this.router.events.subscribe((event: RouterEvent) => {
       this.active = event.url;
     });
   }
 
   ngOnInit() {
-   // this.folder = this.activatedRoute.snapshot.paramMap.get('id');
+
+
   }
+
 
  //CERRAR SESION
  onlogout(){
   this.serviceauth.logout();
   this.router.navigate(['/login']);
 }
+
 
 }
