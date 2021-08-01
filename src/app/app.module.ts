@@ -14,11 +14,13 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
+    PipesModule,
     ReactiveFormsModule,
     CommonModule,
     BrowserModule,

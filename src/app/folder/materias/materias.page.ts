@@ -20,7 +20,7 @@ export class MateriasPage implements OnInit {
   carreraId: string;
 
 materias: any;
-
+textoBuscar='';
   // eslint-disable-next-line @typescript-eslint/member-ordering
 
   constructor(
@@ -36,6 +36,8 @@ materias: any;
         this.getuser(this.idUser);
       }
     });
+
+
 
   }
 
@@ -90,6 +92,12 @@ console.log(this.listaMaterias);
 
 });
 }
+//TOOLBAR SEARCH
+buscar(event){
+  console.log(event);
+  this.textoBuscar=event.detail.value;
 
+
+}
 
 }

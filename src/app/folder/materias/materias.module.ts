@@ -9,6 +9,7 @@ import { MateriasPageRoutingModule } from './materias-routing.module';
 import { MateriasPage } from './materias.page';
 import { PerfilPageModule } from 'src/app/Pages/auth/perfil/perfil.module';
 import { PerfilPage } from 'src/app/Pages/auth/perfil/perfil.page';
+import { PipesModule } from 'src/app/pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { PerfilPage } from 'src/app/Pages/auth/perfil/perfil.page';
     FormsModule,
     IonicModule,
     MateriasPageRoutingModule,
+    PipesModule,
   ],
   declarations: [MateriasPage]
 })

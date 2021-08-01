@@ -39,6 +39,11 @@ const routes: Routes = [
       },
     ]
   },
+  {
+    path: 'detalle-materia',
+    loadChildren: () => import('../Pages/detalle-materia/detalle-materia.module').then( m => m.DetalleMateriaPageModule)
+  },
+
 ];
 
 @NgModule({

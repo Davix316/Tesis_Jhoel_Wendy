@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header no-border>
   <ion-toolbar>
     <ion-title>Materias</ion-title>
 
@@ -7,6 +7,9 @@
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
 
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar animated (ionChange)="buscar($event)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -49,7 +52,7 @@
 
 <img src="" alt="">
     <ion-row>
-      <ion-col *ngFor="let item of listaMaterias let i = index" >
+      <ion-col *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index"  routerLink="/detalle-materia">
         <ion-badge color="warning">{{i+1}}</ion-badge>
         <ion-avatar>
           <img src="/assets/img/logo.png">
