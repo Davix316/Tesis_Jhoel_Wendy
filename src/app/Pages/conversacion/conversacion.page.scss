@@ -1,3 +1,9 @@
+ion-content{
+  --background: url('https://i.pinimg.com/564x/51/38/d3/5138d30c628fff821631b9c3b85259b9.jpg') no-repeat center center / cover;
+
+}
+
+
 .chat-bubble {
   width: auto;
   max-width: 75%;
@@ -11,26 +17,27 @@
   margin-bottom: 0;
 
   &.received {
-      background: rgb(240, 236, 236);
+      background: #ffffff;
       float: left;
   }
 
   &.send {
-      background: var(--ion-color-primary);
+      background: #115571;
       float: right;
       text-align: right;
       color: #fff;
   }
 
-  h6 {
+  .mesage {
       margin: 0;
       margin-bottom: 4px;
-      font-weight: 400;
+      //font-weight: 400;
+      font-size: 12px;
   }
 
   p {
       margin: 0;
-      font-size: 1rem;
+      font-size: 10px;
       opacity: .4;
   }
 
@@ -41,3 +48,4 @@
     height: calc(100% - 60px);
     overflow: scroll
 }
+

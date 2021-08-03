@@ -1,9 +1,106 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>detalle-tarea</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-button>
+        <ion-icon name="heart-outline" (click)="addFavorite()"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Nombre Tarea</ion-title>
+   </ion-toolbar>
+
+   <ion-label><b>Autor:</b> Jhone Doe</ion-label>
+   <iframe width="300" height="315" [src]="fileUrl" frameborder="0" allowfullscreen></iframe>
+   <p>
+    Es un hecho establecido hace demasiado tiempo que un lector se distraerá con
+    el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem
+    Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar
+    textos como por ejemplo "Contenido aquí, contenido aquí". Estos textos hacen parecerlo un
+    español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem
+    Ipsum como su texto por defecto, y al hacer una búsqueda de
+
+   </p>
+   <ion-segment (ionChange)="segmentChanged($event)">
+    <ion-chip>
+      <ion-icon name="thumbs-up-outline"></ion-icon>
+      <ion-label>78</ion-label>
+    </ion-chip>
+
+      <ion-chip>
+        <ion-icon name="chatbubble-outline"></ion-icon>
+        <ion-label>78</ion-label>
+      </ion-chip>
+
+
+      <ion-chip>
+
+        <ion-icon name="heart-outline" (click)="addFavorite()"></ion-icon>
+      </ion-chip>
+
+  </ion-segment>
+   <hr>
+   <ion-list>
+
+
+<ion-item>
+  <ion-avatar slot="start">
+    <img src="/assets/img/marty-avatar.png">
+  </ion-avatar>
+  <ion-label>
+    <h2>Jhoen Doe</h2>
+   <input type="text">
+
+  </ion-label>
+  <ion-icon name="send-outline"></ion-icon>
+</ion-item>
+
+  <ion-item>
+    <ion-list>
+    <ion-avatar slot="start">
+      <img src="/assets/img/sarah-avatar.png.jpeg">
+    </ion-avatar>
+    <ion-label>
+      <h2>Ruth C</h2>
+      <p>Listen, I've had a pretty messed up day Hay muchas variaciones de
+        los pasajes de Lorem Ipsum disponibles</p>
+    </ion-label>
+    <ion-button>
+      <ion-label>Comentar</ion-label>
+    </ion-button>
+    <ion-button>
+      <ion-icon name="star-outline"></ion-icon>
+      <ion-label>5</ion-label>
+    </ion-button>
+
+  </ion-list>
+
+  </ion-item>
+
+
+  <ion-item>
+      <ion-avatar slot="start">
+        <img src="/assets/img/ian-avatar.png">
+      </ion-avatar>
+      <ion-label>
+        <h2>Jhon Doe</h2>
+        <p>Listen, I've had a pretty messed up day...</p>
+      </ion-label>
+</ion-item>
+
+
+
+    </ion-list>
+
+
+
 
 </ion-content>

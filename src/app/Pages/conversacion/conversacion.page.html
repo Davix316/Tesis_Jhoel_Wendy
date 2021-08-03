@@ -18,7 +18,7 @@
 <ion-content class="bg">
   <div class="chat-container">
     <div *ngFor="let message of messages" class="chat-bubble" [(ngClass)]="message.type">
-      <h6>{{ message.text }}</h6>
+      <div class="mesage">{{ message.text }}</div>
       <p>{{ message.created }}</p>
     </div>
   </div>

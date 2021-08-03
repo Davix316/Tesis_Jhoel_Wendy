@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./detalle-materia.page.scss'],
 })
 export class DetalleMateriaPage implements OnInit {
+  segment: string;
+
 
   constructor() { }
 
+  segmentChanged(ev: any) {
+    console.log('Segment changed', ev);
+  }
+
   ngOnInit() {
+    this.segment = 'first';
   }
 
 }

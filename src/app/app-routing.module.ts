@@ -24,43 +24,8 @@ const routes: Routes = [
     path: 'reset-password',
     loadChildren: () => import('./Pages/auth/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
   },
-  {
-    path: 'conversacion',
-    loadChildren: () => import('./Pages/conversacion/conversacion.module').then( m => m.ConversacionPageModule)
-  },
-  {
-    path: 'detalle-materia',
-    loadChildren: () => import('./Pages/detalle-materia/detalle-materia.module').then( m => m.DetalleMateriaPageModule)
-  },
-  {
-    path: 'detalle-tarea',
-    loadChildren: () => import('./Pages/detalle-tarea/detalle-tarea.module').then( m => m.DetalleTareaPageModule)
-  },
-  {
-    path: 'comentarios',
-    loadChildren: () => import('./Pages/comentarios/comentarios.module').then( m => m.ComentariosPageModule)
-  },
-  {
-    path: 'puntuacion',
-    loadChildren: () => import('./Pages/puntuacion/puntuacion.module').then( m => m.PuntuacionPageModule)
-  },
 
-    /*{
-   path: 'news',
-    loadChildren: () => import('./folder/news/news.module').then(m=>m.NewsPageModule)
-  },
-  {
-    path: 'materias',
-    loadChildren: () => import('./folder/materias/materias.module').then(m=>m.MateriasPageModule)
-  },
-  {
-    path: 'mensajes',
-    loadChildren: () => import('./folder/chat/chat.module').then( m => m.ChatPageModule)
-  },
-  {
-    path: 'favoritos',
-    loadChildren: () => import('./folder/favoritos/favoritos.module').then( m => m.FavoritosPageModule)
-  }, */
+
 
 ];
 

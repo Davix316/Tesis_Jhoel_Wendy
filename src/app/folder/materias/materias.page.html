@@ -14,54 +14,79 @@
 </ion-header>
 
 <ion-content>
-    <!-- Content -->
-   <!--  <ion-app>
+<!-- Filtro semestres -->
+<ion-label>Filtrar por Semestres</ion-label>
+<ion-segment [(ngModel)]="segment" scrollable>
+  <ion-segment-button value="first">
+    <i class="fas fa-dice-one"></i>
+  </ion-segment-button>
+  <ion-segment-button value="second">
+    <i class="fas fa-dice-two"></i>
+  </ion-segment-button>
+  <ion-segment-button value="third">
+    <i class="fas fa-dice-three"></i>
+  </ion-segment-button>
+  <ion-segment-button value="four">
+    <i class="fas fa-dice-four"></i>
+  </ion-segment-button>
+  <ion-segment-button value="five">
+    <i class="fas fa-dice-five"></i>
+  </ion-segment-button>
+</ion-segment>
 
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-            <ion-avatar>
-              <img src="/assets/img/logo.png">
-            </ion-avatar>
-            <ion-label>Programación</ion-label>
+<div [ngSwitch]="segment">
+  <ion-card *ngSwitchCase="'first'">
+    <ion-card-header>
+      First Content
+    </ion-card-header>
+    <ion-card-content>
+      First Content here
+    </ion-card-content>
+  </ion-card>
 
-        </ion-col>
-        <ion-col>
-          <ion-avatar>
-            <img src="/assets/img/logo1.png">
-          </ion-avatar>
-          <ion-label>Algoritmos y Estructura de datos</ion-label>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-avatar>
-            <img src="/assets/img/logo1.png">
-          </ion-avatar>
-          <ion-label>Fisica</ion-label>
-        </ion-col>
-        <ion-col>
-          <ion-avatar>
-            <img src="/assets/img/logo.png">
-          </ion-avatar>
-          <ion-label>Introduccion a TICs</ion-label>
-        </ion-col>
-      </ion-row>
-      </ion-grid>
-    </ion-app> -->
+  <ion-card *ngSwitchCase="'second'">
+    <ion-card-header>
+      Second Header
+    </ion-card-header>
+    <ion-card-content>
+      Second content here
+    </ion-card-content>
+  </ion-card>
 
-<img src="" alt="">
+  <ion-card *ngSwitchCase="'third'">
+    <ion-card-header>
+      Third Header
+    </ion-card-header>
+    <ion-card-content>
+      Third content
+    </ion-card-content>
+  </ion-card>
+</div>
+
+
+<ion-grid>
     <ion-row>
-      <ion-col *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index"  routerLink="/detalle-materia">
-        <ion-badge color="warning">{{i+1}}</ion-badge>
+      <ion-col size="6"  *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index"  routerLink="/detalle-materia">
+        <ion-card>
+          <ion-card-content>
+            <ion-badge class="ion-text-start" color="warning">{{i+1}}</ion-badge>
+            <div class="ion-text-center">
         <ion-avatar>
           <img src="/assets/img/logo.png">
         </ion-avatar>
-        <h6>{{item.nombre}}</h6>
+        <p>{{item.nombre}}</p>
         <small>Nivel: {{item.nivel}}</small>
+      </div>
+          </ion-card-content>
+        </ion-card>
+
       </ion-col>
 
     </ion-row>
+  </ion-grid>
+
+
+
 </ion-content>
 
 

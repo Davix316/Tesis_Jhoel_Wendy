@@ -33,15 +33,31 @@ const routes: Routes = [
         redirectTo: '/menu/news',
         pathMatch: 'full'
       },
-      {
-        path: 'conversacion',
-        loadChildren: () => import('../Pages/conversacion/conversacion.module').then( m => m.ConversacionPageModule)
-      },
     ]
+  },
+  {
+    path: 'conversacion',
+    loadChildren: () => import('../Pages/conversacion/conversacion.module').then( m => m.ConversacionPageModule)
   },
   {
     path: 'detalle-materia',
     loadChildren: () => import('../Pages/detalle-materia/detalle-materia.module').then( m => m.DetalleMateriaPageModule)
+  },
+  {
+    path: 'detalle-tarea',
+    loadChildren: () => import('../Pages/detalle-tarea/detalle-tarea.module').then( m => m.DetalleTareaPageModule)
+  },
+  {
+    path: 'comentarios',
+    loadChildren: () => import('../Pages/comentarios/comentarios.module').then( m => m.ComentariosPageModule)
+  },
+  {
+    path: 'puntuacion',
+    loadChildren: () => import('../Pages/puntuacion/puntuacion.module').then( m => m.PuntuacionPageModule)
+  },
+  {
+    path: 'mis-archivos',
+    loadChildren: () => import('../Pages/mis-archivos/mis-archivos.module').then( m => m.MisArchivosPageModule)
   },
 
 ];

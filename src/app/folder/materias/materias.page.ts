@@ -19,8 +19,19 @@ export class MateriasPage implements OnInit {
   userInfo: any;
   carreraId: string;
 
-materias: any;
+
 textoBuscar='';
+segment: string;
+
+imgMaterias=[
+  {src:'/assets/img/speakers/cheetah.jpg' },
+  {src:'/assets/img/speakers/eagle.jpg'},
+  {src:'/assets/img/speakers/elephant.jpg'} ,
+  {src:'/assets/img/speakers/giraffe.jpg' },
+  {src:'/assets/img/speakers/iguana.jpg' },
+
+];
+
   // eslint-disable-next-line @typescript-eslint/member-ordering
 
   constructor(
@@ -40,10 +51,14 @@ textoBuscar='';
 
 
   }
+//SEGMENTO DE SEMESTRE
+  segmentChanged(ev: any) {
+    console.log('Segment changed', ev);
+  }
 
 
   ngOnInit() {
-
+    this.segment = 'first';
   }
 
 

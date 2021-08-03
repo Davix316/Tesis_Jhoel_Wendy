@@ -17,7 +17,7 @@ ion-menu-button {
 }
 
 #container p {
-  font-size: 16px;
+  font-size: 14px;
   line-height: 22px;
   color: #8c8c8c;
   margin: 0;
@@ -29,11 +29,12 @@ ion-menu-button {
 
 
 ion-item.activo{
-  --background: #c4c7d3;
-  --color:#000000;
+  --background: #115571;
+  --color:#ffffff;
 
 }
 
 .logout:hover{
 --background: #f5f5f5;
 }
+
