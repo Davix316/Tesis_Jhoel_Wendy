@@ -18,7 +18,6 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   async onReset(){
-    console.log("hola");
     console.log(this.email.value);
 
 

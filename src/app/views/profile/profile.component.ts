@@ -38,12 +38,14 @@ export class ProfileComponent implements OnInit{
         // console.log(user.uid);
         this.email=user.email;
         this.getuser();
+        this.getAdmin();
       })
 
     }
 
     getuser(){
       this.firestore.collection('Usuarios').ref.where('email', '==', this.email)
+
       .get()
       .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
@@ -58,7 +60,33 @@ export class ProfileComponent implements OnInit{
             this.admin.semestreRef=this.userLogIn.semestreRef;
             this.admin.foto=this.userLogIn.foto;
             this.admin.rol=this.userLogIn.rol;
-             // console.log(doc.id, ' => ', doc.data());
+            // console.log(doc.id, ' => ', doc.data());
+          });
+      })
+      .catch((error) => {
+          console.log('Error getting documents:' , error);
+      });
+    
+    }
+
+    getAdmin(){
+      this.firestore.collection('Administradores').ref.where('email', '==', this.email)
+
+      .get()
+      .then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            this.userLogIn=doc.data();
+            this.admin.nombre=this.userLogIn.nombre;
+            this.admin.apellido=this.userLogIn.apellido;
+            this.admin.telefono=this.userLogIn.telefono;
+            this.admin.numUnico=this.userLogIn.numUnico;
+            this.admin.carrera=this.userLogIn.carrera;
+            this.admin.email=this.userLogIn.email;
+            this.admin.password=this.userLogIn.password;
+            this.admin.semestreRef=this.userLogIn.semestreRef;
+            this.admin.foto=this.userLogIn.foto;
+            this.admin.rol=this.userLogIn.rol;
+            // console.log(doc.id, ' => ', doc.data());
           });
       })
       .catch((error) => {

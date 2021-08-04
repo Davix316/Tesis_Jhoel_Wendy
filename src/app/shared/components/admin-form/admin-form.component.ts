@@ -25,7 +25,8 @@ export class AdminFormComponent implements OnInit {
 
 
   ngOnInit(): void {
-      this.router.navigate(['newAdmin']);
+
+      this.adminForm.patchValue(this.admin);
     
   }
 

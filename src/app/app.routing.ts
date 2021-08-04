@@ -10,10 +10,12 @@ import { ForgotPasswordComponent } from './views/forgot-password/forgot-password
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { ResetPasswordComponent } from './views/reset-password/reset-password.component';
+import { CheckloginGuard } from './shared/guards/checklogin.guard';
 
 
 export const routes: Routes = [
-  {path: 'forgot', component:ForgotPasswordComponent},
+  {
+    path: 'forgot', component:ForgotPasswordComponent},
   {
     path: '',
     redirectTo: 'login',
@@ -119,7 +121,7 @@ export const routes: Routes = [
         path: 'carreras',
         loadChildren: () => import('./views/carreras/carreras.module').then(m => m.CarrerasModule)
       }
-    ]
+    ],canActivate: [CheckloginGuard],
   },
   { path: '**', component: P404Component }
 ];
