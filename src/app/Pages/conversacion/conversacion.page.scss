@@ -1,8 +1,10 @@
 ion-content{
-  --background: url('https://i.pinimg.com/564x/51/38/d3/5138d30c628fff821631b9c3b85259b9.jpg') no-repeat center center / cover;
+  --background: url('/assets/background/chat.png') no-repeat center center / cover;
 
 }
-
+ion-toolbar{
+  --color:#115571;
+}
 
 .chat-bubble {
   width: auto;

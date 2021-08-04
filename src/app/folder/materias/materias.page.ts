@@ -2,6 +2,7 @@
 
 import { Component, OnInit, Input, ViewChild, Query } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { NavigationExtras, Router } from '@angular/router';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { MateriasService } from 'src/app/services/materias.service';
 import { MateriasInterface } from 'src/app/shared/materias-interface';
@@ -20,6 +21,7 @@ export class MateriasPage implements OnInit {
   carreraId: string;
 
 
+
 textoBuscar='';
 segment: string;
 
@@ -32,12 +34,20 @@ imgMaterias=[
 
 ];
 
+navigationExtras: NavigationExtras = {
+  state: {
+    value: null
+  }
+
+};
+
   // eslint-disable-next-line @typescript-eslint/member-ordering
 
   constructor(
     private materiasServ: MateriasService,
     private firestore: AngularFirestore,
     private serviceauth: FireauthService,
+    private router: Router
   ) {
     //INFORMACION DE USUARIO ACTUAL
     this.serviceauth.stateAuth().subscribe(user => {
@@ -102,11 +112,22 @@ imgMaterias=[
  */
 const path='Materias';
 this.materiasServ.getCollection<MateriasInterface>(path).subscribe(res=>{
-this.listaMaterias=res.filter(e => idC===e.idCarrera);
+
+ this.listaMaterias=res.filter(e => idC===e.idCarrera);
+
 console.log(this.listaMaterias);
+
+this.listaMaterias.forEach(element => {
+  this.carreraId=element.id;
+  console.log(element.id);
+});
+
 
 });
 }
+
+
+
 //TOOLBAR SEARCH
 buscar(event){
   console.log(event);
@@ -114,5 +135,11 @@ buscar(event){
 
 
 }
+
+detalleMateria(item: any): void{
+  this.navigationExtras.state.value=item;
+  this.router.navigate(['/detalle-materia'],this.navigationExtras);
+}
+
 
 }

@@ -1,17 +1,23 @@
 <ion-header>
-  <ion-toolbar color="secondary">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-    <ion-avatar slot="start" class="contact-avatar">
-      <img src="/assets/img/users/user5.jpeg">
-    </ion-avatar>
-    <ion-title >
-      <ion-label>
-        <h2>{{ contactInfo.name }}</h2>
-        <p><small class="text-muted">{{ contactInfo.status }}</small></p>
-      </ion-label>
-    </ion-title>
+
+    <ion-item>
+      <ion-avatar slot="start"  >
+        <img src="/assets/img/speakers/duck.jpg">
+      </ion-avatar>
+      <ion-title >
+        <ion-label class="ion-text-start">
+          {{ contactInfo.name }}
+          <p><small class="text-muted">{{ contactInfo.status }}</small></p>
+        </ion-label>
+      </ion-title>
+    </ion-item>
+
+
+
   </ion-toolbar>
 </ion-header>
 

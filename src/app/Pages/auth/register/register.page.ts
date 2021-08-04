@@ -28,7 +28,7 @@ export class RegisterPage implements OnInit {
   //emailPattern: any = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
   emailPattern: any =/^\w+([\.-]?\w+)*@epn.edu.ec+$/;
 
-carreras=Array[0]=[];
+
 
   listacarrera: Carreras[];
 

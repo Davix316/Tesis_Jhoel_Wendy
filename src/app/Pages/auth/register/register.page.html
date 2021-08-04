@@ -1,19 +1,21 @@
 <ion-header>
+  <ion-toolbar>
+    <ion-title>Materia Name</ion-title>
 
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <img src="assets/background/register.png" alt="">
-  <ion-card>
-      <ion-card-content>
-
         <form [formGroup]="myFormUser" (ngSubmit)="register(myFormUser.value)" >
-
+          <ion-card>
+            <ion-card-content>
           <ion-item lines="full">
             <ion-label position="floating" >Nombre</ion-label>
             <ion-input type="text" class="" required formControlName="nombre"></ion-input>
           </ion-item>
-
 
 
           <ion-item lines="full">
@@ -26,6 +28,11 @@
             <ion-label position="floating">teléfono</ion-label>
             <ion-input type="number" required formControlName="telefono"></ion-input>
           </ion-item>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+        <ion-card-content>
 
           <ion-item lines="full">
             <ion-label position="floating">Numero Unico</ion-label>
@@ -55,7 +62,12 @@
                 Ingrese un email EPN valido.
             </div>
         </small>
+      </ion-card-content>
+    </ion-card>
 
+
+    <ion-card>
+      <ion-card-content>
           <ion-item lines="full">
             <ion-label position="floating">Password</ion-label>
             <ion-input type="password"  required formControlName="password"></ion-input>
@@ -82,7 +94,12 @@
               <ion-select-option value="graduado">Graduado</ion-select-option>
             </ion-select>
           </ion-item>
+        </ion-card-content>
+      </ion-card>
 
+
+ <ion-card>
+      <ion-card-content>
           <ion-item >
             <div class="mb-3">
               <label for="formFileSm" class="form-label">Foto</label>
@@ -97,14 +114,15 @@
             </ion-col>
 
           </ion-row>
+
           <div class="ion-text-center">
             <a routerLink="/login">Iniciar sesión!</a>
           </div>
-
+</ion-card-content>
+      </ion-card>
 
         </form>
 
-    </ion-card-content>
-  </ion-card>
+
 
 </ion-content>

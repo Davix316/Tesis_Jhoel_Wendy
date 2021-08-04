@@ -15,7 +15,7 @@
 
 <ion-content>
 <!-- Filtro semestres -->
-<ion-label>Filtrar por Semestres</ion-label>
+<ion-label color="light">Filtrar por Semestres</ion-label>
 <ion-segment [(ngModel)]="segment" scrollable>
   <ion-segment-button value="first">
     <i class="fas fa-dice-one"></i>
@@ -66,7 +66,7 @@
 
 <ion-grid>
     <ion-row>
-      <ion-col size="6"  *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index"  routerLink="/detalle-materia">
+      <ion-col size="6"  *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index"  (click)="detalleMateria(item)">
         <ion-card>
           <ion-card-content>
             <ion-badge class="ion-text-start" color="warning">{{i+1}}</ion-badge>

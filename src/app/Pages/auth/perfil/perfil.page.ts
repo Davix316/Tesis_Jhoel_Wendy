@@ -21,7 +21,7 @@ export class PerfilPage implements OnInit {
   apellido: '',
   telefono: 0,
   numeroUnico: 0,
-  carrera: '',
+  carreraId: '',
   email: '',
   password: '',
   semestreRef: 0,
@@ -60,7 +60,7 @@ getuser(){
         this.user.apellido=this.userLogIn.apellido;
         this.user.telefono=this.userLogIn.telefono;
         this.user.numeroUnico=this.userLogIn.numUnico;
-        this.user.carrera=this.userLogIn.carrera;
+        this.user.carreraId=this.userLogIn.carrera;
         this.user.email=this.userLogIn.email;
         this.user.password=this.userLogIn.password;
         this.user.semestreRef=this.userLogIn.semestreRef;

@@ -1,5 +1,5 @@
 export interface MateriasInterface {
-id?: string;
+id: string;
 nombre: string;
 nivel: number;
 numHoras: number;

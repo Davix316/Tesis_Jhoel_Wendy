@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-segment [(ngModel)]="segment" scrollable>
+  <ion-segment  [(ngModel)]="segment" >
 
     <ion-segment-button value="first">
       <ion-label>Tareas</ion-label>
@@ -31,12 +31,12 @@
       <ion-card>
 
         <ion-grid>
-           <ion-row>
+           <ion-row *ngFor="let item of listaTareas">
             <ion-col class="ion-align-self-center">
               <img src="/assets/icon/pdf.png" alt="file.png">
             </ion-col>
             <ion-col size="8"  class="ion-text-center">
-              <b>Ejercicios de Programacion</b>
+              <b>titulo: {{item.titulo}}</b>
               <ion-list>
                 <ion-button color="light" size="small"><ion-icon name="download"></ion-icon></ion-button>
                 <ion-button color="light"  size="small"><ion-icon  class="heart" name="heart-dislike"></ion-icon></ion-button>
@@ -53,35 +53,6 @@
 
         </ion-grid>
     </ion-card>
-
-
-    <ion-card>
-
-      <ion-grid>
-         <ion-row>
-          <ion-col class="ion-align-self-center">
-            <img src="/assets/icon/pdf.png" alt="file.png">
-          </ion-col>
-          <ion-col size="8"  class="ion-text-center">
-            <b>Ejercicios de Programacion</b>
-            <ion-list>
-              <ion-button  size="small" color="light">
-                <ion-icon name="download"></ion-icon>
-
-              </ion-button>
-              <ion-button size="small" color="light"><ion-icon  class="heart" name="heart-dislike"></ion-icon></ion-button>
-            </ion-list>
-
-
-          </ion-col >
-          <ion-col size="2" class="ion-align-self-center">
-            <a routerLink="/detalle-tarea">
-              <ion-icon name="arrow-forward"></ion-icon>
-             </a>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-  </ion-card>
 
 
 
