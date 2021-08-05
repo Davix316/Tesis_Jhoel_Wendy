@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { FirestoreService } from 'src/app/services/firestore.service';
+import { PublicacionInterface } from 'src/app/shared/publicacion';
 
 @Component({
   selector: 'app-home',
@@ -9,15 +10,20 @@ import { Observable } from 'rxjs';
 })
 export class HomePage implements OnInit {
 
-////
-publicaciones: Observable<any[]>;
+publicaciones: PublicacionInterface[]=[];
 
-  constructor(private firestore: AngularFirestore) {
-    this.publicaciones = firestore.collection('Publicaciones').valueChanges();
+  constructor(private fireService: FirestoreService) {
 
    }
 
   ngOnInit() {
+    this.getPublicacion();
+  }
+
+  getPublicacion(){
+    this.fireService.getCollection<PublicacionInterface>('Publicaciones').subscribe(res => {
+      this.publicaciones = res;
+    }).unsubscribe;
   }
 
 }

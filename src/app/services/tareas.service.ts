@@ -16,8 +16,8 @@ export class TareasService {
    }
 
 
-  getCollection<Tipo>(path: string){
-    const collection = this.firestore.collection<Tipo>(path);
+  getCollection<Interfaz>(coleccion: string){
+    const collection = this.firestore.collection<Interfaz>(coleccion);
     return collection.valueChanges();
   }
 

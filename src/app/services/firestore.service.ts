@@ -11,4 +11,10 @@ export class FirestoreService {
 
   }
 
+  getCollection<Interfaz>(coleccion: string){
+    const collection = this.firestore.collection<Interfaz>(coleccion);
+    return collection.valueChanges();
+  }
+
+
 }

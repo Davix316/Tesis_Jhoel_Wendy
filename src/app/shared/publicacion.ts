@@ -1,4 +1,4 @@
-export interface Publicacion {
+export interface PublicacionInterface {
   id: string;
   idUser: string;
   idTarea: string;
@@ -8,6 +8,7 @@ export interface Publicacion {
   titulo: string;
   descripcion: string;
   nameUser: string;
+  apellUser: string;
   file: string;
   imagen?: string;
 }
