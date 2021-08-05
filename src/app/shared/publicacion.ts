@@ -1,7 +1,7 @@
 export interface PublicacionInterface {
   id: string;
   idUser: string;
-  idTarea: string;
+  idMateria: string;
   categoria: string;
   fecha: Date;
   likes: number;
