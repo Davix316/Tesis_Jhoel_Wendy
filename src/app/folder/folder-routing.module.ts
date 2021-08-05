@@ -9,8 +9,8 @@ const routes: Routes = [
     component: FolderPage,
     children:[
       {
-        path: 'news',
-        loadChildren: () => import('./news/news.module').then( m => m.NewsPageModule)
+        path: 'home',
+        loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
       },
       {
         path: 'materias',
@@ -30,7 +30,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/menu/news',
+        redirectTo: '/menu/home',
         pathMatch: 'full'
       },
     ]
@@ -58,6 +58,10 @@ const routes: Routes = [
   {
     path: 'mis-archivos',
     loadChildren: () => import('../Pages/mis-archivos/mis-archivos.module').then( m => m.MisArchivosPageModule)
+  },
+  {
+    path: 'new-publicacion',
+    loadChildren: () => import('../Pages/new-publicacion/new-publicacion.module').then( m => m.NewPublicacionPageModule)
   },
 
 ];

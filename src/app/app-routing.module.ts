@@ -25,6 +25,11 @@ const routes: Routes = [
     loadChildren: () => import('./Pages/auth/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
   },
 
+  {
+    path: 'edit-publicacion',
+    loadChildren: () => import('./Pages/edit-publicacion/edit-publicacion.module').then( m => m.EditPublicacionPageModule)
+  },
+
 
 
 ];

@@ -12,33 +12,13 @@ export class TareasService {
   tareasCollection: AngularFirestoreCollection<TareasInterface>;
 
   constructor(private firestore: AngularFirestore) {
-   // this.tareasCollection=firestore.collection<TareasInterface>('Tareas');
-   // this.getTareas();
+
    }
 
-  getTareaDoc(id: string) {
-    return this.firestore.collection('Tareas').doc(id).snapshotChanges();
-  }
-
-  getTareasList() {
-    return this.firestore
-    .collection('Tareas')
-    .snapshotChanges();
-  }
-
-  /*  getTareas(): void{
-    this.tareas=this.tareasCollection.snapshotChanges().pipe(
-      map(action=> action.map(a=>a.payload.doc.data()as TareasInterface)),
-
-    );
-
-  } */
 
   getCollection<Tipo>(path: string){
     const collection = this.firestore.collection<Tipo>(path);
     return collection.valueChanges();
-
   }
-
 
 }

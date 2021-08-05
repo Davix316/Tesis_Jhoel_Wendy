@@ -17,7 +17,7 @@ export class FolderPage implements OnInit {
   option = [
     {
       name: 'Publicaciones',
-      link: '/menu/news',
+      link: '/menu/home',
       icon: 'newspaper',
     },
     {
