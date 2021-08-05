@@ -18,9 +18,7 @@ export class DefaultLayoutComponent {
      }
 
      ngOnInit() {
-      this.serviceAuth.getCurrentUser().subscribe(user => {
-        this.name = user.email;
-      })
+        this.name = "super.admin@epn.edu.ec";
     }
   toggleMinimize(e) {
     this.sidebarMinimized = e;

@@ -13,6 +13,10 @@ export class LoginComponent implements OnInit {
   validations_form: FormGroup;
   errorMessage: string = '';
   private isEmail = /\S+@\S+\.\S+/;
+  formLogin=new FormGroup({
+    emailF: new FormControl('',[Validators.required]),
+    passwordF: new FormControl('',[Validators.required])
+  });
 
   constructor(private serviceAuth : FirebaseauthService, private fb:FormBuilder,
     private router:Router) {
@@ -36,16 +40,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  async loginUser(){
+  loginUser(){
     let {usuarioF,passwordF} = this.myFormUser.value;
-    const user = await this.serviceAuth.login(usuarioF,passwordF)
-    if(user){
-      console.log("User: " , this.myFormUser.value)
-      this.router.navigate(['/dashboard'])
-    } else{
+    const user = this.serviceAuth.login(usuarioF,passwordF)
+    if(this.myFormUser.invalid){
       this.errorMessage;
       console.log("Inicio de Sesión fallido");
-      window.alert("Credenciales incorrectas")
+      window.alert("Credenciales incorrectas")    
     }
   }
 

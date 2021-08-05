@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     component: ListComponent,
     data: {
-      title: 'Administradores',
+      title: 'Lista de Administradores',
     }
   }
 ];

@@ -44,6 +44,25 @@ export class AdminFormComponent implements OnInit {
     }
   }
 
+  register(user: Admin){
+    try{
+      console.log(user);
+      if(this.adminForm.valid){
+      //user.foto=this.inputImageUser.nativeElement.value;
+      user.rol='Administrador';
+      this.adminsSvc.registrar(user);
+      this.router.navigate(['list']);
+      }
+      else{
+        console.log("no valido");
+      }
+    }
+    catch(error){
+      console.error(error);
+    }
+}
+
+
   onGoBackToList(): void {
     this.router.navigate(['list']);
   }

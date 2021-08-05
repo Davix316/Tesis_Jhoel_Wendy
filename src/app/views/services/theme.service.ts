@@ -7,6 +7,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { resolve } from '@angular/compiler-cli/src/ngtsc/file_system';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { Router } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +18,17 @@ export class ThemeService {
   admins: Observable<Admin[]>;
   students: Observable<Admin[]>;
   photo: any;
+  currentUser: any;
+  token: string;
+  idDoc: string;
+  private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
 
   private adminsCollection: AngularFirestoreCollection<Admin>;
   private studentsCollection: AngularFirestoreCollection<Admin>;
 
 
-  constructor(private readonly afs: AngularFirestore, private afAuth: AngularFireAuth, private storage: AngularFireStorage) {
+  constructor(private readonly afs: AngularFirestore, private afAuth: AngularFireAuth, private storage: AngularFireStorage, public router: Router) {
     this.adminsCollection = afs.collection<Admin>('Administradores');
     this.studentsCollection = afs.collection<Admin>('Usuarios');
     this.getAdmins();
@@ -86,6 +94,26 @@ export class ThemeService {
       }
     });
   }
+
+    //REGISTRAR USUARIO
+    registrar(usuario: Admin){
+      this.afAuth.createUserWithEmailAndPassword(usuario.email,usuario.password)
+       .then((userResponse)=>{
+         // add the user to the "users" database
+         usuario.id=userResponse.user.uid;
+         //id del documento
+        this.idDoc=userResponse.user.uid;
+         //add the user to the database
+         this.afs.collection('Administradores').doc(this.idDoc).set(usuario).then(ref=>{
+          window.alert('Administrador registrado');
+         });
+  
+       })
+       .catch((err)=>{
+          console.log('error de registro: ', err);
+       });
+  
+      }
 
   onSaveStudent(student: Admin, studentId: string): Promise<void> {
 

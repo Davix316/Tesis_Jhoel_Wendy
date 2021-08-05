@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     component: ProfileComponent,
     data: {
-      title: 'Perfil'
+      title: 'Perfil de Usuario'
     } 
   }
 ];
