@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { CarrerasComponent } from './carreras.component';
-import { SistemasComponent } from './sistemas.component';
-import { RedesComponent } from './redes.component';
-import { ElectromecanicaComponent } from './electromecanica.component';
-import { AmbientalComponent } from './ambiental.component';
+import { SistemasComponent } from './sistemas/sistemas.component';
+import { RedesComponent } from './redes/redes.component';
+import { ElectromecanicaComponent } from './electromecanica/electromecanica.component';
+import { AmbientalComponent } from './ambiental/ambiental.component';
 import { MateriasComponent } from './materias/materias.component';
 import { ArchivoComponent } from './materias/archivo.component';
 import { InforArchivoComponent } from './materias/infor-archivo.component';
@@ -14,21 +14,11 @@ import { InforArchivoComponent } from './materias/infor-archivo.component';
 const routes: Routes = [
   {
     path: '',
+    component: CarrerasComponent,
     data: {
       title: 'Carreras'
     },
-    children: [
-      {
-        path: '',
-        redirectTo: 'carreras'
-      },
-      {
-        path: 'carreras',
-        component: CarrerasComponent,
-        data: {
-          title: ''
-        }
-      },
+  },
       {
         path: 'sistemas',
         component: SistemasComponent,
@@ -78,8 +68,6 @@ const routes: Routes = [
           title: 'Información de archivo'
         }
       }
-    ]
-  }
 ];
 
 @NgModule({

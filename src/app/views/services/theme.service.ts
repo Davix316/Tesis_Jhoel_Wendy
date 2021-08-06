@@ -9,14 +9,17 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { Materia } from '../../shared/models/materia.interface';
 
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ThemeService {
   admins: Observable<Admin[]>;
   students: Observable<Admin[]>;
+  materias: Observable<Materia[]>;
   photo: any;
   currentUser: any;
   token: string;
@@ -26,13 +29,16 @@ export class ThemeService {
 
   private adminsCollection: AngularFirestoreCollection<Admin>;
   private studentsCollection: AngularFirestoreCollection<Admin>;
+  private materiasCollection: AngularFirestoreCollection<Materia>;
 
 
   constructor(private readonly afs: AngularFirestore, private afAuth: AngularFireAuth, private storage: AngularFireStorage, public router: Router) {
     this.adminsCollection = afs.collection<Admin>('Administradores');
     this.studentsCollection = afs.collection<Admin>('Usuarios');
+    this.materiasCollection = afs.collection<Materia>('Materias');
     this.getAdmins();
     this.getStudents();
+    this.getMaterias();
   }
 
 
@@ -40,6 +46,18 @@ export class ThemeService {
     return new Promise(async (resolve, reject) => {
       try {
         const result = await this.adminsCollection.doc(adminId).delete();
+        resolve(result);
+
+      } catch (err) {
+        reject(err.message);
+      }
+    });
+  }
+
+  onDeleteMaterias(materiaId: string): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const result = await this.materiasCollection.doc(materiaId).delete();
         resolve(result);
 
       } catch (err) {
@@ -115,6 +133,7 @@ export class ThemeService {
   
       }
 
+
   onSaveStudent(student: Admin, studentId: string): Promise<void> {
 
     return new Promise(async (resolve, reject) => {
@@ -125,6 +144,21 @@ export class ThemeService {
         const result = await this.studentsCollection.doc(id).set(data);
         resolve(result);
         window.alert('Estudiante registrado');
+      } catch (err) {
+        reject(err.message);
+      }
+    });
+  }
+
+  onSaveMateria(materia: Materia, materiaId: string): Promise<void> {
+
+    return new Promise(async (resolve, reject) => {
+      try {
+        const id = materiaId || this.afs.createId();
+        const data = { id, ...materia };
+        const result = await this.materiasCollection.doc(id).set(data);
+        resolve(result);
+        window.alert('materia registrada');
       } catch (err) {
         reject(err.message);
       }
@@ -143,6 +177,14 @@ export class ThemeService {
     this.students = this.studentsCollection.snapshotChanges().pipe(
       map(actions => 
         actions.map(a => a.payload.doc.data() as Admin))
+    );
+  }
+
+
+  private getMaterias(): void {
+    this.materias = this.materiasCollection.snapshotChanges().pipe(
+      map(actions => 
+        actions.map(a => a.payload.doc.data() as Materia))
     );
   }
 }

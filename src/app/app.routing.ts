@@ -120,7 +120,10 @@ export const routes: Routes = [
       {
         path: 'carreras',
         loadChildren: () => import('./views/carreras/carreras.module').then(m => m.CarrerasModule)
-      }
+      },{ path: 'sistemas', loadChildren: () => import('./views/carreras/sistemas/sistemas.module').then(m => m.SistemasModule),
+      data: {
+        title: 'Sistemas'
+      } }
     ],canActivate: [CheckloginGuard],
   },
   { path: '**', component: P404Component }
