@@ -9,7 +9,7 @@
 
 <ion-content>
   <div>
-    <form [formGroup]="newPublicacion" (ngSubmit)="savePublicacion(newPublicacion.value)">
+    <form [formGroup]="formPublicacion" (ngSubmit)="savePublicacion(formPublicacion.value)">
       <ion-card>
         <ion-card-header>
           <ion-card-subtitle>Seleccione la materia</ion-card-subtitle>
@@ -19,10 +19,11 @@
         <ion-card-content>
           <ion-item>
             <ion-label>Materia</ion-label>
-            <ion-select interface="popover"formControlName="materia" >
-              <div *ngFor="let item of listaMaterias">
-                <ion-select-option value={{item.id}} >{{item.nombre}}</ion-select-option>
-              </div>
+            <ion-select formControlName="materia">
+
+              <ion-item *ngFor="let item of listaMaterias">
+                <ion-select-option value={{item.id}}>{{item.nombre}}</ion-select-option>
+              </ion-item>
 
             </ion-select>
           </ion-item>

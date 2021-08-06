@@ -2,6 +2,7 @@ export interface PublicacionInterface {
   id: string;
   idUser: string;
   idMateria: string;
+  idCarrera: string;
   categoria: string;
   fecha: Date;
   likes: number;
@@ -9,6 +10,6 @@ export interface PublicacionInterface {
   descripcion: string;
   nameUser: string;
   apellUser: string;
-  file: string;
+  file: string[];
   imagen?: string;
 }
