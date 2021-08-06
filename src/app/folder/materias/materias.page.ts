@@ -14,7 +14,7 @@ import { MateriasInterface } from 'src/app/shared/materias-interface';
   styleUrls: ['./materias.page.scss'],
 })
 export class MateriasPage implements OnInit {
-  listaMaterias: MateriasInterface[];
+  listaMaterias: MateriasInterface[] ;
   idUser: string;
   userLogIn: any;
   userInfo: any;

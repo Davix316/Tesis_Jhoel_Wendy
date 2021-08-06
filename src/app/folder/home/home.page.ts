@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import * as firebase from 'firebase';
+import * as moment from 'moment';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { PublicacionInterface } from 'src/app/shared/publicacion';
@@ -17,6 +19,9 @@ export class HomePage implements OnInit {
 
 publicaciones: PublicacionInterface[]=[];
 
+
+
+
   constructor(
     private fireService: FirestoreService,
     private serviceauth: FireauthService,
@@ -25,7 +30,10 @@ publicaciones: PublicacionInterface[]=[];
 
    }
 
+
   ngOnInit() {
+
+
 
     //INFORMACION DE USUARIO ACTUAL
     this.serviceauth.stateAuth().subscribe(user => {
@@ -64,7 +72,11 @@ publicaciones: PublicacionInterface[]=[];
     this.fireService.getCollection<PublicacionInterface>('Publicaciones').subscribe(res => {
       this.publicaciones = res.filter(e=>idC===e.idCarrera
         );
+        /* res.forEach(element => {
+          element.fecha;
+          console.log(element.fecha.toDateString());
+        });
+        console.log('e',res); */
     }).unsubscribe;
   }
-
 }

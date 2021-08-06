@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { PublicacionInterface } from '../shared/publicacion';
 
 @Injectable({
@@ -7,12 +9,14 @@ import { PublicacionInterface } from '../shared/publicacion';
 })
 export class PublicacionService {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, private router: Router, public toastController: ToastController) { }
 
   newPublicacion(publicacion: PublicacionInterface, idP: string){
     this.firestore.collection('Publicaciones').doc(idP).set(publicacion)
   .then((docRef) => {
       console.log('registro exitoso');
+      this.presentToast('Archivo Publicado!');
+      this.router.navigate(['/menu/home']);
   })
   .catch((error) => {
       console.error('"Error adding document: "', error);
@@ -22,5 +26,16 @@ export class PublicacionService {
   getId(){
     return this.firestore.createId();
   }
+  //PRESENTAR ALERTA REGISTRO existoso
+  async presentToast(text) {
+    const toast = await this.toastController.create({
+      message: text,
+      duration: 2000,
+      color: 'success'
+    });
+    toast.present();
+  }
+
+
 }
 

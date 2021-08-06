@@ -15,13 +15,11 @@
   <ion-card *ngFor="let item of publicaciones">
 
     <ion-item>
-
       <ion-avatar>
         <img src="/assets/img/marty-avatar.png">
       </ion-avatar>
-      <small> {{item.nameUser}} {{item.apellUser}}</small>
-      <!-- <ion-note slot="end" color="primary"> {{item.fecha.toDate()|date }}</ion-note> -->
-
+      <small><b>{{item.nameUser}} {{item.apellUser}}</b> </small>
+       <ion-text slot="end" color="secondary" class="fechaPubli"> {{item.fecha.toDate() | date:'MMM d, y'}}</ion-text>
 
     </ion-item>
 
@@ -36,25 +34,28 @@
 
     <ion-row>
       <ion-col>
-        <button ion-button color="primary" clear small icon-start>
-          <ion-icon name='thumbs-up'></ion-icon>
-          {{item.likes}} Likes
-        </button>
+        <ion-button size="small" ion-button color="primary" clear small icon-start>
+          <ion-icon name="star"></ion-icon>
+          {{item.likes}}
+        </ion-button>
       </ion-col>
       <ion-col>
-        <button ion-button color="primary" clear small icon-start>
-          <ion-icon name='text'></ion-icon>
-          4 Comments
-        </button>
+        <ion-button size="small" ion-button color="primary" clear small icon-start >
+          <ion-icon name="chatbubble-ellipses"></ion-icon>
+          <ion-label>4 </ion-label>
+        </ion-button>
       </ion-col>
       <ion-col center text-center>
 
-        <!-- <p color="primary"> {{item.fecha.toDate()|date:'h:mm a'}}</p> -->
+        <ion-note color="secondary"> {{item.fecha.toDate()|date:'h:mm a'}}</ion-note>
       </ion-col>
     </ion-row>
   </ion-card>
-  <ion-button routerLink="/new-publicacion">
-    ADD
-  </ion-button>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="warning" routerLink="/new-publicacion">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>

@@ -4,7 +4,7 @@ export interface PublicacionInterface {
   idMateria: string;
   idCarrera: string;
   categoria: string;
-  fecha: Date;
+  fecha: any;
   likes: number;
   titulo: string;
   descripcion: string;
