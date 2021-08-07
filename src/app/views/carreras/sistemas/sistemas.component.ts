@@ -3,6 +3,7 @@ import { ThemeService } from '../../services/theme.service';
 import { NavigationExtras, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Materia } from '../../../shared/models/materia.interface';
+import { MateriasService } from './../../services/materias.service';
 
 
 @Component({
@@ -10,10 +11,13 @@ import { Materia } from '../../../shared/models/materia.interface';
   templateUrl: 'sistemas.component.html',
 })
 export class SistemasComponent implements OnInit {
- 
+
   Materias$ = this.materiaSvc.materias;
   materiaForm: FormGroup;
   materia: Materia;
+  listaMaterias: Materia[];
+  carreraId: string;
+  nivelId: string;
 
   navigationExtras: NavigationExtras = {
     state: {
@@ -21,16 +25,24 @@ export class SistemasComponent implements OnInit {
     }
   };
 
-  constructor(private materiaSvc: ThemeService, private router: Router, private fb: FormBuilder,) {
+  constructor(
+    private materiaSvc: ThemeService,
+    private router: Router,
+    private fb: FormBuilder,
+    private materiasServ: MateriasService,
+  ) {
     const navigation = this.router.getCurrentNavigation();
     this.materia = navigation?.extras?.state?.value;
     this.initForm();
-   }
+
+  }
 
 
   ngOnInit(): void {
 
     this.materiaForm.patchValue(this.materia);
+    this.obtenerMaterias("ph4kM1eyF6KoaieJqCr0");
+
   }
 
   onGoToSee(item: any): void {
@@ -57,8 +69,16 @@ export class SistemasComponent implements OnInit {
       this.materiaSvc.onSaveMateria(materia, materiaId);
       this.materiaForm.reset();
       this.router.navigate(['carreras/sistemas']);
-    }else{
-      console.log("no valido")
+      this.materiaForm = this.fb.group({
+        idCarrera: ['ph4kM1eyF6KoaieJqCr0'],
+        nivel: ['', [Validators.required]],
+        nombre: ['', [Validators.required]],
+        numHoras: ['', [Validators.required]],
+      });
+    } else {
+      console.log("no valido"),
+        window.alert("Complete todos los campos")
+
     }
   }
 
@@ -68,8 +88,21 @@ export class SistemasComponent implements OnInit {
       ? 'is-invalid' : validatedField.touched ? 'is-valid' : '';
   }
 
-  onGoBackToList(): void {
-    this.router.navigate(['carreras']);
+  obtenerMaterias(idC: string) {
+    const path = 'Materias';
+    this.materiasServ.getCollection<Materia>(path).subscribe(res => {
+
+      this.listaMaterias = res.filter(e => idC === e.idCarrera);
+
+      console.log(this.listaMaterias);
+
+      this.listaMaterias.forEach(element => {
+        this.carreraId = element.id;
+        this.nivelId = element.nivel;
+        console.log(element.nivel);
+      });
+
+    });
   }
 
   private initForm(): void {
@@ -82,4 +115,3 @@ export class SistemasComponent implements OnInit {
   }
 
 }
-

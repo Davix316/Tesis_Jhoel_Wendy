@@ -3,6 +3,7 @@ import { ThemeService } from '../../services/theme.service';
 import { NavigationExtras, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Materia } from '../../../shared/models/materia.interface';
+import { MateriasService } from './../../services/materias.service';
 
 
 @Component({
@@ -14,6 +15,8 @@ export class AmbientalComponent implements OnInit {
   Materias$ = this.materiaSvc.materias;
   materiaForm: FormGroup;
   materia: Materia;
+  listaMaterias: Materia[];
+  carreraId: string;
 
   navigationExtras: NavigationExtras = {
     state: {
@@ -21,7 +24,12 @@ export class AmbientalComponent implements OnInit {
     }
   };
 
-  constructor(private materiaSvc: ThemeService, private router: Router, private fb: FormBuilder,) {
+  constructor(
+    private materiaSvc: ThemeService, 
+    private router: Router, 
+    private fb: FormBuilder,
+    private materiasServ: MateriasService,
+    ) {
     const navigation = this.router.getCurrentNavigation();
     this.materia = navigation?.extras?.state?.value;
     this.initForm();
@@ -31,6 +39,8 @@ export class AmbientalComponent implements OnInit {
   ngOnInit(): void {
 
     this.materiaForm.patchValue(this.materia);
+    this.obtenerMaterias("iw6XSHR2NiPPkwMSjKBM");
+
   }
 
   onGoToSee(item: any): void {
@@ -57,8 +67,16 @@ export class AmbientalComponent implements OnInit {
       this.materiaSvc.onSaveMateria(materia, materiaId);
       this.materiaForm.reset();
       this.router.navigate(['carreras/ambiental']);
+
+      this.materiaForm = this.fb.group({
+        idCarrera: ['iw6XSHR2NiPPkwMSjKBM'],
+        nivel: ['', [Validators.required]],
+        nombre: ['', [Validators.required]],
+        numHoras: ['', [Validators.required]],
+      });
     }else{
-      console.log("no valido")
+      console.log("no valido"),
+      window.alert("Complete todos los campos")
     }
   }
 
@@ -68,8 +86,20 @@ export class AmbientalComponent implements OnInit {
       ? 'is-invalid' : validatedField.touched ? 'is-valid' : '';
   }
 
-  onGoBackToList(): void {
-    this.router.navigate(['carreras']);
+  obtenerMaterias(idC: string) {
+    const path = 'Materias';
+    this.materiasServ.getCollection<Materia>(path).subscribe(res => {
+
+      this.listaMaterias = res.filter(e => idC === e.idCarrera);
+
+      console.log(this.listaMaterias);
+
+      this.listaMaterias.forEach(element => {
+        this.carreraId = element.id;
+        console.log(element.id);
+      });
+
+    });
   }
 
   private initForm(): void {
