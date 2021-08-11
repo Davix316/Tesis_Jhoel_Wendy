@@ -16,7 +16,7 @@
 
       <ion-col>
         <div class="position-absolute top-100 start-50 translate-middle "><ion-avatar class="ion-margin-start">
-          <img src="{{user.foto}}">
+          <img src="/assets/img/marty-avatar.png">
         </ion-avatar></div>
       </ion-col>
 
@@ -59,7 +59,7 @@
           <ion-label>{{usuario}}</ion-label>
         </ion-chip>
 
-        <ion-card-title>{{user.nombre}} {{user.apellido}}</ion-card-title>
+        <ion-card-title  class="ion-text-capitalize">{{user.nombre}} {{user.apellido}}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <ion-item>
@@ -72,7 +72,7 @@
         </ion-item>
         <ion-item>
           <ion-label>Carrera</ion-label>
-          <ion-note slot="end">{{user.carrera}}</ion-note>
+          <ion-note slot="end">{{user.carreraNombre}}</ion-note>
         </ion-item>
         <ion-item>
           <ion-label>Semestre</ion-label>

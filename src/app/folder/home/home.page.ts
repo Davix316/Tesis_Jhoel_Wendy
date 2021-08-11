@@ -53,7 +53,7 @@ publicaciones: PublicacionInterface[]=[];
     if (doc.exists) {
       //console.log('infoUser', doc.data());
       this.userInfo = doc.data();
-      this.carreraId = this.userInfo.carrera;
+      this.carreraId = this.userInfo.carreraId;
       console.log(this.carreraId);
       this.getPublicacion(this.carreraId);
     } else {

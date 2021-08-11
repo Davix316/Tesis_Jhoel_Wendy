@@ -1,3 +1,5 @@
+
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -32,16 +34,18 @@ export class RegisterPage implements OnInit {
 
   listacarrera: Carreras[];
 
+
   public myFormUser=new FormGroup({
     nombre: new FormControl('',[Validators.required]),
     apellido: new FormControl('',[Validators.required]),
     telefono: new FormControl('',[Validators.required]),
     numUnico: new FormControl('',[Validators.required]),
-    carrera: new FormControl('',[Validators.required]),
+    carreraId: new FormControl('',[Validators.required]),
     email: new FormControl('',[Validators.required, Validators.pattern(this.emailPattern)]),
     password: new FormControl('',[Validators.required,Validators.minLength(6)]),
     semestreRef: new FormControl('',[Validators.required]),
     foto: new FormControl('',[Validators.required]),
+    carreraNombre:new FormControl(''),
   });
 
 
@@ -63,6 +67,20 @@ export class RegisterPage implements OnInit {
         console.log(user);
         if(this.myFormUser.valid){
         //user.foto=this.inputImageUser.nativeElement.value;
+
+        if(user.carreraId==='TkiP9dMmAXyoscir6GqF'){
+          user.carreraNombre='TS- Electromecánica';
+        }
+        else if(user.carreraId==='i6e9eP0YTsnowV8p8EKi'){
+          user.carreraNombre='TS- Redes y Telecomunicaciones';
+        }
+        else if(user.carreraId==='iw6XSHR2NiPPkwMSjKBM'){
+          user.carreraNombre='TS- Agua y Saneamiento Ambiental';
+        }
+        else if(user.carreraId==='ph4kM1eyF6KoaieJqCr0'){
+          user.carreraNombre='TS- Desarrollo de Software';
+        }
+
         user.rol='estudiante';
         this.authService.registrar(user);
         }

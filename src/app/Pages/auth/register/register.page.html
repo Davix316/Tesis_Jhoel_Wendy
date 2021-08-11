@@ -41,9 +41,9 @@
 
           <ion-item lines="full">
             <ion-label position="floating">Carrera</ion-label>
-            <ion-select ok-text="Ok" cancel-text="Cancelar"  formControlName="carrera" >
+            <ion-select ok-text="Ok" cancel-text="Cancelar"  formControlName="carreraId" >
               <div *ngFor="let item of listacarrera">
-                <ion-select-option  value={{item.id}}>{{item.nombre}}</ion-select-option>
+                <ion-select-option value={{item.id}}>{{item.nombre}}</ion-select-option>
               </div>
             </ion-select>
           </ion-item>

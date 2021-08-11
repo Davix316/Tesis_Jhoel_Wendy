@@ -19,7 +19,6 @@ export class NewPublicacionPage implements OnInit {
   listaMaterias: MateriasInterface[];
 
 
-  carreraId: string;
 
   idCarr='';
   idMateria='';
@@ -76,16 +75,10 @@ export class NewPublicacionPage implements OnInit {
         this.nameUser=this.userInfo.nombre;
         this.idUserPubli=this.userInfo.id;
         this.apellUser=this.userInfo.apellido;
-        this.idCarr=this.userInfo.carrera;
-        console.log('"id":', this.idUserPubli);
-        console.log('"nombre":', this.nameUser);
-
-        this.carreraId = this.userInfo.carrera;
-        console.log(this.carreraId);
+        this.idCarr=this.userInfo.carreraId;
         //LISTAR MATERIAS DEL USUARIO
-        this.obtenerMaterias(this.carreraId);
+        this.obtenerMaterias(this.idCarr);
       } else {
-        // doc.data() will be undefined in this case
         console.log('"no existe el usuario"');
       }
     }).catch((error) => {
@@ -105,10 +98,10 @@ export class NewPublicacionPage implements OnInit {
 
       console.log(this.listaMaterias);
 
-      this.listaMaterias.forEach(element => {
+     /*  this.listaMaterias.forEach(element => {
         this.carreraId = element.id;
-        console.log(element.id);
-      });
+        //console.log(element.id);
+      }); */
 
 
     });

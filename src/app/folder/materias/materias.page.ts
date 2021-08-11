@@ -20,10 +20,11 @@ export class MateriasPage implements OnInit {
   userInfo: any;
   carreraId: string;
 
-
+nivel: number;
+subject: string;
 
 textoBuscar='';
-segment: string;
+segment: number;
 
 imgMaterias=[
   {src:'/assets/img/speakers/cheetah.jpg' },
@@ -61,14 +62,11 @@ navigationExtras: NavigationExtras = {
 
 
   }
-//SEGMENTO DE SEMESTRE
-  segmentChanged(ev: any) {
-    console.log('Segment changed', ev);
-  }
+
 
 
   ngOnInit() {
-    this.segment = 'first';
+    this.segment=0;
   }
 
 
@@ -79,7 +77,7 @@ navigationExtras: NavigationExtras = {
       if (doc.exists) {
         //console.log('infoUser', doc.data());
         this.userInfo = doc.data();
-        this.carreraId = this.userInfo.carrera;
+        this.carreraId = this.userInfo.carreraId;
         console.log(this.carreraId);
         //LISTAR MATERIAS DEL USUARIO
         this.obtenerMaterias(this.carreraId);
@@ -118,8 +116,13 @@ this.materiasServ.getCollection<MateriasInterface>(path).subscribe(res=>{
 console.log(this.listaMaterias);
 
 this.listaMaterias.forEach(element => {
-  this.carreraId=element.id;
-  console.log(element.id);
+  this.nivel=element.nivel;
+  this.subject=element.nombre;
+
+/* console.log(this.nivel);
+console.log(this.subject); */
+
+
 });
 
 
@@ -140,6 +143,9 @@ detalleMateria(item: any): void{
   this.navigationExtras.state.value=item;
   this.router.navigate(['/detalle-materia'],this.navigationExtras);
 }
+
+//FILTRAR MATERIAS  BY SEMESTRES
+
 
 
 }
