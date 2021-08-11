@@ -18,6 +18,7 @@ export class SistemasComponent implements OnInit {
   listaMaterias: Materia[];
   carreraId: string;
   nivelId: string;
+  textoBuscar='';
 
   navigationExtras: NavigationExtras = {
     state: {
@@ -41,7 +42,7 @@ export class SistemasComponent implements OnInit {
   ngOnInit(): void {
 
     this.materiaForm.patchValue(this.materia);
-    this.obtenerMaterias("ph4kM1eyF6KoaieJqCr0");
+    this.obtenerMaterias("ph4kM1eyF6KoaieJqCr0", "");
 
   }
 
@@ -71,7 +72,7 @@ export class SistemasComponent implements OnInit {
       this.router.navigate(['carreras/sistemas']);
       this.materiaForm = this.fb.group({
         idCarrera: ['ph4kM1eyF6KoaieJqCr0'],
-        nivel: ['', [Validators.required]],
+        nivel: ['1', [Validators.required]],
         nombre: ['', [Validators.required]],
         numHoras: ['', [Validators.required]],
       });
@@ -88,27 +89,36 @@ export class SistemasComponent implements OnInit {
       ? 'is-invalid' : validatedField.touched ? 'is-valid' : '';
   }
 
-  obtenerMaterias(idC: string) {
+  obtenerMaterias(idC: string, niv: string) {
     const path = 'Materias';
     this.materiasServ.getCollection<Materia>(path).subscribe(res => {
 
-      this.listaMaterias = res.filter(e => idC === e.idCarrera);
+      if (niv==""){
+        this.listaMaterias = res.filter(e => idC === e.idCarrera);
+      }else{
+        this.listaMaterias = res.filter(e => idC === e.idCarrera && niv == e.nivel);
+      }
+      
 
-      console.log(this.listaMaterias);
+      //console.log(this.listaMaterias);
 
       this.listaMaterias.forEach(element => {
         this.carreraId = element.id;
         this.nivelId = element.nivel;
-        console.log(element.nivel);
+       // console.log(element.nivel);
       });
-
     });
+  }
+
+  buscar($event){
+    console.log(this.textoBuscar);
+    this.obtenerMaterias("ph4kM1eyF6KoaieJqCr0",this.textoBuscar)
   }
 
   private initForm(): void {
     this.materiaForm = this.fb.group({
       idCarrera: ['ph4kM1eyF6KoaieJqCr0'],
-      nivel: ['', [Validators.required]],
+      nivel: ['1', [Validators.required]],
       nombre: ['', [Validators.required]],
       numHoras: ['', [Validators.required]],
     });

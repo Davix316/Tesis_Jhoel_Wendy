@@ -16,6 +16,8 @@ export class RedesComponent implements OnInit {
   materia: Materia;
   listaMaterias: Materia[] ;
   carreraId: string;
+  nivelId: string;
+  textoBuscar='';
 
   navigationExtras: NavigationExtras = {
     state: {
@@ -39,7 +41,7 @@ export class RedesComponent implements OnInit {
   ngOnInit(): void {
 
     this.materiaForm.patchValue(this.materia);
-    this.obtenerMaterias("i6e9eP0YTsnowV8p8EKi");
+    this.obtenerMaterias("i6e9eP0YTsnowV8p8EKi", "");
 
   }
 
@@ -70,7 +72,7 @@ export class RedesComponent implements OnInit {
 
       this.materiaForm = this.fb.group({
         idCarrera: ['i6e9eP0YTsnowV8p8EKi'],
-        nivel: ['', [Validators.required]],
+        nivel: ['1', [Validators.required]],
         nombre: ['', [Validators.required]],
         numHoras: ['', [Validators.required]],
       });
@@ -87,27 +89,33 @@ export class RedesComponent implements OnInit {
       ? 'is-invalid' : validatedField.touched ? 'is-valid' : '';
   }
 
-  obtenerMaterias(idC: string) {
+  obtenerMaterias(idC: string, niv: string) {
     const path = 'Materias';
     this.materiasServ.getCollection<Materia>(path).subscribe(res => {
 
-      this.listaMaterias = res.filter(e => idC === e.idCarrera);
-
-      console.log(this.listaMaterias);
+      if (niv==""){
+        this.listaMaterias = res.filter(e => idC === e.idCarrera);
+      }else{
+        this.listaMaterias = res.filter(e => idC === e.idCarrera && niv == e.nivel);
+      }
 
       this.listaMaterias.forEach(element => {
         this.carreraId = element.id;
-        console.log(element.id);
+        //console.log(element.id);
       });
 
     });
   }
 
+  buscar($event){
+    console.log(this.textoBuscar);
+    this.obtenerMaterias("i6e9eP0YTsnowV8p8EKi",this.textoBuscar)
+  }
   
   private initForm(): void {
     this.materiaForm = this.fb.group({
       idCarrera: ['i6e9eP0YTsnowV8p8EKi'],
-      nivel: ['', [Validators.required]],
+      nivel: ['1', [Validators.required]],
       nombre: ['', [Validators.required]],
       numHoras: ['', [Validators.required]],
     });
