@@ -50,7 +50,7 @@
                 <ion-avatar>
                   <img src="/assets/img/logo.png">
                 </ion-avatar>
-                <p class="ion-text-lowercase">{{item.nombre}}</p>
+                <p class="ion-text-capitalize">{{item.nombre}}</p>
                 <small>Nivel: {{item.nivel}}</small>
               </div>
             </ion-card-content>
@@ -62,17 +62,19 @@
     </ion-grid>
 
     <div *ngSwitchCase=1>
+      <ion-grid>
       <ion-row>
-        <ion-col *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index" (click)="detalleMateria(item)">
+        <ng-container *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index" (click)="detalleMateria(item)" >
+        <ion-col *ngIf="item.nivel==1" >
 
-            <ion-card>
-              <ion-card-content *ngIf="item.nivel==1" >
+            <ion-card  >
+              <ion-card-content >
                 <ion-badge class="ion-text-start" color="warning">{{i+1}}</ion-badge>
                 <div class="ion-text-center">
                   <ion-avatar>
                     <img src="/assets/img/logo.png">
                   </ion-avatar>
-                  <p class="ion-text-lowercase">{{item.nombre}}</p>
+                  <p class="ion-text-capitalize" >{{item.nombre}}</p>
                   <small>Nivel: {{item.nivel}}</small>
                 </div>
               </ion-card-content>
@@ -81,47 +83,50 @@
 
 
         </ion-col>
-
+      </ng-container>
       </ion-row>
+    </ion-grid>
     </div>
 
 
     <div *ngSwitchCase=2>
+      <ion-grid>
       <ion-row>
-        <ion-col *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index" (click)="detalleMateria(item)">
+        <ng-container  *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index" (click)="detalleMateria(item)">
+        <ion-col *ngIf="item.nivel==2">
 
             <ion-card>
-              <ion-card-content *ngIf="item.nivel==2" >
+              <ion-card-content  >
                 <ion-badge class="ion-text-start" color="warning">{{i+1}}</ion-badge>
                 <div class="ion-text-center">
                   <ion-avatar>
                     <img src="/assets/img/logo.png">
                   </ion-avatar>
-                  <p class="ion-text-lowercase">{{item.nombre}}</p>
+                  <p class="ion-text-capitalize">{{item.nombre}}</p>
                   <small>Nivel: {{item.nivel}}</small>
                 </div>
               </ion-card-content>
             </ion-card>
-
-
-
         </ion-col>
-
+      </ng-container>
       </ion-row>
+    </ion-grid>
     </div>
 
     <div *ngSwitchCase=3>
+      <ion-grid>
       <ion-row>
-        <ion-col *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index" (click)="detalleMateria(item)">
+        <ng-container *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index" (click)="detalleMateria(item)" >
+        <ion-col  *ngIf="item.nivel==3">
 
             <ion-card>
-              <ion-card-content *ngIf="item.nivel==3" >
+              <ion-card-content >
                 <ion-badge class="ion-text-start" color="warning">{{i+1}}</ion-badge>
                 <div class="ion-text-center">
                   <ion-avatar>
                     <img src="/assets/img/logo.png">
                   </ion-avatar>
-                  <p class="ion-text-lowercase">{{item.nombre}}</p>
+                  <p class="ion-text-capitalize">{{item.nombre}}</p>
                   <small>Nivel: {{item.nivel}}</small>
                 </div>
               </ion-card-content>
@@ -130,23 +135,26 @@
 
 
         </ion-col>
-
+      </ng-container>
       </ion-row>
+    </ion-grid>
     </div>
 
 
     <div *ngSwitchCase=4>
+      <ion-grid>
       <ion-row>
-        <ion-col *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index" (click)="detalleMateria(item)">
+        <ng-container *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index" (click)="detalleMateria(item)" >
+        <ion-col *ngIf="item.nivel==4" >
 
             <ion-card>
-              <ion-card-content *ngIf="item.nivel==4" >
+              <ion-card-content >
                 <ion-badge class="ion-text-start" color="warning">{{i+1}}</ion-badge>
                 <div class="ion-text-center">
                   <ion-avatar>
                     <img src="/assets/img/logo.png">
                   </ion-avatar>
-                  <p class="ion-text-lowercase">{{item.nombre}}</p>
+                  <p class="ion-text-capitalize">{{item.nombre}}</p>
                   <small>Nivel: {{item.nivel}}</small>
                 </div>
               </ion-card-content>
@@ -155,33 +163,35 @@
 
 
         </ion-col>
-
+      </ng-container>
       </ion-row>
+    </ion-grid>
     </div>
 
 
     <div *ngSwitchCase=5>
+      <ion-grid>
       <ion-row>
-        <ion-col *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index" (click)="detalleMateria(item)">
-
-            <ion-card>
-              <ion-card-content *ngIf="item.nivel==5" >
+        <ng-container  *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index" (click)="detalleMateria(item)">
+        <ion-col size="6" *ngIf="item.nivel==5" >
+            <ion-card >
+              <ion-card-content >
                 <ion-badge class="ion-text-start" color="warning">{{i+1}}</ion-badge>
                 <div class="ion-text-center">
                   <ion-avatar>
                     <img src="/assets/img/logo.png">
                   </ion-avatar>
-                  <p class="ion-text-lowercase">{{item.nombre}}</p>
+                  <p class="ion-text-capitalize" >{{item.nombre}}</p>
                   <small>Nivel: {{item.nivel}}</small>
                 </div>
               </ion-card-content>
+
             </ion-card>
 
-
-
         </ion-col>
-
+        </ng-container>
       </ion-row>
+    </ion-grid>
     </div>
 
   </div>

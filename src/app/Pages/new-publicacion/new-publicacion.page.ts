@@ -32,7 +32,7 @@ export class NewPublicacionPage implements OnInit {
 
 
   public formPublicacion=new FormGroup({
-    materia:new FormControl(),
+    idMateria:new FormControl(),
     categoria:new FormControl(),
     titulo:new FormControl(),
     descripcion:new FormControl(),

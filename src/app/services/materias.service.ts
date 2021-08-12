@@ -14,10 +14,15 @@ materias: any;
 
 
   getCollection<Tipo>(path: string){
-    const collection = this.firestore.collection<Tipo>(path);
+    const collection = this.firestore.collection<Tipo>(path, ref=> ref.orderBy('nivel','asc'));
     //console.log('collecc', collection);
     return collection.valueChanges();
   }
 
+  getCarreras<Tipo>(path: string){
+    const collection = this.firestore.collection<Tipo>(path);
+    //console.log('collecc', collection);
+    return collection.valueChanges();
+  }
 
 }

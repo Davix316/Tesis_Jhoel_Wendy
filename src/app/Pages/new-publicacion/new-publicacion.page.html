@@ -19,9 +19,11 @@
         <ion-card-content>
           <ion-item>
             <ion-label position="floating">Materia</ion-label>
-            <ion-select ok-text="Ok" cancel-text="Cancelar" formControlName="materia">
+            <ion-select ok-text="Ok" cancel-text="Cancelar" formControlName="idMateria">
               <div *ngFor="let item of listaMaterias">
-                <ion-select-option class="ion-text-lowercase" value={{item.id}}>{{item.nombre}}</ion-select-option>
+                <ion-select-option class="ion-text-capitalize"
+
+                value={{item.id}}>{{item.nombre}}</ion-select-option>
               </div>
 
             </ion-select>
@@ -64,7 +66,8 @@
           </ion-item>
 
           <ion-item>
-            <ion-textarea placeholder="Descripcion" formControlName="descripcion"></ion-textarea>
+            <ion-label position="floating" class="titulo">Descripcion</ion-label>
+            <ion-textarea  formControlName="descripcion"></ion-textarea>
           </ion-item>
         </ion-card-content>
       </ion-card>

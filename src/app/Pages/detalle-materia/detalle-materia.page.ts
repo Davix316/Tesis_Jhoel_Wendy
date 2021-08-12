@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TareasService } from 'src/app/services/tareas.service';
+import { PublicacionInterface } from 'src/app/shared/publicacion';
 import { TareasInterface } from 'src/app/shared/tareas-interface';
 
 @Component({
@@ -12,7 +13,7 @@ export class DetalleMateriaPage implements OnInit {
   segment: string;
 
   tareas: TareasInterface = null;
-  listaTareas: TareasInterface[];
+  listaTareas: PublicacionInterface[];
   materiaId: string;
 
 
@@ -22,6 +23,7 @@ export class DetalleMateriaPage implements OnInit {
     this.tareas = navigation?.extras?.state?.value;
     this.materiaId = this.tareas.id;
     console.log('tareas id:', this.materiaId);
+
     this.getTareas(this.materiaId);
 
   }
@@ -41,9 +43,10 @@ export class DetalleMateriaPage implements OnInit {
 
   }
 
-  getTareas(idTarea: string){
-    this.tarService.getCollection<TareasInterface>('Tareas').subscribe(res => {
-      this.listaTareas = res.filter(e => idTarea === e.idMateria);
+
+  getTareas(idMat: string){
+    this.tarService.getCollection<PublicacionInterface>('Publicaciones').subscribe(res => {
+      this.listaTareas = res.filter(e => idMat === e.idMateria);
       console.log(this.listaTareas);
     });
   }

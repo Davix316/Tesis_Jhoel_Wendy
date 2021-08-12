@@ -96,10 +96,10 @@ export class RegisterPage implements OnInit {
   /// LEER CARRERAS
 getCarrera(){
 
-this.materiasServ.getCollection<Carreras>('Carreras').subscribe(res=>{
+this.materiasServ.getCarreras<Carreras>('Carreras').subscribe(res=>{
 if(res){
   this.listacarrera=res;
-  console.log(res);
+  console.log('carreras',this.listacarrera);
 }
 });
 }
