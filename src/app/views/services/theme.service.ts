@@ -107,6 +107,7 @@ export class ThemeService {
         const result = await this.adminsCollection.doc(id).set(data);
         resolve(result);
         window.alert('Administrador registrado');
+        
       } catch (err) {
         reject(err.message);
       }
@@ -138,10 +139,10 @@ export class ThemeService {
 
     return new Promise(async (resolve, reject) => {
       try {
-        this.afAuth.createUserWithEmailAndPassword(student.email, student.password);
         const id = studentId || this.afs.createId();
         const data = { id, ...student };
         const result = await this.studentsCollection.doc(id).set(data);
+        this.afAuth.createUserWithEmailAndPassword(student.email, student.password);
         resolve(result);
         window.alert('Estudiante registrado');
       } catch (err) {

@@ -7,13 +7,13 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class CheckloginGuard implements CanActivate {
+export class CheckloginGuard2 implements CanActivate {
   constructor(private fAuth: AngularFireAuth, public router: Router){
 
   }
+
   canActivate(): Observable<boolean>{
-    return this.fAuth.authState.pipe(
-      map(auth=> {
+    return this.fAuth.authState(rol)(
         if(!auth){
           this.router.navigate(['/login']);
           console.log('autenticado:', false);
@@ -23,7 +23,7 @@ export class CheckloginGuard implements CanActivate {
           console.log('autenticado:', true);
           return true;
         }
-      })
+    )
     );
 }
 }

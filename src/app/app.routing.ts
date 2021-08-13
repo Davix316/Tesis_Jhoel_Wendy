@@ -81,7 +81,7 @@ export const routes: Routes = [
       },
       {
         path: 'list',
-        loadChildren: () => import('./views/admin/list/list.module').then(m => m.ListModule)
+        loadChildren: () => import('./views/admin/list/list.module').then(m => m.ListModule),
       },{
         path: 'newAdmin', loadChildren: () => import('./views/admin/newAdmin/newAdmin.module').then(m => m.NewAdminModule),
         data: {
@@ -99,7 +99,8 @@ export const routes: Routes = [
       {
         path: 'listStudent',
         loadChildren: () => import('./views/student/listStudent/listStudent.module').then(m => m.ListStudenttModule)
-      },{
+      },
+      {
         path: 'newStudent', loadChildren: () => import('./views/student/newStudent/newStudent.module').then(m => m.NewStudentModule),
         data: {
           title: 'Nuevo Estudiante'

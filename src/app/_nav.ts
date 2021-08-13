@@ -7,16 +7,6 @@ export const navItems: INavData[] = [
     icon: 'icon-speedometer',
   },
   {
-    name: 'Administradores',
-    url: '/list',
-    icon: 'icon-pie-chart'
-  },
-  {
-    name: 'Estudiantes',
-    url: '/listStudent',
-    icon: 'icon-calculator',
-  },
-  {
     name: 'Carreras',
     url: '/carreras',
     icon: 'icon-star'
@@ -27,3 +17,5 @@ export const navItems: INavData[] = [
     icon: 'icon-ban',
   }
 ];
+
+

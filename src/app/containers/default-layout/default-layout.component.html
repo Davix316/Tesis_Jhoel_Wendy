@@ -2,14 +2,14 @@
 <app-header
   
   [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/img/imagenes/epn_logo.png', width: 100, height: 55, alt: 'CoreUI Logo'}"
+  [navbarBrandFull]="{src: 'assets/img/imagenes/app_logo2.PNG', width: 80, height: 55, alt: 'CoreUI Logo'}"
   [sidebarToggler]="'lg'"
   [asideMenuToggler]="'lg'"
-  [navbarBrandMinimized]="{src: 'assets/img/imagenes/esfot_logo.png', width: 100, height: 55, alt: 'CoreUI Logo'}"
   >
-  <h1>HOLA MUNDO </h1>
+  <h1 style="color: #236084;">PEER-KNOW</h1>
   
 </app-header>
+
 
 <!--
 <header 
@@ -31,11 +31,48 @@
 
 
 <div class="app-body">
+
+  <div *ngIf="admin.rol=='SuperAdministrador'; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+      <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" 
+      [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
+        
+        <app-sidebar-nav  [navItems]="navItems2" 
+        [perfectScrollbar] [disabled]="appSidebar.minimized">
+        </app-sidebar-nav>
+        
+        <app-sidebar-minimizer></app-sidebar-minimizer>
+      </app-sidebar>    
+    </ng-template>
+
+    <ng-template #elseBlock>
+      <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" 
+      [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
+        
+        <app-sidebar-nav  [navItems]="navItems" 
+        [perfectScrollbar] [disabled]="appSidebar.minimized">
+        </app-sidebar-nav>
+    
+        <app-sidebar-minimizer></app-sidebar-minimizer>
+      </app-sidebar>    
+    </ng-template>
+
+      
+
+      <!--
   <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" 
   [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
-    <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized"></app-sidebar-nav>
+    
+    <app-sidebar-nav  [navItems]="navItems2" 
+    [perfectScrollbar] [disabled]="appSidebar.minimized">
+    </app-sidebar-nav>
+
     <app-sidebar-minimizer></app-sidebar-minimizer>
   </app-sidebar>
+
+-->
+
+
   <!-- Main content -->
   <main class="main">
     <!-- Breadcrumb -->
@@ -48,7 +85,7 @@
         </cui-breadcrumb>
       </div>
       <div class="col-md-3" style="background-color: #2f353a; max-height: 45px; text-align: center; color: white;">
-        <h5>{{name}}</h5>
+        <h5>{{admin.email}}</h5>
       </div>
       <div class="col-md-2"  style="padding-right: 0px; padding-left: 0px;">
        <button (click)="salir()" type="button" class="btn btn-warning" style="height: 45px; color: white;"><h5>Cerrar Sesión <i class="cil-account-logout"></i></h5></button>
