@@ -1,6 +1,8 @@
+/* eslint-disable eqeqeq */
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { TareasService } from 'src/app/services/tareas.service';
+import { MateriasInterface } from 'src/app/shared/materias-interface';
 import { PublicacionInterface } from 'src/app/shared/publicacion';
 import { TareasInterface } from 'src/app/shared/tareas-interface';
 
@@ -12,19 +14,33 @@ import { TareasInterface } from 'src/app/shared/tareas-interface';
 export class DetalleMateriaPage implements OnInit {
   segment: string;
 
-  tareas: TareasInterface = null;
+  tareas: MateriasInterface = null;
   listaTareas: PublicacionInterface[];
   materiaId: string;
+  tareas0 = true;
 
+  //obtener id Clic=keado
+navigationExtras: NavigationExtras = {
+  state: {
+    value: null
+  }
+};
 
-  constructor(private tarService: TareasService, private router: Router){
+  constructor(private tarService: TareasService, private router: Router) {
 
     const navigation = this.router.getCurrentNavigation();
     this.tareas = navigation?.extras?.state?.value;
+      //Si no hay ID de tarea retorna
+      if (typeof this.tareas==='undefined') {
+        this.router.navigate(['/menu/materias']);
+      }
+      //
     this.materiaId = this.tareas.id;
-    console.log('tareas id:', this.materiaId);
+    console.log('Materia id:', this.materiaId);
+//Busca Tareas por ID de la Carrera
+      this.getTareas(this.materiaId);
 
-    this.getTareas(this.materiaId);
+
 
   }
 
@@ -35,21 +51,31 @@ export class DetalleMateriaPage implements OnInit {
   ngOnInit() {
 
     this.segment = 'first';
-    ///MOSTRAR TAREAS BY MATERIA
-    if (typeof this.tareas === 'undefined') {
-      this.router.navigate(['materias']);
-    }
+
 
 
   }
 
 
-  getTareas(idMat: string){
+  getTareas(idMat: string) {
     this.tarService.getCollection<PublicacionInterface>('Publicaciones').subscribe(res => {
       this.listaTareas = res.filter(e => idMat === e.idMateria);
+      if (this.listaTareas.length === 0){
+        this.tareas0= true;
+        console.log('"No hay tareas"');
+      }
+      else{
+        this.tareas0=false;
+      }
       console.log(this.listaTareas);
     });
   }
 
+  //INFORMACION DE LA TAREA CLICKEADA
+  infoTarea(item: any): void{
+    this.navigationExtras.state.value=item;
+      this.router.navigate(['/detalle-tarea'],this.navigationExtras);
+
+  }
 
 }

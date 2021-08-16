@@ -21,4 +21,9 @@ export class TareasService {
     return collection.valueChanges();
   }
 
+  getTarea<Interfaz>(path: string, id: string){
+    const collection = this.firestore.collection<Interfaz>(path);
+    return collection.doc(id).valueChanges();
+  }
+
 }

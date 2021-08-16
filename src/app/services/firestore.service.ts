@@ -12,7 +12,7 @@ export class FirestoreService {
   }
 
   getCollection<Interfaz>(coleccion: string){
-    const collection = this.firestore.collection<Interfaz>(coleccion);
+    const collection = this.firestore.collection<Interfaz>(coleccion, ref=> ref.orderBy('fecha','desc'));
     return collection.valueChanges();
   }
 

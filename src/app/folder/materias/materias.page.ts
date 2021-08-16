@@ -39,7 +39,6 @@ navigationExtras: NavigationExtras = {
   state: {
     value: null
   }
-
 };
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
@@ -141,10 +140,10 @@ buscar(event){
 
 detalleMateria(item: any): void{
   this.navigationExtras.state.value=item;
+  console.log('"dio click"');
   this.router.navigate(['/detalle-materia'],this.navigationExtras);
 }
 
-//FILTRAR MATERIAS  BY SEMESTRES
 
 
 

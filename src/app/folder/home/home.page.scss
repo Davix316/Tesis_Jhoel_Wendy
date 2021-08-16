@@ -12,3 +12,27 @@ small{
 ion-button{
 border-radius: 10px;
 }
+
+
+
+p {
+  max-height: 2.5rem;/*line-height por nº de líneas*/
+  overflow: hidden;
+}
+p::after {
+  content:'...';
+  color: blue;
+  position: absolute;
+  top:2rem ;/*max-height menos 1 line-height*/
+  right: 1.5rem;
+
+}
+
+
+a{
+  text-decoration: none;
+  position: absolute;
+  bottom:0 ;
+  right: 0;
+}
+

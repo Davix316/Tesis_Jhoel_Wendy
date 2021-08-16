@@ -11,8 +11,12 @@
 </ion-header>
 
 <ion-content>
-
-  <ion-card *ngFor="let item of publicaciones">
+  <ion-card>
+  <ion-card-content *ngIf="publicaciones0">
+<label > No hay publicaciones en su Carrera</label>
+  </ion-card-content>
+</ion-card>
+  <ion-card *ngFor="let item of publicaciones" >
 
     <ion-item>
       <ion-avatar>
@@ -23,13 +27,14 @@
 
     </ion-item>
 
-
-    <img src="/assets/icon/pdf.png" alt="">
+    <p><b>{{item.titulo}}</b></p>
+    <img src="/assets/icon/pdf.png" alt="" width="50%">
 
 
 
     <ion-card-content>
-      <p>{{item.descripcion}}</p>
+      <p >{{item.descripcion}}</p>
+      <a routerLink="/detalle-tarea" (click)="infoTarea(item)">Ver mas</a>
     </ion-card-content>
 
     <ion-row>

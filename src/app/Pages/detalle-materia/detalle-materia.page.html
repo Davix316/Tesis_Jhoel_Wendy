@@ -29,14 +29,16 @@
   <div [ngSwitch]="segment">
     <div *ngSwitchCase="'first'">
       <ion-card>
-
+<ion-card-content *ngIf="tareas0">
+  <label >No hay Tareas publicadas</label>
+</ion-card-content>
         <ion-grid>
            <ion-row *ngFor="let item of listaTareas">
             <ion-col class="ion-align-self-center">
               <img src="/assets/icon/pdf.png" alt="file.png">
             </ion-col>
             <ion-col size="8"  class="ion-text-center">
-              <b>titulo: {{item.titulo}}</b>
+              <b>titulo:{{item.titulo}}</b>
               <ion-list>
                 <ion-button color="light" size="small"><ion-icon name="download"></ion-icon></ion-button>
                 <ion-button color="light"  size="small"><ion-icon  class="heart" name="heart-dislike"></ion-icon></ion-button>
@@ -45,13 +47,14 @@
 
             </ion-col >
             <ion-col size="2" class="ion-align-self-center"  >
-              <a routerLink="/detalle-tarea">
+              <a routerLink="/detalle-tarea" (click)="infoTarea(item)">
              <ion-icon name="arrow-forward"></ion-icon>
             </a>
             </ion-col>
           </ion-row>
 
         </ion-grid>
+
     </ion-card>
 
 
