@@ -1,7 +1,7 @@
 
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/member-ordering */
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ViewChildren } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -10,6 +10,10 @@ import { User } from 'src/app/shared/userinterface';
 import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/storage';
 import { ToastController } from '@ionic/angular';
 import { MateriasService } from 'src/app/services/materias.service';
+import { finalize } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
+
 
 //INTERFAZ DE CARRERAS
 interface Carreras {
@@ -56,6 +60,14 @@ export class RegisterPage implements OnInit {
     private storage: AngularFireStorage,
     private materiasServ: MateriasService,
     ) { }
+/* Referencia de URL FOTO */
+@ViewChild('imageUrlUser') inputImageUser: ElementRef;
+//Para ver porcentaje de carga de la imagen y recuperar URL
+progreso=false;
+porcentaje=0;
+porcentajesubida: Observable<number>;
+urlImage: Observable<string>;
+
 
 
   ngOnInit() {
@@ -82,7 +94,9 @@ export class RegisterPage implements OnInit {
         }
 
         user.rol='estudiante';
+        user.foto=this.inputImageUser.nativeElement.value;
         this.authService.registrar(user);
+
         }
         else{
           this.presentAlert();
@@ -104,22 +118,7 @@ if(res){
 });
 }
 
-  //SUBIR IMAGEN
-  /* upload(event) {
-    // Get input file
-    const file = event.target.files[0];
-    // Generate a random ID
-    const randomId = Math.random().toString(36).substring(2);
-    console.log(randomId);
-    const filepath = `images/${randomId}`;
-    const fileRef = this.storage.ref(filepath);
-    // Upload image
-    const task = this.storage.upload(filepath, file);
-     // Get notified when the download URL is available
-     task.snapshotChanges().pipe(
-      finalize(() => this.uploadURL = fileRef.getDownloadURL())
-    ).subscribe();
-  } */
+
 
   //ALERT
   async presentAlert() {
@@ -136,8 +135,32 @@ if(res){
 get emailF() {return this.myFormUser.get('email');}
 get passwordF() {return this.myFormUser.get('password');}
 
+//SUBIR IMAGEN
+
+onUpload(e){
+//console.log('subir', e.target.files[0]);
+//generar id Aleatorio para el archivo
+const id= Math.random().toString(36).substring(2);
+const file=e.target.files[0];
+const filepath=`Perfil/user_${id}`;
+const ref=this.storage.ref(filepath);
+const tarea= this.storage.upload(filepath,file);
+this.porcentajesubida= tarea.percentageChanges();
+
+this.progreso=true;
+tarea.snapshotChanges().pipe(finalize(()=>this.urlImage=ref.getDownloadURL())).subscribe();
+
+//Cambia el porcentaje
+tarea.percentageChanges().subscribe((porcentaje) => {
+  this.porcentaje = Math.round(porcentaje);
+  if (this.porcentaje === 100) {
+    this.progreso = false;
+  }
+});
 
 
+
+}
 
 }
 

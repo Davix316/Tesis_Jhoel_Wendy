@@ -67,6 +67,13 @@ export class FireauthService {
   registrar(usuario: User) {
     this.fAuth.createUserWithEmailAndPassword(usuario.email, usuario.password)
       .then((userResponse) => {
+        //Actualizar perfil
+        if (userResponse) {
+          userResponse.user.updateProfile({
+            displayName: usuario.nombre,
+            photoURL: usuario.foto
+          });
+        }
         // add the user to the "users" database
         usuario.id = userResponse.user.uid;
         //id del documento
@@ -96,6 +103,7 @@ export class FireauthService {
   stateAuth() {
     return this.fAuth.authState;
   }
+
 
 
   //RECUPERAR CONTRASEñA

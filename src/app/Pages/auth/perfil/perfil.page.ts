@@ -52,6 +52,10 @@ try{
 }
 
 getuser(){
+  this.serviceauth.getCurrentUser().then(ref=>{
+ console.log( '"foto:"',ref.photoURL);
+
+  });
 
   this.firestore.collection('Usuarios').ref.where('id', '==', this.id)
   .get()
