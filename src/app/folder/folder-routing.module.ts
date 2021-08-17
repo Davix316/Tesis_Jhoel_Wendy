@@ -63,6 +63,14 @@ const routes: Routes = [
     path: 'new-publicacion',
     loadChildren: () => import('../Pages/new-publicacion/new-publicacion.module').then( m => m.NewPublicacionPageModule)
   },
+  {
+    path: 'edit-publicacion',
+    loadChildren: () => import('../Pages/edit-publicacion/edit-publicacion.module').then( m => m.EditPublicacionPageModule)
+  },
+  {
+    path: 'editar-perfil',
+    loadChildren: () => import('../Pages/auth/editar-perfil/editar-perfil.module').then( m => m.EditarPerfilPageModule)
+  },
 
 ];
 

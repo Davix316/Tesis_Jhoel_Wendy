@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { NavigationExtras, Router } from '@angular/router';
-import { TareasService } from 'src/app/services/tareas.service';
+import { Router } from '@angular/router';
 import { PublicacionInterface } from 'src/app/shared/publicacion';
-import { TareasInterface } from 'src/app/shared/tareas-interface';
 
 
 

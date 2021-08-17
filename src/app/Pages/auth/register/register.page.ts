@@ -159,8 +159,10 @@ tarea.percentageChanges().subscribe((porcentaje) => {
 });
 
 
-
 }
+
+
+
 
 }
 

@@ -10,6 +10,7 @@ export interface PublicacionInterface {
   descripcion: string;
   nameUser: string;
   apellUser: string;
-  file: string[];
+  file: string;
   imagen?: string;
+  userFoto: string;
 }

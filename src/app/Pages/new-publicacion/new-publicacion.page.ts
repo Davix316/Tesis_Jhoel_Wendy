@@ -1,7 +1,11 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 import { unescapeIdentifier } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore, fromCollectionRef, fromDocRef } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { MateriasService } from 'src/app/services/materias.service';
 import { PublicacionService } from 'src/app/services/publicacion.service';
@@ -21,6 +25,7 @@ export class NewPublicacionPage implements OnInit {
 
 
   idCarr='';
+  fotoUser='';
   idMateria='';
   idUserPubli='';
   nameUser='';
@@ -44,11 +49,18 @@ export class NewPublicacionPage implements OnInit {
     private firestore: AngularFirestore,
     private serviceauth: FireauthService,
     private publiServ: PublicacionService,
+    private storage: AngularFireStorage,
   ) {
 
   }
 
-
+/* Referencia de URL FILE */
+@ViewChild('imageUrlUser') inputFile: ElementRef;
+//Para ver porcentaje de carga de la imagen y recuperar URL
+progreso=false;
+porcentaje=0;
+porcentajesubida: Observable<number>;
+urlFile: Observable<string>;
 
 
   ngOnInit() {
@@ -76,6 +88,7 @@ export class NewPublicacionPage implements OnInit {
         this.idUserPubli=this.userInfo.id;
         this.apellUser=this.userInfo.apellido;
         this.idCarr=this.userInfo.carreraId;
+        this.fotoUser=this.userInfo.foto;
         //LISTAR MATERIAS DEL USUARIO
         this.obtenerMaterias(this.idCarr);
       } else {
@@ -115,16 +128,42 @@ try {
     publi.fecha=this.fechaPubli;
     publi.idUser=this.idUserPubli;
     publi.nameUser=this.nameUser;
+    publi.userFoto=this.fotoUser;
     publi.apellUser=this.apellUser;
     publi.likes=this.likes;
     publi.id=this.id;
     publi.idCarrera=this.idCarr;
+    publi.file=this.inputFile.nativeElement.value;
     this.publiServ.newPublicacion(publi,this.id);
   }
 } catch (error) {
 console.log(error);
+}
+  }
+
+
+//SUBIR ARCHIVO
+uploadFile(pdf){
+//generar id Aleatorio para el archivo
+const id= Math.random().toString(36).substring(2);
+const file=pdf.target.files[0];
+const filepath=`Archivos/file_${id}`;
+const ref=this.storage.ref(filepath);
+const tarea= this.storage.upload(filepath,file);
+this.porcentajesubida= tarea.percentageChanges();
+
+this.progreso=true;
+tarea.snapshotChanges().pipe(finalize(()=>this.urlFile=ref.getDownloadURL())).subscribe();
+
+//Cambia el porcentaje
+tarea.percentageChanges().subscribe((porcentaje) => {
+  this.porcentaje = Math.round(porcentaje);
+  if (this.porcentaje === 100) {
+    this.progreso = false;
+  }
+});
 
 }
 
-  }
+
 }

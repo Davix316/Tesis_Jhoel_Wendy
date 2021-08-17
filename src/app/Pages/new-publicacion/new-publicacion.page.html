@@ -79,10 +79,20 @@
 
       <ion-card>
         <ion-card-content>
-          <div class="mb-3">
-            <label for="formFileSm" class="form-label">Suba un Archivo</label>
-            <input class="form-control form-control-sm" id="formFileSm" type="file" formControlName="file">
-          </div>
+          <ion-item>
+            <div class="mb-3">
+              <label for="formFileSm" class="form-label">Suba un Archivo</label>
+              <input class=" form-control-sm" id="formFileSm" accept=".pdf ,.docx ,.xlsx"
+                type="file" (change)="uploadFile($event)"  formControlName="file">
+               <!--  Spinner progreso animada -->
+               <div class="spinner-border" role="status" *ngIf="progreso==true">
+                <span class="visually-hidden" >Loading...</span>
+              </div>
+
+              <input #imageUrlUser  type="hidden"  [value]="urlFile |async" >
+
+            </div>
+          </ion-item>
 
           <ion-button  type="submit"   expand="block" class="boton">GUARDAR</ion-button>
         </ion-card-content>

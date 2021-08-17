@@ -20,18 +20,16 @@
 
     <ion-item>
       <ion-avatar>
-        <img src="/assets/img/marty-avatar.png">
+        <img [src]="item.userFoto">
       </ion-avatar>
       <small><b>{{item.nameUser}} {{item.apellUser}}</b> </small>
        <ion-text slot="end" color="secondary" class="fechaPubli"> {{item.fecha.toDate() | date:'MMM d, y'}}</ion-text>
 
     </ion-item>
 
-    <p><b>{{item.titulo}}</b></p>
-    <img src="/assets/icon/pdf.png" alt="" width="50%">
+    <div class="ion-text-center"><b>{{item.titulo}}</b></div>
 
-
-
+    <img src="/assets/icon/pdf.png" alt="pdf" width="50%">
     <ion-card-content>
       <p >{{item.descripcion}}</p>
       <a routerLink="/detalle-tarea" (click)="infoTarea(item)">Ver mas</a>
