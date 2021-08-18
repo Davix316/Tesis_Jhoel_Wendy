@@ -70,6 +70,7 @@ export class SistemasComponent implements OnInit {
       this.materiaSvc.onSaveMateria(materia, materiaId);
       this.materiaForm.reset();
       this.router.navigate(['carreras/sistemas']);
+      
       this.materiaForm = this.fb.group({
         idCarrera: ['ph4kM1eyF6KoaieJqCr0'],
         nivel: ['1', [Validators.required]],

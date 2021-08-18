@@ -11,6 +11,7 @@ import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 import { ResetPasswordComponent } from './views/reset-password/reset-password.component';
 import { CheckloginGuard } from './shared/guards/checklogin.guard';
+import { CheckloginGuard2 } from './shared/guards/checklogin.guard2';
 
 
 export const routes: Routes = [
@@ -72,48 +73,40 @@ export const routes: Routes = [
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
-        path: 'icons',
-        loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)
-      },
-      {
-        path: 'notifications',
-        loadChildren: () => import('./views/notifications/notifications.module').then(m => m.NotificationsModule)
-      },
-      {
         path: 'list',
-        loadChildren: () => import('./views/admin/list/list.module').then(m => m.ListModule),
+        loadChildren: () => import('./views/admin/list/list.module').then(m => m.ListModule), canActivate: [CheckloginGuard2],
       },{
-        path: 'newAdmin', loadChildren: () => import('./views/admin/newAdmin/newAdmin.module').then(m => m.NewAdminModule),
+        path: 'newAdmin', loadChildren: () => import('./views/admin/newAdmin/newAdmin.module').then(m => m.NewAdminModule),canActivate: [CheckloginGuard2],
         data: {
           title: 'Nuevo Administrador'
         }},
-      { path: 'edit', loadChildren: () => import('./views/admin/edit/edit.module').then(m => m.EditModule),
+      { path: 'edit', loadChildren: () => import('./views/admin/edit/edit.module').then(m => m.EditModule),canActivate: [CheckloginGuard2],
       data: {
         title: 'Editar Administrador'
       } },
-      { path: 'details', loadChildren: () => import('./views/admin/details/details.module').then(m => m.DetailsModule),
+      { path: 'details', loadChildren: () => import('./views/admin/details/details.module').then(m => m.DetailsModule),canActivate: [CheckloginGuard2],
       data: {
         title: 'Detalle de Administrador'
       } }
       ,
       {
         path: 'listStudent',
-        loadChildren: () => import('./views/student/listStudent/listStudent.module').then(m => m.ListStudenttModule)
+        loadChildren: () => import('./views/student/listStudent/listStudent.module').then(m => m.ListStudenttModule), canActivate: [CheckloginGuard2],
       },
       {
-        path: 'newStudent', loadChildren: () => import('./views/student/newStudent/newStudent.module').then(m => m.NewStudentModule),
+        path: 'newStudent', loadChildren: () => import('./views/student/newStudent/newStudent.module').then(m => m.NewStudentModule), canActivate: [CheckloginGuard2],
         data: {
           title: 'Nuevo Estudiante'
         }},
-      { path: 'editStudent', loadChildren: () => import('./views/student/editStudent/editStudent.module').then(m => m.EditStudentModule),
+      { path: 'editStudent', loadChildren: () => import('./views/student/editStudent/editStudent.module').then(m => m.EditStudentModule),canActivate: [CheckloginGuard2],
       data: {
         title: 'Editar Estudiante'
       } },
-      { path: 'detailsStudent', loadChildren: () => import('./views/student/detailsStudent/detailsStudent.module').then(m => m.DetailsStudentModule),
+      { path: 'detailsStudent', loadChildren: () => import('./views/student/detailsStudent/detailsStudent.module').then(m => m.DetailsStudentModule),canActivate: [CheckloginGuard2],
       data: {
         title: 'Detalle de Estudiante'
       } }
-      ,{ path: 'blockStudent', loadChildren: () => import('./views/student/block/blockStudent.module').then(m => m.BlockStudentModule),
+      ,{ path: 'blockStudent', loadChildren: () => import('./views/student/block/blockStudent.module').then(m => m.BlockStudentModule),canActivate: [CheckloginGuard2],
       data: {
         title: 'Bloqueo de Estudiante'
       } }
@@ -121,10 +114,7 @@ export const routes: Routes = [
       {
         path: 'carreras',
         loadChildren: () => import('./views/carreras/carreras.module').then(m => m.CarrerasModule)
-      },{ path: 'sistemas', loadChildren: () => import('./views/carreras/sistemas/sistemas.module').then(m => m.SistemasModule),
-      data: {
-        title: 'Sistemas'
-      } }
+      }
     ],canActivate: [CheckloginGuard],
   },
   { path: '**', component: P404Component }

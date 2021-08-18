@@ -35,7 +35,10 @@ export class DefaultLayoutComponent {
 
   rolU: string;
 
-  constructor(private serviceAuth : FirebaseauthService, private afAuth: AngularFireAuth, private router:Router, private firestore: AngularFirestore,) {
+  constructor(private serviceAuth : FirebaseauthService, 
+              private afAuth: AngularFireAuth, 
+              private router:Router, 
+              private firestore: AngularFirestore,) {
      }
 
      ngOnInit() {
@@ -68,7 +71,6 @@ export class DefaultLayoutComponent {
             this.admin.semestreRef=this.userLogIn.semestreRef;
             this.admin.foto=this.userLogIn.foto;
             this.admin.rol=this.userLogIn.rol;
-            console.log(doc.id, ' => ', doc.data());
 
             console.log(this.admin.rol);
           });

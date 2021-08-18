@@ -151,6 +151,22 @@ export class ThemeService {
     });
   }
 
+  onSaveMateria2(materia: Materia, materiaId: string, idCarr: string): Promise<void> {
+
+    return new Promise(async (resolve, reject) => {
+      try {
+        const id = materiaId || this.afs.createId();
+        const idCarrera = idCarr;
+        const data = { id, idCarrera, ...materia };
+        const result = await this.materiasCollection.doc(id).set(data);
+        resolve(result);
+        window.alert('materia registrada');
+      } catch (err) {
+        reject(err.message);
+      }
+    });
+  }
+
   onSaveMateria(materia: Materia, materiaId: string): Promise<void> {
 
     return new Promise(async (resolve, reject) => {
