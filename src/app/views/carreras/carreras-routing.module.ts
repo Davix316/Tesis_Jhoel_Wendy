@@ -8,7 +8,7 @@ import { ElectromecanicaComponent } from './electromecanica/electromecanica.comp
 import { AmbientalComponent } from './ambiental/ambiental.component';
 import { MateriasComponent } from './materias/materias.component';
 import { ArchivoComponent } from './materias/archivo.component';
-import { InforArchivoComponent } from './materias/infor-archivo.component';
+import { NewArchivoComponent } from './materias/new-archivo.component';
 
 
 const routes: Routes = [
@@ -62,10 +62,10 @@ const routes: Routes = [
         }
       },
       {
-        path: 'infor-archivo',
-        component: InforArchivoComponent,
+        path: 'new-archivo',
+        component: NewArchivoComponent,
         data: {
-          title: 'Información de archivo'
+          title: 'Nuevo Archivo'
         }
       }
 ];

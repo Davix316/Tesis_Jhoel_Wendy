@@ -7,6 +7,7 @@ import { NavigationExtras, Router } from '@angular/router';
   templateUrl: './list.component.html'
 })
 export class ListComponent implements OnInit {
+  
   Usuarios$ = this.adminsSvc.admins;
   navigationExtras: NavigationExtras = {
     state: {

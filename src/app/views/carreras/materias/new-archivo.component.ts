@@ -3,21 +3,16 @@ import { ThemeService } from '../../services/theme.service';
 import { NavigationExtras, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Publicacion } from '../../../shared/models/publicacion.interface';
+import { PublicacionesService } from './../../services/publicaciones.service';
+
 
 @Component({
-  templateUrl: './archivo.component.html',
+  templateUrl: './new-archivo.component.html',
 })
+export class NewArchivoComponent implements OnInit {
 
-export class ArchivoComponent implements OnInit{
-
-  Publicacion$ = this.publicacionSvc.publicaciones;
   publicacionForm: FormGroup;
   publicacion: Publicacion;
-  listarPublicaciones: Publicacion[];
-  carreraId: string;
-  materiaId: string;
-
-  textoBuscar='';
 
   navigationExtras: NavigationExtras = {
     state: {
@@ -37,11 +32,6 @@ export class ArchivoComponent implements OnInit{
 
   ngOnInit(): void {
 
-    if (typeof this.publicacion === 'undefined') {
-      this.router.navigate(['/carreras']);
-    }
-    console.log(this.publicacion.id)
-    console.log(this.publicacion.idMateria)
     this.publicacionForm.patchValue(this.publicacion);
 
   }
@@ -52,14 +42,27 @@ export class ArchivoComponent implements OnInit{
       console.log("valido")
       const publicacion = this.publicacionForm.value;
       const publicacionId = this.publicacion?.id || null;
-      const idMateria = this.publicacion.idMateria || null;
-
-      this.publicacionSvc.onSavePublicacion(publicacion, publicacionId, idMateria);
+      this.publicacionSvc.onSavePublicacion2(publicacion, publicacionId);
       this.publicacionForm.reset();
       this.router.navigate(['/carreras']);
+      
+      this.publicacionForm = this.fb.group({
+        idCarrera: ['iw6XSHR2NiPPkwMSjKBM'],
+        idMateria: ['0GU7nnvVnTbK6hYUelgj'],
+        fecha: ['01/01/2021'],
+        nameUser: ['Super'],
+        apellUser: ['Admin'],
+        idUser: ['YK35sTwC8GN7z2FcKHWp75Z0u4z2'],
+        file: ['', [Validators.required]],
+        likes: ['0'],
+        categoria: ['Tarea', [Validators.required]],
+        titulo: ['', [Validators.required]],
+        descripcion: ['', [Validators.required]],
+      });
     } else {
       console.log("no valido"),
         window.alert("Complete todos los campos")
+
     }
   }
 
@@ -71,6 +74,15 @@ export class ArchivoComponent implements OnInit{
 
   private initForm(): void {
     this.publicacionForm = this.fb.group({
+      idCarrera: ['iw6XSHR2NiPPkwMSjKBM'],
+      idMateria: ['0GU7nnvVnTbK6hYUelgj'],
+      fecha: ['01/01/2021'],
+      nameUser: ['Super'],
+      apellUser: ['Admin'],
+      idUser: ['YK35sTwC8GN7z2FcKHWp75Z0u4z2'],
+      file: ['', [Validators.required]],
+      likes: ['0'],
+      categoria: ['Tarea', [Validators.required]],
       titulo: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
     });

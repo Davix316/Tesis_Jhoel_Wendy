@@ -13,7 +13,7 @@ import { AmbientalComponent } from './ambiental/ambiental.component';
 import { ElectromecanicaComponent } from './electromecanica/electromecanica.component';
 import { MateriasComponent } from './materias/materias.component';
 import { ArchivoComponent } from './materias/archivo.component';
-import { InforArchivoComponent } from './materias/infor-archivo.component';
+import { NewArchivoComponent } from './materias/new-archivo.component';
 
 @NgModule({
   imports: [
@@ -32,7 +32,7 @@ import { InforArchivoComponent } from './materias/infor-archivo.component';
     ElectromecanicaComponent, 
     MateriasComponent, 
     ArchivoComponent, 
-    InforArchivoComponent 
+    NewArchivoComponent 
   ]
 })
 export class CarrerasModule { }
