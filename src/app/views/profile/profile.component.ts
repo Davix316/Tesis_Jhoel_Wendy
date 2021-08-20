@@ -27,8 +27,11 @@ export class ProfileComponent implements OnInit{
   rol: '',
   };
 
-  constructor(private serviceAuth : FirebaseauthService, private firestore: AngularFirestore,
-    private router:Router) {
+  constructor(
+    private serviceAuth : FirebaseauthService, 
+    private firestore: AngularFirestore,
+    private router:Router
+    ) {
      }
 
      ngOnInit() {

@@ -4,6 +4,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Publicacion } from '../../../shared/models/publicacion.interface';
 import { PublicacionesService } from './../../services/publicaciones.service';
+import {Materia} from '../../../shared/models/materia.interface';
 
 
 @Component({
@@ -12,7 +13,10 @@ import { PublicacionesService } from './../../services/publicaciones.service';
 export class NewArchivoComponent implements OnInit {
 
   publicacionForm: FormGroup;
-  publicacion: Publicacion;
+  publicacion: Publicacion = null;
+  materia: Materia = null;
+  materiaId: string;
+  carreraId: string;
 
   navigationExtras: NavigationExtras = {
     state: {
@@ -28,12 +32,14 @@ export class NewArchivoComponent implements OnInit {
     const navigation = this.router.getCurrentNavigation();
     this.publicacion = navigation?.extras?.state?.value;
     this.initForm();
+    
   }
 
   ngOnInit(): void {
 
     this.publicacionForm.patchValue(this.publicacion);
-
+    
+    console.log("Carrera",this.publicacion.idCarrera)
   }
 
   onSave(): void {
@@ -42,13 +48,16 @@ export class NewArchivoComponent implements OnInit {
       console.log("valido")
       const publicacion = this.publicacionForm.value;
       const publicacionId = this.publicacion?.id || null;
-      this.publicacionSvc.onSavePublicacion2(publicacion, publicacionId);
+      const matId= this.publicacion.idMateria;
+      const carrId= this.publicacion.idCarrera;
+      
+     // this.publicacionSvc.onSavePublicacion2(publicacion, publicacionId, matId, carrId);
       this.publicacionForm.reset();
       this.router.navigate(['/carreras']);
       
       this.publicacionForm = this.fb.group({
-        idCarrera: ['iw6XSHR2NiPPkwMSjKBM'],
-        idMateria: ['0GU7nnvVnTbK6hYUelgj'],
+        idCarrera: [this.publicacion.idCarrera],
+        idMateria: [this.publicacion.idMateria],
         fecha: ['01/01/2021'],
         nameUser: ['Super'],
         apellUser: ['Admin'],
@@ -74,8 +83,8 @@ export class NewArchivoComponent implements OnInit {
 
   private initForm(): void {
     this.publicacionForm = this.fb.group({
-      idCarrera: ['iw6XSHR2NiPPkwMSjKBM'],
-      idMateria: ['0GU7nnvVnTbK6hYUelgj'],
+      idCarrera: [this.publicacion.idCarrera],
+      idMateria: [this.publicacion.idMateria],
       fecha: ['01/01/2021'],
       nameUser: ['Super'],
       apellUser: ['Admin'],

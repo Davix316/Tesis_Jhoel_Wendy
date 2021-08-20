@@ -200,12 +200,12 @@ export class ThemeService {
     });
   }
 
-  onSavePublicacion2(publicacion: Publicacion, publicacionId: string): Promise<void> {
+  onSavePublicacion2(publicacion: Publicacion, publicacionId: string, materiaId: string, idCarrera:string ): Promise<void> {
 
     return new Promise(async (resolve, reject) => {
       try {
         const id = publicacionId || this.afs.createId();
-        const data = { id, ...publicacion };
+        const data = { id, materiaId, idCarrera, ...publicacion };
         const result = await this.publicacionesCollection.doc(id).set(data);
         resolve(result);
         window.alert('publicación registrada');
