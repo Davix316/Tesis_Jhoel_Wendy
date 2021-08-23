@@ -6,7 +6,6 @@ import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ng
 import { PublicacionInterface } from 'src/app/shared/publicacion';
 import { Platform } from '@ionic/angular';
 
-
 @Component({
   selector: 'app-detalle-tarea',
   templateUrl: './detalle-tarea.page.html',
@@ -31,7 +30,6 @@ export class DetalleTareaPage implements OnInit {
    private transfer: FileTransfer,
    private platform: Platform,
      ) {
-
       const navigation = this.router.getCurrentNavigation();
       this.tareas = navigation?.extras?.state?.value;
       console.log('tareas cons:', this.tareas);

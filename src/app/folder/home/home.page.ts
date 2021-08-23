@@ -99,7 +99,6 @@ navigationExtras: NavigationExtras = {
   infoTarea(item: any): void{
     this.navigationExtras.state.value=item;
       this.router.navigate(['/detalle-tarea'],this.navigationExtras);
-
   }
 
   //LIKES

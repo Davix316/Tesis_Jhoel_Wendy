@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ComentariosComponent } from '../Pages/comentarios/comentarios.component';
 
 import { FolderPage } from './folder.page';
 
@@ -63,6 +64,9 @@ const routes: Routes = [
   {
     path: 'edit-publicacion',
     loadChildren: () => import('../Pages/edit-publicacion/edit-publicacion.module').then( m => m.EditPublicacionPageModule)
+  },
+  {
+    path: 'comentarios',   component: ComentariosComponent
   },
   {
     path: 'editar-perfil',

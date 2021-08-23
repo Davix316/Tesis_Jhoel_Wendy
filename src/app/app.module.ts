@@ -34,7 +34,7 @@ import { FileTransfer } from '@ionic-native/file-transfer/ngx';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireStorageModule
+    AngularFireStorageModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AngularFirestore,

@@ -1,20 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
 import { DetalleTareaPageRoutingModule } from './detalle-tarea-routing.module';
 
 import { DetalleTareaPage } from './detalle-tarea.page';
+import { ComentariosComponent } from '../comentarios/comentarios.component';
+
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
-    DetalleTareaPageRoutingModule
+    DetalleTareaPageRoutingModule,
   ],
-  declarations: [DetalleTareaPage]
+  declarations: [DetalleTareaPage,ComentariosComponent]
 })
 export class DetalleTareaPageModule {}

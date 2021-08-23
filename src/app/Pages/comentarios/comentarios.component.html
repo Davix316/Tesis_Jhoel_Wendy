@@ -1,0 +1,67 @@
+<div>
+  <form [formGroup]="formComentario" (ngSubmit)="savePublicacion(formComentario.value)">
+
+  <ion-item>
+    <ion-list>
+      <ion-row>
+        <ion-col>
+          <ion-chip >
+            <ion-avatar>
+              <img src="/assets/img/sarah-avatar.png.jpeg">
+            </ion-avatar>
+            <ion-label>Ruth C</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+
+        <ion-label class="ion-text-wrap comentario">Listen, I've had a pretty messed up day Hay muchas variaciones de
+          los pasajes de Lorem Ipsum disponibles</ion-label>
+      <ion-button>
+        <ion-label>Comentar</ion-label>
+      </ion-button>
+      <ion-button>
+        <ion-icon name="star-outline"></ion-icon>
+        <ion-label>5</ion-label>
+      </ion-button>
+    </ion-list>
+  </ion-item>
+
+    <ion-item>
+      <ion-list>
+        <ion-row>
+          <ion-col>
+            <ion-chip >
+              <ion-avatar>
+                <img src="/assets/img/speakers/puppy.jpg">
+              </ion-avatar>
+              <ion-label>Ruth C</ion-label>
+            </ion-chip>
+          </ion-col>
+        </ion-row>
+
+          <ion-label class="ion-text-wrap comentario">Listen, I've had a pretty messed up day Hay muchas variaciones de
+            los pasajes de Lorem Ipsum disponibles</ion-label>
+        <ion-button>
+          <ion-label>Comentar</ion-label>
+        </ion-button>
+        <ion-button type="submit">
+          <ion-icon name="star-outline"></ion-icon>
+          <ion-label>5</ion-label>
+        </ion-button>
+      </ion-list>
+    </ion-item>
+
+    <ion-item class="fixed">
+      <ion-chip >
+      <ion-input   type="text" formControlName="texto" rows="2" placeholder="Escribe un comentario..."></ion-input>
+
+        <button>
+        <ion-icon name="send-outline"></ion-icon>
+      </button>
+
+    </ion-chip>
+    </ion-item>
+
+  </form>
+
+  </div>

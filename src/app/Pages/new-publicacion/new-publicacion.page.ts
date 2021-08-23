@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/member-ordering */
-import { unescapeIdentifier } from '@angular/compiler';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore, fromCollectionRef, fromDocRef } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
