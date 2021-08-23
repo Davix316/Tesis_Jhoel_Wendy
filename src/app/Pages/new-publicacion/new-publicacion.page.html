@@ -71,8 +71,8 @@
           </ion-item>
 
           <ion-item>
-            <ion-label position="floating" class="titulo">Descripcion</ion-label>
-            <ion-textarea   placeholder="En este espacio escriba una breve descripcion de que trata el archivo que vaya a cargar" formControlName="descripcion"></ion-textarea>
+            <ion-label position="floating" class="titulo" >Descripcion</ion-label>
+            <ion-textarea  rows="5" placeholder="En este espacio escriba una breve descripcion de que trata el archivo que vaya a cargar" formControlName="descripcion"></ion-textarea>
           </ion-item>
         </ion-card-content>
       </ion-card>
@@ -89,8 +89,7 @@
                 <span class="visually-hidden" >Loading...</span>
               </div>
 
-              <input #imageUrlUser  type="hidden"  [value]="urlFile |async" >
-
+              <input #FileUrlUser  type="hidden" [value]="urlFile |async" >
             </div>
           </ion-item>
 

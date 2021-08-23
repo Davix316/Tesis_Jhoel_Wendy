@@ -33,7 +33,7 @@ export class NewPublicacionPage implements OnInit {
   fechaPubli=new Date();
   likes=2;
   id=this.publiServ.getId();
-
+  filepath='';
 
 
   public formPublicacion=new FormGroup({
@@ -55,7 +55,7 @@ export class NewPublicacionPage implements OnInit {
   }
 
 /* Referencia de URL FILE */
-@ViewChild('imageUrlUser') inputFile: ElementRef;
+@ViewChild('FileUrlUser') inputFile: ElementRef;
 //Para ver porcentaje de carga de la imagen y recuperar URL
 progreso=false;
 porcentaje=0;
@@ -109,7 +109,7 @@ urlFile: Observable<string>;
 
       this.listaMaterias = res.filter(e => idC === e.idCarrera);
 
-      console.log(this.listaMaterias);
+      //console.log(this.listaMaterias);
 
      /*  this.listaMaterias.forEach(element => {
         this.carreraId = element.id;
@@ -147,14 +147,14 @@ uploadFile(pdf){
 //generar id Aleatorio para el archivo
 const id= Math.random().toString(36).substring(2);
 const file=pdf.target.files[0];
-const filepath=`Archivos/file_${id}`;
-const ref=this.storage.ref(filepath);
-const tarea= this.storage.upload(filepath,file);
+ this.filepath='Archivos/'+ this.nameUser+ '/'+'file_'+id;
+const ref=this.storage.ref(this.filepath);
+const tarea= this.storage.upload(this.filepath,file);
 this.porcentajesubida= tarea.percentageChanges();
 
-this.progreso=true;
-tarea.snapshotChanges().pipe(finalize(()=>this.urlFile=ref.getDownloadURL())).subscribe();
 
+tarea.snapshotChanges().pipe(finalize(()=>this.urlFile=ref.getDownloadURL())).subscribe();
+this.progreso=true;
 //Cambia el porcentaje
 tarea.percentageChanges().subscribe((porcentaje) => {
   this.porcentaje = Math.round(porcentaje);

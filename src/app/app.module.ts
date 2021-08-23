@@ -15,6 +15,9 @@ import { environment } from '../environments/environment';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { PipesModule } from './pipes/pipes.module';
+import { File } from '@ionic-native/file/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,7 +36,11 @@ import { PipesModule } from './pipes/pipes.module';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, AngularFirestore],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AngularFirestore,
+    File,
+    FileTransfer
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

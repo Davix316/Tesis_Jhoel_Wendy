@@ -1,5 +1,7 @@
 {
   "name": "tareasApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

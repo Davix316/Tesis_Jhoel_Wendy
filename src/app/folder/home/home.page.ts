@@ -22,6 +22,8 @@ cadena: string;
 cutCadena: string;
 
 publicaciones0=true;
+numberOfLikes = 0;
+numberOfDislikes = 0;
 
 //obtener id Clic=keado
 navigationExtras: NavigationExtras = {
@@ -100,5 +102,13 @@ navigationExtras: NavigationExtras = {
 
   }
 
+  //LIKES
+  likeButtonClick(){
+    this.numberOfLikes++;
+  }
 
+  dislikeButtonClick(){
+    this.numberOfDislikes++;
+    this.numberOfLikes--;
+  }
 }

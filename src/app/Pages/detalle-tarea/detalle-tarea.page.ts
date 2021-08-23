@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { File } from '@ionic-native/file/ngx';
+import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { PublicacionInterface } from 'src/app/shared/publicacion';
-
+import { Platform } from '@ionic/angular';
 
 
 @Component({
@@ -12,6 +14,7 @@ import { PublicacionInterface } from 'src/app/shared/publicacion';
 })
 export class DetalleTareaPage implements OnInit {
   fileUrl: SafeResourceUrl;
+  fileTransfer: FileTransferObject;
 
   titulo: string;
 
@@ -24,6 +27,9 @@ export class DetalleTareaPage implements OnInit {
   constructor(
     private domSanit: DomSanitizer,
     private router: Router,
+   private file: File,
+   private transfer: FileTransfer,
+   private platform: Platform,
      ) {
 
       const navigation = this.router.getCurrentNavigation();
@@ -36,6 +42,8 @@ export class DetalleTareaPage implements OnInit {
       //
       this.tareaId = this.tareas.id;
       console.log('Tarea id:', this.tareaId);
+
+
 
   }
 
@@ -56,5 +64,42 @@ export class DetalleTareaPage implements OnInit {
 
   addFavorite(){
   }
+
+
+  /* // full example
+  upload() {
+    let options: FileUploadOptions = {
+       fileKey: 'file',
+       fileName: 'name.jpg',
+       headers: {}
+       .....
+    }
+
+    fileTransfer.upload('<file path>', '<api endpoint>', options)
+     .then((data) => {
+       // success
+     }, (err) => {
+       // error
+     })
+  } */
+
+  download() {
+    let path =null;
+    if(this.platform.is('ios')){
+      path=this.file.documentsDirectory;
+    }else{
+  path=this.file.dataDirectory;
+    }
+       ///
+       const fileTransfer = this.transfer.create();
+    const url = 'http://www.africau.edu/images/default/sample.pdf';
+    fileTransfer.download(url, path + 'file.pdf').then((entry) => {
+      console.log('download complete: ' + entry.toURL());
+    }, (error) => {
+      console.log(error);
+
+    });
+  }
+
 
 }
