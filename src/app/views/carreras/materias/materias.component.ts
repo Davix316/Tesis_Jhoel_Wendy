@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { ThemeService } from '../../services/theme.service';
 import { Materia } from '../../../shared/models/materia.interface';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Publicacion } from '../../../shared/models/publicacion.interface';
 import { PublicacionesService } from './../../services/publicaciones.service';
 import { Location } from '@angular/common';
 import { Admin } from '../../../shared/models/admin.interface';
 import { FirebaseauthService } from '../../services/firebaseauth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { StructuredType } from 'typescript';
 
 @Component({
   templateUrl: './materias.component.html',
@@ -23,6 +24,14 @@ export class MateriasComponent implements OnInit {
   listarPublicaciones: Publicacion[];
   materiaId: string;
   carreraId: string;
+  idUser: string;
+  userInfo: any;
+  idUserPubli='';
+  nameUser='';
+  apellUser='';
+  fechaPubli= new Date();
+  like='';
+  id=this.publicacionesServ.getId();
 
   email: string;
   userLogIn: any;
@@ -46,6 +55,7 @@ export class MateriasComponent implements OnInit {
     }
   };
 
+
   constructor(
     private router: Router,
     private materiaSvc: ThemeService,
@@ -60,16 +70,22 @@ export class MateriasComponent implements OnInit {
     this.materia = navigation?.extras?.state?.value;
     this.initForm();
     this.initForm2();
+
   }
 
   ngOnInit(): void {
 
     this.serviceAuth.getCurrentUser().subscribe(user => {
       this.email = user.email;
-      // console.log(user.uid);
-      this.email = user.email;
       this.getAdmin();
+
     })
+
+    //this.serviceAuth.getCurrentUser().subscribe(user => {
+    //  this.email = user.email;
+     // this.getAdmin();
+    //})
+
 
     this.publicacionForm.patchValue(this.publicacion);
 
@@ -83,27 +99,23 @@ export class MateriasComponent implements OnInit {
     this.obtenerPublicaciones(this.materia.id);
   }
 
-  getAdmin() {
-    this.firestore.collection('Administradores').ref.where('email', '==', this.email)
+ public getAdmin() {
+
+  this.firestore.collection('Administradores').ref.where('email', '==', this.email)
+
       .get()
       .then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          this.userLogIn = doc.data();
-          this.admin.nombre = this.userLogIn.nombre;
-          this.admin.apellido = this.userLogIn.apellido;
-          this.admin.telefono = this.userLogIn.telefono;
-          this.admin.numUnico = this.userLogIn.numUnico;
-          this.admin.carrera = this.userLogIn.carrera;
-          this.admin.email = this.userLogIn.email;
-          this.admin.password = this.userLogIn.password;
-          this.admin.semestreRef = this.userLogIn.semestreRef;
-          this.admin.foto = this.userLogIn.foto;
-          this.admin.rol = this.userLogIn.rol;
-          // console.log(doc.id, ' => ', doc.data());
-        });
+          querySnapshot.forEach((doc) => {
+            this.userLogIn=doc.data();
+
+            this.nameUser=this.userLogIn.nombre;
+            this.idUserPubli=this.userLogIn.id;
+            this.apellUser=this.userLogIn.apellido;
+
+          });
       })
       .catch((error) => {
-        console.log('Error getting documents:', error);
+          console.log('Error getting documents:' , error);
       });
   }
 
@@ -127,44 +139,26 @@ export class MateriasComponent implements OnInit {
     }
   }
 
-  onSaveP(): void {
-    if (this.publicacionForm.valid) {
-      console.log("valido")
-      const publicacion = this.publicacionForm.value;
-      const publicacionId = this.publicacion?.id || null;
-      const materiaId = this.materia?.id || null;
-      const idCarrera = this.materia.idCarrera || null;
-      const idUser = this.admin.id || null;
-      const nameUser = this.admin.nombre || null;
-      const apellUser = this.admin.apellido || null;
-
-      this.publicacionSvc.onSavePublicacion2(
-        publicacion, publicacionId, materiaId, idCarrera
-        );
-      this.publicacionForm.reset();
-      this.router.navigate(['/carreras']);
-
-      this.publicacionForm = this.fb.group({
-        idCarrera: [this.materia.idCarrera],
-        idMateria: [this.materia.id],
-        fecha: ['01/01/2021'],
-        nameUser: [this.admin.nombre],
-        apellUser: [this.admin.apellido],
-        idUser: [this.admin.id],
-        file: ['', [Validators.required]],
-        likes: ['0'],
-        categoria: ['Tarea', [Validators.required]],
-        titulo: ['', [Validators.required]],
-        descripcion: ['', [Validators.required]],
-      });
-
-
-      console.log(this.admin.nombre)
-    } else {
-      console.log("no valido"),
-        window.alert("Complete todos los campos")
+  savePublicacion(publi: Publicacion){
+    try {
+      console.log(this.publicacionForm.value);
+      if(this.publicacionForm.valid){
+        publi.fecha=this.fechaPubli;
+        publi.idUser=this.idUserPubli;
+        publi.nameUser=this.nameUser;
+        publi.apellUser=this.apellUser;
+        publi.likes='0';
+        publi.id=this.id;
+        publi.idCarrera=this.materia.idCarrera;
+        publi.idMateria=this.materia.id;
+        this.publicacionSvc.newPublicacion(publi,this.id);
+      }
+    } catch (error) {
+    console.log(error);
     }
-  }
+      }
+
+
 
   obtenerPublicaciones(idM: string) {
     const path = 'Publicaciones';
@@ -213,13 +207,14 @@ export class MateriasComponent implements OnInit {
   }
 
   private initForm2(): void {
+
     this.publicacionForm = this.fb.group({
       idCarrera: [this.materia.idCarrera],
       idMateria: [this.materia.id],
       fecha: ['01/01/2021'],
-      nameUser: [this.admin.nombre],
-      apellUser: [this.admin.apellido],
-      idUser: [this.admin.id],
+      nameUser: [this.nameUser],
+      apellUser: [this.apellUser],
+      idUser: [this.idUserPubli],
       file: ['', [Validators.required]],
       likes: ['0'],
       categoria: ['Tarea', [Validators.required]],

@@ -17,4 +17,8 @@ publicaciones: any;
     return collection.valueChanges();
   }
 
+  getId(){
+    return this.firestore.createId();
+  }
+
 }

@@ -200,12 +200,13 @@ export class ThemeService {
     });
   }
 
-  onSavePublicacion2(publicacion: Publicacion, publicacionId: string, materiaId: string, idCarrera:string ): Promise<void> {
+  onSavePublicacion2(publicacion: Publicacion, publicacionId: string, idMateria: string, idCarrera:string, 
+    ): Promise<void> {
 
     return new Promise(async (resolve, reject) => {
       try {
         const id = publicacionId || this.afs.createId();
-        const data = { id, materiaId, idCarrera, ...publicacion };
+        const data = { id, idMateria, idCarrera, ...publicacion };
         const result = await this.publicacionesCollection.doc(id).set(data);
         resolve(result);
         window.alert('publicación registrada');
@@ -214,6 +215,20 @@ export class ThemeService {
       }
     });
   }
+
+  newPublicacion(publicacion: Publicacion, idP: string){
+    this.afs.collection('Publicaciones').doc(idP).set(publicacion)
+  .then((docRef) => {
+      console.log('registro exitoso');
+      window.alert('publicación registrada');
+      this.router.navigate(['/carreras']);
+  })
+  .catch((error) => {
+      console.error('"Error adding document: "', error);
+  });
+
+  }
+
 
   onSavePublicacion(publicacion: Publicacion, publicacionId: string, idMat: string): Promise<void> {
 

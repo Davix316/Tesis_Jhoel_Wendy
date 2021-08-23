@@ -5,7 +5,7 @@ export interface Publicacion {
   file?: string;
   categoria?: string;
   descripcion: string;
-  fecha?: string;
+  fecha?: any;
   apellUser?: string;
   idUser?: string;
   likes?: string;
