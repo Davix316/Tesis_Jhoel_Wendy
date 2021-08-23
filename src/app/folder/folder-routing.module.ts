@@ -47,10 +47,7 @@ const routes: Routes = [
     path: 'detalle-tarea',
     loadChildren: () => import('../Pages/detalle-tarea/detalle-tarea.module').then( m => m.DetalleTareaPageModule)
   },
-  {
-    path: 'comentarios',
-    loadChildren: () => import('../Pages/comentarios/comentarios.module').then( m => m.ComentariosPageModule)
-  },
+
   {
     path: 'puntuacion',
     loadChildren: () => import('../Pages/puntuacion/puntuacion.module').then( m => m.PuntuacionPageModule)

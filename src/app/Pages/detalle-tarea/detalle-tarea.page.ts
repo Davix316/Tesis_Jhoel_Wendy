@@ -47,9 +47,7 @@ export class DetalleTareaPage implements OnInit {
 
   }
 
-  segmentChanged(ev: any) {
-    console.log('Segment changed', ev);
-  }
+
 
   ngOnInit(): void{
 

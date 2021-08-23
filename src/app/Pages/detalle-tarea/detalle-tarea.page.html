@@ -20,7 +20,7 @@
 
   <ion-label class="ion-text-capitalize"><b>Autor: </b>{{tareas.nameUser}} {{tareas.apellUser}}</ion-label>
   <br>
-  <iframe width="300" height="315" [src]="fileUrl" frameborder="0" allowfullscreen></iframe>
+  <!-- <iframe width="300" height="315" [src]="fileUrl" frameborder="0" allowfullscreen></iframe> -->
 
 
   <ion-button href="{{tareas.file}}" target="_blank" style="text-decoration:none;">
@@ -29,7 +29,7 @@
   <!-- <ion-button (click)="download()">Descargar Archivo</ion-button> -->
 
   <p>{{tareas.descripcion}} </p>
-  <ion-segment (ionChange)="segmentChanged($event)">
+  <ion-segment>
     <ion-chip>
       <ion-icon name="thumbs-up-outline"></ion-icon>
       <ion-label>78</ion-label>
@@ -48,25 +48,50 @@
 
   </ion-segment>
   <hr>
-  <ion-list>
 
-    <ion-row>
-      <ion-col></ion-col>
-      <ion-col></ion-col>
-    </ion-row>
+<div>
 
 
+  <ion-item>
+    <ion-list>
+      <ion-row>
+        <ion-col>
+          <ion-chip >
+            <ion-avatar>
+              <img src="/assets/img/sarah-avatar.png.jpeg">
+            </ion-avatar>
+            <ion-label>Ruth C</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+
+        <ion-label class="ion-text-wrap comentario">Listen, I've had a pretty messed up day Hay muchas variaciones de
+          los pasajes de Lorem Ipsum disponibles</ion-label>
+      <ion-button>
+        <ion-label>Comentar</ion-label>
+      </ion-button>
+      <ion-button>
+        <ion-icon name="star-outline"></ion-icon>
+        <ion-label>5</ion-label>
+      </ion-button>
+    </ion-list>
+  </ion-item>
 
     <ion-item>
       <ion-list>
-        <ion-avatar slot="start">
-          <img src="/assets/img/sarah-avatar.png.jpeg">
-        </ion-avatar>
-        <ion-label>
-          <h2>Ruth C</h2>
-          <p>Listen, I've had a pretty messed up day Hay muchas variaciones de
-            los pasajes de Lorem Ipsum disponibles</p>
-        </ion-label>
+        <ion-row>
+          <ion-col>
+            <ion-chip >
+              <ion-avatar>
+                <img src="/assets/img/speakers/puppy.jpg">
+              </ion-avatar>
+              <ion-label>Ruth C</ion-label>
+            </ion-chip>
+          </ion-col>
+        </ion-row>
+
+          <ion-label class="ion-text-wrap comentario">Listen, I've had a pretty messed up day Hay muchas variaciones de
+            los pasajes de Lorem Ipsum disponibles</ion-label>
         <ion-button>
           <ion-label>Comentar</ion-label>
         </ion-button>
@@ -74,36 +99,22 @@
           <ion-icon name="star-outline"></ion-icon>
           <ion-label>5</ion-label>
         </ion-button>
-
       </ion-list>
-
     </ion-item>
-
-
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="/assets/img/ian-avatar.png">
-      </ion-avatar>
-      <ion-label>
-        <h2>Jhon Doe</h2>
-        <p>Listen, I've had a pretty messed up day...</p>
-      </ion-label>
-    </ion-item>
-
+  </div>
     <div class="spacing"></div>
 
 
 
-  </ion-list>
-
-
   <ion-item class="fixed">
-    <ion-input  rows="2" placeholder="Escribe un comentario"></ion-input>
-    <ion-note slot="end" color="secondary">
+    <ion-chip >
+    <ion-input  rows="2" placeholder="Escribe un comentario..."></ion-input>
+
       <button>
       <ion-icon name="send-outline"></ion-icon>
     </button>
-    </ion-note>
+
+  </ion-chip>
   </ion-item>
 
 </ion-content>
