@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -20,14 +21,18 @@ export class ComentariosComponent implements OnInit {
   tareaId: string;
   codUser: string;
   userName: string;
+  apllUser: string;
   imgUser: string;
   voto=0;
+
+  horaA=new Date();
+  horaP= 0;
 
   fechaComen=new Date();
   id=this.servFirestore.getId();
 
   public formComentario=new FormGroup({
-    texto:new FormControl(),
+    texto:new FormControl('',[Validators.required]),
   });
 
   constructor(
@@ -50,6 +55,8 @@ export class ComentariosComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.horaComment();
+
       //INFORMACION DE USUARIO ACTUAL
       this.serviceauth.stateAuth().subscribe(user => {
         if (user != null) {
@@ -59,6 +66,9 @@ export class ComentariosComponent implements OnInit {
           this.getuser(this.codUser);
         }
       });
+
+      //Leer comentarios por publicacion
+      this.getComments(this.tareaId);
 
   }
 
@@ -71,6 +81,7 @@ export class ComentariosComponent implements OnInit {
         this.userInfo = doc.data();
         this.userName=this.userInfo.nombre;
         this.imgUser=this.userInfo.foto;
+        this.apllUser=this.userInfo.apellido;
       } else {
         console.log('"no existe el usuario"');
       }
@@ -82,7 +93,7 @@ export class ComentariosComponent implements OnInit {
 
 
    //GUARDAR COMENTARIO EN LA BDD
-   savePublicacion(comn: ComentariosInterface){
+   saveComentario(comn: ComentariosInterface){
     try {
       console.log(this.formComentario.value);
       if(this.formComentario.valid){
@@ -90,14 +101,43 @@ export class ComentariosComponent implements OnInit {
         comn.fecha=this.fechaComen;
         comn.idUser=this.codUser;
         comn.nameUser=this.userName;
+        comn.apellUser=this.apllUser;
         comn.fotoUser=this.imgUser;
         comn.idPublicacion=this.tareaId;
         comn.voto=this.voto;
 
         this.servFirestore.saveCollection(comn,this.id);
+        this.formComentario.reset();
       }
     } catch (error) {
     console.log(error);
     }
       }
+
+
+//LEER COMENTARIOS
+getComments(idP: string){
+
+  this.servFirestore.getCollection<ComentariosInterface>('Comentarios').subscribe(res=>{
+    this.coment = res.filter(e=>idP===e.idPublicacion);
+this.coment.forEach(element => {
+  console.log(element.fecha);
+
+});
+
+  }).unsubscribe;
+
+}
+
+horaComment(){
+const hour=((this.horaA.getHours()<10)? '0':'')+this.horaA.getHours();
+const minutes=((this.horaA.getMinutes()<10)? '0':'')+this.horaA.getMinutes();
+const secs=((this.horaA.getSeconds()<10)? '0':'')+this.horaA.getSeconds();
+
+const horaActual= hour+':'+ minutes +':'+secs;
+console.log('la hora actual:'+ horaActual);
+return horaActual;
+}
+
+
 }

@@ -1,67 +1,57 @@
-<div>
-  <form [formGroup]="formComentario" (ngSubmit)="savePublicacion(formComentario.value)">
 
-  <ion-item>
+
+
+  <div *ngFor="let item of coment">
     <ion-list>
       <ion-row>
         <ion-col>
-          <ion-chip >
+          <ion-chip>
             <ion-avatar>
-              <img src="/assets/img/sarah-avatar.png.jpeg">
+              <img [src]="item.fotoUser">
             </ion-avatar>
-            <ion-label>Ruth C</ion-label>
+            <ion-label>{{item.nameUser}} {{item.apellUser}}</ion-label>
+            <ion-note></ion-note>
           </ion-chip>
         </ion-col>
       </ion-row>
+      <ion-row>
+        <ion-label class="ion-text-wrap comentario">{{item.texto}}</ion-label>
+        <ion-label class="ion-text-wrap comentario">{{item.fecha.toDate()|date:'h:mm a'}}</ion-label>
+      </ion-row>
 
-        <ion-label class="ion-text-wrap comentario">Listen, I've had a pretty messed up day Hay muchas variaciones de
-          los pasajes de Lorem Ipsum disponibles</ion-label>
-      <ion-button>
-        <ion-label>Comentar</ion-label>
-      </ion-button>
-      <ion-button>
-        <ion-icon name="star-outline"></ion-icon>
-        <ion-label>5</ion-label>
-      </ion-button>
-    </ion-list>
-  </ion-item>
-
-    <ion-item>
-      <ion-list>
         <ion-row>
-          <ion-col>
-            <ion-chip >
-              <ion-avatar>
-                <img src="/assets/img/speakers/puppy.jpg">
-              </ion-avatar>
-              <ion-label>Ruth C</ion-label>
-            </ion-chip>
+          <ion-col size="4">
+            <ion-label class="btnComm"><i class="far fa-star"></i> Votar</ion-label>
+          </ion-col>
+          <ion-col size="4">
+            <ion-label class="btnComm"><ion-icon name="chatbubble-ellipses"></ion-icon> Comentar</ion-label>
+          </ion-col>
+          <ion-col size="4">
+            <ion-label class="btnComm"><i class="fas fa-sms"></i> Chatear</ion-label>
           </ion-col>
         </ion-row>
 
-          <ion-label class="ion-text-wrap comentario">Listen, I've had a pretty messed up day Hay muchas variaciones de
-            los pasajes de Lorem Ipsum disponibles</ion-label>
-        <ion-button>
-          <ion-label>Comentar</ion-label>
-        </ion-button>
-        <ion-button type="submit">
-          <ion-icon name="star-outline"></ion-icon>
-          <ion-label>5</ion-label>
-        </ion-button>
-      </ion-list>
-    </ion-item>
 
-    <ion-item class="fixed">
-      <ion-chip >
-      <ion-input   type="text" formControlName="texto" rows="2" placeholder="Escribe un comentario..."></ion-input>
+    </ion-list>
+  </div>
+
+
+
+<ion-item>
+  <form [formGroup]="formComentario" (ngSubmit)="saveComentario(formComentario.value)">
+    <ion-row class="fixed">
+      <ion-col>
+      <ion-chip>
+        <ion-input type="text" formControlName="texto" rows="2" placeholder="Escribe un comentario..." required></ion-input>
 
         <button>
-        <ion-icon name="send-outline"></ion-icon>
-      </button>
+          <ion-icon name="send-outline"></ion-icon>
+        </button>
 
-    </ion-chip>
-    </ion-item>
+      </ion-chip>
+    </ion-col>
+    </ion-row>
 
   </form>
+</ion-item>
 
-  </div>
