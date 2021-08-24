@@ -62,7 +62,7 @@ navigationExtras: NavigationExtras = {
       //console.log('infoUser', doc.data());
       this.userInfo = doc.data();
       this.carreraId = this.userInfo.carreraId;
-      console.log('carrera ID:',this.carreraId);
+      //console.log('carrera ID:',this.carreraId);
       this.getPublicacion(this.carreraId);
     } else {
       // doc.data() will be undefined in this case

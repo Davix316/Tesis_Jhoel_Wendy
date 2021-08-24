@@ -5,6 +5,9 @@ import { File } from '@ionic-native/file/ngx';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { PublicacionInterface } from 'src/app/shared/publicacion';
 import { Platform } from '@ionic/angular';
+import { FavoritosInterface } from 'src/app/shared/favoritos';
+import { FirestoreService } from 'src/app/services/firestore.service';
+import { FireauthService } from 'src/app/services/fireauth.service';
 
 @Component({
   selector: 'app-detalle-tarea',
@@ -17,29 +20,36 @@ export class DetalleTareaPage implements OnInit {
 
   titulo: string;
 
-   tareas: PublicacionInterface=null;
-
-
+  tareas: PublicacionInterface = null;
   tareaId: string;
+  idUser: string;
+ favorito: FavoritosInterface={
+   id: this.serviceFS.getId(),
+   idUser:'',
+   idPublicacion:''
+ };
 
+ favoritoAdd=false;
 
   constructor(
     private domSanit: DomSanitizer,
     private router: Router,
-   private file: File,
-   private transfer: FileTransfer,
-   private platform: Platform,
-     ) {
-      const navigation = this.router.getCurrentNavigation();
-      this.tareas = navigation?.extras?.state?.value;
-      console.log('tareas cons:', this.tareas);
-      //Si no hay ID de tarea retorna
-      if (typeof this.tareas==='undefined') {
-        this.router.navigate(['/menu/home']);
-      }
-      //
-      this.tareaId = this.tareas.id;
-      console.log('Tarea id:', this.tareaId);
+    private file: File,
+    private transfer: FileTransfer,
+    private platform: Platform,
+    private serviceFS: FirestoreService,
+    private serviceauth: FireauthService,
+  ) {
+    const navigation = this.router.getCurrentNavigation();
+    this.tareas = navigation?.extras?.state?.value;
+    //console.log('tareas cons:', this.tareas);
+    //Si no hay ID de tarea retorna
+    if (typeof this.tareas === 'undefined') {
+      this.router.navigate(['/menu/home']);
+    }
+    //
+    this.tareaId = this.tareas.id;
+    console.log('Tarea id:', this.tareaId);
 
 
 
@@ -47,18 +57,33 @@ export class DetalleTareaPage implements OnInit {
 
 
 
-  ngOnInit(): void{
+  ngOnInit(): void {
 
-
-    this.fileUrl= this.domSanit.bypassSecurityTrustResourceUrl(
-      'https://www.youtube.com/watch?v=RjGPlLLqRYg&list=RDMM&index=27'
-      );
-
+ //INFORMACION DE USUARIO ACTUAL
+ this.serviceauth.stateAuth().subscribe(user => {
+  if (user != null) {
+    //id de Usuario de fireAuth
+    this.idUser = user.uid;
+   // console.log(this.idUser);
+  }
+});
 
 
   }
 
-  addFavorite(){
+  //GUARDAR FAVORITOS
+  addFavorite() {
+    try {
+      this.favorito.idUser=this.idUser;
+      this.favorito.idPublicacion=this.tareaId;
+      console.log('VALORES FAVORITO',this.favorito);
+      this.serviceFS.saveDoc('Favoritos', this.favorito, this.favorito.id);
+      this.favoritoAdd=true;
+    } catch (error) {
+      console.log(error);
+
+    }
+
   }
 
 
@@ -80,14 +105,14 @@ export class DetalleTareaPage implements OnInit {
   } */
 
   download() {
-    let path =null;
-    if(this.platform.is('ios')){
-      path=this.file.documentsDirectory;
-    }else{
-  path=this.file.dataDirectory;
+    let path = null;
+    if (this.platform.is('ios')) {
+      path = this.file.documentsDirectory;
+    } else {
+      path = this.file.dataDirectory;
     }
-       ///
-       const fileTransfer = this.transfer.create();
+    ///
+    const fileTransfer = this.transfer.create();
     const url = 'http://www.africau.edu/images/default/sample.pdf';
     fileTransfer.download(url, path + 'file.pdf').then((entry) => {
       console.log('download complete: ' + entry.toURL());

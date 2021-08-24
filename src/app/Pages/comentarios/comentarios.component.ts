@@ -61,7 +61,7 @@ export class ComentariosComponent implements OnInit {
       this.serviceauth.stateAuth().subscribe(user => {
         if (user != null) {
           this.codUser = user.uid;
-          console.log(this.codUser);
+          //console.log(this.codUser);
           //Busca en la coleccion Usuarios
           this.getuser(this.codUser);
         }
@@ -117,14 +117,12 @@ export class ComentariosComponent implements OnInit {
 
 //LEER COMENTARIOS
 getComments(idP: string){
-
   this.servFirestore.getCollection<ComentariosInterface>('Comentarios').subscribe(res=>{
     this.coment = res.filter(e=>idP===e.idPublicacion);
 this.coment.forEach(element => {
   console.log(element.fecha);
 
 });
-
   }).unsubscribe;
 
 }
