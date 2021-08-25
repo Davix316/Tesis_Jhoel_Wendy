@@ -8,6 +8,7 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 import { ComentariosInterface } from 'src/app/shared/comentarios';
 import { PublicacionInterface } from 'src/app/shared/publicacion';
 
+
 @Component({
   selector: 'app-comentarios',
   templateUrl: './comentarios.component.html',
@@ -15,7 +16,7 @@ import { PublicacionInterface } from 'src/app/shared/publicacion';
 })
 export class ComentariosComponent implements OnInit {
 
-  coment: ComentariosInterface[];
+  listacoment: ComentariosInterface[];
   publi: PublicacionInterface=null;
   userInfo: any;
   tareaId: string;
@@ -25,16 +26,17 @@ export class ComentariosComponent implements OnInit {
   imgUser: string;
   voto=0;
 
-  horaA=new Date();
-  horaP= 0;
 
   fechaComen=new Date();
   id=this.servFirestore.getId();
+  comentarios0 = true;
 
   public formComentario=new FormGroup({
     texto:new FormControl('',[Validators.required]),
   });
 
+
+  private showOptions = false;
   constructor(
     private router: Router,
     private serviceauth: FireauthService,
@@ -55,7 +57,7 @@ export class ComentariosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.horaComment();
+
 
       //INFORMACION DE USUARIO ACTUAL
       this.serviceauth.stateAuth().subscribe(user => {
@@ -97,7 +99,7 @@ export class ComentariosComponent implements OnInit {
     try {
       console.log(this.formComentario.value);
       if(this.formComentario.valid){
-        comn.id=this.id;
+        const idComentario=comn.id || null;
         comn.fecha=this.fechaComen;
         comn.idUser=this.codUser;
         comn.nameUser=this.userName;
@@ -106,7 +108,7 @@ export class ComentariosComponent implements OnInit {
         comn.idPublicacion=this.tareaId;
         comn.voto=this.voto;
 
-        this.servFirestore.saveCollection(comn,this.id);
+        this.servFirestore.saveCollection(comn,idComentario);
         this.formComentario.reset();
       }
     } catch (error) {
@@ -118,8 +120,15 @@ export class ComentariosComponent implements OnInit {
 //LEER COMENTARIOS
 getComments(idP: string){
   this.servFirestore.getCollection<ComentariosInterface>('Comentarios').subscribe(res=>{
-    this.coment = res.filter(e=>idP===e.idPublicacion);
-this.coment.forEach(element => {
+    this.listacoment = res.filter(e=>idP===e.idPublicacion);
+    if (this.listacoment.length === 0){
+      this.comentarios0= true;
+      console.log('No hay comentarios');
+    }
+    else{
+      this.comentarios0=false;
+    }
+this.listacoment.forEach(element => {
   console.log(element.fecha);
 
 });
@@ -127,14 +136,15 @@ this.coment.forEach(element => {
 
 }
 
-horaComment(){
-const hour=((this.horaA.getHours()<10)? '0':'')+this.horaA.getHours();
-const minutes=((this.horaA.getMinutes()<10)? '0':'')+this.horaA.getMinutes();
-const secs=((this.horaA.getSeconds()<10)? '0':'')+this.horaA.getSeconds();
 
-const horaActual= hour+':'+ minutes +':'+secs;
-console.log('la hora actual:'+ horaActual);
-return horaActual;
+
+//MODALS ADJUNTAR
+showOptionsToggle(value?: boolean) {
+  if (value !== undefined) {
+    this.showOptions = value;
+    return;
+  }
+  this.showOptions = !this.showOptions;
 }
 
 
