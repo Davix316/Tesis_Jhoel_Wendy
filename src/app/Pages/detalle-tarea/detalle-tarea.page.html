@@ -10,7 +10,7 @@
 <ion-content>
 
   <ion-toolbar>
-    <button slot="secondary"  (click)="addFavorite()">
+    <button slot="end"  (click)="addFavorite()">
         <ion-icon *ngIf="favoritoAdd==false" class="favoritoFalse" name="heart"></ion-icon>
         <ion-icon *ngIf="favoritoAdd==true" class="favoritoTrue" name="heart"></ion-icon>
     </button>

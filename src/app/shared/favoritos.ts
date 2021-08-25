@@ -1,5 +1,6 @@
 export interface FavoritosInterface {
   id: string;
   idUser: string;
-  idPublicacion: string;
+  nombreTarea: string;
+  idPublicacion: any[];
 }

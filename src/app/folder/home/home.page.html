@@ -36,29 +36,29 @@
     </ion-card-content>
 
     <ion-row>
-      <ion-col>
+      <ion-col size="3">
         <ion-button size="small" ion-button color="primary" clear small icon-start (click)="likeButtonClick()">
           <ion-icon name="thumbs-up-outline"></ion-icon>
           {{numberOfLikes}}
         </ion-button>
       </ion-col>
 
-      <ion-col>
+      <ion-col size="3">
         <ion-button size="small" ion-button color="primary" clear small icon-start (click)="dislikeButtonClick()" >
           <ion-icon name="thumbs-down-outline"></ion-icon>
           <ion-label>{{numberOfDislikes}}</ion-label>
         </ion-button>
       </ion-col>
 
-      <ion-col>
-        <ion-button size="small" ion-button color="primary" clear small icon-start >
+      <ion-col size="3">
+        <ion-button routerLink="/detalle-tarea" (click)="infoTarea(item)"  size="small" ion-button color="primary" clear small icon-start  >
           <ion-icon name="chatbubble-ellipses"></ion-icon>
           <ion-label>4 </ion-label>
         </ion-button>
       </ion-col>
 
 
-      <ion-col center text-center>
+      <ion-col center text-center size="3">
 
         <ion-note color="secondary"> {{item.fecha.toDate()|date:'h:mm a'}}</ion-note>
       </ion-col>

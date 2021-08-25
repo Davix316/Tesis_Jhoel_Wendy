@@ -8,5 +8,7 @@ export interface ComentariosInterface {
   apellUser: string;
   fotoUser: string;
   idPublicacion: string;
+  file: string;
+  imagen: string;
   voto: number;
 }

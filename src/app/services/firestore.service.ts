@@ -14,7 +14,7 @@ export class FirestoreService {
 //LEER COLECCION EN ORDEN DESC
 
   getCollection<Interfaz>(coleccion: string){
-    const collection = this.firestore.collection<Interfaz>(coleccion, ref=> ref.orderBy('fecha','desc'));
+    const collection = this.firestore.collection<Interfaz>(coleccion, ref=> ref.orderBy('fecha','asc'));
     return collection.valueChanges();
   }
 //LEER COLECCION en orden desc
@@ -26,7 +26,9 @@ readCollection<Interfaz>(coleccion: string){
 
 //GUARDAR COLECCION
 saveCollection(comentario: ComentariosInterface, idP: string){
-  this.firestore.collection('Comentarios').doc(idP).set(comentario)
+  const id=idP ||this.firestore.createId();
+  comentario.id=id;
+  this.firestore.collection('Comentarios').doc(id).set(comentario)
 .then((docRef) => {
     console.log('registro exitoso');
    })
@@ -35,6 +37,8 @@ saveCollection(comentario: ComentariosInterface, idP: string){
 });
 
 }
+
+
 //Guardar Coleccion GENERICO
 saveDoc(  path: string, interf: any, idC: string){
   this.firestore.collection(path).doc(idC).set(interf)
