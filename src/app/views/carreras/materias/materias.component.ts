@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ViewChild , ElementRef } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { ThemeService } from '../../services/theme.service';
 import { Materia } from '../../../shared/models/materia.interface';
@@ -10,11 +10,16 @@ import { Admin } from '../../../shared/models/admin.interface';
 import { FirebaseauthService } from '../../services/firebaseauth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { StructuredType } from 'typescript';
+import { Observable } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   templateUrl: './materias.component.html',
 })
 export class MateriasComponent implements OnInit {
+
+  filepath='';
 
   Publicaciones$ = this.materiaSvc.publicaciones;
   publicacionForm: FormGroup;
@@ -65,6 +70,7 @@ export class MateriasComponent implements OnInit {
     private _location: Location,
     private serviceAuth: FirebaseauthService,
     private firestore: AngularFirestore,
+    private storage: AngularFireStorage,
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.materia = navigation?.extras?.state?.value;
@@ -72,6 +78,12 @@ export class MateriasComponent implements OnInit {
     this.initForm2();
 
   }
+
+  @ViewChild('FileUrlUser') inputFile: ElementRef;
+  progreso=false;
+  porcentaje=0;
+  porcentajesubida: Observable<number>;
+  urlFile: Observable<string>;
 
   ngOnInit(): void {
 
@@ -151,6 +163,7 @@ export class MateriasComponent implements OnInit {
         publi.id=this.id;
         publi.idCarrera=this.materia.idCarrera;
         publi.idMateria=this.materia.id;
+        publi.file=this.inputFile.nativeElement.value;
         this.publicacionSvc.newPublicacion(publi,this.id);
       }
     } catch (error) {
@@ -178,11 +191,16 @@ export class MateriasComponent implements OnInit {
   }
 
   async onGoToDelete(publicacionId: string): Promise<void> {
-    try {
-      await this.materiaSvc.onDeletePublicaciones(publicacionId);
-      alert('La pubicacion se elimino con exito');
-    } catch (err) {
-      console.log(err);
+
+    const confirmacion = confirm('Esta seguro que desea eliminar la publicación');
+
+    if (confirmacion) {
+      try {
+        await this.materiaSvc.onDeletePublicaciones(publicacionId);
+        alert('La pubicacion se elimino con exito');
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 
@@ -223,4 +241,27 @@ export class MateriasComponent implements OnInit {
     });
   }
 
+  //SUBIR ARCHIVO
+  uploadFile(pdf){
+  //generar id Aleatorio para el archivo
+  const id= Math.random().toString(36).substring(2);
+  const file=pdf.target.files[0];
+   this.filepath='Archivos/'+ this.nameUser+ '/'+'file_'+id;
+  const ref=this.storage.ref(this.filepath);
+  const tarea= this.storage.upload(this.filepath,file);
+  this.porcentajesubida= tarea.percentageChanges();
+  
+  
+  tarea.snapshotChanges().pipe(finalize(()=>this.urlFile=ref.getDownloadURL())).subscribe();
+  this.progreso=true;
+  //Cambia el porcentaje
+  tarea.percentageChanges().subscribe((porcentaje) => {
+    this.porcentaje = Math.round(porcentaje);
+    if (this.porcentaje === 100) {
+      this.progreso = false;
+    }
+  });
+  
+  }
+  
 }

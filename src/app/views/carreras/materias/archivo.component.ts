@@ -3,6 +3,7 @@ import { ThemeService } from '../../services/theme.service';
 import { NavigationExtras, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Publicacion } from '../../../shared/models/publicacion.interface';
+import { Location } from '@angular/common';
 
 @Component({
   templateUrl: './archivo.component.html',
@@ -29,6 +30,7 @@ export class ArchivoComponent implements OnInit{
     private publicacionSvc: ThemeService,
     private router: Router,
     private fb: FormBuilder,
+    private _location: Location,
   ) { 
     const navigation = this.router.getCurrentNavigation();
     this.publicacion = navigation?.extras?.state?.value;
@@ -73,6 +75,11 @@ export class ArchivoComponent implements OnInit{
     this.publicacionForm = this.fb.group({
       titulo: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
+      file: ['', [Validators.required]],
     });
+  }
+
+  goBack() {
+    this._location.back();
   }
 }

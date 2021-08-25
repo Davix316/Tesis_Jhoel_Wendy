@@ -132,6 +132,21 @@ export class ThemeService {
     });
   }
 
+  onSaveAdmin2(admin1: Admin, adminId: string, email: string): Promise<void> {
+
+    return new Promise(async (resolve, reject) => {
+      try {
+        const id = adminId || this.afs.createId();
+        const data = { id, email, ...admin1 };
+        const result = await this.adminsCollection.doc(id).set(data);
+        resolve(result);
+        window.alert('Administrador registrado');
+      } catch (err) {
+        reject(err.message);
+      }
+    });
+  }
+
     //REGISTRAR USUARIO
     registrar(usuario: Admin){
       this.afAuth.createUserWithEmailAndPassword(usuario.email,usuario.password)

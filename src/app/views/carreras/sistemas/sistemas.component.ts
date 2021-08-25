@@ -124,5 +124,4 @@ export class SistemasComponent implements OnInit {
       numHoras: ['', [Validators.required]],
     });
   }
-
 }

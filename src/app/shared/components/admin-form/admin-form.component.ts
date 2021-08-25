@@ -17,7 +17,11 @@ export class AdminFormComponent implements OnInit {
 
   private isEmail = /\S+@\S+\.\S+/;
 
-  constructor(private router: Router, private fb: FormBuilder, private adminsSvc: ThemeService, private storage: AngularFireStorage) {
+  constructor(private router: Router, 
+    private fb: FormBuilder, 
+    private adminsSvc: ThemeService, 
+    private storage: AngularFireStorage
+    ) {
     const navigation = this.router.getCurrentNavigation();
     this.admin = navigation?.extras?.state?.value;
     this.initForm();

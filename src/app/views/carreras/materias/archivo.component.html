@@ -14,7 +14,12 @@
                             <input type="text" class="form-control" formControlName="titulo" style="width: 50%;">
                             <br>
                             <label for="exampleFormControlInput2">Descripción: </label>
-                            <input type="text" class="form-control" formControlName="descripcion" style="width: 100%;">
+                            <input type="textarea" class="form-control" formControlName="descripcion" style="width: 100%;">
+                            <br>
+                            <br>
+                            <label for="exampleFormControlInput3">Archivo: </label>
+                            <a href="{{publicacion.file}}" target="_blank">Ver archivo</a>
+                            <input type="text" class="form-control" formControlName="file" style="width: 50%;">
                             <br>
                             <div class="row">
                                 <div class="col-md-12">
@@ -27,8 +32,8 @@
                 </form>
 
                 <div class="col-md-5">
-                    <button type="button" class="btn btn-dark" [routerLink]="[ '/carreras']"
-                        style="color: white;">Regresar a Carreras</button>
+                    <button type="button" class="btn btn-dark" (click)="goBack()"
+                        style="color: white;">Regresar a publicaciones</button>
                 </div>
                 <br>
                 <hr>
