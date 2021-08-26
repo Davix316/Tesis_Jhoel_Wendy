@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Admin } from '../../models/admin.interface';
 import {AngularFireStorage} from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-form',
@@ -12,60 +14,56 @@ import {AngularFireStorage} from '@angular/fire/storage';
 })
 export class AdminFormComponent implements OnInit {
 
+  fotopath='';
+  fotoUser='';
+
   admin: Admin;
   adminForm: FormGroup;
 
   private isEmail = /\S+@\S+\.\S+/;
 
-  constructor(private router: Router, 
+  constructor(
+    private router: Router, 
     private fb: FormBuilder, 
     private adminsSvc: ThemeService, 
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
     ) {
     const navigation = this.router.getCurrentNavigation();
     this.admin = navigation?.extras?.state?.value;
     this.initForm();
   }
 
+  @ViewChild('FotoUrlUser') inputFoto: ElementRef;
+  progreso=false;
+  porcentaje=0;
+  porcentajesubida: Observable<number>;
+  urlFoto: Observable<string>;
 
   ngOnInit(): void {
 
+    if (typeof this.admin === 'undefined') {
+      this.router.navigate(['newAdmin']);
+    } else {
       this.adminForm.patchValue(this.admin);
-    
+    }
+      this.fotoUser = this.admin.foto;
+      console.log("foto", this.fotoUser)
   }
 
-   onSave(): void {
+   onSave(adm): void {
 
     if (this.adminForm.valid) {
       console.log("valido")
       const admin = this.adminForm.value;
       const adminId = this.admin?.id || null;
-      this.adminsSvc.onSaveAdmin(admin, adminId);
+      adm.foto=this.inputFoto.nativeElement.value;
+      this.adminsSvc.onSaveAdmin(admin, adminId, adm.foto);
       this.adminForm.reset();
       this.router.navigate(['list']);
     }else{
       console.log("no valido")
     }
   }
-
-  register(user: Admin){
-    try{
-      console.log(user);
-      if(this.adminForm.valid){
-      //user.foto=this.inputImageUser.nativeElement.value;
-      user.rol='Administrador';
-      this.adminsSvc.registrar(user);
-      this.router.navigate(['list']);
-      }
-      else{
-        console.log("no valido");
-      }
-    }
-    catch(error){
-      console.error(error);
-    }
-}
-
 
   onGoBackToList(): void {
     this.router.navigate(['list']);
@@ -88,8 +86,28 @@ export class AdminFormComponent implements OnInit {
       semestreRef: ['', [Validators.required]],
       telefono: ['', [Validators.required]],
       rol: ['Administrador'],
-      foto: '',
+      foto:  ['', [Validators.required]],
     });
   }
+
+  uploadFoto(foto){
+    //generar id Aleatorio para el archivo
+    const id= Math.random().toString(36).substring(2);
+    const file=foto.target.files[0];
+    this.fotopath='Perfil/'+ 'user_'+id;
+    const ref=this.storage.ref(this.fotopath);
+    const tarea= this.storage.upload(this.fotopath,file);
+    this.porcentajesubida= tarea.percentageChanges();
+    
+    tarea.snapshotChanges().pipe(finalize(()=>this.urlFoto=ref.getDownloadURL())).subscribe();
+    this.progreso=true;
+    //Cambia el porcentaje
+    tarea.percentageChanges().subscribe((porcentaje) => {
+      this.porcentaje = Math.round(porcentaje);
+      if (this.porcentaje === 100) {
+        this.progreso = false;
+      }
+    });
+    }
 
 }

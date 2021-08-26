@@ -90,14 +90,7 @@ export class MateriasComponent implements OnInit {
     this.serviceAuth.getCurrentUser().subscribe(user => {
       this.email = user.email;
       this.getAdmin();
-
     })
-
-    //this.serviceAuth.getCurrentUser().subscribe(user => {
-    //  this.email = user.email;
-     // this.getAdmin();
-    //})
-
 
     this.publicacionForm.patchValue(this.publicacion);
 
@@ -119,11 +112,9 @@ export class MateriasComponent implements OnInit {
       .then((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             this.userLogIn=doc.data();
-
             this.nameUser=this.userLogIn.nombre;
             this.idUserPubli=this.userLogIn.id;
             this.apellUser=this.userLogIn.apellido;
-
           });
       })
       .catch((error) => {
@@ -169,7 +160,7 @@ export class MateriasComponent implements OnInit {
     } catch (error) {
     console.log(error);
     }
-      }
+  }
 
 
 

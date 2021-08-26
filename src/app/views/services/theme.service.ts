@@ -11,6 +11,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { Materia } from '../../shared/models/materia.interface';
 import { Publicacion } from '../../shared/models/publicacion.interface';
+import { Bloqueo } from '../../shared/models/block.interface';
 
 
 @Injectable({
@@ -36,7 +37,12 @@ export class ThemeService {
   private publicacionesCollection: AngularFirestoreCollection<Publicacion>;
 
 
-  constructor(private readonly afs: AngularFirestore, private afAuth: AngularFireAuth, private storage: AngularFireStorage, public router: Router) {
+  constructor(
+    private readonly afs: AngularFirestore, 
+    private afAuth: AngularFireAuth, 
+    private storage: AngularFireStorage, 
+    public router: Router
+    ) {
     this.adminsCollection = afs.collection<Admin>('Administradores');
     this.studentsCollection = afs.collection<Admin>('Usuarios');
     this.materiasCollection = afs.collection<Materia>('Materias');
@@ -115,17 +121,16 @@ export class ThemeService {
     });
   }
 
-  onSaveAdmin(admin: Admin, adminId: string): Promise<void> {
+  onSaveAdmin(admin: Admin, adminId: string, foto:string): Promise<void> {
 
     return new Promise(async (resolve, reject) => {
       try {
         this.afAuth.createUserWithEmailAndPassword(admin.email, admin.password);
         const id = adminId || this.afs.createId();
-        const data = { id, ...admin };
+        const data = { id, foto, ...admin };
         const result = await this.adminsCollection.doc(id).set(data);
         resolve(result);
-        window.alert('Administrador registrado');
-        
+        window.alert('Administrador registrado');        
       } catch (err) {
         reject(err.message);
       }
@@ -168,12 +173,12 @@ export class ThemeService {
       }
 
 
-  onSaveStudent(student: Admin, studentId: string): Promise<void> {
+  onSaveStudent(student: Admin, studentId: string, foto:string): Promise<void> {
 
     return new Promise(async (resolve, reject) => {
       try {
         const id = studentId || this.afs.createId();
-        const data = { id, ...student };
+        const data = { id, foto, ...student };
         const result = await this.studentsCollection.doc(id).set(data);
         this.afAuth.createUserWithEmailAndPassword(student.email, student.password);
         resolve(result);
@@ -243,6 +248,20 @@ export class ThemeService {
   });
 
   }
+
+  newBlock(block: Bloqueo, idB: string){
+    this.afs.collection('Bloqueos').doc(idB).set(block)
+  .then((docRef) => {
+      console.log('registro exitoso');
+      window.alert('bloqueo registrado');
+      this.router.navigate(['/dashboard']);
+  })
+  .catch((error) => {
+      console.error('"Error adding document: "', error);
+  });
+
+  }
+
 
 
   onSavePublicacion(publicacion: Publicacion, publicacionId: string, idMat: string): Promise<void> {
