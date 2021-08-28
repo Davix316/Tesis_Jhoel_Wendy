@@ -49,19 +49,17 @@ export class BlockStudentComponent implements OnInit {
 
   saveBloqueo(block: Bloqueo){
     try {
-      console.log(this.studentBlockForm.value);
       if(this.studentBlockForm.valid){
         block.id=this.id;
         block.nombre=this.student.nombre;
         block.apellido=this.student.apellido;
         block.numUnico=this.student.numUnico;
         block.email=this.student.email;
-        block.motivo=this.motivoBlock;
-        block.dias=this.diasBlock;
         block.fechaI=this.fechaBlockI;
         block.fechaF=this.fechaBlockF;
         this.adminsSvc.newBlock(block,this.id);
         this.router.navigate(['listStudent']);
+        console.log(block.dias);
       }
     } catch (error) {
     console.log(error);
@@ -86,8 +84,8 @@ export class BlockStudentComponent implements OnInit {
       email: [this.student.email],
       motivo: ['', [Validators.required]],
       dias: ['', [Validators.required]],
-      fechaI: ['', [Validators.required]],
-      fechaF: ['', [Validators.required]],
+      fechaI: [''],
+      fechaF: [''],
     });
   }
 

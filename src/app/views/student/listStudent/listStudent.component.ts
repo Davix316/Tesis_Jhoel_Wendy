@@ -33,6 +33,10 @@ export class ListStudentComponent implements OnInit {
     this.router.navigate(['newStudent']);
   }
 
+  onGoToBlock2(){
+    this.router.navigate(['listStudentBlock']);
+  }
+
   onGoToBlock(item: any): void{
     this.navigationExtras.state.value = item;
     this.router.navigate(['blockStudent'], this.navigationExtras);  }

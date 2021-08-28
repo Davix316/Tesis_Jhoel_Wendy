@@ -21,6 +21,7 @@ import { Bloqueo } from '../../shared/models/block.interface';
 export class ThemeService {
   admins: Observable<Admin[]>;
   students: Observable<Admin[]>;
+  studentsBlock: Observable<Admin[]>;
   materias: Observable<Materia[]>;
   publicaciones: Observable<Publicacion[]>;
 
@@ -33,6 +34,7 @@ export class ThemeService {
 
   private adminsCollection: AngularFirestoreCollection<Admin>;
   private studentsCollection: AngularFirestoreCollection<Admin>;
+  private studentsBlockCollection: AngularFirestoreCollection<Admin>;
   private materiasCollection: AngularFirestoreCollection<Materia>;
   private publicacionesCollection: AngularFirestoreCollection<Publicacion>;
 
@@ -45,10 +47,12 @@ export class ThemeService {
     ) {
     this.adminsCollection = afs.collection<Admin>('Administradores');
     this.studentsCollection = afs.collection<Admin>('Usuarios');
+    this.studentsBlockCollection = afs.collection<Admin>('Bloqueos');
     this.materiasCollection = afs.collection<Materia>('Materias');
     this.publicacionesCollection = afs.collection<Publicacion>('Publicaciones');
     this.getAdmins();
     this.getStudents();
+    this.getStudentsBloqueados();
     this.getMaterias();
     this.getPublicaciones();
   }
@@ -94,6 +98,18 @@ export class ThemeService {
     return new Promise(async (resolve, reject) => {
       try {
         const result = await this.studentsCollection.doc(studentId).delete();
+        resolve(result);
+
+      } catch (err) {
+        reject(err.message);
+      }
+    });
+  }
+
+  onDeleteStudentsBlock(studentId: string): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const result = await this.studentsBlockCollection.doc(studentId).delete();
         resolve(result);
 
       } catch (err) {
@@ -295,6 +311,12 @@ export class ThemeService {
     );
   }
 
+  private getStudentsBloqueados(): void {
+    this.studentsBlock = this.studentsBlockCollection.snapshotChanges().pipe(
+      map(actions => 
+        actions.map(a => a.payload.doc.data() as Admin))
+    );
+  }
 
   private getMaterias(): void {
     this.materias = this.materiasCollection.snapshotChanges().pipe(

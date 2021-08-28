@@ -94,6 +94,10 @@ export const routes: Routes = [
         loadChildren: () => import('./views/student/listStudent/listStudent.module').then(m => m.ListStudenttModule), canActivate: [CheckloginGuard2],
       },
       {
+        path: 'listStudentBlock',
+        loadChildren: () => import('./views/student/listStudentBlock/listStudentBlock.module').then(m => m.ListStudentBlockModule), canActivate: [CheckloginGuard2],
+      },
+      {
         path: 'newStudent', loadChildren: () => import('./views/student/newStudent/newStudent.module').then(m => m.NewStudentModule), canActivate: [CheckloginGuard2],
         data: {
           title: 'Nuevo Estudiante'
@@ -105,6 +109,11 @@ export const routes: Routes = [
       { path: 'detailsStudent', loadChildren: () => import('./views/student/detailsStudent/detailsStudent.module').then(m => m.DetailsStudentModule),canActivate: [CheckloginGuard2],
       data: {
         title: 'Detalle de Estudiante'
+      } }
+      ,
+      { path: 'detailsStudentBlock', loadChildren: () => import('./views/student/detailsStudentBlock/detailsStudentBlock.module').then(m => m.DetailsStudentBlockModule),canActivate: [CheckloginGuard2],
+      data: {
+        title: 'Detalle de Estudiante Bloqueado'
       } }
       ,{ path: 'blockStudent', loadChildren: () => import('./views/student/block/blockStudent.module').then(m => m.BlockStudentModule),canActivate: [CheckloginGuard2],
       data: {
