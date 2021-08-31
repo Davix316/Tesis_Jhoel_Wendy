@@ -106,7 +106,7 @@
             <input class=" form-control-sm" id="formFileSm" accept=".png, .jpg, .jpeg"
               type="file" (change)="onUpload($event)"  formControlName="foto">
              <!--  Spinner progreso animada -->
-             <div class="spinner-border" role="status" *ngIf="progreso===true">
+             <div class="spinner-border" role="status" *ngIf="progreso==true">
               <span class="visually-hidden" >Loading...</span>
             </div>
             <!--  <br>

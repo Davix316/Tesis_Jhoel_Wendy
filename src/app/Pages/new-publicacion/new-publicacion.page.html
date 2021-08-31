@@ -85,7 +85,7 @@
               <input class=" form-control-sm" id="formFileSm" accept=".pdf ,.docx ,.xlsx"
                 type="file" (change)="uploadFile($event)"  formControlName="file">
                <!--  Spinner progreso animada -->
-               <div class="spinner-border" role="status" *ngIf="progreso===true">
+               <div class="spinner-border" role="status" *ngIf="progreso==true">
                 <span class="visually-hidden" >Loading...</span>
               </div>
 

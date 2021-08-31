@@ -11,8 +11,8 @@
 
   <ion-toolbar>
     <button slot="end"  (click)="addFavorite()">
-        <ion-icon *ngIf="favoritoAdd===false" class="favoritoFalse" name="heart"></ion-icon>
-        <ion-icon *ngIf="favoritoAdd===true" class="favoritoTrue" name="heart"></ion-icon>
+        <ion-icon *ngIf="favoritoAdd==false" class="favoritoFalse" name="heart"></ion-icon>
+        <ion-icon *ngIf="favoritoAdd==true" class="favoritoTrue" name="heart"></ion-icon>
     </button>
     <ion-text class="ion-text-center titulo" color="primary">{{tareas.titulo}}</ion-text>
   </ion-toolbar>
