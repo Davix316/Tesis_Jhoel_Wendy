@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-item>
+      <ion-avatar slot="start"  >
+        <img src="/assets/img/speakers/duck.jpg">
+      </ion-avatar>
+      <ion-title >
+        <ion-label class="ion-text-start">
+          {{ contactInfo.name }}
+          <p><small class="text-muted">{{ contactInfo.status }}</small></p>
+        </ion-label>
+      </ion-title>
+    </ion-item>
+
+
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg">
+  <div class="chat-container">
+    <div *ngFor="let message of messages" class="chat-bubble" [(ngClass)]="message.type">
+      <div class="mesage">{{ message.text }}</div>
+      <p>{{ message.created }}</p>
+    </div>
+  </div>
+
+  <div class="chat-controls" [ngClass]="{'active': showOptions}">
+
+    <ion-row class="bg-white">
+      <ion-col size="9" class="ion-no-padding">
+        <ion-list lines="none" class="ion-no-padding">
+          <ion-item class="formControl">
+            <ion-input placeholder="Type your message" type="text" (focus)="showOptionsToggle(false)"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col size="3" class="ion-no-padding">
+        <p class="ion-text-center icon-controls">
+          <ion-icon mode="ios" name="send" class="text-primary"></ion-icon>
+        </p>
+      </ion-col>
+    </ion-row>
+  </div>
+
+
+</ion-content>

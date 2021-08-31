@@ -1,0 +1,55 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content>
+
+  <img src="/assets/background/login.png" alt="">
+  <div><br><br></div>
+  <ion-card>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <a routerLink="/login" routerLinkActive="activo"><b>Login</b></a>
+      </ion-col>
+      <ion-col>
+        <a routerLink="/register" routerLinkActive="activo">
+          <b>Registro</b>
+        </a>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> <b>LOGIN</b></ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form [formGroup]="formLogin" (ngSubmit)="logIn()">
+        <ion-item lines="full">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="text" formControlName="emailF" required></ion-input>
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password" formControlName="passwordF" required></ion-input>
+        </ion-item>
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit"  expand="block" class="boton">Ingresar
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <div class="ion-text-center">
+
+        <a routerLink="/reset-password">
+         <u>Recuperar contraseña!</u> </a>
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
+

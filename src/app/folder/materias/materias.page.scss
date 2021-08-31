@@ -1,0 +1,24 @@
+
+ion-segment-button {
+  --indicator-box-shadow: transparent !important;
+  --color:rgba(0, 0, 0, 0.527);
+  --background-checked: white;
+  --color-checked:#115571;
+  border-radius: 8px;
+  margin: 0;
+  font-size: 24px;
+}
+
+ion-segment{
+  background-color: #f3f4ff;
+}
+ion-content{
+  --background:#88aab8
+}
+ ion-col, ion-card-content{
+   padding: 0;
+   margin: 0;
+
+ }
+
+

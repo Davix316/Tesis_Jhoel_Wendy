@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Materia Name</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment  [(ngModel)]="segment" >
+
+    <ion-segment-button value="first">
+      <ion-label>Tareas</ion-label>
+      <ion-icon name="book"></ion-icon>
+    </ion-segment-button>
+
+    <ion-segment-button value="second">
+      <ion-label>Cuestionarios</ion-label>
+      <ion-icon name="clipboard"></ion-icon>
+    </ion-segment-button>
+
+  </ion-segment>
+
+
+<!-- TAREAS -->
+
+  <div [ngSwitch]="segment">
+    <div *ngSwitchCase="'first'">
+      <ion-card>
+<ion-card-content *ngIf="tareas0">
+  <label >No hay Tareas publicadas</label>
+</ion-card-content>
+        <ion-grid>
+           <ion-row *ngFor="let item of listaTareas">
+            <ion-col class="ion-align-self-center">
+              <img src="/assets/icon/pdf.png" alt="file.png">
+            </ion-col>
+            <ion-col size="8"  class="ion-text-center">
+              <b>titulo:{{item.titulo}}</b>
+              <ion-list>
+                <ion-button color="light" size="small" href="{{item.file}}" target="_blank"><ion-icon name="download"></ion-icon></ion-button>
+                <ion-button color="light"  size="small"><ion-icon  class="heart" name="heart-dislike"></ion-icon></ion-button>
+              </ion-list>
+
+
+            </ion-col >
+            <ion-col size="2" class="ion-align-self-center"  >
+              <a routerLink="/detalle-tarea" (click)="infoTarea(item)">
+             <ion-icon name="arrow-forward"></ion-icon>
+            </a>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+
+    </ion-card>
+
+
+
+    </div>
+
+    <!-- CUESTIONARIOS -->
+
+    <div *ngSwitchCase="'second'">
+      <ion-card>
+
+        <ion-grid>
+           <ion-row>
+            <ion-col class="ion-align-self-center">
+              <img src="/assets/icon/pdf.png" alt="file.png">
+            </ion-col>
+            <ion-col size="8"  class="ion-text-center">
+              <b>Ejercicios de Programacion</b>
+              <ion-list>
+                <ion-button color="light" size="small"><ion-icon name="download"></ion-icon></ion-button>
+                <ion-button color="light"  size="small"><ion-icon  class="heart" name="heart-dislike"></ion-icon></ion-button>
+              </ion-list>
+
+
+            </ion-col >
+            <ion-col size="2" class="ion-align-self-center"  >
+              <a routerLink="/detalle-tarea">
+             <ion-icon name="arrow-forward"></ion-icon>
+            </a>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+    </ion-card>
+
+    </div>
+  </div>
+
+
+</ion-content>

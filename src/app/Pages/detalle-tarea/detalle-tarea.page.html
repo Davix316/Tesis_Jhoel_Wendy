@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>detalle-tarea</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-toolbar>
+    <button slot="end"  (click)="addFavorite()">
+        <ion-icon *ngIf="favoritoAdd===false" class="favoritoFalse" name="heart"></ion-icon>
+        <ion-icon *ngIf="favoritoAdd===true" class="favoritoTrue" name="heart"></ion-icon>
+    </button>
+    <ion-text class="ion-text-center titulo" color="primary">{{tareas.titulo}}</ion-text>
+  </ion-toolbar>
+
+  <ion-label class="ion-text-capitalize"><b>Autor: </b>{{tareas.nameUser}} {{tareas.apellUser}}</ion-label>
+  <br>
+  <!-- <iframe width="300" height="315" [src]="fileUrl" frameborder="0" allowfullscreen></iframe> -->
+
+
+  <ion-button href="{{tareas.file}}" target="_blank" style="text-decoration:none;">
+    Descargar archivo</ion-button>
+
+  <!-- <ion-button (click)="download()">Descargar Archivo</ion-button> -->
+
+  <p>{{tareas.descripcion}} </p>
+  <ion-segment>
+    <ion-chip>
+      <ion-icon name="thumbs-up-outline"></ion-icon>
+      <ion-label>78</ion-label>
+    </ion-chip>
+
+    <ion-chip>
+      <ion-icon name="chatbubble-outline"></ion-icon>
+      <ion-label>78</ion-label>
+    </ion-chip>
+
+
+    <ion-chip>
+
+      <ion-icon name="heart-outline" (click)="addFavorite()"></ion-icon>
+    </ion-chip>
+
+  </ion-segment>
+  <hr>
+
+  <app-comentarios></app-comentarios>
+
+    <div class="spacing"></div>
+
+
+
+
+
+</ion-content>

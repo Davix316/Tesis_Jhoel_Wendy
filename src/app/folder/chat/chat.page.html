@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Chat</ion-title>
+
+    <!-- Hamburger -->
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div lines="none" class="app-list"  >
+
+
+<ion-card *ngFor="let chat of chatList" (click)="showConversationPage()">
+  <ion-item >
+    <ion-avatar slot="start">
+      <img [src]="chat.user.avatar">
+    </ion-avatar>
+    <ion-label>
+      <h2>{{ chat.user.name }}</h2>
+      <p>{{ chat.message.snippet }}</p>
+      <p item-end class="text-ellipsis">{{ chat.message.created }}</p>
+    </ion-label>
+  </ion-item>
+
+</ion-card>
+  </div>
+
+
+
+</ion-content>

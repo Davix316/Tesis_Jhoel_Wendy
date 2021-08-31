@@ -1,0 +1,53 @@
+ion-content{
+  --background: url('/assets/background/chat.png') no-repeat center center / cover;
+
+}
+ion-toolbar{
+  --color:#115571;
+}
+
+.chat-bubble {
+  width: auto;
+  max-width: 75%;
+  min-width: 25%;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin: 10px;
+  display: block;
+  clear: both;
+  position: relative;
+  margin-bottom: 0;
+
+  &.received {
+      background: #ffffff;
+      float: left;
+  }
+
+  &.send {
+      background: #115571;
+      float: right;
+      text-align: right;
+      color: #fff;
+  }
+
+  .mesage {
+      margin: 0;
+      margin-bottom: 4px;
+      //font-weight: 400;
+      font-size: 12px;
+  }
+
+  p {
+      margin: 0;
+      font-size: 10px;
+      opacity: .4;
+  }
+
+
+}
+
+.chat-container {
+    height: calc(100% - 60px);
+    overflow: scroll
+}
+

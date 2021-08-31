@@ -1,16 +1,29 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { CheckloginGuard } from './shared/guards/checklogin.guard';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'folder/Inbox',
-    pathMatch: 'full'
+    path: 'login',
+    loadChildren:()=>import('./Pages/auth/login/login.module').then(m=>m.LoginPageModule)
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  }
+    path: 'register', loadChildren:()=>import('./Pages/auth/register/register.module').then(m=>m.RegisterPageModule)
+  },
+  {path:'', redirectTo:'login', pathMatch:'full'},
+  /* {
+    path: 'menu',
+    redirectTo: 'news'
+  }, */
+  {
+    path: '',
+    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule),  canActivate: [CheckloginGuard]
+  },
+  {
+    path: 'reset-password',
+    loadChildren: () => import('./Pages/auth/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+  },
+
 ];
 
 @NgModule({

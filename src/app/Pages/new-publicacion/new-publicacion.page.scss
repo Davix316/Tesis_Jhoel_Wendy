@@ -1,0 +1,22 @@
+ion-content{
+  --background: #115571;
+}
+
+ion-button{
+  --background: #115571;
+  color: white;
+}
+
+ion-button .hover{
+  --background:white ;
+  color: #115571;
+}
+
+ion-input{
+  --font-weight: bold;
+  --text-transform: capitalize;
+}
+
+ion-textarea{
+--height: 150px;
+}

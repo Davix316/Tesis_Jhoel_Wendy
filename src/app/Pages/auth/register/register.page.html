@@ -1,0 +1,150 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Materia Name</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="myFormUser" (ngSubmit)="register(myFormUser.value)">
+    <ion-card>
+      <ion-card-content>
+        <ion-item lines="full">
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input type="text" class="" required formControlName="nombre"></ion-input>
+        </ion-item>
+
+
+        <ion-item lines="full">
+          <ion-label position="floating">Apellido</ion-label>
+          <ion-input type="text" required formControlName="apellido"></ion-input>
+        </ion-item>
+
+
+        <ion-item lines="full">
+          <ion-label position="floating">teléfono</ion-label>
+          <ion-input type="number" required formControlName="telefono"></ion-input>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-content>
+
+        <ion-item lines="full">
+          <ion-label position="floating">Numero Unico</ion-label>
+          <ion-input type="number" required placeholder="Num unico EPN" formControlName="numUnico"></ion-input>
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-label position="floating">Carrera</ion-label>
+          <ion-select ok-text="Ok" cancel-text="Cancelar" formControlName="carreraId">
+            <div *ngFor="let item of listacarrera">
+              <ion-select-option value={{item.id}}>{{item.nombre}}</ion-select-option>
+            </div>
+          </ion-select>
+        </ion-item>
+
+        <ion-item lines="full">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" required formControlName="email"></ion-input>
+
+        </ion-item>
+
+        <small class="alert-danger" *ngIf="emailF.invalid && (emailF.dirty || emailF.touched)">
+          <div class="div container-error-message" *ngIf="emailF.errors.required">
+            Email es requerido
+          </div>
+          <div class="div container-error-message" *ngIf="emailF.errors.pattern">
+            Ingrese un email EPN valido.
+          </div>
+        </small>
+      </ion-card-content>
+    </ion-card>
+
+
+    <ion-card>
+      <ion-card-content>
+        <ion-item lines="full">
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password" required formControlName="password"></ion-input>
+        </ion-item>
+
+        <small class="alert-danger" *ngIf="passwordF.invalid && (passwordF.dirty || passwordF.touched)">
+          <div class="div container-error-message" *ngIf="passwordF.errors.required">
+            El password es requerido
+          </div>
+          <div class="div container-error-message" *ngIf="passwordF.errors?.minlength">
+            El password debe tener una longitud de 6 caracteres
+          </div>
+        </small>
+
+
+        <ion-item lines="full">
+          <ion-label position="floating">Semestre referencial</ion-label>
+          <ion-select required formControlName="semestreRef">
+            <ion-select-option value="1">1ro</ion-select-option>
+            <ion-select-option value="2">2do</ion-select-option>
+            <ion-select-option value="3">3ro</ion-select-option>
+            <ion-select-option value="4">4to</ion-select-option>
+            <ion-select-option value="5">5to</ion-select-option>
+            <ion-select-option value="graduado">Graduado</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <div class="mb-3">
+            <label for="formFileSm" >Foto</label>
+            <input class=" form-control-sm" id="formFileSm" accept=".png, .jpg, .jpeg"
+              type="file" (change)="onUpload($event)"  formControlName="foto">
+             <!--  Spinner progreso animada -->
+             <div class="spinner-border" role="status" *ngIf="progreso===true">
+              <span class="visually-hidden" >Loading...</span>
+            </div>
+            <!--  <br>
+              <div class="progress">
+                <div [style.visibility]="(porcentajesubida) ? 'hidden' : 'visible'" class="progress-bar progress-bar-striped progress-bar-animated  bg-success" role="progressbar"
+                [style.with]="(porcentajesubida | async) +'%'"></div>
+              </div>
+ -->
+              <!-- input invisible que recupera la url de la img en storage -->
+            <input #imageUrlUser  type="hidden"  [value]="urlImage |async" >
+
+          </div>
+        </ion-item>
+        <ion-row>
+          <ion-col>
+            <ion-button  *ngIf="urlImage |async; else botondisable" type="submit" expand="block">Enviar</ion-button>
+          </ion-col>
+
+        </ion-row>
+
+        <ng-template #botondisable >
+          <ion-row>
+            <ion-col>
+              <ion-button  disabled=true type="submit" expand="block">Enviar</ion-button>
+            </ion-col>
+          </ion-row>
+        </ng-template>
+
+
+        <div class="ion-text-center">
+          <a routerLink="/login">Iniciar sesión!</a>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+  </form>
+
+
+
+</ion-content>
+

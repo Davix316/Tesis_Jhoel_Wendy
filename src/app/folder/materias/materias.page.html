@@ -1,0 +1,201 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-title>Materias</ion-title>
+
+    <!-- Hamburger -->
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar animated (ionChange)="buscar($event)"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Filtro semestres -->
+  <ion-label color="light">Filtrar por Semestres</ion-label>
+  <ion-segment [(ngModel)]="segment" scrollable>
+    <ion-segment-button value=1>
+      <i class="fas fa-dice-one"></i>
+    </ion-segment-button>
+    <ion-segment-button value=2>
+      <i class="fas fa-dice-two"></i>
+    </ion-segment-button>
+    <ion-segment-button value=3>
+      <i class="fas fa-dice-three"></i>
+    </ion-segment-button>
+    <ion-segment-button value=4>
+      <i class="fas fa-dice-four"></i>
+    </ion-segment-button>
+    <ion-segment-button value=5>
+      <i class="fas fa-dice-five"></i>
+    </ion-segment-button>
+  </ion-segment>
+
+
+
+
+  <div [ngSwitch]="segment">
+    <!-- listar  todas materias -->
+
+    <ion-grid *ngSwitchCase=0>
+      <ion-row>
+        <ion-col *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index" (click)="detalleMateria(item)">
+          <ion-card>
+            <ion-card-content>
+              <ion-badge class="ion-text-start" color="warning">{{i+1}}</ion-badge>
+              <div class="ion-text-center">
+                <ion-avatar>
+                  <img src="/assets/img/logo.png">
+                </ion-avatar>
+                <p class="ion-text-capitalize">{{item.nombre}}</p>
+                <small>Nivel: {{item.nivel}}</small>
+              </div>
+            </ion-card-content>
+          </ion-card>
+
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+    <div *ngSwitchCase=1>
+      <ion-grid>
+      <ion-row>
+        <ng-container *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index">
+
+        <ion-col *ngIf="item.nivel==1">
+
+            <ion-card  (click)="detalleMateria(item)">
+              <ion-card-content >
+                <ion-badge class="ion-text-start" color="warning">{{i+1}}</ion-badge>
+                <div class="ion-text-center">
+                  <ion-avatar>
+                    <img src="/assets/img/logo.png">
+                  </ion-avatar>
+                  <p class="ion-text-capitalize" >{{item.nombre}}</p>
+                  <small>Nivel: {{item.nivel}}</small>
+                </div>
+              </ion-card-content>
+            </ion-card>
+
+
+
+        </ion-col>
+      </ng-container>
+      </ion-row>
+    </ion-grid>
+    </div>
+
+
+    <div *ngSwitchCase=2>
+      <ion-grid>
+      <ion-row>
+        <ng-container  *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index" >
+        <ion-col *ngIf="item.nivel==2">
+
+            <ion-card (click)="detalleMateria(item)">
+              <ion-card-content  >
+                <ion-badge class="ion-text-start" color="warning">{{i+1}}</ion-badge>
+                <div class="ion-text-center">
+                  <ion-avatar>
+                    <img src="/assets/img/logo.png">
+                  </ion-avatar>
+                  <p class="ion-text-capitalize">{{item.nombre}}</p>
+                  <small>Nivel: {{item.nivel}}</small>
+                </div>
+              </ion-card-content>
+            </ion-card>
+        </ion-col>
+      </ng-container>
+      </ion-row>
+    </ion-grid>
+    </div>
+
+    <div *ngSwitchCase=3>
+      <ion-grid>
+      <ion-row>
+        <ng-container *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index" >
+        <ion-col  *ngIf="item.nivel==3">
+
+            <ion-card (click)="detalleMateria(item)" >
+              <ion-card-content >
+                <ion-badge class="ion-text-start" color="warning">{{i+1}}</ion-badge>
+                <div class="ion-text-center">
+                  <ion-avatar>
+                    <img src="/assets/img/logo.png">
+                  </ion-avatar>
+                  <p class="ion-text-capitalize">{{item.nombre}}</p>
+                  <small>Nivel: {{item.nivel}}</small>
+                </div>
+              </ion-card-content>
+            </ion-card>
+
+
+
+        </ion-col>
+      </ng-container>
+      </ion-row>
+    </ion-grid>
+    </div>
+
+
+    <div *ngSwitchCase=4>
+      <ion-grid>
+      <ion-row>
+        <ng-container *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index"  >
+        <ion-col *ngIf="item.nivel==4" >
+
+            <ion-card (click)="detalleMateria(item)">
+              <ion-card-content >
+                <ion-badge class="ion-text-start" color="warning">{{i+1}}</ion-badge>
+                <div class="ion-text-center">
+                  <ion-avatar>
+                    <img src="/assets/img/logo.png">
+                  </ion-avatar>
+                  <p class="ion-text-capitalize">{{item.nombre}}</p>
+                  <small>Nivel: {{item.nivel}}</small>
+                </div>
+              </ion-card-content>
+            </ion-card>
+
+
+
+        </ion-col>
+      </ng-container>
+      </ion-row>
+    </ion-grid>
+    </div>
+
+
+    <div *ngSwitchCase=5>
+      <ion-grid>
+      <ion-row>
+        <ng-container  *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index">
+        <ion-col size="6" *ngIf="item.nivel==5" >
+            <ion-card  (click)="detalleMateria(item)" >
+              <ion-card-content >
+                <ion-badge class="ion-text-start" color="warning">{{i+1}}</ion-badge>
+                <div class="ion-text-center">
+                  <ion-avatar>
+                    <img src="/assets/img/logo.png">
+                  </ion-avatar>
+                  <p class="ion-text-capitalize" >{{item.nombre}}</p>
+                  <small>Nivel: {{item.nivel}}</small>
+                </div>
+              </ion-card-content>
+
+            </ion-card>
+
+        </ion-col>
+        </ng-container>
+      </ion-row>
+    </ion-grid>
+    </div>
+
+  </div>
+
+
+</ion-content>
