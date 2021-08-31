@@ -29,6 +29,11 @@ export class ListStudentComponent implements OnInit {
     this.router.navigate(['detailsStudent'], this.navigationExtras);
   }
 
+  onGoToAdmin(item: any): void {
+    this.navigationExtras.state.value = item;
+    this.router.navigate(['edit'], this.navigationExtras);
+  }
+
   onGoToNew(){
     this.router.navigate(['newStudent']);
   }
@@ -42,6 +47,8 @@ export class ListStudentComponent implements OnInit {
     this.router.navigate(['blockStudent'], this.navigationExtras);  }
 
   async onGoToDelete(studentId: string): Promise<void> {
+    const confirmacion = confirm('Esta seguro que desea eliminar el estudiante');
+    if (confirmacion) {
     try {
       await this.adminsSvc.onDeleteStudents(studentId);
       alert('Deleted');
@@ -49,4 +56,5 @@ export class ListStudentComponent implements OnInit {
       console.log(err);
     }
   }
+}
 }

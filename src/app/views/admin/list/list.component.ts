@@ -7,7 +7,7 @@ import { NavigationExtras, Router } from '@angular/router';
   templateUrl: './list.component.html'
 })
 export class ListComponent implements OnInit {
-  
+
   Usuarios$ = this.adminsSvc.admins;
   navigationExtras: NavigationExtras = {
     state: {
@@ -32,16 +32,19 @@ export class ListComponent implements OnInit {
     this.router.navigate(['details'], this.navigationExtras);
   }
 
-  onGoToNew(){
+  onGoToNew() {
     this.router.navigate(['newAdmin']);
   }
 
   async onGoToDelete(adminId: string): Promise<void> {
-    try {
-      await this.adminsSvc.onDeleteAdmins(adminId);
-      alert('Deleted');
-    } catch (err) {
-      console.log(err);
+    const confirmacion = confirm('Esta seguro que desea eliminar al administrador');
+    if (confirmacion) {
+      try {
+        await this.adminsSvc.onDeleteAdmins(adminId);
+        alert('Administrador Eliminado');
+      } catch (err) {
+        console.log(err);
+      }
     }
   }
 }

@@ -6,6 +6,7 @@ import { Admin } from '../../models/admin.interface';
 import {AngularFireStorage} from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { FirebaseauthService } from '../../../views/services/firebaseauth.service';
 
 @Component({
   selector: 'app-admin-form',
@@ -27,6 +28,7 @@ export class AdminFormComponent implements OnInit {
     private fb: FormBuilder, 
     private adminsSvc: ThemeService, 
     private storage: AngularFireStorage,
+    private serviceAuth : FirebaseauthService, 
     ) {
     const navigation = this.router.getCurrentNavigation();
     this.admin = navigation?.extras?.state?.value;
@@ -53,7 +55,8 @@ export class AdminFormComponent implements OnInit {
    onSave(adm): void {
 
     if (this.adminForm.valid) {
-      console.log("valido")
+      adm.rol = "Administrador";
+      console.log("valido");
       const admin = this.adminForm.value;
       const adminId = this.admin?.id || null;
       adm.foto=this.inputFoto.nativeElement.value;
@@ -62,6 +65,7 @@ export class AdminFormComponent implements OnInit {
       this.router.navigate(['list']);
     }else{
       console.log("no valido")
+      console.log(this.adminForm.value)
     }
   }
 
@@ -81,7 +85,8 @@ export class AdminFormComponent implements OnInit {
       apellido: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
       password: ['', [Validators.required, Validators.minLength(5)]],
-      carrera: ['', [Validators.required]],
+      carreraNombre: ['', [Validators.required]],
+      carreraId: [''],
       numUnico: ['', [Validators.required]],
       semestreRef: ['', [Validators.required]],
       telefono: ['', [Validators.required]],

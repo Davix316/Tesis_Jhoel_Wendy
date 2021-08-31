@@ -29,6 +29,8 @@ export class ListStudentBlockComponent implements OnInit {
   }
 
   async onGoToDelete(studentId: string): Promise<void> {
+    const confirmacion = confirm('Esta seguro que desea eliminar de bloqueados');
+    if (confirmacion) {
     try {
       await this.adminsSvc.onDeleteStudentsBlock(studentId);
       alert('Deleted');
@@ -36,4 +38,5 @@ export class ListStudentBlockComponent implements OnInit {
       console.log(err);
     }
   }
+}
 }

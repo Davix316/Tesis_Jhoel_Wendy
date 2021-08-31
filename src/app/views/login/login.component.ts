@@ -18,7 +18,9 @@ export class LoginComponent implements OnInit {
     passwordF: new FormControl('',[Validators.required])
   });
 
-  constructor(private serviceAuth : FirebaseauthService, private fb:FormBuilder,
+  constructor(
+    private serviceAuth : FirebaseauthService, 
+    private fb:FormBuilder,
     private router:Router) {
       this.initForm();
      }

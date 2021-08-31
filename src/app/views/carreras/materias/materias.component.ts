@@ -46,7 +46,7 @@ export class MateriasComponent implements OnInit {
     apellido: '',
     telefono: '',
     numUnico: '',
-    carrera: '',
+    carreraNombre: '',
     email: '',
     password: '',
     semestreRef: '',

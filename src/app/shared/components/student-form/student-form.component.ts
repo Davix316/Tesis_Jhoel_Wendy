@@ -82,7 +82,7 @@ export class StudentFormComponent implements OnInit {
       apellido: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
       password: ['', [Validators.required, Validators.minLength(5)]],
-      carrera: ['', [Validators.required]],
+      carreraNombre: ['', [Validators.required]],
       numUnico: ['', [Validators.required]],
       semestreRef: ['', [Validators.required]],
       telefono: ['', [Validators.required]],

@@ -51,6 +51,10 @@ export class RedesComponent implements OnInit {
   }
 
   async onGoToDelete(materiaId: string): Promise<void> {
+
+    const confirmacion = confirm('Esta seguro que desea eliminar la materia');
+
+    if (confirmacion) {
     try {
       await this.materiaSvc.onDeleteMaterias(materiaId);
       alert('La materia se elimino con exito');
@@ -58,6 +62,7 @@ export class RedesComponent implements OnInit {
       console.log(err);
     }
   }
+}
 
 
   onSave(): void {

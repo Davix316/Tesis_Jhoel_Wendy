@@ -79,22 +79,24 @@
     <!-- breaking change 'cui-breadcrumb' -->
     
     <div class="row" >
-      <div class="col-md-7" style="padding-right: 0px;">
+      <div class="col-md-8" style="padding-right: 0px;">
         <cui-breadcrumb>
           <!-- Breadcrumb Menu-->
         </cui-breadcrumb>
       </div>
-      <div class="col-md-3" style="background-color: #2f353a; max-height: 45px; text-align: center; color: white;">
+      <div class="col-md-4" style="background-color: #2f353a; max-height: 45px; text-align: center; color: white;">
         <h5>{{admin.email}}</h5>
-      </div>
-      <div class="col-md-2"  style="padding-right: 0px; padding-left: 0px;">
-       <button (click)="salir()" type="button" class="btn btn-warning" style="height: 45px; color: white;"><h5>Cerrar Sesión <i class="cil-account-logout"></i></h5></button>
       </div>
     </div>
     <div class="container-fluid">
       <router-outlet></router-outlet>
     </div><!-- /.container-fluid -->
   </main>
+  <app-aside [fixed]="false" [display]="true" [ngClass]="'test'">
+    <div class="col-md-12"  style="padding-right: 0px; padding-left: 0px;">
+      <button (click)="salir()" type="button" class="btn btn-warning" style="height: 45px; color: white;"><h5>Cerrar Sesión <i class="cil-account-logout"></i></h5></button>
+     </div>  
+    </app-aside>
 </div>
 <app-footer>
   <span><a href="https://www.epn.edu.ec/" target="_blank">Escuela Politécnica Nacional</a> &copy; 2021</span>

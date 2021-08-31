@@ -51,12 +51,17 @@ export class ElectromecanicaComponent implements OnInit {
   }
 
   async onGoToDelete(materiaId: string): Promise<void> {
+
+    const confirmacion = confirm('Esta seguro que desea eliminar la materia');
+
+    if (confirmacion) {
     try {
       await this.materiaSvc.onDeleteMaterias(materiaId);
       alert('La materia se elimino con exito');
     } catch (err) {
       console.log(err);
     }
+  }
   }
 
 

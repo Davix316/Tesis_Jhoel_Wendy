@@ -64,14 +64,14 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label>Carrera: </label>
-                  <select id="carrera" class="form-control" formControlName="carrera" [class]="isValidField('carrera')">
+                  <select id="carreraNombre" class="form-control" formControlName="carreraNombre" [class]="isValidField('carreraNombre')">
                     <option select value="TSASA">TSASA - Agua y Saneamiento Ambiental</option>
                     <option value="TSDS">TSDS - Desarrollo de Software</option>
                     <option value="TSRT">TSRT - Redes y Telecomunicaciones</option>
                     <option value="TSEM">TSEM - Electromecánica</option>
                   </select>
                   <div class="invalid-feedback">
-                    <span *ngIf="adminForm.get('carrera').errors?.required">
+                    <span *ngIf="adminForm.get('carreraNombre').errors?.required">
                       Este campo es requerido.
                     </span>
                   </div>
@@ -140,8 +140,8 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label>El rol sera: </label>
-                  <input type="text" class="form-control" placeholder="Administrador" formControlName="rol"
-                   value="Administrador" disabled>
+                  <input type="text" class="form-control" placeholder="Administrador"
+                   value="Administrador" disabled>´
                 </div>
               </div>
 
@@ -149,7 +149,7 @@
             </div>
           </div>
          
-          <button type="submit" class="btn bg-success btn-block text-light">Guardar</button>
+          <button type="submit" class="btn bg-success btn-block text-light" style="width: 50%; margin: auto;">Guardar Administrador</button>
         </form>
         <button type="button" class="btn btn-primary mt-2" (click)="onGoBackToList()">Regresar a la lista</button>
 

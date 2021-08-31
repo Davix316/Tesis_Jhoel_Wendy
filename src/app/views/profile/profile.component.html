@@ -6,10 +6,15 @@
       </div>
       <div class="card-body">
 
-        <form class="mt-3 col-md-12" (ngSubmit)="onSave(adminForm)" [formGroup]="adminForm">
+        <form class="mt-3 col-md-12" (ngSubmit)="onSave(adminForm.value)" [formGroup]="adminForm">
           <div class="row">
             <div class="col-md-3">
-                  <input type="file" class="form-control" value="{{admin.foto}}"  formControlName="foto">
+              <img [src]="fotoUser" alt="Suba una foto" width="100%">
+                  <input type="file" class="form-control" formControlName="foto"  placeholder="Suba una foto">
+                  <div class="spinner-border" role="status" *ngIf="progreso==true">
+                    <span class="visually-hidden" >Cargando...</span>
+                  </div>
+                  <input #FotoUrlUser  type="text" [value]="urlFoto |async" >
                   <br>
                   <button class="btn-danger"><i class="cil-trash"></i> Eliminar</button>
             </div>
@@ -18,7 +23,7 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label>Nombres: </label>
-                  <input type="text" class="form-control" formControlName="nombre">                
+                  <input type="text" class="form-control" formControlName="nombre" placeholder="{{admin.nombre}}">                
                 </div>
                 <div class="form-group col-md-6">
                   <label>Apellidos: </label>
@@ -63,8 +68,8 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label>Carrera: </label>
-                  <select class="form-control" formControlName="carrera">
-                    <option select>{{admin.carrera}}</option>
+                  <select class="form-control" formControlName="carreraNombre">
+                    <option select>{{admin.carreraNombre}}</option>
                     <option value="TSASA">TSASA - Agua y Saneamiento Ambiental</option>
                     <option value="TSDS">TSDS - Desarrollo de Software</option>
                     <option value="TSRT">TSRT - Redes y Telecomunicaciones</option>

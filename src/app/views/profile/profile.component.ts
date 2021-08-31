@@ -1,11 +1,13 @@
 import { Router, NavigationExtras } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FirebaseauthService } from '../services/firebaseauth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Admin } from '../../shared/models/admin.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ThemeService } from '../../../app/views/services/theme.service';
-
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
+import {AngularFireStorage} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-profile',
@@ -17,6 +19,8 @@ export class ProfileComponent implements OnInit{
   admin1: Admin;
   adminForm: FormGroup;
   private isEmail = /\S+@\S+\.\S+/;
+  fotoUser='';
+  fotopath='';
 
   email: string;
   userLogIn: any;
@@ -26,7 +30,7 @@ export class ProfileComponent implements OnInit{
   apellido: '',
   telefono: '',
   numUnico: '',
-  carrera: '',
+  carreraNombre: '',
   email: '',
   password: '',
   semestreRef: '',
@@ -40,15 +44,24 @@ export class ProfileComponent implements OnInit{
     private fb: FormBuilder, 
     private router:Router,
     private adminsSvc: ThemeService, 
+    private storage: AngularFireStorage,
     ) {
       this.initForm();
      }
+
+  @ViewChild('FotoUrlUser') inputFoto: ElementRef;
+  progreso=false;
+  porcentaje=0;
+  porcentajesubida: Observable<number>;
+  urlFoto: Observable<string>;
+
 
      ngOnInit() {
 
       this.serviceAuth.getCurrentUser().subscribe(user => {
         this.email = user.email;
         this.getAdmin();
+      this.fotoUser = this.admin.foto;
       })
     }
 
@@ -63,7 +76,7 @@ export class ProfileComponent implements OnInit{
             this.admin.apellido=this.userLogIn.apellido;
             this.admin.telefono=this.userLogIn.telefono;
             this.admin.numUnico=this.userLogIn.numUnico;
-            this.admin.carrera=this.userLogIn.carrera;
+            this.admin.carreraNombre=this.userLogIn.carrera;
             this.admin.email=this.userLogIn.email;
             this.admin.password=this.userLogIn.password;
             this.admin.semestreRef=this.userLogIn.semestreRef;
@@ -78,16 +91,20 @@ export class ProfileComponent implements OnInit{
       });
     }
 
-    onSave(adminForm): void {
+    onSave(adm): void {
 
-      console.log(adminForm.value);
+      console.log(this.adminForm.value);
 
-      if (adminForm.valid) {
+      if (this.adminForm.valid) {
+        adm.rol = "Administrador";
         console.log("valido")
         const admin1 = this.adminForm.value;
-        const adminId = this.admin.id || null;
-        const adminEmail = this.admin.email || null;
-        this.adminsSvc.onSaveAdmin2(admin1, adminId, adminEmail);
+        const adminId = this.admin?.id || null;
+        adm.foto=this.inputFoto.nativeElement.value;
+        const adminEmail = this.admin?.email || null;
+        this.adminsSvc.onSaveAdmin2(admin1, adminId, adminEmail, adm.foto);
+        this.router.navigate(['perfil']);
+      
       }else{
         console.log("no valido")
       }
@@ -98,9 +115,8 @@ export class ProfileComponent implements OnInit{
       this.adminForm = this.fb.group({
         nombre: [''],
         apellido: [''],
-        email: ['', [Validators.pattern(this.isEmail)]],
         password: ['', [Validators.minLength(5)]],
-        carrera: [''],
+        carreraNombre: [''],
         numUnico: [''],
         semestreRef: [''],
         telefono: [''],
@@ -108,4 +124,24 @@ export class ProfileComponent implements OnInit{
         foto: '',
       });
     }
-};
+
+    uploadFoto(foto){
+      //generar id Aleatorio para el archivo
+      const id= Math.random().toString(36).substring(2);
+      const file=foto.target.files[0];
+      this.fotopath='Perfil/'+ 'user_'+id;
+      const ref=this.storage.ref(this.fotopath);
+      const tarea= this.storage.upload(this.fotopath,file);
+      this.porcentajesubida= tarea.percentageChanges();
+      
+      tarea.snapshotChanges().pipe(finalize(()=>this.urlFoto=ref.getDownloadURL())).subscribe();
+      this.progreso=true;
+      //Cambia el porcentaje
+      tarea.percentageChanges().subscribe((porcentaje) => {
+        this.porcentaje = Math.round(porcentaje);
+        if (this.porcentaje === 100) {
+          this.progreso = false;
+        }
+      });
+      }
+}

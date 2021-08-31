@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { Materia } from '../../shared/models/materia.interface';
 import { Publicacion } from '../../shared/models/publicacion.interface';
 import { Bloqueo } from '../../shared/models/block.interface';
+import { FirebaseauthService } from '../../../app/views/services/firebaseauth.service';
 
 
 @Injectable({
@@ -43,7 +44,8 @@ export class ThemeService {
     private readonly afs: AngularFirestore, 
     private afAuth: AngularFireAuth, 
     private storage: AngularFireStorage, 
-    public router: Router
+    public router: Router,
+    private serviceAuth : FirebaseauthService, 
     ) {
     this.adminsCollection = afs.collection<Admin>('Administradores');
     this.studentsCollection = afs.collection<Admin>('Usuarios');
@@ -146,22 +148,26 @@ export class ThemeService {
         const data = { id, foto, ...admin };
         const result = await this.adminsCollection.doc(id).set(data);
         resolve(result);
-        window.alert('Administrador registrado');        
+        window.alert('Administrador registrado');  
+        const user = this.serviceAuth.login("super.admin@epn.edu.ec","appAdmin123")
+
       } catch (err) {
         reject(err.message);
       }
     });
   }
 
-  onSaveAdmin2(admin1: Admin, adminId: string, email: string): Promise<void> {
+  onSaveAdmin2(admin1: Admin, adminId: string, email: string, foto:string): Promise<void> {
 
     return new Promise(async (resolve, reject) => {
       try {
+        this.afAuth.createUserWithEmailAndPassword(admin1.email, admin1.password);
         const id = adminId || this.afs.createId();
-        const data = { id, email, ...admin1 };
+        const data = { id, email, foto, ...admin1 };
         const result = await this.adminsCollection.doc(id).set(data);
         resolve(result);
-        window.alert('Administrador registrado');
+        window.alert('Información guardada con exito');
+        console.log("registro: ", admin1)
       } catch (err) {
         reject(err.message);
       }

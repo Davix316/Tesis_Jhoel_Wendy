@@ -3,7 +3,8 @@ export interface Admin {
     nombre: string;
     apellido: string;
     numUnico: string;
-    carrera?: string;
+    carreraId?: string;
+    carreraNombre?: string;
     semestreRef?: string;
     email: string;
     password: string;

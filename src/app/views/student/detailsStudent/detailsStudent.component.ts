@@ -34,6 +34,10 @@ export class DetailsStudentComponent implements OnInit {
   }
 
   async onGoToDelete(): Promise<void> {
+
+    const confirmacion = confirm('Esta seguro que desea eliminar el estudiante');
+
+    if (confirmacion) {
     try {
       await this.adminsSvc.onDeleteStudents(this.student?.id);
       alert('Deleted');
@@ -41,6 +45,7 @@ export class DetailsStudentComponent implements OnInit {
     } catch (err) {
       console.log(err);
     }
+  }
   }
 
   onGoBackToList(): void {

@@ -23,7 +23,7 @@ export class CheckloginGuard2 implements CanActivate, OnInit {
   apellido: '',
   telefono: '',
   numUnico: '',
-  carrera: '',
+  carreraNombre: '',
   email: '',
   password: '',
   semestreRef: '',
@@ -64,7 +64,7 @@ export class CheckloginGuard2 implements CanActivate, OnInit {
           this.admin.apellido=this.userLogIn.apellido;
           this.admin.telefono=this.userLogIn.telefono;
           this.admin.numUnico=this.userLogIn.numUnico;
-          this.admin.carrera=this.userLogIn.carrera;
+          this.admin.carreraNombre=this.userLogIn.carrera;
           this.admin.email=this.userLogIn.email;
           this.admin.password=this.userLogIn.password;
           this.admin.semestreRef=this.userLogIn.semestreRef;
