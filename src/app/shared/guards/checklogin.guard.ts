@@ -1,15 +1,31 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CheckloginGuard implements CanActivate {
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return true;
+  constructor(private fAuth: AngularFireAuth, public router: Router){
+
   }
+  canActivate(): Observable<boolean>{
+    return this.fAuth.authState.pipe(
+      map(auth=> {
+        if(!auth){
+          this.router.navigate(['/login']);
+          console.log('autenticado:', false);
+        return false;
+        }
+        else{
+          console.log('autenticado:', true);
+          return true;
+
+        }
+      })
+    );
+}
 
 }

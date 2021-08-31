@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: 'register', loadChildren:()=>import('./Pages/auth/register/register.module').then(m=>m.RegisterPageModule)
   },
-  {path:'', redirectTo:'login', pathMatch:'full'},
+  {path:'', redirectTo:'menu/home', pathMatch:'full'},
   /* {
     path: 'menu',
     redirectTo: 'news'
