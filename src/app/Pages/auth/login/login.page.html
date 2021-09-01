@@ -32,9 +32,20 @@
         </ion-item>
 
         <ion-item lines="full">
-          <ion-label position="floating">Password</ion-label>
-          <ion-input type="password" formControlName="passwordF" required></ion-input>
+
+            <ion-label position="floating">Password</ion-label>
+          <ion-input #input type="password" formControlName="passwordF" required></ion-input>
+
+          <ion-note slot="end">
+            <a (click)="mostrarContrasena(input)" name="password-checked">
+            <ion-icon [hidden]="!show" name="eye-outline"></ion-icon>
+            <ion-icon [hidden]="show" name="eye-off-outline"></ion-icon>
+            </a>
+        </ion-note>
         </ion-item>
+
+
+
         <ion-row>
           <ion-col>
             <ion-button type="submit"  expand="block" class="boton">Ingresar

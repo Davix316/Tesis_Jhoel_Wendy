@@ -86,13 +86,22 @@
           <ion-label>Semestre</ion-label>
           <ion-note slot="end">{{user.semestreRef}}</ion-note>
         </ion-item>
-        <ion-item>
-          <ion-label>Password</ion-label>
-          <ion-note slot="end" type="password">{{user.password}}</ion-note>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
 
+        <ion-item>
+          <ion-label >Clave</ion-label>
+          <a (click)="mostrarContrasena(input)" name="password-checked">
+            <ion-icon [hidden]="!show" name="eye-outline"></ion-icon>
+            <ion-icon [hidden]="show" name="eye-off-outline"></ion-icon>
+            </a>
+        </ion-item>
+        <ion-input disabled=true #input slot="end"  type="password" value="{{user.password}}"></ion-input>
+
+
+
+
+      </ion-card-content>
+
+    </ion-card>
 
 
 </ion-content>

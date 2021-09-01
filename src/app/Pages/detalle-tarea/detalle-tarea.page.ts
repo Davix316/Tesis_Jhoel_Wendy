@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -8,6 +9,8 @@ import { Platform } from '@ionic/angular';
 import { FavoritosInterface } from 'src/app/shared/favoritos';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { FireauthService } from 'src/app/services/fireauth.service';
+import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
+
 
 @Component({
   selector: 'app-detalle-tarea',
@@ -43,6 +46,7 @@ export class DetalleTareaPage implements OnInit {
     private platform: Platform,
     private serviceFS: FirestoreService,
     private serviceauth: FireauthService,
+    private previewAnyFile: PreviewAnyFile
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.tareas = navigation?.extras?.state?.value;
@@ -93,41 +97,13 @@ export class DetalleTareaPage implements OnInit {
 
   }
 
+//ABRIR ARCHIVO
+openFile( urlFile: string){
+  this.previewAnyFile.preview(urlFile).then(()=>{
 
-  /* // full example
-  upload() {
-    let options: FileUploadOptions = {
-       fileKey: 'file',
-       fileName: 'name.jpg',
-       headers: {}
-       .....
-    }
-
-    fileTransfer.upload('<file path>', '<api endpoint>', options)
-     .then((data) => {
-       // success
-     }, (err) => {
-       // error
-     })
-  } */
-
-  /* download() {
-    let path = null;
-    if (this.platform.is('ios')) {
-      path = this.file.documentsDirectory;
-    } else {
-      path = this.file.dataDirectory;
-    }
-    ///
-    const fileTransfer = this.transfer.create();
-    const url = 'http://www.africau.edu/images/default/sample.pdf';
-    fileTransfer.download(url, path + 'file.pdf').then((entry) => {
-      console.log('download complete: ' + entry.toURL());
-    }, (error) => {
-      console.log(error);
-
-    });
-  } */
-
+  },(error)=>{
+    alert(JSON.stringify(error));
+  });
+}
 
 }

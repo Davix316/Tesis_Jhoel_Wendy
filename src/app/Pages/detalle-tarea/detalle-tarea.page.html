@@ -22,10 +22,8 @@
   <!-- <iframe width="300" height="315" [src]="fileUrl" frameborder="0" allowfullscreen></iframe> -->
 
 
-  <ion-button href="{{tareas.file}}" target="_blank" style="text-decoration:none;">
-    Descargar archivo</ion-button>
-
-  <!-- <ion-button (click)="download()">Descargar Archivo</ion-button> -->
+  <ion-button  (click)="openFile('{{tareas.file}}')" >
+    Ver archivo</ion-button>
 
   <p>{{tareas.descripcion}} </p>
   <ion-segment>

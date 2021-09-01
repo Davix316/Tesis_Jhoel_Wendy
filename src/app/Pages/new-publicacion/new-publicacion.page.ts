@@ -1,10 +1,13 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable @typescript-eslint/prefer-for-of */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore, fromCollectionRef, fromDocRef } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { FileUploadService } from 'src/app/services/file-upload.service';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { MateriasService } from 'src/app/services/materias.service';
 import { PublicacionService } from 'src/app/services/publicacion.service';
@@ -40,8 +43,9 @@ export class NewPublicacionPage implements OnInit {
     categoria:new FormControl(),
     titulo:new FormControl(),
     descripcion:new FormControl(),
-    file:new FormControl()
+    file:new FormControl(null, Validators.required),
   });
+
 
   constructor(
     private materiasServ: MateriasService,
@@ -49,6 +53,7 @@ export class NewPublicacionPage implements OnInit {
     private serviceauth: FireauthService,
     private publiServ: PublicacionService,
     private storage: AngularFireStorage,
+    private storageService: FileUploadService,
   ) {
 
   }
@@ -143,10 +148,9 @@ console.log(error);
 
 //SUBIR ARCHIVO
 uploadFile(pdf){
-//generar id Aleatorio para el archivo
-const id= Math.random().toString(36).substring(2);
 const file=pdf.target.files[0];
- this.filepath='Archivos/'+ this.nameUser+ '/'+'file_'+id;
+const filename = pdf.target.files[0].name;
+ this.filepath='Archivos/'+ this.nameUser+ '/'+filename;
 const ref=this.storage.ref(this.filepath);
 const tarea= this.storage.upload(this.filepath,file);
 this.porcentajesubida= tarea.percentageChanges();
@@ -163,6 +167,7 @@ tarea.percentageChanges().subscribe((porcentaje) => {
 });
 
 }
+
 
 
 }

@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content>
+
   <div>
     <form [formGroup]="formPublicacion" (ngSubmit)="savePublicacion(formPublicacion.value)">
       <ion-card>
@@ -82,7 +83,7 @@
           <ion-item>
             <div class="mb-3">
               <label for="formFileSm" class="form-label">Suba un Archivo</label>
-              <input class=" form-control-sm" id="formFileSm" accept=".pdf ,.docx ,.xlsx"
+              <input class=" form-control-sm" id="formFileSm" accept=".pdf ,.docx ,.xlsx, .zip"
                 type="file" (change)="uploadFile($event)"  formControlName="file">
                <!--  Spinner progreso animada -->
                <div class="spinner-border" role="status" *ngIf="progreso==true">

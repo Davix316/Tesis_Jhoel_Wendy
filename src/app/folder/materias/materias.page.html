@@ -42,20 +42,30 @@
 
     <ion-grid *ngSwitchCase=0>
       <ion-row>
-        <ion-col *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index" (click)="detalleMateria(item)">
-          <ion-card>
+        <ion-col>
+
+          <ion-card *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index" (click)="detalleMateria(item)">
+            <ion-badge class="ion-text-start" color="warning">{{i+1}}</ion-badge>
             <ion-card-content>
-              <ion-badge class="ion-text-start" color="warning">{{i+1}}</ion-badge>
-              <div class="ion-text-center">
+              <ion-item>
                 <ion-avatar>
                   <img src="/assets/img/logo.png">
                 </ion-avatar>
-                <p class="ion-text-capitalize">{{item.nombre}}</p>
-                <small>Nivel: {{item.nivel}}</small>
-              </div>
+                <ion-label>
+                  <div class="ion-text-center">
+
+                    <p class="ion-text-capitalize">{{item.nombre}}</p>
+                    <small>Nivel: {{item.nivel}}</small>
+                  </div>
+                </ion-label>
+              </ion-item>
+
+
+
+
+
             </ion-card-content>
           </ion-card>
-
         </ion-col>
 
       </ion-row>

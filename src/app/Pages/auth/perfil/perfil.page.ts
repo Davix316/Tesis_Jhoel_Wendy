@@ -1,4 +1,6 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+/* eslint-disable eqeqeq */
+/* eslint-disable @typescript-eslint/member-ordering */
+import { Component, OnInit, Input, Output, ViewChild,ElementRef } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import firebase from 'firebase';
@@ -10,7 +12,10 @@ import { UserInterface} from 'src/app/shared/user';
   templateUrl: './perfil.page.html',
   styleUrls: ['./perfil.page.scss'],
 })
+
 export class PerfilPage implements OnInit {
+
+
 
   usuario: string;
   id: string;
@@ -30,8 +35,13 @@ export class PerfilPage implements OnInit {
   rol: '',
   };
 
+  // VIEW PASSWORD
 
-  constructor(private serviceauth: FireauthService, private firestore: AngularFirestore) { }
+  show: boolean;
+
+  constructor(private serviceauth: FireauthService, private firestore: AngularFirestore) {
+    this.show = false;
+  }
 
   ngOnInit() {
     //ROL DE USUARIO AUTENTICADO
@@ -82,5 +92,21 @@ getuser(){
   });
 
 }
+//VISUALIZAR CONTRASEñA
+mostrarContrasena(input: any){
+  if(input.type == 'password'){
+    input.type = 'text';
+    this.show=true;
+    console.log(this.show);
+
+  }else{
+    input.type = 'password';
+    this.show=false;
+    console.log(this.show);
+
+  }
+}
+
+
 
 }

@@ -14,6 +14,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 //import { FiltroPipe } from './pipes/filtro.pipe';
 /* import { PipesModule } from './pipes/pipes.module';
 import { File } from '@ionic-native/file/ngx';
@@ -36,7 +37,7 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx'; */
     ReactiveFormsModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AngularFirestore,
+    AngularFirestore,PreviewAnyFile
   ],
   bootstrap: [AppComponent],
 })

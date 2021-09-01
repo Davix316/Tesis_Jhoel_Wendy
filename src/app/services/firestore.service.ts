@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { ComentariosInterface } from '../shared/comentarios';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { ComentariosInterface } from '../shared/comentarios';
 })
 export class FirestoreService {
 
-  constructor(private firestore: AngularFirestore) {
+  constructor(private firestore: AngularFirestore, ) {
 
 
   }
@@ -55,5 +56,6 @@ saveDoc(  path: string, interf: any, idC: string){
 getId(){
   return this.firestore.createId();
 }
+
 
 }

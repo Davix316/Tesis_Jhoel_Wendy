@@ -18,6 +18,7 @@ import { ComentariosComponent } from '../comentarios/comentarios.component';
     IonicModule,
     DetalleTareaPageRoutingModule
   ],
-  declarations: [DetalleTareaPage,ComentariosComponent]
+  declarations: [DetalleTareaPage,ComentariosComponent],
+
 })
 export class DetalleTareaPageModule {}

@@ -1,9 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { NavigationExtras, Router } from '@angular/router';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { PublicacionInterface } from 'src/app/shared/publicacion';
+import { TareasInterface } from 'src/app/shared/tareas';
 
 @Component({
   selector: 'app-mis-archivos',
@@ -18,11 +20,22 @@ export class MisArchivosPage implements OnInit {
 
 misArchivos: PublicacionInterface[]=[];
 
+//obtener id Clic=keado
+navigationExtras: NavigationExtras = {
+  state: {
+    value: null
+  }
+};
+
+
   constructor(
     private fireService: FirestoreService,
     private serviceauth: FireauthService,
     private firestore: AngularFirestore,
-  ) { }
+    private router: Router
+  ) {
+
+  }
 
   ngOnInit() {
     //INFORMACION DE USUARIO ACTUAL
@@ -69,6 +82,13 @@ public getuser(uid: string) {
         });*/
         console.log('e',this.misArchivos);
     }).unsubscribe;
+  }
+
+  //INFORMACION DE LA TAREA CLICKEADA
+  infoTarea(item: any): void{
+    this.navigationExtras.state.value=item;
+      this.router.navigate(['/detalle-tarea'],this.navigationExtras);
+
   }
 
 

@@ -70,8 +70,15 @@
       <ion-card-content>
         <ion-item lines="full">
           <ion-label position="floating">Password</ion-label>
-          <ion-input type="password" required formControlName="password"></ion-input>
-        </ion-item>
+          <ion-input #input type="password" required formControlName="password"></ion-input>
+
+        <ion-note slot="end">
+          <a (click)="mostrarContrasena(input)" name="password-checked">
+          <ion-icon [hidden]="!show" name="eye-outline"></ion-icon>
+          <ion-icon [hidden]="show" name="eye-off-outline"></ion-icon>
+          </a>
+      </ion-note>
+    </ion-item>
 
         <small class="alert-danger" *ngIf="passwordF.invalid && (passwordF.dirty || passwordF.touched)">
           <div class="div container-error-message" *ngIf="passwordF.errors.required">

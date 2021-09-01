@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/member-ordering */
@@ -52,6 +53,10 @@ export class RegisterPage implements OnInit {
     carreraNombre:new FormControl(''),
   });
 
+// VIEW PASSWORD
+
+show: boolean;
+
 
   constructor(
     public authService: FireauthService,
@@ -59,7 +64,9 @@ export class RegisterPage implements OnInit {
     private alertController: AlertController,
     private storage: AngularFireStorage,
     private materiasServ: MateriasService,
-    ) { }
+    ) {
+      this.show = false;
+    }
 /* Referencia de URL FOTO */
 @ViewChild('imageUrlUser') inputImageUser: ElementRef;
 //Para ver porcentaje de carga de la imagen y recuperar URL
@@ -67,8 +74,6 @@ progreso=false;
 porcentaje=0;
 porcentajesubida: Observable<number>;
 urlImage: Observable<string>;
-
-
 
   ngOnInit() {
     this.getCarrera();
@@ -162,7 +167,18 @@ tarea.percentageChanges().subscribe((porcentaje) => {
 }
 
 
-
+  //VISUALIZAR CONTRASEñA
+  mostrarContrasena(input: any){
+    if(input.type =='password'){
+      input.type = 'text';
+      this.show=true;
+      console.log(this.show);
+    }else{
+      input.type = 'password';
+      this.show=false;
+      console.log(this.show);
+    }
+  }
 
 }
 

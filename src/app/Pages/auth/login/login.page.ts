@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,9 +17,12 @@ export class LoginPage implements OnInit {
     passwordF: new FormControl('',[Validators.required])
   });
 
+  show: boolean;
   constructor(public authService: FireauthService,public router: Router, private alertController: AlertController,
     public toastController: ToastController
-    ) { }
+    ) {
+      this.show = false;
+     }
 
   ngOnInit() {
   }
@@ -54,6 +58,21 @@ export class LoginPage implements OnInit {
     });
     toast.present();
   }
+
+  //VISUALIZAR CONTRASEñA
+mostrarContrasena(input: any){
+  if(input.type == 'password'){
+    input.type = 'text';
+    this.show=true;
+    console.log(this.show);
+
+  }else{
+    input.type = 'password';
+    this.show=false;
+    console.log(this.show);
+
+  }
+}
 
 
 

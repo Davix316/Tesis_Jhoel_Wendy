@@ -6,6 +6,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { PublicacionInterface } from 'src/app/shared/publicacion';
+import {  ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -37,6 +38,7 @@ navigationExtras: NavigationExtras = {
     private serviceauth: FireauthService,
     private firestore: AngularFirestore,
     private router: Router,
+    public toastController: ToastController,
     ){
 
    }
@@ -66,6 +68,7 @@ navigationExtras: NavigationExtras = {
       this.getPublicacion(this.carreraId);
     } else {
       // doc.data() will be undefined in this case
+      this.failToast('No existe el Usuario');
       console.log('"no existe el usuario"');
     }
   }).catch((error) => {
@@ -110,4 +113,16 @@ navigationExtras: NavigationExtras = {
     this.numberOfDislikes++;
     this.numberOfLikes--;
   }
+
+
+//PRESENTAR ALERTA LOGIN fallido
+async failToast(text) {
+  const toast = await this.toastController.create({
+    message: text,
+    duration: 3000,
+    color: 'danger'
+  });
+  toast.present();
+}
+
 }
