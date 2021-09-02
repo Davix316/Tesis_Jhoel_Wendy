@@ -15,11 +15,17 @@ import { environment } from '../environments/environment';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { File } from '@ionic-native/file/ngx';
+
+
+
 //import { FiltroPipe } from './pipes/filtro.pipe';
 /* import { PipesModule } from './pipes/pipes.module';
 import { File } from '@ionic-native/file/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx'; */
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,7 +43,7 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx'; */
     ReactiveFormsModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AngularFirestore,PreviewAnyFile
+    AngularFirestore,PreviewAnyFile, ImagePicker, File
   ],
   bootstrap: [AppComponent],
 })

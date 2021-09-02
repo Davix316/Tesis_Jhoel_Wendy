@@ -15,7 +15,7 @@ export class FirestoreService {
 //LEER COLECCION EN ORDEN DESC
 
   getCollection<Interfaz>(coleccion: string){
-    const collection = this.firestore.collection<Interfaz>(coleccion, ref=> ref.orderBy('fecha','asc'));
+    const collection = this.firestore.collection<Interfaz>(coleccion, ref=> ref.orderBy('fecha','desc'));
     return collection.valueChanges();
   }
 //LEER COLECCION en orden desc
@@ -55,6 +55,13 @@ saveDoc(  path: string, interf: any, idC: string){
 //GENERAR ID aleatorio
 getId(){
   return this.firestore.createId();
+}
+
+//LEER UN SOLO DOCUMENTO
+
+getDoc<tipo>(path: string, id: string){ // tipo es una variable cualquier auqe entra como argumento
+  const collection = this.firestore.collection<tipo>(path);
+  return collection.doc(id).valueChanges();
 }
 
 

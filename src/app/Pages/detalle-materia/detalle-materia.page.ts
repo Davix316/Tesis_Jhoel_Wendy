@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable @typescript-eslint/prefer-for-of */
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { TareasService } from 'src/app/services/tareas.service';
@@ -15,7 +17,11 @@ export class DetalleMateriaPage implements OnInit {
   tareas: MateriasInterface = null;
   listaTareas: PublicacionInterface[];
   materiaId: string;
+  materiaName: string;
   tareas0 = true;
+cuestionarios0 =true;
+proyectos0=true;
+
 
   //obtener id Clic=keado
 navigationExtras: NavigationExtras = {
@@ -34,6 +40,7 @@ navigationExtras: NavigationExtras = {
       }
       //
     this.materiaId = this.tareas.id;
+    this.materiaName=this.tareas.nombre;
     console.log('Materia id:', this.materiaId);
 //Busca Tareas por ID de la Carrera
       this.getTareas(this.materiaId);
@@ -58,12 +65,17 @@ navigationExtras: NavigationExtras = {
   getTareas(idMat: string) {
     this.tarService.getCollection<PublicacionInterface>('Publicaciones').subscribe(res => {
       this.listaTareas = res.filter(e => idMat === e.idMateria);
+
       if (this.listaTareas.length === 0){
         this.tareas0= true;
+        this.cuestionarios0 =true;
+        this.proyectos0=true;
         console.log('"No hay tareas"');
       }
       else{
         this.tareas0=false;
+        this.cuestionarios0 =false;
+        this.proyectos0=false;
       }
       console.log(this.listaTareas);
     });
@@ -75,5 +87,7 @@ navigationExtras: NavigationExtras = {
       this.router.navigate(['/detalle-tarea'],this.navigationExtras);
 
   }
+
+
 
 }

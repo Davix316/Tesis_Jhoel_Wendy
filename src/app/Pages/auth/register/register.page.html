@@ -1,7 +1,5 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Materia Name</ion-title>
-
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -116,13 +114,7 @@
              <div class="spinner-border" role="status" *ngIf="progreso==true">
               <span class="visually-hidden" >Loading...</span>
             </div>
-            <!--  <br>
-              <div class="progress">
-                <div [style.visibility]="(porcentajesubida) ? 'hidden' : 'visible'" class="progress-bar progress-bar-striped progress-bar-animated  bg-success" role="progressbar"
-                [style.with]="(porcentajesubida | async) +'%'"></div>
-              </div>
- -->
-              <!-- input invisible que recupera la url de la img en storage -->
+
             <input #imageUrlUser  type="hidden"  [value]="urlImage |async" >
 
           </div>

@@ -27,3 +27,19 @@ input{
   .favoritoTrue{
 color: rgba(255, 0, 0, 0.616);
   }
+.deletePubli{
+  color: rgb(245, 50, 50);
+}
+
+.popover-content {
+  background: #222;
+}
+
+/* Works - pass "my-custom-class" in cssClass to increase specificity */
+.my-custom-class .popover-content {
+  background: #222;
+}
+
+.my-custom-class {
+  --background: #222;
+}

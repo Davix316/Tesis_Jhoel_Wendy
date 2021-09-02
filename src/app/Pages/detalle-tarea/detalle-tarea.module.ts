@@ -8,6 +8,7 @@ import { DetalleTareaPageRoutingModule } from './detalle-tarea-routing.module';
 
 import { DetalleTareaPage } from './detalle-tarea.page';
 import { ComentariosComponent } from '../comentarios/comentarios.component';
+import { PopinfoComponent } from 'src/app/componets/popinfo/popinfo.component';
 
 
 @NgModule({
@@ -16,9 +17,9 @@ import { ComentariosComponent } from '../comentarios/comentarios.component';
     FormsModule,
     ReactiveFormsModule,
     IonicModule,
-    DetalleTareaPageRoutingModule
+    DetalleTareaPageRoutingModule,
   ],
-  declarations: [DetalleTareaPage,ComentariosComponent],
+  declarations: [DetalleTareaPage,ComentariosComponent,PopinfoComponent ],
 
 })
 export class DetalleTareaPageModule {}

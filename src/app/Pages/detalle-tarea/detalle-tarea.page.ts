@@ -10,7 +10,11 @@ import { FavoritosInterface } from 'src/app/shared/favoritos';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
-
+import { PopoverController } from '@ionic/angular';
+import { PopinfoComponent } from 'src/app/componets/popinfo/popinfo.component';
+import { MateriasInterface } from 'src/app/shared/materias';
+import { MateriasService } from 'src/app/services/materias.service';
+import { getLocaleNumberSymbol } from '@angular/common';
 
 @Component({
   selector: 'app-detalle-tarea',
@@ -36,7 +40,11 @@ export class DetalleTareaPage implements OnInit {
    {idPubli: '3', tituloPubli:'3'}],
  };
 
+ listaMateria: MateriasInterface[];
+
  favoritoAdd=false;
+materiaId:string;
+nombreMateria:string;
 
   constructor(
     private domSanit: DomSanitizer,
@@ -46,7 +54,9 @@ export class DetalleTareaPage implements OnInit {
     private platform: Platform,
     private serviceFS: FirestoreService,
     private serviceauth: FireauthService,
-    private previewAnyFile: PreviewAnyFile
+    private previewAnyFile: PreviewAnyFile,
+    public popoverController: PopoverController,
+   private fireStore: FirestoreService,
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.tareas = navigation?.extras?.state?.value;
@@ -58,8 +68,10 @@ export class DetalleTareaPage implements OnInit {
     //
     this.tareaId = this.tareas.id;
     this.nombreTarea=this.tareas.titulo;
-    console.log('Tarea id:', this.tareaId);
-
+    this.materiaId=this.tareas.idMateria;
+    console.log('Tarea id:', this.tareaId);      
+    //TRAER EL NOMBRE DE LA MATERIA
+    this.getMateria(this.materiaId);
 
 
   }
@@ -105,5 +117,35 @@ openFile( urlFile: string){
     alert(JSON.stringify(error));
   });
 }
+
+//CONSULTAR MATERIA
+getMateria(idMateria: string){ 
+  const path = 'Materias';
+  this.fireStore.getDoc<MateriasInterface>(path, idMateria).subscribe( res => {
+  
+    this.nombreMateria=res.nombre;
+    
+  });
+}
+
+//MOSTRAR POPOVER PARA ELIMINAR Y REPRTAR PUBLICACION
+
+async presentPopover(ev: any) {
+
+  const popover = await this.popoverController.create({
+    component: PopinfoComponent,
+    cssClass: 'my-custom-class',
+    event: ev,
+    translucent: true,
+    mode:'ios'
+  });
+  await popover.present();
+  console.log('click pop');
+  const { role } = await popover.onDidDismiss();
+  console.log('onDidDismiss resolved with role', role);
+}
+
+
+
 
 }

@@ -92,34 +92,20 @@ navigationExtras: NavigationExtras = {
 
   //OBTENER MATERIAS DE LA CARRERA
   obtenerMaterias(idC: string){
-  /* this.firestore.collection('Materias').ref.where('IdCarrera', '==', idC)
-    .get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, ' =>', doc.data());
-        //this.materias=Object.values(doc.data());
-        this.materias=doc.data();
-        this.listaMaterias= this.materias;
 
-      });
-    })
-    .catch((error) => {
-      console.log('Error getting documents: ', error);
-    });
- */
 const path='Materias';
 this.materiasServ.getCollection<MateriasInterface>(path).subscribe(res=>{
 
  this.listaMaterias=res.filter(e => idC===e.idCarrera);
 
-//console.log(this.listaMaterias);
+console.log(this.listaMaterias);
 
 this.listaMaterias.forEach(element => {
   this.nivel=element.nivel;
   this.subject=element.nombre;
 
-/* console.log(this.nivel);
-console.log(this.subject); */
+ console.log(this.nivel);
+console.log(this.subject);
 
 
 });

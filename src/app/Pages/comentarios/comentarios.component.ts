@@ -1,14 +1,22 @@
+/* eslint-disable @typescript-eslint/member-ordering */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/prefer-for-of */
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { interval, Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 //import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { ComentariosInterface } from 'src/app/shared/comentarios';
 import { PublicacionInterface } from 'src/app/shared/publicacion';
+import { ImagePicker, ImagePickerOptions} from '@ionic-native/image-picker/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { PopoverController } from '@ionic/angular';
+import { PopinfoComponent } from 'src/app/componets/popinfo/popinfo.component';
 
 
 @Component({
@@ -27,6 +35,7 @@ export class ComentariosComponent implements OnInit {
   apllUser: string;
   imgUser: string;
   voto=0;
+  imgpath='';
 
 
   fechaComen=new Date();
@@ -37,16 +46,28 @@ export class ComentariosComponent implements OnInit {
     texto:new FormControl('',[Validators.required]),
   });
 
-  imgRes: any;
-  options: any;
+images: any=[];
 
+/* Referencia de URL FILE */
+@ViewChild('FileUrlUser') inputFile: ElementRef;
+//Para ver porcentaje de carga de la imagen y recuperar URL
+progreso=false;
+porcentaje=0;
+porcentajesubida: Observable<number>;
+urlImg: Observable<string>;
+
+toggleValue=false;
 
   constructor(
     private router: Router,
     private serviceauth: FireauthService,
     private firestore: AngularFirestore,
     private servFirestore: FirestoreService,
-    //private imgPicker: ImagePicker,
+    private storage: AngularFireStorage,
+    private imgPicker: ImagePicker,
+    private file: File,
+    public popoverController: PopoverController,
+
     ) {
 
     const navigation = this.router.getCurrentNavigation();
@@ -126,39 +147,76 @@ export class ComentariosComponent implements OnInit {
 getComments(idP: string){
   this.servFirestore.getCollection<ComentariosInterface>('Comentarios').subscribe(res=>{
     this.listacoment = res.filter(e=>idP===e.idPublicacion);
-    if (this.listacoment.length === 0){
+    if (this.listacoment.length===0){
       this.comentarios0= true;
       console.log('No hay comentarios');
     }
     else{
       this.comentarios0=false;
     }
-this.listacoment.forEach(element => {
-  console.log(element.fecha);
 
-});
   }).unsubscribe;
 
 }
-/* //IMAGE PICKER
+ //IMAGE PICKER
 imagePicker() {
-  this.options = {
-    width: 200,
-    quality: 30,
-    outputType: 1
-  };
-
-  this.imgRes = [];
-
-  this.imgPicker.getPictures(this.options).then((results) => {
+ const options: ImagePickerOptions={
+   maximumImagesCount:5,
+   width:30,
+   height:30
+ };
+  this.imgPicker.getPictures(options).then((results) => {
     for (let i = 0; i < results.length; i++) {
-      this.imgRes.push('data:image/jpeg;base64,' + results[i]);
+       this.images.push('data:image/png;base64,' + results[i]);
+     /*  const filename=results[i].substring(results[i].lastindexOf('/')+1);
+      const path=results[i].substring(0,results[i].lastindexOf('/')+1);
+      this.file.readAsDataURL(path, filename).then((base64String)=>{
+this.images.push(base64String);
+      }); */
     }
   }, (error) => {
     alert(error);
   });
 }
- */
 
+
+uploadImage(imgs){
+const imgFile=imgs.target.files[0];
+const imgname = imgs.target.files[0].name;
+this.imgpath='Imagenes/'+ this.tareaId+ '/'+imgname;
+
+const ref=this.storage.ref(this.imgpath);
+const tarea= this.storage.upload(this.imgpath,imgFile);
+this.porcentajesubida= tarea.percentageChanges();
+
+
+tarea.snapshotChanges().pipe(finalize(()=>this.urlImg=ref.getDownloadURL())).subscribe();
+this.progreso=true;
+//Cambia el porcentaje
+tarea.percentageChanges().subscribe((porcentaje) => {
+  this.porcentaje = Math.round(porcentaje);
+  if (this.porcentaje === 100) {
+    this.progreso = false;
+  }
+});
+
+
+}
+
+//Popover
+async presentPopover(ev: any) {
+
+  const popover = await this.popoverController.create({
+    component: PopinfoComponent,
+    cssClass: 'my-custom-class',
+    translucent: true,
+    event: ev,
+    mode:'ios'
+  });
+  await popover.present();
+  console.log('click pop');
+  const { role } = await popover.onDidDismiss();
+  console.log('onDidDismiss resolved with role', role);
+}
 
 }

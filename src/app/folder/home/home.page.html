@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Noticias</ion-title>
+    <ion-title>Publicaciones</ion-title>
 
     <!-- Hamburger -->
     <ion-buttons slot="start">
@@ -12,46 +12,54 @@
 
 <ion-content>
   <ion-card>
-  <ion-card-content *ngIf="publicaciones0">
-<label > No hay publicaciones en su Carrera</label>
-  </ion-card-content>
-</ion-card>
-  <ion-card *ngFor="let item of publicaciones" >
+    <ion-card-content *ngIf="publicaciones0">
+      <label> No hay publicaciones en su Carrera</label>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngFor="let item of publicaciones">
 
     <ion-item>
       <ion-avatar>
         <img [src]="item.userFoto">
       </ion-avatar>
       <small><b>{{item.nameUser}} {{item.apellUser}}</b> </small>
-       <ion-text slot="end" color="secondary" class="fechaPubli"> {{item.fecha.toDate() | date:'MMM d, y'}}</ion-text>
-
+      <ion-text slot="end" color="secondary" class="fechaPubli"> {{item.fecha.toDate() | date:'MMM d, y'}} <br> {{item.fecha.toDate()|date:'h:mm a'}}</ion-text>
     </ion-item>
 
-    <div class="ion-text-center"><b>{{item.titulo}}</b></div>
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <div class="ion-text-center"  (click)="infoTarea(item)"><b>{{item.titulo}}</b></div>
+      </ion-col>
+      
+    </ion-row>
 
-    <img src="/assets/icon/pdf.png" alt="pdf" width="50%">
-    <ion-card-content>
-      <p >{{item.descripcion}}</p>
-      <a routerLink="/detalle-tarea" (click)="infoTarea(item)">Ver mas</a>
+
+    <div class="text-center"  style="font-size: 42px; color:#000000 ;">
+      <i class="far fa-file-alt"></i>
+    </div>
+
+    <ion-card-content >
+      <p>{{item.descripcion}}</p>
     </ion-card-content>
 
     <ion-row>
       <ion-col size="3">
-        <ion-button size="small" ion-button color="primary" clear small icon-start (click)="likeButtonClick()">
+        <ion-button size="small"    icon-start (click)="likeButtonClick()">
           <ion-icon name="thumbs-up-outline"></ion-icon>
           {{numberOfLikes}}
         </ion-button>
       </ion-col>
 
       <ion-col size="3">
-        <ion-button size="small" ion-button color="primary" clear small icon-start (click)="dislikeButtonClick()" >
+        <ion-button size="small" ion-button  clear small icon-start (click)="dislikeButtonClick()">
           <ion-icon name="thumbs-down-outline"></ion-icon>
           <ion-label>{{numberOfDislikes}}</ion-label>
         </ion-button>
       </ion-col>
 
       <ion-col size="3">
-        <ion-button routerLink="/detalle-tarea" (click)="infoTarea(item)"  size="small" ion-button color="primary" clear small icon-start  >
+        <ion-button routerLink="/detalle-tarea" (click)="infoTarea(item)" size="small"  clear
+          small icon-start>
           <ion-icon name="chatbubble-ellipses"></ion-icon>
           <ion-label>4 </ion-label>
         </ion-button>
@@ -59,8 +67,10 @@
 
 
       <ion-col center text-center size="3">
+        <ion-button (click)="infoTarea(item)" size="small"  clear small icon-start>
+        <ion-icon name="eye-outline"></ion-icon>
+      </ion-button>
 
-        <ion-note color="secondary"> {{item.fecha.toDate()|date:'h:mm a'}}</ion-note>
       </ion-col>
     </ion-row>
   </ion-card>
@@ -72,4 +82,3 @@
   </ion-fab>
 
 </ion-content>
-

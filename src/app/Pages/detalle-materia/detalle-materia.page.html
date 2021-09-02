@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Materia Name</ion-title>
+    <ion-title> {{materiaName}}</ion-title>
 
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
@@ -9,88 +9,177 @@
 </ion-header>
 
 <ion-content>
-  <ion-segment  [(ngModel)]="segment" >
+  <ion-segment [(ngModel)]="segment">
 
     <ion-segment-button value="first">
-      <ion-label>Tareas</ion-label>
+      <ion-label>Task</ion-label>
       <ion-icon name="book"></ion-icon>
     </ion-segment-button>
 
     <ion-segment-button value="second">
-      <ion-label>Cuestionarios</ion-label>
+      <ion-label>Form</ion-label>
       <ion-icon name="clipboard"></ion-icon>
+    </ion-segment-button>
+
+    <ion-segment-button value="third">
+      <ion-label>Project</ion-label>
+      <ion-icon name="analytics"></ion-icon>
     </ion-segment-button>
 
   </ion-segment>
 
 
-<!-- TAREAS -->
+  <!-- TAREAS -->
 
   <div [ngSwitch]="segment">
     <div *ngSwitchCase="'first'">
-      <ion-card>
-<ion-card-content *ngIf="tareas0">
-  <label >No hay Tareas publicadas</label>
-</ion-card-content>
-        <ion-grid>
-           <ion-row *ngFor="let item of listaTareas">
-            <ion-col class="ion-align-self-center">
-              <img src="/assets/icon/pdf.png" alt="file.png">
-            </ion-col>
-            <ion-col size="8"  class="ion-text-center">
-              <b>titulo:{{item.titulo}}</b>
-              <ion-list>
-                <ion-button color="light" size="small" href="{{item.file}}" target="_blank"><ion-icon name="download"></ion-icon></ion-button>
-                <ion-button color="light"  size="small"><ion-icon  class="heart" name="heart-dislike"></ion-icon></ion-button>
-              </ion-list>
+     
+      <ion-card *ngIf="tareas0">
+        <ion-card-content>
+          <label>No hay Tareas Publicadas</label>
+        </ion-card-content>
+        
+      </ion-card>
 
 
-            </ion-col >
-            <ion-col size="2" class="ion-align-self-center"  >
-              <a routerLink="/detalle-tarea" (click)="infoTarea(item)">
-             <ion-icon name="arrow-forward"></ion-icon>
-            </a>
-            </ion-col>
-          </ion-row>
 
-        </ion-grid>
+      <ng-container *ngFor="let item of listaTareas">
+        <ion-card  *ngIf="item.categoria=='Tarea'">
+          <ion-card-content>
+            <ion-grid>
+            <ion-row >
 
-    </ion-card>
-
-
+              <ion-col class="ion-align-self-center">
+                <img src="/assets/icon/pdf.png" alt="file.png">
+              </ion-col>
+              <ion-col size="8" class="ion-text-center">
+                <b>titulo:{{item.titulo}}</b>
+                <ion-list>
+                  <ion-button color="light" size="small" href="{{item.file}}" target="_blank">
+                    <ion-icon name="download"></ion-icon>
+                  </ion-button>
+                  <ion-button color="light" size="small">
+                    <ion-icon class="heart" name="heart-dislike"></ion-icon>
+                  </ion-button>
+                </ion-list>
+  
+  
+              </ion-col>
+              <ion-col size="2" class="ion-align-self-center">
+                <a routerLink="/detalle-tarea" (click)="infoTarea(item)">
+                  <ion-icon name="arrow-forward"></ion-icon>
+                </a>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
+      
 
     </div>
+
+
 
     <!-- CUESTIONARIOS -->
-
     <div *ngSwitchCase="'second'">
-      <ion-card>
 
-        <ion-grid>
-           <ion-row>
-            <ion-col class="ion-align-self-center">
-              <img src="/assets/icon/pdf.png" alt="file.png">
-            </ion-col>
-            <ion-col size="8"  class="ion-text-center">
-              <b>Ejercicios de Programacion</b>
-              <ion-list>
-                <ion-button color="light" size="small"><ion-icon name="download"></ion-icon></ion-button>
-                <ion-button color="light"  size="small"><ion-icon  class="heart" name="heart-dislike"></ion-icon></ion-button>
-              </ion-list>
+      
+        <ion-card *ngIf="cuestionarios0">
+          <ion-card-content>
+            <label>No hay Cuestionarios Publicados</label>
+          </ion-card-content>
+          
+        </ion-card>
 
 
-            </ion-col >
-            <ion-col size="2" class="ion-align-self-center"  >
-              <a routerLink="/detalle-tarea">
-             <ion-icon name="arrow-forward"></ion-icon>
-            </a>
-            </ion-col>
-          </ion-row>
 
-        </ion-grid>
-    </ion-card>
+        <ng-container *ngFor="let item of listaTareas">
+          <ion-card  *ngIf="item.categoria=='Cuestionario'">
+            <ion-card-content>
+              <ion-grid>
+              <ion-row >
+
+                <ion-col class="ion-align-self-center">
+                  <img src="/assets/icon/pdf.png" alt="file.png">
+                </ion-col>
+                <ion-col size="8" class="ion-text-center">
+                  <b>titulo:{{item.titulo}}</b>
+                  <ion-list>
+                    <ion-button color="light" size="small" href="{{item.file}}" target="_blank">
+                      <ion-icon name="download"></ion-icon>
+                    </ion-button>
+                    <ion-button color="light" size="small">
+                      <ion-icon class="heart" name="heart-dislike"></ion-icon>
+                    </ion-button>
+                  </ion-list>
+    
+    
+                </ion-col>
+                <ion-col size="2" class="ion-align-self-center">
+                  <a routerLink="/detalle-tarea" (click)="infoTarea(item)">
+                    <ion-icon name="arrow-forward"></ion-icon>
+                  </a>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            </ion-card-content>
+          </ion-card>
+        </ng-container>
+        
+       
 
     </div>
+
+
+    <!-- PROYECTOS -->
+
+    <div *ngSwitchCase="'third'">
+      <ion-card *ngIf="proyectos0">
+        <ion-card-content>
+          <label>No hay Proyectos Publicados</label>
+        </ion-card-content>
+        
+      </ion-card>
+
+
+
+      <ng-container *ngFor="let item of listaTareas">
+        <ion-card  *ngIf="item.categoria=='Proyecto'">
+          <ion-card-content>
+            <ion-grid>
+            <ion-row >
+
+              <ion-col class="ion-align-self-center">
+                <img src="/assets/icon/pdf.png" alt="file.png">
+              </ion-col>
+              <ion-col size="8" class="ion-text-center">
+                <b>titulo:{{item.titulo}}</b>
+                <ion-list>
+                  <ion-button color="light" size="small" href="{{item.file}}" target="_blank">
+                    <ion-icon name="download"></ion-icon>
+                  </ion-button>
+                  <ion-button color="light" size="small">
+                    <ion-icon class="heart" name="heart-dislike"></ion-icon>
+                  </ion-button>
+                </ion-list>
+  
+  
+              </ion-col>
+              <ion-col size="2" class="ion-align-self-center">
+                <a routerLink="/detalle-tarea" (click)="infoTarea(item)">
+                  <ion-icon name="arrow-forward"></ion-icon>
+                </a>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
+      
+
+    </div>
+
   </div>
 
 

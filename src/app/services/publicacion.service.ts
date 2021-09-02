@@ -12,7 +12,9 @@ export class PublicacionService {
   constructor(private firestore: AngularFirestore, private router: Router, public toastController: ToastController) { }
 
   newPublicacion(publicacion: PublicacionInterface, idP: string){
-    this.firestore.collection('Publicaciones').doc(idP).set(publicacion)
+    const id=idP ||this.firestore.createId();
+publicacion.id=id;
+    this.firestore.collection('Publicaciones').doc(id).set(publicacion)
   .then((docRef) => {
       console.log('registro exitoso');
       this.presentToast('Archivo Publicado!');

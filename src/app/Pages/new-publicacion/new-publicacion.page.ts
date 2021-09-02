@@ -34,7 +34,6 @@ export class NewPublicacionPage implements OnInit {
   apellUser='';
   fechaPubli=new Date();
   likes=2;
-  id=this.publiServ.getId();
   filepath='';
 
 
@@ -129,17 +128,17 @@ urlFile: Observable<string>;
 try {
   console.log(this.formPublicacion.value);
   if(this.formPublicacion.valid){
+    const idPublicacion=publi.id || null;
     publi.fecha=this.fechaPubli;
     publi.idUser=this.idUserPubli;
     publi.nameUser=this.nameUser;
     publi.userFoto=this.fotoUser;
     publi.apellUser=this.apellUser;
     publi.likes=this.likes;
-    publi.id=this.id;
     publi.idCarrera=this.idCarr;
     publi.file=this.inputFile.nativeElement.value;
-    this.publiServ.newPublicacion(publi,this.id);
-  }
+    this.publiServ.newPublicacion(publi,idPublicacion);
+  } this.formPublicacion.reset();
 } catch (error) {
 console.log(error);
 }

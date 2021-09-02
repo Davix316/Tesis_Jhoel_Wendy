@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>detalle-tarea</ion-title>
+    <ion-title>{{tareas.titulo}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -13,19 +13,31 @@
     <button slot="end"  (click)="addFavorite()">
         <ion-icon *ngIf="favoritoAdd==false" class="favoritoFalse" name="heart"></ion-icon>
         <ion-icon *ngIf="favoritoAdd==true" class="favoritoTrue" name="heart"></ion-icon>
+
     </button>
+
     <ion-text class="ion-text-center titulo" color="primary">{{tareas.titulo}}</ion-text>
+
+
   </ion-toolbar>
+ 
+  <p><b>Materia: </b>{{nombreMateria}}</p>
 
   <ion-label class="ion-text-capitalize"><b>Autor: </b>{{tareas.nameUser}} {{tareas.apellUser}}</ion-label>
   <br>
-  <!-- <iframe width="300" height="315" [src]="fileUrl" frameborder="0" allowfullscreen></iframe> -->
+  
 
 
-  <ion-button  (click)="openFile('{{tareas.file}}')" >
+
+  <ion-button  (click)="openFile(tareas.file)" >
     Ver archivo</ion-button>
 
   <p>{{tareas.descripcion}} </p>
+
+
+
+
+
   <ion-segment>
     <ion-chip>
       <ion-icon name="thumbs-up-outline"></ion-icon>
@@ -39,17 +51,19 @@
 
 
     <ion-chip>
-
       <ion-icon name="heart-outline" (click)="addFavorite()"></ion-icon>
     </ion-chip>
 
+
+<ion-chip (click)="presentPopover($event)">
+      <ion-icon name="ellipsis-horizontal"></ion-icon>
+</ion-chip>
   </ion-segment>
   <hr>
 
-  <app-comentarios></app-comentarios>
+<app-comentarios></app-comentarios>
 
     <div class="spacing"></div>
-
 
 
 
