@@ -10,6 +10,8 @@ import { Admin } from '../../../shared/models/admin.interface';
 export class DetailsComponent implements OnInit {
 
   admin: Admin = null;
+  fotoUser='';
+
 
   navigationExtras: NavigationExtras = {
     state: {
@@ -26,6 +28,8 @@ export class DetailsComponent implements OnInit {
     if (typeof this.admin === 'undefined') {
       this.router.navigate(['list']);
     }
+
+    this.fotoUser = this.admin.foto;
   }
 
   onGoToEdit(): void {
@@ -34,6 +38,9 @@ export class DetailsComponent implements OnInit {
   }
 
   async onGoToDelete(): Promise<void> {
+
+    const confirmacion = confirm('Esta seguro');
+    if (confirmacion) {
     try {
       await this.adminsSvc.onDeleteAdmins(this.admin?.id);
       alert('Deleted');
@@ -41,6 +48,7 @@ export class DetailsComponent implements OnInit {
     } catch (err) {
       console.log(err);
     }
+  }
   }
 
   onGoBackToList(): void {

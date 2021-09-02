@@ -81,25 +81,23 @@
                 </div>
 
                 <br>
-                <input type="text" class="form-control" placeholder="Carrera" formControlName="idCarrera"
+                <input type="hidden" class="form-control" placeholder="Carrera" formControlName="idCarrera"
                   value="{{materia.idCarrera}}" disabled>
 
-                <input type="text" class="form-control" placeholder="Materia" formControlName="idMateria"
+                <input type="hidden" class="form-control" placeholder="Materia" formControlName="idMateria"
                   value="{{materia.id}}" disabled>
 
-                <input type="text" class="form-control" placeholder="Fecha" formControlName="fecha"
+                <input type="hidden" class="form-control" placeholder="Fecha" formControlName="fecha"
                   value="01/01/2021" disabled>
 
-                <input type="text" class="form-control" placeholder="Nombre de Usuario" formControlName="nameUser"
+                <input type="hidden" class="form-control" placeholder="Nombre de Usuario" formControlName="nameUser"
                   value="{{nameUser}}" disabled>
 
-                <input type="text" class="form-control" placeholder="Apellido de Usuario" formControlName="apellUser"
+                <input type="hidden" class="form-control" placeholder="Apellido de Usuario" formControlName="apellUser"
                   value="{{apellUser}}" disabled>
 
-                <input type="text" class="form-control" placeholder="ID de Usuario" formControlName="idUser"
+                <input type="hidden" class="form-control" placeholder="ID de Usuario" formControlName="idUser"
                   value="{{idUserPubli}}" disabled>
-
-                  <label>Esta publicación será registrada en </label>
 
               </div>
 
@@ -150,8 +148,8 @@
                                 </thead>
                                 <tbody>
                                     <tr class="table-info" *ngFor="let item of listarPublicaciones">
-                                        <th scope="row">{{ item.titulo}} - {{ item.idMateria}}</th>
-                                        <th scope="row">{{ item.descripcion}} {{ item.nameUser}}</th>
+                                        <th scope="row">{{ item.titulo}}</th>
+                                        <th scope="row">{{ item.descripcion}}</th>
                                         <td role="group">
                                             <button type="button" class="btn btn-outline-success m-1"
                                                 (click)="onGoToSee(item)">

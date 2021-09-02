@@ -10,6 +10,7 @@ import { Admin } from '../../../shared/models/admin.interface';
 export class DetailsStudentComponent implements OnInit {
 
   student: Admin = null;
+  fotoUser='';
 
   navigationExtras: NavigationExtras = {
     state: {
@@ -26,6 +27,9 @@ export class DetailsStudentComponent implements OnInit {
     if (typeof this.student === 'undefined') {
       this.router.navigate(['listStudent']);
     }
+
+    this.fotoUser = this.student.foto;
+
   }
 
   onGoToEdit(): void {

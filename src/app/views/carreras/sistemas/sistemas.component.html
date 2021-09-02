@@ -27,7 +27,7 @@
               </thead>
               <tbody>
                 <tr class="table-info" *ngFor="let item of listaMaterias">
-                  <th scope="row">{{ item.nombre}} - {{ item.idCarrera}} - {{ item.nivel}}</th>
+                  <th scope="row">{{ item.nombre}} - {{ item.nivel}} semestre</th>
                   <td role="group">
                     <button type="button" class="btn btn-outline-success m-1" (click)="onGoToSee(item)">
                       <i class="cil-info" style="color: green;"> Ver Datos</i>

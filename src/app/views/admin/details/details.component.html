@@ -9,8 +9,8 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-4">
-              <div class="card" style="width: 100%;">
-                <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png" alt="Card image cap">
+              <div class="card" style="width: 80%;">
+                <img class="card-img-top" [src]="fotoUser" alt="Sin foto">
               </div>
             </div>
             <div class="col-md-4">
@@ -34,9 +34,6 @@
                 </li>
                 <li class="list-group-item">
                   <h5>Teléfono: </h5><h6>{{admin.telefono}}</h6>
-                </li>
-                <li class="list-group-item">
-                  <h5>Foto: </h5><h6>{{admin.foto}}</h6>
                 </li>
               </ul>
             </div>
