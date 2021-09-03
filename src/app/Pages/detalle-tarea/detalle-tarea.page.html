@@ -8,30 +8,31 @@
 </ion-header>
 
 <ion-content>
-
-  <ion-toolbar>
+<ion-chip style="background: rgba(77, 226, 194, 0.623); color: #115571; width: -webkit-fill-available;">
+ 
     <button slot="end"  (click)="addFavorite()">
         <ion-icon *ngIf="favoritoAdd==false" class="favoritoFalse" name="heart"></ion-icon>
         <ion-icon *ngIf="favoritoAdd==true" class="favoritoTrue" name="heart"></ion-icon>
 
     </button>
 
-    <ion-text class="ion-text-center titulo" color="primary">{{tareas.titulo}}</ion-text>
+    <ion-text class="ion-text-center titulo" >{{tareas.titulo}}</ion-text>
 
-
-  </ion-toolbar>
+  </ion-chip>
+  
  
   <p><b>Materia: </b>{{nombreMateria}}</p>
 
   <ion-label class="ion-text-capitalize"><b>Autor: </b>{{tareas.nameUser}} {{tareas.apellUser}}</ion-label>
   <br>
   
+<div class="ion-text-center">
+  <img src="/assets/icon/viewfile.png"  width="30%" alt="">
 
-
-
-  <ion-button  (click)="openFile(tareas.file)" >
-    Ver archivo</ion-button>
-
+  <button type="button"  (click)="openFile(tareas.file)" >
+    Descargar
+  </button>
+</div>
   <p>{{tareas.descripcion}} </p>
 
 
@@ -50,9 +51,9 @@
     </ion-chip>
 
 
-    <ion-chip>
+    <!-- <ion-chip>
       <ion-icon name="heart-outline" (click)="addFavorite()"></ion-icon>
-    </ion-chip>
+    </ion-chip> -->
 
 
 <ion-chip (click)="presentPopover($event)">
