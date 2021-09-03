@@ -35,7 +35,7 @@ export class ChatPage implements OnInit {
 
   public showConversationPage()
   {
-    this.navCtrl.navigateForward('conversacion');
+    this.navCtrl.navigateForward('/menu/conversacion');
   }
 
 }

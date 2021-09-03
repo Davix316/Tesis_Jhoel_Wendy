@@ -8,52 +8,16 @@ import { FireauthService } from '../services/fireauth.service';
   styleUrls: ['./folder.page.scss'],
 })
 export class FolderPage implements OnInit {
- //public folder: string;
- active = '';
+ 
 
-
- option = [
-   {
-     name: 'Publicaciones',
-     link: '/home',
-     icon: 'newspaper',
-   },
-   {
-     name: 'Materias',
-     link: '/materias',
-     icon: 'book'
-   },
-   {
-     name: 'Favoritos',
-     link: '/favoritos',
-     icon: 'heart'
-   },
-   {
-     name: 'Chat',
-     link: '/chat',
-     icon: 'chatbubble'
-   },
-   {
-     name: 'Perfil',
-     link: '/perfil',
-     icon: 'person'
-   },
-
- ];
- constructor( private router: Router,private serviceauth: FireauthService,) {
-   this.router.events.subscribe((event: RouterEvent) => {
-     this.active = event.url;
-   });
+ constructor( private router: Router,) {
+   
  }
 
 
   ngOnInit() {
   }
 
- //CERRAR SESION
- onlogout(){
-  this.serviceauth.logout();
-  this.router.navigate(['/login']);
-}
+ 
 
 }

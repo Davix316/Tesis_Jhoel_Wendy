@@ -20,7 +20,7 @@
         <ion-card-content>
           <ion-item>
             <ion-label position="floating">Materia</ion-label>
-            <ion-select ok-text="Ok" cancel-text="Cancelar" formControlName="idMateria">
+            <ion-select ok-text="Ok" cancel-text="Cancelar" formControlName="idMateria" required>
               <div *ngFor="let item of listaMaterias">
                 <ion-select-option class="ion-text-capitalize"
 
@@ -39,7 +39,7 @@
           </ion-card-header>
 
         <ion-card-content>
-          <ion-radio-group  formControlName="categoria">
+          <ion-radio-group  formControlName="categoria" required>
             <ion-item>
               <ion-label>Tarea</ion-label>
               <ion-radio slot="start" value="Tarea"></ion-radio>
@@ -68,7 +68,7 @@
         <ion-card-content>
           <ion-item>
             <ion-label position="floating" class="titulo">Titulo</ion-label>
-            <ion-input type="text" formControlName="titulo"></ion-input>
+            <ion-input type="text" required formControlName="titulo" ></ion-input>
           </ion-item>
 
           <ion-item>
@@ -84,7 +84,7 @@
             <div class="mb-3">
               <label for="formFileSm" class="form-label">Suba un Archivo</label>
               <input class=" form-control-sm" id="formFileSm" accept=".pdf ,.docx ,.xlsx, .zip"
-                type="file" (change)="uploadFile($event)"  formControlName="file">
+                type="file" (change)="uploadFile($event)"  formControlName="file" required>
                <!--  Spinner progreso animada -->
                <div class="spinner-border" role="status" *ngIf="progreso==true">
                 <span class="visually-hidden" >Loading...</span>

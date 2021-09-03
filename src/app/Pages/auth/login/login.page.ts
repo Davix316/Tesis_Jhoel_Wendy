@@ -2,9 +2,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-login',
@@ -18,11 +19,16 @@ export class LoginPage implements OnInit {
   });
 
   show: boolean;
-  constructor(public authService: FireauthService,public router: Router, private alertController: AlertController,
-    public toastController: ToastController
+  constructor(public authService: FireauthService,
+    public router: Router,
+    private alertController: AlertController,
+    public toastController: ToastController,
+    
     ) {
       this.show = false;
      }
+
+     
 
   ngOnInit() {
   }

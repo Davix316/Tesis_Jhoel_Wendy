@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { FolderPageRoutingModule } from './folder-routing.module';
 
 import { FolderPage } from './folder.page';
+import { MenuComponent } from '../componets/menu/menu.component';
 
 @NgModule({
   imports: [

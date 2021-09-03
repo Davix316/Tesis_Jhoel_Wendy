@@ -64,5 +64,10 @@ getDoc<tipo>(path: string, id: string){ // tipo es una variable cualquier auqe e
   return collection.doc(id).valueChanges();
 }
 
+//ELIMINAR UN DOCUMENTO
+deleteDoc(path: string, id: string){
+  const collection = this.firestore.collection(path);
+  return collection.doc(id).delete();
+}
 
 }

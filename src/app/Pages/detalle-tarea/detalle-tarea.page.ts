@@ -13,50 +13,52 @@ import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { PopoverController } from '@ionic/angular';
 import { PopinfoComponent } from 'src/app/componets/popinfo/popinfo.component';
 import { MateriasInterface } from 'src/app/shared/materias';
-import { MateriasService } from 'src/app/services/materias.service';
-import { getLocaleNumberSymbol } from '@angular/common';
-
+import { AlertController } from '@ionic/angular';
+import { ComentariosInterface } from 'src/app/shared/comentarios';
 @Component({
   selector: 'app-detalle-tarea',
   templateUrl: './detalle-tarea.page.html',
   styleUrls: ['./detalle-tarea.page.scss'],
 })
 export class DetalleTareaPage implements OnInit {
- /*  fileUrl: SafeResourceUrl;
-  fileTransfer: FileTransferObject;
- */
+  /*  fileUrl: SafeResourceUrl;
+   fileTransfer: FileTransferObject;
+  */
   titulo: string;
 
   tareas: PublicacionInterface = null;
   tareaId: string;
   idUser: string;
   nombreTarea: string;
- favorito: FavoritosInterface={
-   id: this.serviceFS.getId(),
-   idUser:'',
-   nombreTarea:'',
-   idPublicacion: [{idPubli: '1', tituloPubli:'1'},
-   {idPubli: '2', tituloPubli:'2'},
-   {idPubli: '3', tituloPubli:'3'}],
- };
+  favorito: FavoritosInterface = {
+    id: this.serviceFS.getId(),
+    idUser: '',
+    nombreTarea: '',
+    idPublicacion: [{ idPubli: '1', tituloPubli: '1' },
+    { idPubli: '2', tituloPubli: '2' },
+    { idPubli: '3', tituloPubli: '3' }],
+  };
 
- listaMateria: MateriasInterface[];
+  listaMateria: MateriasInterface[];
 
- favoritoAdd=false;
-materiaId:string;
-nombreMateria:string;
+  favoritoAdd = false;
+  materiaId: string;
+  nombreMateria: string;
+
+  listComentarios: ComentariosInterface[];
 
   constructor(
     private domSanit: DomSanitizer,
     private router: Router,
-   /*  private file: File,
-    private transfer: FileTransfer, */
+    /*  private file: File,
+     private transfer: FileTransfer, */
     private platform: Platform,
     private serviceFS: FirestoreService,
     private serviceauth: FireauthService,
     private previewAnyFile: PreviewAnyFile,
     public popoverController: PopoverController,
-   private fireStore: FirestoreService,
+    private fireStore: FirestoreService,
+    public alertController: AlertController,
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.tareas = navigation?.extras?.state?.value;
@@ -67,11 +69,12 @@ nombreMateria:string;
     }
     //
     this.tareaId = this.tareas.id;
-    this.nombreTarea=this.tareas.titulo;
-    this.materiaId=this.tareas.idMateria;
-    console.log('Tarea id:', this.tareaId);      
+    this.nombreTarea = this.tareas.titulo;
+    this.materiaId = this.tareas.idMateria;
+    console.log('Tarea id:', this.tareaId);
     //TRAER EL NOMBRE DE LA MATERIA
     this.getMateria(this.materiaId);
+
 
 
   }
@@ -80,14 +83,15 @@ nombreMateria:string;
 
   ngOnInit(): void {
 
- //INFORMACION DE USUARIO ACTUAL
- this.serviceauth.stateAuth().subscribe(user => {
-  if (user != null) {
-    //id de Usuario de fireAuth
-    this.idUser = user.uid;
-   // console.log(this.idUser);
-  }
-});
+
+    //INFORMACION DE USUARIO ACTUAL
+    this.serviceauth.stateAuth().subscribe(user => {
+      if (user != null) {
+        //id de Usuario de fireAuth
+        this.idUser = user.uid;
+        // console.log(this.idUser);
+      }
+    });
 
 
   }
@@ -95,13 +99,13 @@ nombreMateria:string;
   //GUARDAR FAVORITOS
   addFavorite() {
     try {
-      this.favorito.idUser=this.idUser;
-      this.favorito.nombreTarea=this.nombreTarea;
+      this.favorito.idUser = this.idUser;
+      this.favorito.nombreTarea = this.nombreTarea;
 
-      this.favorito.idPublicacion=this.favorito.idPublicacion;
-      console.log('VALORES FAVORITO',this.favorito);
+      this.favorito.idPublicacion = this.favorito.idPublicacion;
+      console.log('VALORES FAVORITO', this.favorito);
       this.serviceFS.saveDoc('Favoritos', this.favorito, this.idUser);
-      this.favoritoAdd=true;
+      this.favoritoAdd = true;
     } catch (error) {
       console.log(error);
 
@@ -109,41 +113,87 @@ nombreMateria:string;
 
   }
 
-//ABRIR ARCHIVO
-openFile( urlFile: string){
-  this.previewAnyFile.preview(urlFile).then(()=>{
+  //ABRIR ARCHIVO
+  openFile(urlFile: string) {
+    this.previewAnyFile.preview(urlFile).then(() => {
 
-  },(error)=>{
-    alert(JSON.stringify(error));
-  });
-}
+    }, (error) => {
+      alert(JSON.stringify(error));
+    });
+  }
 
-//CONSULTAR MATERIA
-getMateria(idMateria: string){ 
-  const path = 'Materias';
-  this.fireStore.getDoc<MateriasInterface>(path, idMateria).subscribe( res => {
-  
-    this.nombreMateria=res.nombre;
-    
-  });
-}
+  //CONSULTAR MATERIA
+  getMateria(idMateria: string) {
+    const path = 'Materias';
+    this.fireStore.getDoc<MateriasInterface>(path, idMateria).subscribe(res => {
 
-//MOSTRAR POPOVER PARA ELIMINAR Y REPRTAR PUBLICACION
+      this.nombreMateria = res.nombre;
 
-async presentPopover(ev: any) {
+    });
+  }
+  //CONSULTA COMENTARIO
+  //LEER COMENTARIOS
+  DeleteComments(idP: string) {
+    this.fireStore.getCollection<ComentariosInterface>('Comentarios').subscribe(res => {
+      this.listComentarios = res.filter(e => idP === e.idPublicacion);
+      console.log("lista de comentarios", this.listComentarios);
+      for (let i = 0; i < this.listComentarios.length; i++) {
+        const idCom = this.listComentarios[i].id;
+        console.log('idComentario:', idCom);
+        this.fireStore.deleteDoc('Comentarios', idCom);
 
-  const popover = await this.popoverController.create({
-    component: PopinfoComponent,
-    cssClass: 'my-custom-class',
-    event: ev,
-    translucent: true,
-    mode:'ios'
-  });
-  await popover.present();
-  console.log('click pop');
-  const { role } = await popover.onDidDismiss();
-  console.log('onDidDismiss resolved with role', role);
-}
+
+      }
+
+    }).unsubscribe;
+
+  }
+
+  async presentAlertConfirm() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Alerta!',
+      message: '<strong>esta seguro de eliminar?</strong>!!!',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Si',
+          handler: () => {
+            this.fireStore.deleteDoc('Publicaciones', this.tareaId);
+            this.DeleteComments(this.tareaId);
+            this.router.navigate(["/home"]);
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+
+  //MOSTRAR POPOVER PARA ELIMINAR Y REPRTAR PUBLICACION
+
+  async presentPopover(ev: any) {
+
+    const popover = await this.popoverController.create({
+      component: PopinfoComponent,
+      cssClass: 'my-custom-class',
+      event: ev,
+      translucent: true,
+      mode: 'ios'
+    });
+    await popover.present();
+    console.log('click pop');
+    const { role } = await popover.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
 
 
 

@@ -10,8 +10,9 @@ export class PopinfoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log('HOLAPOPPOVER');
+    
   }
+
 
 
 }

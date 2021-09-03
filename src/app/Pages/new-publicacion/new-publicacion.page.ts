@@ -38,11 +38,11 @@ export class NewPublicacionPage implements OnInit {
 
 
   public formPublicacion=new FormGroup({
-    idMateria:new FormControl(),
-    categoria:new FormControl(),
-    titulo:new FormControl(),
-    descripcion:new FormControl(),
-    file:new FormControl(null, Validators.required),
+    idMateria:new FormControl('',[Validators.required]),
+    categoria:new FormControl('',[Validators.required]),
+    titulo:new FormControl('',[Validators.required]),
+    descripcion:new FormControl('',[Validators.required]),
+    file:new FormControl(null,[Validators.required]),
   });
 
 

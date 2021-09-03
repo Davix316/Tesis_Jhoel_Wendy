@@ -4,19 +4,24 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class CheckloginGuard implements CanActivate {
-  constructor(private fAuth: AngularFireAuth, public router: Router){
+  constructor(private fAuth: AngularFireAuth, public router: Router,
+    ){
 
   }
+
   canActivate(): Observable<boolean>{
     return this.fAuth.authState.pipe(
       map(auth=> {
         if(!auth){
           this.router.navigate(['/login']);
+          
           console.log('autenticado:', false);
+          
         return false;
         }
         else{

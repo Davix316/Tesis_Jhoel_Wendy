@@ -98,15 +98,11 @@ this.materiasServ.getCollection<MateriasInterface>(path).subscribe(res=>{
 
  this.listaMaterias=res.filter(e => idC===e.idCarrera);
 
-console.log(this.listaMaterias);
+//console.log(this.listaMaterias);
 
 this.listaMaterias.forEach(element => {
   this.nivel=element.nivel;
   this.subject=element.nombre;
-
- console.log(this.nivel);
-console.log(this.subject);
-
 
 });
 
@@ -126,7 +122,7 @@ buscar(event){
 
 detalleMateria(item: any): void{
   this.navigationExtras.state.value=item;
-  this.router.navigate(['/detalle-materia'],this.navigationExtras);
+  this.router.navigate(['/menu/detalle-materia'],this.navigationExtras);
 }
 
 
