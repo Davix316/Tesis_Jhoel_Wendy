@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 /* import { File } from '@ionic-native/file/ngx';
@@ -80,7 +80,6 @@ export class DetalleTareaPage implements OnInit {
   }
 
 
-
   ngOnInit(): void {
 
 
@@ -151,9 +150,9 @@ export class DetalleTareaPage implements OnInit {
 
   async presentAlertConfirm() {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
+      cssClass: '.alerClass',
       header: 'Alerta!',
-      message: '<strong>esta seguro de eliminar?</strong>!!!',
+      message: '<strong>Seguro desea Eliminar</strong>?',
       buttons: [
         {
           text: 'Cancelar',
@@ -188,12 +187,20 @@ export class DetalleTareaPage implements OnInit {
       event: ev,
       translucent: true,
       mode: 'ios'
+      
     });
     await popover.present();
-    console.log('click pop');
-    const { role } = await popover.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
+    const {data}= await popover.onDidDismiss();
+    if(data.item=="Eliminar"){
+      this.presentAlertConfirm()
+
+    }
+    console.log('botondesdeaPadre:', data);
+      
+    
   }
+
+
 
 
 

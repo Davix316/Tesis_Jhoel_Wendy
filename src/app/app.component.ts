@@ -34,6 +34,7 @@ export class AppComponent {
       link: '/menu/perfil',
       icon: 'person'
     },
+    
  
   ];
   constructor(private serviceauth: FireauthService, public router: Router) {}
@@ -42,6 +43,7 @@ export class AppComponent {
  onlogout(){
   this.serviceauth.logout();
   this.router.navigate(['/login']);
+
 }
 
 }

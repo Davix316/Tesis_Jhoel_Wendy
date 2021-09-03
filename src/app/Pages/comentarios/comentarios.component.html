@@ -31,7 +31,7 @@
     <ion-row>
       <ion-label class="ion-text-wrap comentario"> {{item.texto}} &nbsp;</ion-label>
       <small>({{item.fecha.toDate()|date:'M/d/yy, h:mm a'}})</small>
-
+      <input #idComentario  [value]=item.id  type="hidden">
     </ion-row>
 
       <ion-row>

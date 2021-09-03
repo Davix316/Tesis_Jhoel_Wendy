@@ -1,11 +1,7 @@
-<ion-list>
-  <ion-item>
-    <ion-button color="danger">
-      Eliminar
-      <ion-icon  class="deletePubli" slot="end" name="trash"></ion-icon>
+
+  <ion-item  lines="none" *ngFor=" let item of opcion" detail>
+    <ion-button expand="full" color="warning" (click)="btnPop(item)" >     
+    {{item}}
     </ion-button>
   </ion-item>
-  <ion-item>
-    <ion-button> Reportar<ion-icon name="hammer"></ion-icon></ion-button>
-  </ion-item>
- </ion-list>
+

@@ -48,8 +48,7 @@ export class ComentariosComponent implements OnInit {
 
 images: any=[];
 
-/* Referencia de URL FILE */
-@ViewChild('FileUrlUser') inputFile: ElementRef;
+
 //Para ver porcentaje de carga de la imagen y recuperar URL
 progreso=false;
 porcentaje=0;
@@ -58,6 +57,7 @@ urlImg: Observable<string>;
 
 toggleValue=false;
 
+urlFile: Observable<string>;
   constructor(
     private router: Router,
     private serviceauth: FireauthService,
@@ -67,6 +67,7 @@ toggleValue=false;
     private imgPicker: ImagePicker,
     private file: File,
     public popoverController: PopoverController,
+    private firestoreService:FirestoreService,
 
     ) {
 
@@ -82,8 +83,13 @@ toggleValue=false;
     console.log(' Comentarios-> Tarea id:', this.tareaId);
   }
 
+  /* Referencia de idComentario*/
+@ViewChild('idComentario') idComentario: ElementRef
+
   ngOnInit() {
 
+    
+    
 
       //INFORMACION DE USUARIO ACTUAL
       this.serviceauth.stateAuth().subscribe(user => {
@@ -215,8 +221,16 @@ async presentPopover(ev: any) {
   });
   await popover.present();
   console.log('click pop');
-  const { role } = await popover.onDidDismiss();
-  console.log('onDidDismiss resolved with role', role);
+  const { data } = await popover.onDidDismiss();
+  console.log('porp Comentar', data);
+  if(data.item=="Eliminar"){
+    console.log('codigoUsuario:', this.codUser); 
+    const idC=this.idComentario.nativeElement.value;
+    console.log(idC);
+    
+    this.firestoreService.deleteDoc("Comentarios",idC);
+
+  }
 }
 
 }

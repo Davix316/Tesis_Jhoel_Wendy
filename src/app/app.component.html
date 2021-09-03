@@ -1,34 +1,41 @@
 <ion-app>
-    <ion-split-pane contentId="main-content">
-        <ion-menu contentId="main-content" type="overlay">
-            <ion-content>
-                <ion-list id="inbox-list">
-                    <ion-list-header class="header">Menu</ion-list-header>
-                    <ion-note class="ion-text-center" color="light" ml-2>PEERKNOW</ion-note>
-
-                    <ion-menu-toggle auto-hide="false" *ngFor="let p of option; let i = index">
-                        <ion-item routerDirection="root" [routerLink]="[p.link]" routerLinkActive="activo"
-                            [class.active-menu]="active === p.link" lines="none" detail="false">
-                            <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-                            <ion-label>{{ p.name }}</ion-label>
-                        </ion-item>
-
-                    </ion-menu-toggle>
-
-
-                </ion-list>
-                <!-- Salir sesion -->
-                
-                <ion-list>
-                    <ion-item lines="none" class="logout" type="button">
-                        <ion-icon slot="start" name="log-out-outline"></ion-icon>
-                        <a (click)="onlogout()">Salir</a>
-
-                    </ion-item>
-
-                </ion-list>
-            </ion-content>
-        </ion-menu>
-        <ion-router-outlet id="main-content"></ion-router-outlet>
-    </ion-split-pane>
-</ion-app>
+    <ion-menu contentId="main-content" side="start">
+      <ion-header class="header">
+        <ion-toolbar>
+          <ion-title >Menu</ion-title>
+          <ion-note class="ion-text-center"  ml-2>PEER-KNOW</ion-note>
+        </ion-toolbar>
+      </ion-header>
+  
+      <ion-content>
+        <ion-list>
+          <ion-menu-toggle auto-hide="false" *ngFor="let nav of option">
+            <ion-item  lines="none"
+              routerDirection="root"
+               [routerLink]="nav.link" routerLinkActive="activo"
+               [class.active-menu]="active === nav.link">
+                {{nav.name}}
+                <ion-icon   class="icon" slot="start" [ios]="nav.icon " [md]="nav.icon + '-sharp'"></ion-icon>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+  <!-- Salir sesion -->
+  <hr>
+        <ion-list >
+          <ion-item  lines="none" class="logout" type="button">
+            <ion-icon slot="start" name="log-out-outline"></ion-icon>
+            <a (click)="onlogout()" >Salir</a>
+  
+          </ion-item>
+  
+        </ion-list>
+  
+      </ion-content>
+    </ion-menu>
+  
+  
+  
+  
+    <ion-router-outlet id="main-content" main></ion-router-outlet>
+  
+  </ion-app>

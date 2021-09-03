@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild  } from '@angular/core';
+import { PopoverController } from '@ionic/angular';
+import { DetalleTareaPage } from 'src/app/Pages/detalle-tarea/detalle-tarea.page';
 
 @Component({
   selector: 'app-popinfo',
@@ -7,12 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PopinfoComponent implements OnInit {
 
-  constructor() { }
+opcion=['Eliminar','Reportar' ]
+  constructor(private popoverCtrl:PopoverController) { }
+ 
 
+  
+ 
   ngOnInit() {
     
-  }
+  } 
 
-
+  btnPop(valor:string){
+  //console.log('boton press:', valor);  
+this.popoverCtrl.dismiss({
+  item:valor
+})
+}
 
 }
