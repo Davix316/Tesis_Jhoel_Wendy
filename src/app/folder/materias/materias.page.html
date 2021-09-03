@@ -8,15 +8,16 @@
     </ion-buttons>
 
   </ion-toolbar>
-  <ion-toolbar>
-    <ion-searchbar animated (ionChange)="buscar($event)"></ion-searchbar>
-  </ion-toolbar>
+ 
+  
 </ion-header>
 
 <ion-content>
+  <ion-searchbar animated (ionChange)="buscar($event)" style="border-radius: 8px; position: fixed; z-index: 9999;"></ion-searchbar>
+  <div style="height: 10%;" ></div>
   <!-- Filtro semestres -->
-  <ion-label color="light">Filtrar por Semestres</ion-label>
-  <ion-segment [(ngModel)]="segment" scrollable>
+  <ion-label >Filtrar por Semestres</ion-label>
+  <ion-segment [(ngModel)]="segment" scrollable mode="ios" style="background: #b0bdba65;">
     <ion-segment-button value=1>
       <i class="fas fa-dice-one"></i>
     </ion-segment-button>
