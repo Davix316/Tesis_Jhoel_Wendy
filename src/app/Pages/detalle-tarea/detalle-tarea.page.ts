@@ -63,7 +63,7 @@ nombreMateria:string;
     //console.log('tareas cons:', this.tareas);
     //Si no hay ID de tarea retorna
     if (typeof this.tareas === 'undefined') {
-      this.router.navigate(['/menu/home']);
+      this.router.navigate(['/home']);
     }
     //
     this.tareaId = this.tareas.id;

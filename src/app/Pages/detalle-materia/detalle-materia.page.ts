@@ -36,7 +36,7 @@ navigationExtras: NavigationExtras = {
     this.tareas = navigation?.extras?.state?.value;
       //Si no hay ID de tarea retorna
       if (typeof this.tareas==='undefined') {
-        this.router.navigate(['/menu/materias']);
+        this.router.navigate(['/materias']);
       }
       //
     this.materiaId = this.tareas.id;
@@ -84,7 +84,7 @@ navigationExtras: NavigationExtras = {
   //INFORMACION DE LA TAREA CLICKEADA
   infoTarea(item: any): void{
     this.navigationExtras.state.value=item;
-      this.router.navigate(['/detalle-tarea'],this.navigationExtras);
+      this.router.navigate(['/menu/detalle-tarea'],this.navigationExtras);
 
   }
 

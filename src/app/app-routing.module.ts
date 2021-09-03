@@ -10,13 +10,14 @@ const routes: Routes = [
   {
     path: 'register', loadChildren:()=>import('./Pages/auth/register/register.module').then(m=>m.RegisterPageModule)
   },
-  {path:'', redirectTo:'menu/home', pathMatch:'full'},
+  {path:'', redirectTo:'menu', pathMatch:'full'},
   /* {
     path: 'menu',
     redirectTo: 'news'
   }, */
+
   {
-    path: '',
+    path: 'menu',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule),  canActivate: [CheckloginGuard]
   },
   {

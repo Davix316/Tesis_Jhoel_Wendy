@@ -87,7 +87,7 @@ public getuser(uid: string) {
   //INFORMACION DE LA TAREA CLICKEADA
   infoTarea(item: any): void{
     this.navigationExtras.state.value=item;
-      this.router.navigate(['/detalle-tarea'],this.navigationExtras);
+      this.router.navigate(['/menu/detalle-tarea'],this.navigationExtras);
 
   }
 

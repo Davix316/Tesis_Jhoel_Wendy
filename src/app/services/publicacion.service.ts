@@ -18,7 +18,7 @@ publicacion.id=id;
   .then((docRef) => {
       console.log('registro exitoso');
       this.presentToast('Archivo Publicado!');
-      this.router.navigate(['/menu/home']);
+      this.router.navigate(['/home']);
   })
   .catch((error) => {
       console.error('"Error adding document: "', error);

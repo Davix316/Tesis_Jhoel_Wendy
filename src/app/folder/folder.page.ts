@@ -15,27 +15,27 @@ export class FolderPage implements OnInit {
  option = [
    {
      name: 'Publicaciones',
-     link: '/menu/home',
+     link: '/home',
      icon: 'newspaper',
    },
    {
      name: 'Materias',
-     link: '/menu/materias',
+     link: '/materias',
      icon: 'book'
    },
    {
      name: 'Favoritos',
-     link: '/menu/favoritos',
+     link: '/favoritos',
      icon: 'heart'
    },
    {
      name: 'Chat',
-     link: '/menu/chat',
+     link: '/chat',
      icon: 'chatbubble'
    },
    {
      name: 'Perfil',
-     link: '/menu/perfil',
+     link: '/perfil',
      icon: 'person'
    },
 
