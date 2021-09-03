@@ -49,7 +49,7 @@ export class FireauthService {
             console.log('ROLE CURRENT', this.currentUser.rol);
             this.loggedIn.next(true);
             if (this.currentUser.rol === 'estudiante') {
-              this.router.navigate(['/home']);
+              this.router.navigate(['/menu/home']);
             }
             else if (this.currentUser.rol === 'administrador' || this.currentUser.rol === 'Administrador') {
               this.presentAlert();

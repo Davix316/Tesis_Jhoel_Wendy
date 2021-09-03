@@ -75,7 +75,7 @@ toggleValue=false;
     console.log('detalle tarea en Comentarios:', this.publi);
     //Si no hay ID de tarea retorna
     if (typeof this.publi==='undefined') {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/menu/home']);
     }
     //
     this.tareaId = this.publi.id;

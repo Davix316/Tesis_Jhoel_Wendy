@@ -65,7 +65,7 @@ export class DetalleTareaPage implements OnInit {
     //console.log('tareas cons:', this.tareas);
     //Si no hay ID de tarea retorna
     if (typeof this.tareas === 'undefined') {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/menu/home']);
     }
     //
     this.tareaId = this.tareas.id;
@@ -167,7 +167,7 @@ export class DetalleTareaPage implements OnInit {
           handler: () => {
             this.fireStore.deleteDoc('Publicaciones', this.tareaId);
             this.DeleteComments(this.tareaId);
-            this.router.navigate(["/home"]);
+            this.router.navigate(["/menu/home"]);
             console.log('Confirm Okay');
           }
         }
