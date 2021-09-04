@@ -7,14 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConversacionPage implements OnInit {
   public contactInfo: any = {
-    name: 'JOHN DOE',
+    name: 'Mecanica EM',
     status: 'ONLINE'
   };
   public showOptions = false;
   public messages: Array<any> = [
-    { text: 'Hola como estas', type: 'received', created: '14:02' },
+    { text: 'Hello', type: 'received', created: '14:02' },
     { text: 'Nothing', type: 'send', created: '14:05' },
-    { text: 'Want to go to the movies?', type: 'send', created: '14:05' },
+    { text: 'could you explain the answer to me?', type: 'send', created: '14:05' },
     { text: 'Im sorry, ', type: 'received', created: '14:15' },
     { text: 'but can we go tomorrow?', type: 'received', created: '14:16' },
     { text: 'Nothing', type: 'send', created: '14:05' },

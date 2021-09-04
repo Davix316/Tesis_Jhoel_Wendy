@@ -152,7 +152,7 @@ export class DetalleTareaPage implements OnInit {
     const alert = await this.alertController.create({
       cssClass: '.alerClass',
       header: 'Alerta!',
-      message: '<strong>Seguro desea Eliminar</strong>?',
+      message: '<strong>Seguro desea Eliminar esta Publicación </strong>?',
       buttons: [
         {
           text: 'Cancelar',

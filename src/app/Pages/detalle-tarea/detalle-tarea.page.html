@@ -10,13 +10,14 @@
 <ion-content>
 <ion-chip style="background: rgba(77, 226, 194, 0.623); color: #115571; width: -webkit-fill-available;">
  
-    <button slot="end"  (click)="addFavorite()">
-        <ion-icon *ngIf="favoritoAdd==false" class="favoritoFalse" name="heart"></ion-icon>
-        <ion-icon *ngIf="favoritoAdd==true" class="favoritoTrue" name="heart"></ion-icon>
-
-    </button>
+   
 
     <ion-text class="ion-text-center titulo" >{{tareas.titulo}}</ion-text>
+    <button   (click)="addFavorite()" style="background: none; font-size:medium;">
+      <ion-icon *ngIf="favoritoAdd==false" class="favoritoFalse" name="heart"></ion-icon>
+      <ion-icon *ngIf="favoritoAdd==true" class="favoritoTrue" name="heart"></ion-icon>
+
+  </button>
 
   </ion-chip>
   

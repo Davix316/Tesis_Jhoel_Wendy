@@ -1,9 +1,75 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>puntuacion</ion-title>
+    
+    <ion-buttons slot="start">
+    
+      <ion-back-button slot="start"></ion-back-button>
+      <ion-title>Puntuación</ion-title>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-puntaje obtenido
+<!-- Content -->
+
+<ion-row>
+
+  <ion-col >
+    
+    <div class="position-absolute top-0 start-50 translate-middle-x">
+    <ion-avatar class="ion-margin-start">
+      <img src="https://firebasestorage.googleapis.com/v0/b/tesis-3fc38.appspot.com/o/Perfil%2Fuser_rl9v22ywlf?alt=media&token=e5a9f789-718f-4e2f-a662-bf3f11f04bc6" alt="foto">
+    </ion-avatar>
+   
+  </div>
+  <ion-label>Name User</ion-label>
+
+  <ion-icon name="star" style="font-size: 30px; color: rgb(221, 221, 77);"></ion-icon>
+  </ion-col>
+
+  
+
+</ion-row>
+<br>
+<ion-list>
+  <ion-list-header>
+     <h2><b>Votos Obtenidos:</b> 12</h2>
+  </ion-list-header>
+  
+
+  <ion-item>
+    <h4>5</h4>
+    <ion-icon name="star" ></ion-icon>
+    <ion-label>
+      <h2>Publicacion Name</h2>     
+      <p>Descripcion Comentario...</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <h4>2</h4>
+    <ion-icon name="star" ></ion-icon>
+    <ion-label>
+      <h2>Publicacion Name</h2>     
+      <p>Descripcion Comentario...</p>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <h4>5</h4>
+    <ion-icon name="star" ></ion-icon>
+    <ion-label>
+      <h2>Publicacion Name</h2>     
+      <p>Descripcion Comentario...</p>
+    </ion-label>
+  </ion-item>
+
+  
+</ion-list>
+
+<ion-chip style="background-color: #90edd9; color: #000000; height: 50px;">
+ <b>Se necesita 50 pts</b> 
+  Aún no es Momento de Publicar
+</ion-chip>
+  
 </ion-content>

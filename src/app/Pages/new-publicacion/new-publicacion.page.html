@@ -13,7 +13,7 @@
     <form [formGroup]="formPublicacion" (ngSubmit)="savePublicacion(formPublicacion.value)">
       <ion-card>
         <ion-card-header>
-          <ion-card-subtitle>Seleccione la materia</ion-card-subtitle>
+          <ion-card-subtitle class="negrita">Seleccione la materia</ion-card-subtitle>
 
         </ion-card-header>
 
@@ -35,7 +35,7 @@
 
       <ion-card>
         <ion-card-header>
-          <ion-card-subtitle>Seleccione una categoria</ion-card-subtitle>
+          <ion-card-subtitle class="negrita" >Seleccione una categoria</ion-card-subtitle>
           </ion-card-header>
 
         <ion-card-content>
@@ -62,17 +62,17 @@
 
       <ion-card>
         <ion-card-header>
-          <ion-card-subtitle>Ingrese un titulo y una descripcion corta</ion-card-subtitle>
+          <ion-card-subtitle class="negrita">Ingrese un titulo y una descripcion corta</ion-card-subtitle>
         </ion-card-header>
 
         <ion-card-content>
           <ion-item>
-            <ion-label position="floating" class="titulo">Titulo</ion-label>
+            <ion-label position="floating" class="titulo negrita">Titulo</ion-label>
             <ion-input type="text" required formControlName="titulo" ></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-label position="floating" class="titulo" >Descripcion</ion-label>
+            <ion-label position="floating" class="titulo negrita" >Descripcion</ion-label>
             <ion-textarea  rows="5" placeholder="En este espacio escriba una breve descripcion de que trata el archivo que vaya a cargar" formControlName="descripcion"></ion-textarea>
           </ion-item>
         </ion-card-content>
@@ -82,7 +82,7 @@
         <ion-card-content>
           <ion-item>
             <div class="mb-3">
-              <label for="formFileSm" class="form-label">Suba un Archivo</label>
+              <label for="formFileSm" class="form-label negrita">Suba un Archivo</label>
               <input class=" form-control-sm" id="formFileSm" accept=".pdf ,.docx ,.xlsx, .zip"
                 type="file" (change)="uploadFile($event)"  formControlName="file" required>
                <!--  Spinner progreso animada -->
@@ -94,7 +94,7 @@
             </div>
           </ion-item>
 
-          <ion-button  type="submit"   expand="block" class="boton">GUARDAR</ion-button>
+          <ion-button  type="submit"   expand="block" class="boton negrita">GUARDAR</ion-button>
         </ion-card-content>
 
       </ion-card>

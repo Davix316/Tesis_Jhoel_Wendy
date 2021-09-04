@@ -9,7 +9,7 @@ import { NavController } from '@ionic/angular';
 export class ChatPage implements OnInit {
   public chatList: Array<any> = [
     {
-      user: { name: 'John Doe', avatar: 'https://image.freepik.com/vector-gratis/granjero-que-usa-tecnologia-agricola_53876-120543.jpg' },
+      user: { name: 'Mecanica', avatar: 'https://firebasestorage.googleapis.com/v0/b/tesis-3fc38.appspot.com/o/Perfil%2F039-man.png?alt=media&token=3d636291-4b9c-4a3f-82b4-48dbbd76d4d9' },
       message: { snippet: 'See you later', created: '09:00 AM' }
     },
     {
@@ -17,11 +17,11 @@ export class ChatPage implements OnInit {
       message: { snippet: 'Im comming', created: '13:40 PM' }
     },
     {
-      user: { name: 'Foo', avatar: 'https://cdn.pixabay.com/photo/2020/02/14/12/09/school-4848352_960_720.jpg' },
+      user: { name: 'Luis', avatar: 'https://cdn.pixabay.com/photo/2020/02/14/12/09/school-4848352_960_720.jpg' },
       message: { snippet: 'Here is raining', created: '14:00 PM' }
     },
     {
-      user: { name: 'Bar', avatar:
+      user: { name: 'Karla', avatar:
       'https://image.freepik.com/vector-gratis/ilustracion-dibujos-animados-lindo-astronauta-super-volador_138676-3259.jpg' },
       message: { snippet: 'idk', created: '14:00 PM' }
     }
