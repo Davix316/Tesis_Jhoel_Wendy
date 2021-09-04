@@ -1,7 +1,7 @@
 {
-  "name": "@coreui/coreui-free-angular-admin-template",
+  "name": "peerknow",
   "version": "2.11.2",
-  "description": "CoreUI Free Angular 11 Admin Template",
+  "description": "Sistema web para contralar tareas",
   "author": {
     "name": "Łukasz Holeczek",
     "url": "http://holeczek.pl",
