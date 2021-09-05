@@ -15,8 +15,13 @@ El sistema web se encuentra almacenado en el hosting de Firebase en la siguiente
 | ------------- | ------------- | 
 |![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/splash.png) |![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/webLogin.jpg)|
 
-### Funcionalidades principales de la aplicacion Móvil
+### Funcionalidades principales de la aplicación Móvil
 
 | **Inicio de sesión** :closed_lock_with_key: | **Registro de usuario** :mens: | **Publicaciones** :books: | 
 | ------------- | ------------- | ------------- | 
-|Interfaz de inicio de sesión con el metodo de logueado usuario y contraseña, si es primera vez que ingresa al sistema debe registrarse como muestra la interfaz de registro de usuario ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/login.jpg) |Interfaz de registro de usuario estudiante con los campos nombre,carrera, email, telefono, contraseña entre otros. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/registro.jpg)|la primera pantalla que visualiza el usuario luego de loguearse es la de publicaciones la cual muestra la las publicaciones de todas las tareas referente a la carrera del user. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/publicaciones.jpg)|
+|Interfaz de inicio de sesión con el metodo de logueo usuario y contraseña, si es primera vez que ingresa al sistema debe registrarse como muestra la interfaz de registro de usuario ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/login.jpg) |Interfaz de registro de usuario estudiante con los campos nombre, carrera, email, teléfono, contraseña entre otros. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/registro.jpg)|la primera pantalla que visualiza el usuario luego de loguearse es la de publicaciones la cual muestra la las publicaciones de todas las tareas referente a la carrera del user. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/publicaciones.jpg)|
+
+
+| **Detalle de la tarea** :closed_lock_with_key: | **Lista de materias** :mens: | **lista de tareas** :books: | 
+| ------------- | ------------- | ------------- | 
+|El detalle de la tarea se la visualiza despues de dar clic en el icono de vista de la publicacion, aqui se presenta el detalle completo de la tarea o cuestionario, los comentarios en ella, el archivo cargado y un boton para poder descargarlo ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/detallemateria.jpg)| La lista de materias del estudiante se presentan en orden desde el semestre 1 al 5. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/materias.jpg)|al dar clic sobre una materia en especifico nos lista las publicaciones sobre todas las tareas, cuestionarios o proyectos incluidos en ella. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/tareas.jpg)|
