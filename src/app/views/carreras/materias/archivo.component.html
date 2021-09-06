@@ -1,0 +1,43 @@
+<div class="animated fadeIn">
+    <div>
+        <div class="card">
+            <div class="card-header" style="text-align: center;">
+                <h2>{{publicacion.titulo}}</h2>
+            </div>
+
+            <div class="card-body">
+                <form class="mt-3 col-md-8 offset-md-2" (ngSubmit)="onSave()" [formGroup]="publicacionForm">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <h5>Información de Publicación: </h5>
+                            <label for="exampleFormControlInput1">Título: </label>
+                            <input type="text" class="form-control" formControlName="titulo" style="width: 50%;">
+                            <br>
+                            <label for="exampleFormControlInput2">Descripción: </label>
+                            <input type="textarea" class="form-control" formControlName="descripcion" style="width: 100%;">
+                            <br>
+                            <br>
+                            <label for="exampleFormControlInput3">Archivo: </label>
+                            <a href="{{publicacion.file}}" target="_blank">Ver archivo</a>
+                            <input type="text" class="form-control" formControlName="file" style="width: 50%;">
+                            <br>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="col-md-5">
+                    <button type="button" class="btn btn-dark" (click)="goBack()"
+                        style="color: white;">Regresar a publicaciones</button>
+                </div>
+                <br>
+                <hr>
+            </div>
+        </div>
+    </div>
+</div>

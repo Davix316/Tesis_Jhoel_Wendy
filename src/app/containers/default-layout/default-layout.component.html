@@ -1,0 +1,104 @@
+
+<app-header
+  
+  [fixed]="true"
+  [navbarBrandFull]="{src: 'assets/img/imagenes/app_logo2.png', width: 50,  alt: 'App Logo'}"
+  [sidebarToggler]="'lg'"
+  [asideMenuToggler]="'lg'"
+  >
+  <h1 style="color: #236084;">PEER-KNOW</h1>
+  
+</app-header>
+
+
+<!--
+<header 
+ class="topbar" style="min-height: 10%; background-color: white; ">
+  <div class="row" style="margin-right: 0px;">
+      <div class="col-4" style="text-align: left; padding-left: 3%;">
+        <img src="assets/img/imagenes/epn_logo.png" style="max-width: 30%" alt="epn_logo">
+      </div>
+      <div class="col-4" style="margin: auto; text-align: center;">
+        <h1>HOLA MUNDO</h1>
+      </div>
+      <div class="col-4" style="text-align: right;">
+        <img src="assets/img/imagenes/esfot_logo.png" style="max-width: 30%" alt="esfot_logo">
+      </div>
+    </div>
+</header>
+
+-->
+
+
+<div class="app-body">
+
+  <div *ngIf="admin.rol=='SuperAdministrador'; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+      <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" 
+      [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
+        
+        <app-sidebar-nav  [navItems]="navItems2" 
+        [perfectScrollbar] [disabled]="appSidebar.minimized">
+        </app-sidebar-nav>
+        
+        <app-sidebar-minimizer></app-sidebar-minimizer>
+      </app-sidebar>    
+    </ng-template>
+
+    <ng-template #elseBlock>
+      <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" 
+      [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
+        
+        <app-sidebar-nav  [navItems]="navItems" 
+        [perfectScrollbar] [disabled]="appSidebar.minimized">
+        </app-sidebar-nav>
+    
+        <app-sidebar-minimizer></app-sidebar-minimizer>
+      </app-sidebar>    
+    </ng-template>
+
+      
+
+      <!--
+  <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" 
+  [minimized]="sidebarMinimized" (minimizedChange)="toggleMinimize($event)">
+    
+    <app-sidebar-nav  [navItems]="navItems2" 
+    [perfectScrollbar] [disabled]="appSidebar.minimized">
+    </app-sidebar-nav>
+
+    <app-sidebar-minimizer></app-sidebar-minimizer>
+  </app-sidebar>
+
+-->
+
+
+  <!-- Main content -->
+  <main class="main">
+    <!-- Breadcrumb -->
+    <!-- breaking change 'cui-breadcrumb' -->
+    
+    <div class="row" >
+      <div class="col-md-8" style="padding-right: 0px;">
+        <cui-breadcrumb>
+          <!-- Breadcrumb Menu-->
+        </cui-breadcrumb>
+      </div>
+      <div class="col-md-4" style="background-color: #2f353a; max-height: 45px; text-align: center; color: white;">
+        <h5>{{admin.email}}</h5>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div><!-- /.container-fluid -->
+  </main>
+  <app-aside [fixed]="false" [display]="true" [ngClass]="'test'">
+    <div class="col-md-12"  style="padding-right: 0px; padding-left: 0px;">
+      <button (click)="salir()" type="button" class="btn btn-warning" style="height: 45px; color: white;"><h5>Cerrar Sesión <i class="cil-account-logout"></i></h5></button>
+     </div>  
+    </app-aside>
+</div>
+<app-footer>
+  <span><a href="https://www.epn.edu.ec/" target="_blank">Escuela Politécnica Nacional</a> &copy; 2021</span>
+  <span class="ml-auto">Realizado por: Soto Wendy - Amagua Jhoel</span>
+</app-footer>

@@ -1,0 +1,63 @@
+<div class="animated fadeIn">
+  <div>
+    <div class="card">
+      <div class="card-header" style="text-align: center;">
+        <h2>Información de Estudiante</h2>
+      </div>
+
+      <div class="card-body">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card" style="width: 80%;">
+                <img class="card-img-top" [src]="fotoUser" alt="Sin foto">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-group list-group-flush">
+            
+                <li class="list-group-item">
+                  <h5>Nombre Completo: </h5><h6>{{student.nombre}} {{student.apellido}}</h6>
+                </li>
+                <li class="list-group-item">
+                  <h5>Correo: </h5><h6>{{student.email}}</h6>
+                </li>
+                <li class="list-group-item">
+                  <h5>Carrera y semestre: </h5><h6>{{student.carreraNombre}} / {{student.semestreRef}} semestre</h6>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <h5>Código Único: </h5><h6>{{student.numUnico}}</h6>
+                </li>
+                <li class="list-group-item">
+                  <h5>Teléfono: </h5><h6>{{student.telefono}}</h6>
+                </li>
+              </ul>
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="card-body">
+          <div class="btn-group" role="group">
+          <button type="button" class="btn btn-outline-warning m-1" (click)="onGoToEdit()">
+            <i class="cil-pencil" style="color: #c29305;"> Editar</i>
+          </button>
+          <button type="button" class="btn btn-outline-danger m-1" (click)="onGoToDelete()">
+            <i class="cil-trash" style="color: red;"> Eliminar</i>
+          </button>
+        </div>
+        </div>
+        
+        <br>
+        <button type="button" class="btn btn-primary mt-2" (click)="onGoBackToList()">
+          Regresar a la lista
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
