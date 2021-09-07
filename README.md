@@ -1,14 +1,28 @@
 # PEER-KNOW
 
 ## ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/logo.png)
-PEER-KNOW Es un sistema web para administradores y una aplicación móvil (compatible con el SO Android) para estudiantes de la ESFOT en el cual pueden compartir sus tareas sean estas resueltas o no, publicar cuestionarios, realizar preguntas, contribuir con respuestas y establecer una comunicación privada entre estudiantes, mientras los administradores contralan usuarios estudiantes y revisan tareas publicadas.
+**PEER-KNOW** Es un sistema web y una aplicación móvil (compatible con el SO Android) para estudiantes de la ESFOT en el cual pueden compartir sus tareas sean estas resueltas o no, publicar cuestionarios, realizar preguntas, contribuir con respuestas y establecer una comunicación privada entre estudiantes, mientras los administradores desde la web contralan usuarios estudiantes y revisan tareas publicadas.
 
 
 #### INTEGRANTES DE TESIS  :man::woman:
 - Jhoel Amagua
 - Wendy Soto
-
-### 1. Arquitectura y Estructura
+### 1. Herramientas y Plataformas Utilizadas
+- [x] [Firebase](https://firebase.google.com/)
+- [x] [Angular](https://angular.io/cli)
+- [x] [TypeScript](https://www.typescriptlang.org/)
+- [x] [Ionic](https://ionicframework.com/docs/components)
+- [x] [Node](https://nodejs.org/es/)
+- [x] [Cordova](https://ionicframework.com/docs/cli/commands/cordova-build)
+- [x] [Android SDK](https://developer.android.com/studio)
+- [x] [Java JDK](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
+- [x] [Graddle](https://gradle.org/install/)
+- [x] [Visual Studio](https://code.visualstudio.com/)
+- [x] [Google Play Console](https://play.google.com/console/about/)
+- [x] [Git](https://github.com/)
+### 2. Casos de Uso
+![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/Casos%20de%20Uso.PNG)
+### 3. Arquitectura y Estructura
 - Arquitectura: 
 A continuación se muestra las Arquitecturas; la primera del sistema web, y la segunda de la aplicación móvil:
 
@@ -18,31 +32,31 @@ A continuación se muestra las Arquitecturas; la primera del sistema web, y la s
 La estructura que tienen los datos alojados en Firebase se ven de la siguiente manera:
  ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/web/images/estructura.PNG)
 
-### 2. Sistema web y Aplicación móvil 
+### 4. Sistema web y Aplicación móvil 
 El sistema web se encuentra almacenado en el hosting de Firebase en la siguiente url: 
 :pushpin: https://tesis-3fc38.web.app/  o su última version en la rama web de este repositorio. 
 
 :iphone: La aplicacion móvil disponible para la plataforma de Android  se encuentra almacenada en su última versión en la rama chats de este repositorio
-| **SplashScreen** :bust_in_silhouette: | Sistema :computer: | 
+| **SplashScreen** :pager: | Sistema :computer: | 
 | ------------- | ------------- | 
 |![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/splash.png) |![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/webLogin.jpg)|
 
 
-### 3. Funcionalidades principales de la Aplicación Móvil
+### 5. Funcionalidades principales de la Aplicación Móvil
 
 | **Inicio de sesión** :closed_lock_with_key: | **Registro de usuario** :mens: | **Publicaciones** :books: | 
 | ------------- | ------------- | ------------- | 
 |Interfaz de inicio de sesión con el metodo de logueo usuario y contraseña, si es primera vez que ingresa al sistema debe registrarse como muestra la interfaz de registro de usuario ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/login.jpg) |Interfaz de registro de usuario estudiante con los campos nombre, carrera, email, teléfono, contraseña entre otros. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/registro.jpg)|la primera pantalla que visualiza el usuario luego de loguearse es la de publicaciones la cual muestra la las publicaciones de todas las tareas referente a la carrera del user. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/publicaciones.jpg)|
 
 
-| **Detalle de la tarea** :closed_lock_with_key: | **Lista de materias** :mens: | **lista de tareas** :books: | 
+| **Detalle de la tarea** :scroll: | **Lista de materias** :books: | **lista de tareas** :newspaper: | 
 | ------------- | ------------- | ------------- | 
 |El detalle de la tarea se la visualiza despues de dar clic en el icono de vista de la publicacion, aqui se presenta el detalle completo de la tarea o cuestionario, los comentarios en ella, el archivo cargado y un boton para poder descargarlo ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/detallemateria.jpg)| La lista de materias del estudiante se presentan en orden desde el semestre 1 al 5. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/materias.jpg)|al dar clic sobre una materia en especifico nos lista las publicaciones sobre todas las tareas, cuestionarios o proyectos incluidos en ella. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/tareas.jpg)|
 
 
-### 4. Funcionalidades principales del Sistema Web
+### 6. Funcionalidades principales del Sistema Web
 
-| **Inicio de sesión** :star2: | **Registro de Estudiantes y/o Administradores** :mens: | 
+| **Inicio de sesión** :lock_with_ink_pen: | **Registro de Estudiantes y/o Administradores** :mens: | 
 | ------------- | ------------- |
 |Interfaz de inicio de sesión con el metodo de logueo usuario y contraseña. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/web/images/login_web.jpg) |Interfaz de registro de usuario estudiante y/o administrador con los mismo campos excepto en rol. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/web/images/registro_web_admin.jpg)|
 
@@ -66,3 +80,28 @@ El sistema web se encuentra almacenado en el hosting de Firebase en la siguiente
 | ------------- |
 |Para recuperar la contraseña, el administrador debe ingresar su correo y le llegará un email para restablecer dicha contraseña. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/web/images/recuperar_web.jpg)|
 
+### 7. Despliegue
+
+```
+```
+
+### 8. Instalación
+| **Sistema Web** :lock_with_ink_pen: | **Aplicación móvil** :mens: | 
+| ------------- | ------------- |
+|Clonar este repositorio  `git clone https://github.com/wendysoto/Tesis_Jhoel_Wendy.git`| descargar de la Play Store o clonar este repositorio  `git clone https://github.com/wendysoto/Tesis_Jhoel_Wendy.git`|
+|Ubicarse en la rama main  `git checkout nombreRama`|Ubicarse en la rama chats  `git checkout nombreRama`|
+|Instalar dependencias  `npm install`|Instalar dependencias  `npm install`|
+|Ejecutar proyecto  `ng serve -o`|Ejecutar proyecto  `ionic serve -l`|
+
+
+
+
+
+
+
+
+### 9. Anexos 
+
+ Enlace al video :movie_camera:
+ 
+ [![ScreenShot](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/video.png)](:https://www.youtube.com/)
