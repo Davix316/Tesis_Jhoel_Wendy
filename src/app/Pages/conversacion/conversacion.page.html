@@ -6,11 +6,11 @@
 
    
       <ion-avatar slot="start"  >
-        <img src="https://firebasestorage.googleapis.com/v0/b/tesis-3fc38.appspot.com/o/Perfil%2F039-man.png?alt=media&token=3d636291-4b9c-4a3f-82b4-48dbbd76d4d9">
+        <img [src]="detalleComentario.fotoUser">
       </ion-avatar>
       <ion-title >
         <ion-label class="ion-text-start">
-          {{ contactInfo.name }}
+          {{ detalleComentario.nameUser}}
           <p><small class="text-muted">{{ contactInfo.status }}</small></p>
         </ion-label>
       </ion-title>
@@ -20,31 +20,47 @@
   </ion-toolbar>
 </ion-header>
 
+
+
 <ion-content class="bg">
+
+
   <div class="chat-container">
-    <div *ngFor="let message of messages" class="chat-bubble" [ngClass]="message.type">
-      <div class="mesage">{{ message.text }}</div>
-      <p>{{ message.created }}</p>
+
+    <div *ngFor="let message of chat">    
+      <div *ngIf="message.idUserSender==userLog && message.idUserReciver==detalleComentario.idUser
+       || message.idUserReciver==userLog && message.idUserSender==detalleComentario.idUser">
+       <div class="chat-bubble"  [ngClass]="{'idUserSender': message.idUserSender==userLog, 'idUserReciver': message.idUserSender!=userLog}" >
+      <h6 class="texto">{{ message.texto }}</h6>
+      <p>14:02</p>
     </div>
+  </div>
+    </div>
+
   </div>
 
   <div class="chat-controls" [ngClass]="{'active': showOptions}">
-
+    <form [formGroup]="FormChat" (ngSubmit)="saveMessage()">
     <ion-row class="bg-white">
       <ion-col size="9" class="ion-no-padding">
         <ion-list lines="none" class="ion-no-padding">
-          <ion-item class="formControl">
-            <ion-input placeholder="Type your message" type="text" (focus)="showOptionsToggle(false)"></ion-input>
+          <ion-item >
+            <ion-input placeholder="Type your message" type="text" formControlName="texto" required (focus)="showOptionsToggle(false)"></ion-input>
           </ion-item>
         </ion-list>
       </ion-col>
       <ion-col size="3" class="ion-no-padding">
         <p class="ion-text-center icon-controls">
+          <button style="background: none; ">
           <ion-icon mode="ios" name="send" class="text-primary"></ion-icon>
+        </button>
+          <ion-icon mode="ios" name="add-circle" *ngIf="!showOptions" (click)="showOptionsToggle()"></ion-icon>
+          <ion-icon mode="ios" name="close-circle" *ngIf="showOptions" (click)="showOptionsToggle()"></ion-icon>
         </p>
       </ion-col>
     </ion-row>
+  </form>
   </div>
 
-
+  
 </ion-content>

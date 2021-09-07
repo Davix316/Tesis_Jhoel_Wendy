@@ -5,7 +5,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { interval, Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 //import { ImagePicker } from '@ionic-native/image-picker/ngx';
@@ -58,6 +58,15 @@ urlImg: Observable<string>;
 toggleValue=false;
 
 urlFile: Observable<string>;
+
+//obtener id Clic=keado
+navigationExtras: NavigationExtras = {
+  state: {
+    value: null
+  }
+};
+
+
   constructor(
     private router: Router,
     private serviceauth: FireauthService,
@@ -231,6 +240,11 @@ async presentPopover(ev: any) {
     this.firestoreService.deleteDoc("Comentarios",idC);
 
   }
+}
+
+infoUserChat(item: any): void{
+  this.navigationExtras.state.value=item;
+  this.router.navigate(['/menu/conversacion'],this.navigationExtras);
 }
 
 }

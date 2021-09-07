@@ -18,19 +18,7 @@ ion-toolbar{
   position: relative;
   margin-bottom: 0;
 
-  &.received {
-      background: #ffffff;
-      float: left;
-  }
-
-  &.send {
-      background: #115571;
-      float: right;
-      text-align: right;
-      color: #fff;
-  }
-
-  .mesage {
+  h6 {
       margin: 0;
       margin-bottom: 4px;
       //font-weight: 400;
@@ -51,3 +39,14 @@ ion-toolbar{
     overflow: scroll
 }
 
+.idUserReciver {
+  background: #ffffff;
+  float: left;
+}
+
+.idUserSender {
+  background: #115571;
+  float: right;
+  text-align: right;
+  color: #fff;
+}
