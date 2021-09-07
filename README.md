@@ -86,9 +86,9 @@ El sistema web se encuentra almacenado en el hosting de Firebase en la siguiente
 ```
 
 ### 8. Instalación
-| **Sistema Web** :lock_with_ink_pen: | **Aplicación móvil** :mens: | 
+| **Sistema Web** 💻 | **Aplicación móvil** 📱 | 
 | ------------- | ------------- |
-|Clonar este repositorio  `git clone https://github.com/wendysoto/Tesis_Jhoel_Wendy.git`| descargar de la Play Store o clonar este repositorio  `git clone https://github.com/wendysoto/Tesis_Jhoel_Wendy.git`|
+|Clonar este repositorio  `git clone https://github.com/wendysoto/Tesis_Jhoel_Wendy.git`| Descargar de la Play Store o clonar este repositorio  `git clone https://github.com/wendysoto/Tesis_Jhoel_Wendy.git`|
 |Ubicarse en la rama main  `git checkout nombreRama`|Ubicarse en la rama chats  `git checkout nombreRama`|
 |Instalar dependencias  `npm install`|Instalar dependencias  `npm install`|
 |Ejecutar proyecto  `ng serve -o`|Ejecutar proyecto  `ionic serve -l`|
