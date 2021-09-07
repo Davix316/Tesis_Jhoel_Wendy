@@ -10,11 +10,11 @@ PEER-KNOW Es un sistema web para administradores y una aplicación móvil (compa
 
 ### 1. Arquitectura y Estructura
 - Arquitectura: 
-A continuación se muestra las Arquitecturas; la primera del sistema web, y la segunda de la alicación móvil:
- ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/web/images/arquiMovil.png)
- ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/web/images/arquiWeb.png)
+A continuación se muestra las Arquitecturas; la primera del sistema web, y la segunda de la aplicación móvil:
 
-- Estructura
+ ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/web/images/arquiMovil.png)
+
+- Estructura: 
 La estructura que tienen los datos alojados en Firebase se ven de la siguiente manera:
  ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/web/images/estructura.PNG)
 
