@@ -4,6 +4,8 @@ import { NavigationExtras, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Publicacion } from '../../../shared/models/publicacion.interface';
 import { Location } from '@angular/common';
+import { ComentariosService } from './../../services/comentarios.service';
+import { Comentario } from '../../../shared/models/comentario.interface';
 
 @Component({
   templateUrl: './archivo.component.html',
@@ -11,12 +13,15 @@ import { Location } from '@angular/common';
 
 export class ArchivoComponent implements OnInit{
 
-  Publicacion$ = this.publicacionSvc.publicaciones;
+  Publicacion$ = this.datosSrv.publicaciones;
+  Comentario$ = this.datosSrv.comentarios;
   publicacionForm: FormGroup;
   publicacion: Publicacion;
   listarPublicaciones: Publicacion[];
+  listarComentarios: Comentario[];
   carreraId: string;
   materiaId: string;
+  publicacionId: string;
 
   textoBuscar='';
 
@@ -27,10 +32,11 @@ export class ArchivoComponent implements OnInit{
   };
 
   constructor(
-    private publicacionSvc: ThemeService,
+    private datosSrv: ThemeService,
     private router: Router,
     private fb: FormBuilder,
     private _location: Location,
+    private comentariosServ: ComentariosService,
   ) { 
     const navigation = this.router.getCurrentNavigation();
     this.publicacion = navigation?.extras?.state?.value;
@@ -46,6 +52,7 @@ export class ArchivoComponent implements OnInit{
     console.log(this.publicacion.idMateria)
     this.publicacionForm.patchValue(this.publicacion);
 
+    this.obtenerComentarios(this.publicacion.id);
   }
 
   onSave(): void {
@@ -56,7 +63,7 @@ export class ArchivoComponent implements OnInit{
       const publicacionId = this.publicacion?.id || null;
       const idMateria = this.publicacion.idMateria || null;
 
-      this.publicacionSvc.onSavePublicacion(publicacion, publicacionId, idMateria);
+      this.datosSrv.onSavePublicacion(publicacion, publicacionId, idMateria);
       this.publicacionForm.reset();
       this.router.navigate(['/carreras']);
     } else {
@@ -77,6 +84,32 @@ export class ArchivoComponent implements OnInit{
       descripcion: ['', [Validators.required]],
       file: ['', [Validators.required]],
     });
+  }
+
+  obtenerComentarios(idM: string) {
+    const path = 'Comentarios';
+    this.comentariosServ.getCollection<Comentario>(path).subscribe(res => {
+      this.listarComentarios = res.filter(e => idM === e.idPublicacion);
+      //console.log(this.listaMaterias);
+      this.listarComentarios.forEach(element => {
+        this.publicacionId = element.idPublicacion;
+        // console.log(element.nivel);
+      });
+    });
+  }
+
+  async onGoToDelete(comentarioId: string): Promise<void> {
+
+    const confirmacion = confirm('Esta seguro que desea eliminar el comentario');
+
+    if (confirmacion) {
+      try {
+        await this.datosSrv.onDeleteComentarios(comentarioId);
+        alert('El comentario se elimino con exito');
+      } catch (err) {
+        console.log(err);
+      }
+    }
   }
 
   goBack() {

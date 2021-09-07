@@ -11,6 +11,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { Materia } from '../../shared/models/materia.interface';
 import { Publicacion } from '../../shared/models/publicacion.interface';
+import { Comentario } from '../../shared/models/comentario.interface';
 import { Bloqueo } from '../../shared/models/block.interface';
 import { FirebaseauthService } from '../../../app/views/services/firebaseauth.service';
 
@@ -25,6 +26,7 @@ export class ThemeService {
   studentsBlock: Observable<Admin[]>;
   materias: Observable<Materia[]>;
   publicaciones: Observable<Publicacion[]>;
+  comentarios: Observable<Comentario[]>;
 
   photo: any;
   currentUser: any;
@@ -38,6 +40,7 @@ export class ThemeService {
   private studentsBlockCollection: AngularFirestoreCollection<Admin>;
   private materiasCollection: AngularFirestoreCollection<Materia>;
   private publicacionesCollection: AngularFirestoreCollection<Publicacion>;
+  private comentariosCollection: AngularFirestoreCollection<Comentario>;
 
 
   constructor(
@@ -52,11 +55,13 @@ export class ThemeService {
     this.studentsBlockCollection = afs.collection<Admin>('Bloqueos');
     this.materiasCollection = afs.collection<Materia>('Materias');
     this.publicacionesCollection = afs.collection<Publicacion>('Publicaciones');
+    this.comentariosCollection = afs.collection<Comentario>('Comentarios');
     this.getAdmins();
     this.getStudents();
     this.getStudentsBloqueados();
     this.getMaterias();
     this.getPublicaciones();
+    this.getComentarios();
   }
 
 
@@ -88,6 +93,18 @@ export class ThemeService {
     return new Promise(async (resolve, reject) => {
       try {
         const result = await this.publicacionesCollection.doc(publicacionId).delete();
+        resolve(result);
+
+      } catch (err) {
+        reject(err.message);
+      }
+    });
+  }
+
+  onDeleteComentarios(comentarioId: string): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const result = await this.comentariosCollection.doc(comentarioId).delete();
         resolve(result);
 
       } catch (err) {
@@ -335,6 +352,13 @@ export class ThemeService {
     this.publicaciones = this.publicacionesCollection.snapshotChanges().pipe(
       map(actions => 
         actions.map(a => a.payload.doc.data() as Publicacion))
+    );
+  }
+
+  private getComentarios(): void {
+    this.comentarios = this.comentariosCollection.snapshotChanges().pipe(
+      map(actions => 
+        actions.map(a => a.payload.doc.data() as Comentario))
     );
   }
 }

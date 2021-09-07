@@ -37,6 +37,40 @@
                 </div>
                 <br>
                 <hr>
+
+                <div class="row">
+                    <div class="col-12">
+                        <h5>COMENTARIOS</h5>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th scope="col">Usuario</th>
+                                        <th scope="col">Texto</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-info" *ngFor="let item of listarComentarios">
+                                        <th scope="row">{{ item.nameUser}} {{ item.apellUser}}</th>
+                                        <th scope="row">{{ item.texto}}</th>
+                                        <td role="group">
+                                            <button type="button" class="btn btn-outline-danger m-1"
+                                                (click)="onGoToDelete(item.id)">
+                                                <i class="cil-trash" style="color: red;"> Eliminar</i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
