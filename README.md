@@ -104,4 +104,5 @@ El sistema web se encuentra almacenado en el hosting de Firebase en la siguiente
 
  Enlace al video :movie_camera:
  
- [![ScreenShot](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/video.png)](:https://www.youtube.com/)
+ [![ScreenShot](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/video.png](https://youtu.be/XIPEvncjB04)
+
