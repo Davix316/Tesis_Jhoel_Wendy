@@ -1,4 +1,4 @@
-#PEER-KNOW
+# PEER-KNOW
 
 ## ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/logo.png)
 PEER-KNOW Es un sistema web para administradores y una aplicación móvil (compatible con el SO Android) para estudiantes de la ESFOT en el cual pueden compartir sus tareas sean estas resueltas o no, publicar cuestionarios, realizar preguntas, contribuir con respuestas y establecer una comunicación privada entre estudiantes, mientras los administradores contralan usuarios estudiantes y revisan tareas publicadas.
