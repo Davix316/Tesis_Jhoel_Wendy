@@ -42,7 +42,7 @@ El sistema web se encuentra almacenado en el hosting de Firebase en la siguiente
 
 ### 4. Funcionalidades principales del Sistema Web
 
-| **Inicio de sesión** :simple_smile: | **Registro de Estudiantes y/o Administradores** :mens: | 
+| **Inicio de sesión** :star2: | **Registro de Estudiantes y/o Administradores** :mens: | 
 | ------------- | ------------- |
 |Interfaz de inicio de sesión con el metodo de logueo usuario y contraseña. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/web/images/login_web.jpg) |Interfaz de registro de usuario estudiante y/o administrador con los mismo campos excepto en rol. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/web/images/registro_web_admin.jpg)|
 
