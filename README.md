@@ -9,8 +9,8 @@ PEER-KNOW Es un sistema web para administradores y una aplicación móvil (compa
 - Wendy Soto
 
 ### 1. Arquitectura y Estructura
-- Arquitectura
-A continuación se muestra las Arquitecturas tanto de la aplicación móvil, como del sistema web:
+- Arquitectura: 
+A continuación se muestra las Arquitecturas; la primera del sistema web, y la segunda de la alicación móvil:
  ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/web/images/arquiMovil.png)
  ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/web/images/arquiWeb.png)
 
@@ -27,6 +27,7 @@ El sistema web se encuentra almacenado en el hosting de Firebase en la siguiente
 | ------------- | ------------- | 
 |![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/splash.png) |![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/webLogin.jpg)|
 
+
 ### 3. Funcionalidades principales de la Aplicación Móvil
 
 | **Inicio de sesión** :closed_lock_with_key: | **Registro de usuario** :mens: | **Publicaciones** :books: | 
@@ -38,11 +39,12 @@ El sistema web se encuentra almacenado en el hosting de Firebase en la siguiente
 | ------------- | ------------- | ------------- | 
 |El detalle de la tarea se la visualiza despues de dar clic en el icono de vista de la publicacion, aqui se presenta el detalle completo de la tarea o cuestionario, los comentarios en ella, el archivo cargado y un boton para poder descargarlo ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/detallemateria.jpg)| La lista de materias del estudiante se presentan en orden desde el semestre 1 al 5. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/materias.jpg)|al dar clic sobre una materia en especifico nos lista las publicaciones sobre todas las tareas, cuestionarios o proyectos incluidos en ella. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/tareas.jpg)|
 
+
 ### 4. Funcionalidades principales del Sistema Web
 
 | **Inicio de sesión** :simple_smile: | **Registro de Estudiantes y/o Administradores** :mens: | 
 | ------------- | ------------- |
-|Interfaz de inicio de sesión con el metodo de logueo usuario y contraseña. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/web/images/login_web.jpg) |Interfaz de registro de usuario estudiante y/o administrador con los mismo campos excepto en rol. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/web/images/registro_web.jpg)|
+|Interfaz de inicio de sesión con el metodo de logueo usuario y contraseña. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/web/images/login_web.jpg) |Interfaz de registro de usuario estudiante y/o administrador con los mismo campos excepto en rol. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/web/images/registro_web_admin.jpg)|
 
 
 | **Lista de administradores** :memo: | **Lista de estudiantes** :memo: |
