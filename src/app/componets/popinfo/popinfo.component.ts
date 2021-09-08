@@ -9,24 +9,23 @@ import { DetalleTareaPage } from 'src/app/Pages/detalle-tarea/detalle-tarea.page
 })
 export class PopinfoComponent implements OnInit {
 
-opcion=['Eliminar','Reportar' ]
 
+//Del componente detalle tarea
 @Input() idUserLog: string;
 @Input() idPublishUser:string;
-
-@Input() idComentUser:string;
+//del componente Comentarios
+@Input() OinfoComent:any;
 @Input() idUserLogC:string;
 
-  constructor(private popoverCtrl:PopoverController) { }
- 
 
+  constructor(private popoverCtrl:PopoverController) { }
   
- 
   ngOnInit() {
+    console.log('objeto comentario:', this.OinfoComent);
     console.log('estoy logueado desde DT con:', this.idUserLog);
     console.log(' el idUser de la Publi', this.idPublishUser);
-    console.log('estoy logueado ede Coment oc::', this.idUserLogC);
-    console.log( 'id de User comentario:', this.idComentUser);
+   
+    console.log('estoy logueado desde Coment con:', this.idUserLogC);
     
   } 
 

@@ -95,10 +95,8 @@ navigationExtras: NavigationExtras = {
     console.log(' Comentarios-> Tarea id:', this.tareaId);
   }
 
-/* Referencia de idComentario*/
-@ViewChild('idComentario') idComentario: ElementRef
-//Referencia del id user del comentario
-@ViewChild('idComenUser') idComenUser: ElementRef
+
+
 
 
   ngOnInit() {
@@ -224,8 +222,10 @@ tarea.percentageChanges().subscribe((porcentaje) => {
 
 }
 
-//Popover
-async presentPopover(ev: any){
+//POPOVER PARA ELIMINAR Y REPORTAR COMENTARIOS
+async presentPopover(ev: any, comentario:any){
+  
+console.log('IDW: para visualizar', comentario.id );
 
   const popover = await this.popoverController.create({
     component: PopinfoComponent,
@@ -234,7 +234,8 @@ async presentPopover(ev: any){
     mode:'ios',
     componentProps: {    
       idUserLogC:this.codUser,  
-      idComentUser:this.idComenUser.nativeElement.value, 
+      OinfoComent:comentario.idUser,
+      
     }
   });
   await popover.present();
@@ -245,18 +246,20 @@ try {
   console.log('opcion seleecionada', data);
   if(data.item=="Eliminar"){
     console.log('codigoUsuario:', this.codUser); 
-    const idC=this.idComentario.nativeElement.value;
-    console.log(idC);    
-    this.firestoreService.deleteDoc("id del comentario",idC);
+    
+    this.firestoreService.deleteDoc("Comentarios",comentario.id)
+    
   }
+
  else if(data.item=="Reportar"){
    console.log("reportar true");   
-   this.presentModal(this.idComentario.nativeElement.value);
+
+  this.presentModal(comentario);
    
 
  }
 } catch (error) {
-  console.log('bye desde comentarios');
+  //console.log('bye desde comentarios');
   
 }
  
@@ -268,18 +271,19 @@ infoUserChat(item: any): void{
   this.navigationExtras.state.value=item;
   this.router.navigate(['/menu/conversacion'],this.navigationExtras);
 }
-//PRESENT MODAL
 
-async presentModal(idC:string) {
+//PRESENT MODAL PARA REPORTAR COMENTARIO
+
+async presentModal(infoComentario:any) {
   const modal = await this.modalController.create({
     component: ReportarPage,
     componentProps: {
-      codComentario:idC,
-      idUserLog:this.codUser,
-      nombreLog: this.userName  
+     ObjComentario:infoComentario,
+     userReport: this.userInfo
     }
   });
    await modal.present();
+
 /* const{data}=await modal.onDidDismiss();
 console.log('retorno del modal', data.motivo); */
 

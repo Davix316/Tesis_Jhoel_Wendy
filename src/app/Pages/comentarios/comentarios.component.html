@@ -18,7 +18,7 @@
     <ion-list>
       <ion-row>
         <ion-col>
-          <ion-chip>
+          <ion-chip [ngClass]="{'userLog': codUser==item.idUser}">
             <ion-avatar>
               <img [src]="item.fotoUser">
             </ion-avatar>
@@ -30,9 +30,8 @@
       <ion-row>
         <ion-label class="ion-text-wrap comentario"> {{item.texto}} &nbsp;</ion-label>
         <small>({{item.fecha.toDate()|date:'M/d/yy, h:mm a'}})</small>
-        <input #idComentario [value]=item.id type="hidden">
-        
-        <input #idComenUser [value]=item.idUser >
+       
+
       </ion-row>
 
       <ion-row>
@@ -51,7 +50,7 @@
         </ion-col>
 
         <ion-col size="2">
-          <button (click)="presentPopover($event)">
+          <button (click)="presentPopover($event, item)">
             <ion-label class="btnComm"><i class="fas fa-ellipsis-h"></i></ion-label>
           </button>
         </ion-col>

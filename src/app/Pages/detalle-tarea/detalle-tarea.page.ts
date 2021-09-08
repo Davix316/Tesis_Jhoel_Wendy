@@ -205,14 +205,15 @@ export class DetalleTareaPage implements OnInit {
       if (data.item == "Eliminar") {
         this.presentAlertConfirm()
       }
-      console.log('botondesdeaPadre:', data);
+      //console.log('botondesdeaPadre:', data);
     } catch (error) {
-      console.log('bye');
+      //console.log('bye');
     }
 
   }
 
 
+  
 
 
 

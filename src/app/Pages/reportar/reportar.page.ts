@@ -5,10 +5,14 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 
 interface reporteInterface {
 id: string;
-idPoC:string;
-idUser:string;
 motivo:string;
-nameUser:string;
+descripRe:string;
+idPoC:string;
+idUserComent:string;
+nameUserComent:string;
+idUReport:string;
+nameUReport:string;
+comentReport:string;
 }
 
 @Component({
@@ -18,12 +22,13 @@ nameUser:string;
 })
 export class ReportarPage implements OnInit {
 
-  @Input() codComentario: string;
-  @Input()  idUserLog: string;
-  @Input()  nombreLog: string;
+  @Input() ObjComentario: any;
+  @Input()  userReport: any;
+  
 
   public formReport=new FormGroup({
     motivo: new FormControl('',[Validators.required]),
+    descripcion:  new FormControl('',[Validators.required]),
   })
 
   
@@ -31,9 +36,7 @@ export class ReportarPage implements OnInit {
     private firestore: FirestoreService) { }
 
   ngOnInit() {
-    console.log('codigo de comentario', this.codComentario);
-    console.log('codigo de comentario', this.idUserLog);
-    console.log('codigo de comentario', this.nombreLog);
+    
     
   }
 
@@ -50,9 +53,12 @@ try {
   if(this.formReport.valid){
 
 report.id=this.firestore.getId();
-report.idPoC=this.codComentario;
-report.idUser=this.idUserLog;
-report.nameUser=this.nombreLog;
+report.idPoC=this.ObjComentario.id;
+report.idUReport=this.userReport.id;
+report.nameUReport=this.userReport.nombre;
+report.comentReport=this.ObjComentario.texto;
+report.idUserComent=this.ObjComentario.idUser;
+report.nameUserComent=this.ObjComentario.nameUser;
 const idReporte=report.id;
     this.firestore.saveDoc('Reportes', report, idReporte);
     this.modalController.dismiss({
