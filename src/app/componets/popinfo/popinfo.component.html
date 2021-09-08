@@ -1,7 +1,7 @@
 
-  <ion-item  lines="none" *ngFor=" let item of opcion" detail>
-    <ion-button expand="full" color="warning" (click)="btnPop(item)" >     
-    {{item}}
-    </ion-button>
-  </ion-item>
-
+  <ion-button  *ngIf="idUserLog==idPublishUser"  (click)="btnPop('Eliminar')" shape="round"   size="small" color="warning"   expand="block" > 
+    Eliminar <ion-icon name="trash" ></ion-icon>
+  </ion-button>
+  <ion-button (click)="btnPop('Reportar')"  shape="round"   size="small" color="warning"   expand="block" >
+    Repotar  <ion-icon name="ban" ></ion-icon>  
+  </ion-button>

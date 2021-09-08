@@ -17,6 +17,8 @@ import { ImagePicker, ImagePickerOptions} from '@ionic-native/image-picker/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { PopoverController } from '@ionic/angular';
 import { PopinfoComponent } from 'src/app/componets/popinfo/popinfo.component';
+import { ModalController } from '@ionic/angular';
+import { ReportarPage } from '../reportar/reportar.page';
 
 
 @Component({
@@ -36,7 +38,7 @@ export class ComentariosComponent implements OnInit {
   imgUser: string;
   voto=0;
   imgpath='';
-
+ 
 
   fechaComen=new Date();
   id=this.servFirestore.getId();
@@ -77,6 +79,7 @@ navigationExtras: NavigationExtras = {
     private file: File,
     public popoverController: PopoverController,
     private firestoreService:FirestoreService,
+    public modalController: ModalController,
 
     ) {
 
@@ -92,8 +95,11 @@ navigationExtras: NavigationExtras = {
     console.log(' Comentarios-> Tarea id:', this.tareaId);
   }
 
-  /* Referencia de idComentario*/
+/* Referencia de idComentario*/
 @ViewChild('idComentario') idComentario: ElementRef
+//Referencia del id user del comentario
+@ViewChild('idComenUser') idComenUser: ElementRef
+
 
   ngOnInit() {
 
@@ -164,7 +170,7 @@ getComments(idP: string){
     this.listacoment = res.filter(e=>idP===e.idPublicacion);
     if (this.listacoment.length===0){
       this.comentarios0= true;
-      console.log('No hay comentarios');
+      //console.log('No hay comentarios');
     }
     else{
       this.comentarios0=false;
@@ -219,32 +225,67 @@ tarea.percentageChanges().subscribe((porcentaje) => {
 }
 
 //Popover
-async presentPopover(ev: any) {
+async presentPopover(ev: any){
 
   const popover = await this.popoverController.create({
     component: PopinfoComponent,
-    cssClass: 'my-custom-class',
     translucent: true,
     event: ev,
-    mode:'ios'
+    mode:'ios',
+    componentProps: {    
+      idUserLogC:this.codUser,  
+      idComentUser:this.idComenUser.nativeElement.value, 
+    }
   });
   await popover.present();
-  console.log('click pop');
+  /* //en caso que no seleccione nada
+ const { role } = await popover.onDidDismiss();
+ console.log('onDidDismiss resolved with role', role); */ 
+//trae los valores seleccionados del popInfo
+
   const { data } = await popover.onDidDismiss();
-  console.log('porp Comentar', data);
+  console.log('opcion seleecionada', data);
   if(data.item=="Eliminar"){
     console.log('codigoUsuario:', this.codUser); 
     const idC=this.idComentario.nativeElement.value;
     console.log(idC);
     
     this.firestoreService.deleteDoc("Comentarios",idC);
-
   }
+ else if(data.item=="Reportar"){
+   console.log("reportar true");
+   
+   this.presentModal(this.idComentario.nativeElement.value);
+   
+
+ }
+  
 }
+
 
 infoUserChat(item: any): void{
   this.navigationExtras.state.value=item;
   this.router.navigate(['/menu/conversacion'],this.navigationExtras);
 }
+//PRESENT MODAL
+
+async presentModal(idC:string) {
+  const modal = await this.modalController.create({
+    component: ReportarPage,
+    componentProps: {
+      codComentario:idC,
+      idUserLog:this.codUser,
+      nombreLog: this.userName  
+    }
+  });
+   await modal.present();
+/* const{data}=await modal.onDidDismiss();
+console.log('retorno del modal', data.motivo); */
+
+}
+
+
+
+ 
 
 }
