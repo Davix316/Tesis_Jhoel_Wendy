@@ -238,27 +238,28 @@ async presentPopover(ev: any){
     }
   });
   await popover.present();
-  /* //en caso que no seleccione nada
- const { role } = await popover.onDidDismiss();
- console.log('onDidDismiss resolved with role', role); */ 
+  
 //trae los valores seleccionados del popInfo
-
+try {
   const { data } = await popover.onDidDismiss();
   console.log('opcion seleecionada', data);
   if(data.item=="Eliminar"){
     console.log('codigoUsuario:', this.codUser); 
     const idC=this.idComentario.nativeElement.value;
-    console.log(idC);
-    
-    this.firestoreService.deleteDoc("Comentarios",idC);
+    console.log(idC);    
+    this.firestoreService.deleteDoc("id del comentario",idC);
   }
  else if(data.item=="Reportar"){
-   console.log("reportar true");
-   
+   console.log("reportar true");   
    this.presentModal(this.idComentario.nativeElement.value);
    
 
  }
+} catch (error) {
+  console.log('bye desde comentarios');
+  
+}
+ 
   
 }
 

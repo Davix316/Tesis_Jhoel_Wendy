@@ -47,6 +47,8 @@ export class DetalleTareaPage implements OnInit {
 
   listComentarios: ComentariosInterface[];
 
+  idUserPubli: string;
+
   constructor(
     private domSanit: DomSanitizer,
     private router: Router,
@@ -71,6 +73,7 @@ export class DetalleTareaPage implements OnInit {
     this.tareaId = this.tareas.id;
     this.nombreTarea = this.tareas.titulo;
     this.materiaId = this.tareas.idMateria;
+    this.idUserPubli = this.tareas.idUser
     console.log('Tarea id:', this.tareaId);
     //TRAER EL NOMBRE DE LA MATERIA
     this.getMateria(this.materiaId);
@@ -186,18 +189,27 @@ export class DetalleTareaPage implements OnInit {
       cssClass: 'my-custom-class',
       event: ev,
       translucent: true,
-      mode: 'ios'
-      
+      mode: 'ios',
+      backdropDismiss: true,
+      componentProps: {
+        idPublishUser: this.idUserPubli,
+        idUserLog: this.idUser,
+      }
+
     });
     await popover.present();
-    const {data}= await popover.onDidDismiss();
-    if(data.item=="Eliminar"){
-      this.presentAlertConfirm()
-
+    //trae los valor seleccionados del popInfo
+    // const {data}= await popover.onWillDismiss(); // realiza la accion mas rapida q despues de cerrar
+    try {
+      const { data } = await popover.onDidDismiss();
+      if (data.item == "Eliminar") {
+        this.presentAlertConfirm()
+      }
+      console.log('botondesdeaPadre:', data);
+    } catch (error) {
+      console.log('bye');
     }
-    console.log('botondesdeaPadre:', data);
-      
-    
+
   }
 
 

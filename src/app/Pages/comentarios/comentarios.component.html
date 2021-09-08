@@ -31,6 +31,8 @@
         <ion-label class="ion-text-wrap comentario"> {{item.texto}} &nbsp;</ion-label>
         <small>({{item.fecha.toDate()|date:'M/d/yy, h:mm a'}})</small>
         <input #idComentario [value]=item.id type="hidden">
+        
+        <input #idComenUser [value]=item.idUser >
       </ion-row>
 
       <ion-row>
@@ -43,7 +45,7 @@
           </ion-label>
         </ion-col>
         <ion-col size="4">
-          <button (click)="infoUserChat(item)">
+          <button (click)="infoUserChat(item)" *ngIf="item.idUser!=codUser">
             <ion-label class="btnComm"><i class="fas fa-sms"></i> Chatear</ion-label>
           </button>
         </ion-col>
@@ -106,3 +108,4 @@
 
 
 </form>
+

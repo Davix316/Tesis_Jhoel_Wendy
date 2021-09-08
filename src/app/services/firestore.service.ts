@@ -42,6 +42,7 @@ saveCollection(comentario: ComentariosInterface, idP: string){
 
 //Guardar Coleccion GENERICO
 saveDoc(  path: string, interf: any, idC: string){
+  
   this.firestore.collection(path).doc(idC).set(interf)
 .then((docRef) => {
     console.log('registro exitoso');
