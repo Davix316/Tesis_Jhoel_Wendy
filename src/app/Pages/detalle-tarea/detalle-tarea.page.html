@@ -11,10 +11,9 @@
   <div class="container">
 <ion-chip style="background: rgba(77, 226, 194, 0.623); color: #115571; width: -webkit-fill-available;">
  
-   
-
     <ion-text class="ion-text-center titulo" >{{tareas.titulo}}</ion-text>
-    <div class=""></div>
+    
+    <div class="ion-text-end"></div>
     <button   (click)="addFavorite()" style="background: none; font-size:medium;">
       <ion-icon *ngIf="favoritoAdd==false" class="favoritoFalse" name="heart"></ion-icon>
       <ion-icon *ngIf="favoritoAdd==true" class="favoritoTrue" name="heart"></ion-icon>
