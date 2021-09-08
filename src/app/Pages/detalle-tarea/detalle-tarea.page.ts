@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Component, OnInit,  } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 /* import { File } from '@ionic-native/file/ngx';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx'; */
@@ -15,6 +15,12 @@ import { PopinfoComponent } from 'src/app/componets/popinfo/popinfo.component';
 import { MateriasInterface } from 'src/app/shared/materias';
 import { AlertController } from '@ionic/angular';
 import { ComentariosInterface } from 'src/app/shared/comentarios';
+import { ModalController } from '@ionic/angular';
+import { ReportarPage } from '../reportar/reportar.page';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { ReportPublishPage } from '../report-publish/report-publish.page';
+
+
 @Component({
   selector: 'app-detalle-tarea',
   templateUrl: './detalle-tarea.page.html',
@@ -48,6 +54,7 @@ export class DetalleTareaPage implements OnInit {
   listComentarios: ComentariosInterface[];
 
   idUserPubli: string;
+  userInfo:any;
 
   constructor(
     private domSanit: DomSanitizer,
@@ -61,6 +68,8 @@ export class DetalleTareaPage implements OnInit {
     public popoverController: PopoverController,
     private fireStore: FirestoreService,
     public alertController: AlertController,
+    public modalController: ModalController,
+    private firestore: AngularFirestore,
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.tareas = navigation?.extras?.state?.value;
@@ -91,10 +100,29 @@ export class DetalleTareaPage implements OnInit {
       if (user != null) {
         //id de Usuario de fireAuth
         this.idUser = user.uid;
+        this.getuser(this.idUser);
         // console.log(this.idUser);
       }
     });
 
+
+  }
+
+
+  ///OBTENER INFO  USUARIO DE LA BDD
+  public getuser(uid: string) {
+    const docRef = this.firestore.collection('Usuarios').doc(uid);
+    docRef.get().toPromise().then((doc) => {
+      if (doc.exists){
+        //console.log('infoUser', doc.data());
+        this.userInfo = doc.data();
+       
+      } else {
+        console.log('"no existe el usuario"');
+      }
+    }).catch((error) => {
+      console.log('erro', error);
+    });
 
   }
 
@@ -180,9 +208,9 @@ export class DetalleTareaPage implements OnInit {
   }
 
 
-  //MOSTRAR POPOVER PARA ELIMINAR Y REPRTAR PUBLICACION
+  //MOSTRAR POPOVER PARA ELIMINAR Y REPORTAR PUBLICACION
 
-  async presentPopover(ev: any) {
+  async presentPopover(ev: any, publicacion:any) {
 
     const popover = await this.popoverController.create({
       component: PopinfoComponent,
@@ -205,7 +233,10 @@ export class DetalleTareaPage implements OnInit {
       if (data.item == "Eliminar") {
         this.presentAlertConfirm()
       }
-      //console.log('botondesdeaPadre:', data);
+      else if(data.item=="Reportar"){
+        this.presentModal(publicacion);        
+
+      }
     } catch (error) {
       //console.log('bye');
     }
@@ -213,7 +244,17 @@ export class DetalleTareaPage implements OnInit {
   }
 
 
-  
+  async presentModal(infoPubli:any) {
+    const modal = await this.modalController.create({
+      component: ReportPublishPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+       ObjPublicacion:infoPubli,
+       ObjUReport: this.userInfo,
+      }
+    });
+    return await modal.present();
+  }
 
 
 

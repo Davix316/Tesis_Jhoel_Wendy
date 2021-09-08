@@ -6,13 +6,14 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 interface reporteInterface {
 id: string;
 motivo:string;
-descripRe:string;
+descripReport:string;
 idPoC:string;
-idUserComent:string;
-nameUserComent:string;
+idUserOwner:string;
+nameUserOwner:string;
 idUReport:string;
 nameUReport:string;
-comentReport:string;
+contentReport:string;
+tipo:string;
 }
 
 @Component({
@@ -56,9 +57,10 @@ report.id=this.firestore.getId();
 report.idPoC=this.ObjComentario.id;
 report.idUReport=this.userReport.id;
 report.nameUReport=this.userReport.nombre;
-report.comentReport=this.ObjComentario.texto;
-report.idUserComent=this.ObjComentario.idUser;
-report.nameUserComent=this.ObjComentario.nameUser;
+report.contentReport=this.ObjComentario.texto;
+report.idUserOwner=this.ObjComentario.idUser;
+report.nameUserOwner=this.ObjComentario.nameUser;
+report.tipo='comentario';
 const idReporte=report.id;
     this.firestore.saveDoc('Reportes', report, idReporte);
     this.modalController.dismiss({

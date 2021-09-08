@@ -1,0 +1,50 @@
+<ion-item>
+  <ion-title>Reportar</ion-title> 
+  <button slot="end" (click)="salirModal()" style="background: none; color: blue;"> <b>Cerrar</b> </button>
+</ion-item> 
+  
+  
+
+
+<ion-content>
+<form [formGroup]="formReport" (ngSubmit)="saveReporte(formReport.value)">
+<ion-card>
+  <ion-card-content>
+    <ion-list>
+      <ion-radio-group formControlName="motivo" required>
+        <ion-list-header>
+          <h6>Elija el motivo del reporte</h6>
+        </ion-list-header>
+    
+        <ion-item>
+          <p>Información falsa</p>
+          <ion-radio slot="start" value="Información falsa"></ion-radio>
+        </ion-item>
+    
+        <ion-item>
+          <p>Contenido indebido</p>
+          <ion-radio slot="start" value="Contenido indebido"></ion-radio>
+        </ion-item>
+
+        <ion-item>
+          <p>Palabras Groseras</p>
+          <ion-radio slot="start" value="Palabras Groseras"></ion-radio>
+        </ion-item>
+    
+      </ion-radio-group>
+    </ion-list>
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+<ion-card-content>
+  <h6>Otro</h6>
+  <small>Describa otro motivo por el cual desea reportar</small>
+  <ion-textarea class="form-control" formControlName="descripcion" required> </ion-textarea>
+</ion-card-content>
+<div class="ion-text-center">
+<ion-button shape="round" type="submit">Reportar</ion-button>
+</div>
+</ion-card>
+</form>
+</ion-content>
