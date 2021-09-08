@@ -14,6 +14,7 @@
    
 
     <ion-text class="ion-text-center titulo" >{{tareas.titulo}}</ion-text>
+    <div class=""></div>
     <button   (click)="addFavorite()" style="background: none; font-size:medium;">
       <ion-icon *ngIf="favoritoAdd==false" class="favoritoFalse" name="heart"></ion-icon>
       <ion-icon *ngIf="favoritoAdd==true" class="favoritoTrue" name="heart"></ion-icon>
@@ -58,7 +59,7 @@
     </ion-chip> -->
 
 
-<ion-chip (click)="presentPopover($event)">
+<ion-chip (click)="presentPopover($event, tareas)">
       <ion-icon name="ellipsis-horizontal"></ion-icon>
 </ion-chip>
 
