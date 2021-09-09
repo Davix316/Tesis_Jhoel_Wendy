@@ -85,7 +85,7 @@ navigationExtras: NavigationExtras = {
 
     const navigation = this.router.getCurrentNavigation();
     this.publi = navigation?.extras?.state?.value;
-    console.log('detalle tarea en Comentarios:', this.publi);
+    
     //Si no hay ID de tarea retorna
     if (typeof this.publi==='undefined') {
       this.router.navigate(['/menu/home']);
