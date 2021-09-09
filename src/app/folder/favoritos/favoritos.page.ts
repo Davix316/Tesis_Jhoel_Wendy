@@ -13,13 +13,14 @@ import { FavoritosInterface } from 'src/app/shared/favoritos';
 export class FavoritosPage implements OnInit {
 
   idUser: string;
-  listaFavoritos: FavoritosInterface[];
+  listaFavoritos: any;
+
+publicacion:any;
 
 
   constructor(
     private serviceauth: FireauthService,
     private serviceFS: FirestoreService,
-
   ) { }
 
   ngOnInit() {
@@ -34,17 +35,14 @@ export class FavoritosPage implements OnInit {
     });
   }
 
+
   //LEER COLECCION FAVORITOS //Se requiere Id de Usuario
   getFavoritos(codUser: string){
-this.serviceFS.readCollection<any>('Favoritos').subscribe(res=>{
-  this.listaFavoritos = res.filter(e=>codUser===e.idUser);
+this.serviceFS.getFavorito(codUser).subscribe((ref:any)=>{
+   this.publicacion=ref.publicacion;
+console.log(this.publicacion);
 
-console.log('Lista de favoritos',this.listaFavoritos);
-this.listaFavoritos.forEach(element => {
-console.log(element.idPublicacion);
-});
-
-});
+})
 
   }
 }

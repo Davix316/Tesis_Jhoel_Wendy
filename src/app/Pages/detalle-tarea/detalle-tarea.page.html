@@ -8,64 +8,65 @@
 </ion-header>
 
 <ion-content>
-  <div class="container">
-<ion-chip style="background: rgba(77, 226, 194, 0.623); color: #115571; width: -webkit-fill-available;">
- 
-    <ion-text class="ion-text-center titulo" >{{tareas.titulo}}</ion-text>
-    
-    <div class="ion-text-end"></div>
-    <button   (click)="addFavorite()" style="background: none; font-size:medium;">
-      <ion-icon *ngIf="favoritoAdd==false" class="favoritoFalse" name="heart"></ion-icon>
-      <ion-icon *ngIf="favoritoAdd==true" class="favoritoTrue" name="heart"></ion-icon>
-
-  </button>
-
-  </ion-chip>
-  
- 
-  <p><b>Materia: </b>{{nombreMateria}}</p>
-
-  <ion-label class="ion-text-capitalize"><b>Autor: </b>{{tareas.nameUser}} {{tareas.apellUser}}</ion-label>
-  <br>
-  
-<div class="ion-text-center">
-  <img src="/assets/icon/viewfile.png"  width="30%" alt="">
-
-  <button type="button"  (click)="openFile(tareas.file)" >
-    Descargar
-  </button>
-</div>
-  <p>{{tareas.descripcion}} </p>
-
-
-
-
-
-  <ion-segment>
-    <ion-chip>
-      <ion-icon name="thumbs-up-outline"></ion-icon>
-      <ion-label>78</ion-label>
+  <ion-item lines="none">
+    <div slot="end" style="padding:0; margin: 0px">
+      <button (click)="addFavorite(favorito)" style="background: none; font-size:medium;">
+        <ion-icon *ngIf="favoritoAdd==false" class="favoritoFalse" name="heart"></ion-icon>
+        <ion-icon *ngIf="favoritoAdd==true" class="favoritoTrue" name="heart"></ion-icon>
+      </button>
+    </div>
+    <ion-chip  style="background: rgba(77, 226, 194, 0.623); color: #115571; width: -webkit-fill-available;">
+      <ion-text class="ion-text-center titulo">{{tareas.titulo}}</ion-text>      
     </ion-chip>
-
-    <ion-chip>
-      <ion-icon  name="chatbubble-outline"></ion-icon>
-      <ion-label>78</ion-label>
-    </ion-chip>
+  </ion-item>
 
 
-    <!-- <ion-chip>
+  <div class="container">   
+
+
+    <p><b>Materia: </b>{{nombreMateria}}</p>
+
+    <ion-label class="ion-text-capitalize"><b>Autor: </b>{{tareas.nameUser}} {{tareas.apellUser}}</ion-label>
+    <br>
+
+    <div class="ion-text-center">
+      <img src="/assets/icon/viewfile.png" width="30%" alt="">
+
+      <button type="button" (click)="openFile(tareas.file)">
+        Descargar
+      </button>
+    </div>
+    <p>{{tareas.descripcion}} </p>
+
+
+
+
+
+    <ion-segment>
+      <ion-chip>
+        <ion-icon name="thumbs-up-outline"></ion-icon>
+        <ion-label>78</ion-label>
+      </ion-chip>
+
+      <ion-chip>
+        <ion-icon name="chatbubble-outline"></ion-icon>
+        <ion-label>78</ion-label>
+      </ion-chip>
+
+
+      <!-- <ion-chip>
       <ion-icon name="heart-outline" (click)="addFavorite()"></ion-icon>
     </ion-chip> -->
 
 
-<ion-chip (click)="presentPopover($event, tareas)">
-      <ion-icon name="ellipsis-horizontal"></ion-icon>
-</ion-chip>
+      <ion-chip (click)="presentPopover($event, tareas)">
+        <ion-icon name="ellipsis-horizontal"></ion-icon>
+      </ion-chip>
 
-  </ion-segment>
-  <hr>
+    </ion-segment>
+    <hr>
 
-<app-comentarios></app-comentarios>
+    <app-comentarios></app-comentarios>
 
     <div class="spacing"></div>
 

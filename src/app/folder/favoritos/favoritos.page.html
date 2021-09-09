@@ -12,34 +12,17 @@
 
 <ion-content>
 
+  <div *ngFor="let fav of publicacion">
     <ion-card >
-
       <ion-grid>
          <ion-row>
           <ion-col class="ion-align-self-center">
             <img src="/assets/icon/pdf.png" alt="file.png">
           </ion-col>
           <ion-col size="8"  class="ion-text-center">
-            <b>Ejercicios de Repaso Calculo difrencial</b>
-            <ion-list>
-              <ion-button color="light" size="small"><ion-icon name="download"></ion-icon></ion-button>
-              <ion-button color="light"  size="small"><ion-icon  class="heart" name="heart-dislike"></ion-icon></ion-button>
-            </ion-list>
-
-
-          </ion-col >
-          <ion-col size="2" class="ion-align-self-center"  >
-            <a routerLink="/menu/detalle-tarea">
-           <ion-icon name="arrow-forward"></ion-icon>
-          </a>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col class="ion-align-self-center">
-            <img src="/assets/icon/pdf.png" alt="file.png">
-          </ion-col>
-          <ion-col size="8"  class="ion-text-center">
-            <b>Metodos de Integración</b>
+            <p>{{fav.nameUser}}</p>
+            <h3>{{fav.nomPubli}}</h3>
+            <ion-label>{{fav.idPubli}}</ion-label>
             <ion-list>
               <ion-button color="light" size="small"><ion-icon name="download"></ion-icon></ion-button>
               <ion-button color="light"  size="small"><ion-icon  class="heart" name="heart-dislike"></ion-icon></ion-button>
@@ -56,7 +39,7 @@
 
       </ion-grid>
   </ion-card>
-
+</div>
 
 
 </ion-content>

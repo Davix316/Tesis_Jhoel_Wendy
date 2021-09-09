@@ -77,7 +77,10 @@ navigationExtras: NavigationExtras = {
         this.cuestionarios0 =false;
         this.proyectos0=false;
       }
-      console.log(this.listaTareas);
+     
+
+
+      //console.log(this.listaTareas);
     });
   }
 

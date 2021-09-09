@@ -7,6 +7,7 @@ import { FireauthService } from 'src/app/services/fireauth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { PublicacionInterface } from 'src/app/shared/publicacion';
 import {  ToastController } from '@ionic/angular';
+import { ComentariosInterface } from 'src/app/shared/comentarios';
 
 @Component({
   selector: 'app-home',
@@ -17,14 +18,15 @@ export class HomePage implements OnInit {
   userInfo: any;
   idUser: string;
   carreraId: string;
-
+  
 publicaciones: PublicacionInterface[]=[];
-cadena: string;
-cutCadena: string;
+
 
 publicaciones0=true;
 numberOfLikes = 0;
 numberOfDislikes = 0;
+listaComent: ComentariosInterface[];
+numComent:any;
 
 //obtener id Clic=keado
 navigationExtras: NavigationExtras = {
@@ -39,6 +41,7 @@ navigationExtras: NavigationExtras = {
     private firestore: AngularFirestore,
     private router: Router,
     public toastController: ToastController,
+    private servFirestore: FirestoreService,
     ){
 
    }
@@ -51,8 +54,13 @@ navigationExtras: NavigationExtras = {
        this.idUser = user.uid;
        //console.log(this.idUser);
        this.getuser(this.idUser);
+       console.log("Num Coment=>", this.numComent);
+       
      }
    });
+
+
+   
 
   }
 
@@ -82,21 +90,26 @@ navigationExtras: NavigationExtras = {
   getPublicacion(idC: string){
     this.fireService.getCollection<PublicacionInterface>('Publicaciones').subscribe(res => {
       this.publicaciones = res.filter(e=>idC===e.idCarrera
-        );
-       /*  this.publicaciones.forEach(element => {
-          this.cadena=element.descripcion;
-          this.cutCadena=this.cadena.substr(0,50);
-          console.log('"parrafo"', this.cutCadena);
-        }); */
-
+        );       
         if(this.publicaciones.length===0){
           this.publicaciones0=true;
         }else{
           this.publicaciones0=false;
 
         }
+
+        this.publicaciones.forEach(element => {
+          const idPubli=element.id
+          this.countComments(idPubli);
+                   
+        });
+
+        
+
     }).unsubscribe;
   }
+
+
 
 //NAVIGATION EXTRAS
   infoTarea(item: any): void{
@@ -124,5 +137,19 @@ async failToast(text) {
   });
   toast.present();
 }
+
+
+//Contar COMENTARIOS
+countComments(idP: string){
+  this.servFirestore.getCollection<ComentariosInterface>('Comentarios').subscribe(res=>{
+    this.listaComent = res.filter(e=>idP===e.idPublicacion);
+  this.numComent=this.listaComent.length;
+    console.log(' # comentarios:',this.listaComent.length  );
+
+
+  }).unsubscribe;
+
+}
+
 
 }

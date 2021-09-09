@@ -18,12 +18,12 @@ export class FirestoreService {
     const collection = this.firestore.collection<Interfaz>(coleccion, ref=> ref.orderBy('fecha','desc'));
     return collection.valueChanges();
   }
-//LEER COLECCION en orden desc
 
-readCollection<Interfaz>(coleccion: string){
-  const collection = this.firestore.collection<Interfaz>(coleccion);
-  return collection.valueChanges();
+
+getFavorito(idUser:string){
+return this.firestore.collection('Favoritos').doc(idUser).valueChanges();
 }
+
 
 //GUARDAR COLECCION
 saveCollection(comentario: ComentariosInterface, idP: string){

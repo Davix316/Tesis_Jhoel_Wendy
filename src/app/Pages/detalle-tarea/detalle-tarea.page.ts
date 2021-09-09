@@ -38,11 +38,9 @@ export class DetalleTareaPage implements OnInit {
   nombreTarea: string;
   favorito: FavoritosInterface = {
     id: this.serviceFS.getId(),
-    idUser: '',
-    nombreTarea: '',
-    idPublicacion: [{ idPubli: '1', tituloPubli: '1' },
-    { idPubli: '2', tituloPubli: '2' },
-    { idPubli: '3', tituloPubli: '3' }],
+    idUser: '',    
+    nameUser:'',
+    publicacion:{},
   };
 
   listaMateria: MateriasInterface[];
@@ -127,14 +125,17 @@ export class DetalleTareaPage implements OnInit {
   }
 
   //GUARDAR FAVORITOS
-  addFavorite() {
+  addFavorite(favor:FavoritosInterface) {
     try {
-      this.favorito.idUser = this.idUser;
-      this.favorito.nombreTarea = this.nombreTarea;
-
-      this.favorito.idPublicacion = this.favorito.idPublicacion;
-      console.log('VALORES FAVORITO', this.favorito);
-      this.serviceFS.saveDoc('Favoritos', this.favorito, this.idUser);
+      favor.id=this.serviceFS.getId();
+      favor.idUser=this.idUser;
+      favor.nameUser=this.userInfo.nombre;
+      favor.publicacion=[{
+        idPubli:this.tareas.id,
+        nomPubli:this.tareas.titulo,
+      }]
+      
+      this.serviceFS.saveDoc('Favoritos', favor, this.idUser);
       this.favoritoAdd = true;
     } catch (error) {
       console.log(error);
