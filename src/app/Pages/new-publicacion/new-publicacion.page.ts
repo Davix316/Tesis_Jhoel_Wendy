@@ -138,7 +138,10 @@ try {
     publi.idCarrera=this.idCarr;
     publi.file=this.inputFile.nativeElement.value;
     this.publiServ.newPublicacion(publi,idPublicacion);
-  } this.formPublicacion.reset();
+      this.formPublicacion.reset();
+    
+  } 
+
 } catch (error) {
 console.log(error);
 }

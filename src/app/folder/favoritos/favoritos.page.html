@@ -20,9 +20,9 @@
             <img src="/assets/icon/pdf.png" alt="file.png">
           </ion-col>
           <ion-col size="8"  class="ion-text-center">
-            <p>{{fav.nameUser}}</p>
-            <h3>{{fav.nomPubli}}</h3>
-            <ion-label>{{fav.idPubli}}</ion-label>
+            
+            <h3>{{fav.titulo}}</h3>
+            
             <ion-list>
               <ion-button color="light" size="small"><ion-icon name="download"></ion-icon></ion-button>
               <ion-button color="light"  size="small"><ion-icon  class="heart" name="heart-dislike"></ion-icon></ion-button>
@@ -31,7 +31,7 @@
 
           </ion-col >
           <ion-col size="2" class="ion-align-self-center"  >
-            <a routerLink="/menu/detalle-tarea">
+            <a (click)="infoTarea(fav)">
            <ion-icon name="arrow-forward"></ion-icon>
           </a>
           </ion-col>

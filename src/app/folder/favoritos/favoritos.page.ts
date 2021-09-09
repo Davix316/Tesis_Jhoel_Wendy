@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
+import { NavParams } from '@ionic/angular';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { FavoritosInterface } from 'src/app/shared/favoritos';
@@ -17,10 +19,18 @@ export class FavoritosPage implements OnInit {
 
 publicacion:any;
 
+//obtener id Clic=keado
+navigationExtras: NavigationExtras = {
+  state: {
+    value: null
+  }
+};
+
 
   constructor(
     private serviceauth: FireauthService,
     private serviceFS: FirestoreService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -45,5 +55,13 @@ console.log(this.publicacion);
 })
 
   }
+
+
+//NAVIGATION EXTRAS
+infoTarea(item: any): void{
+  this.navigationExtras.state.value=item;
+    this.router.navigate(['/menu/detalle-tarea'],this.navigationExtras);
+}
+
 }
 

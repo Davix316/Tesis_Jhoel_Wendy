@@ -20,6 +20,12 @@ import { ReportarPage } from '../reportar/reportar.page';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ReportPublishPage } from '../report-publish/report-publish.page';
 
+interface publiFav {
+  
+  id: string
+  titulo : string
+  idMateria:string
+}
 
 @Component({
   selector: 'app-detalle-tarea',
@@ -40,8 +46,10 @@ export class DetalleTareaPage implements OnInit {
     id: this.serviceFS.getId(),
     idUser: '',    
     nameUser:'',
-    publicacion:{},
+    publicacion:{}
   };
+infPubli:publiFav[];
+
 
   listaMateria: MateriasInterface[];
 
@@ -53,6 +61,7 @@ export class DetalleTareaPage implements OnInit {
 
   idUserPubli: string;
   userInfo:any;
+
 
   constructor(
     private domSanit: DomSanitizer,
@@ -126,16 +135,25 @@ export class DetalleTareaPage implements OnInit {
 
   //GUARDAR FAVORITOS
   addFavorite(favor:FavoritosInterface) {
+    const publicI:  publiFav={
+      id: this.tareas.id,
+      titulo:this.tareas.titulo,
+      idMateria:this.tareas.idMateria,
+    }
+
     try {
       favor.id=this.serviceFS.getId();
       favor.idUser=this.idUser;
       favor.nameUser=this.userInfo.nombre;
-      favor.publicacion=[{
-        idPubli:this.tareas.id,
-        nomPubli:this.tareas.titulo,
-      }]
-      
-      this.serviceFS.saveDoc('Favoritos', favor, this.idUser);
+      favor.publicacion=[/* {
+        id:this.tareas.id,
+        titulo:this.tareas.titulo,
+        idMateria:this.tareas.idMateria
+      } */
+     publicI
+    
+    ]      
+      this.serviceFS.saveFavorito('Favoritos', favor, this.idUser, publicI);
       this.favoritoAdd = true;
     } catch (error) {
       console.log(error);
@@ -162,6 +180,8 @@ export class DetalleTareaPage implements OnInit {
 
     });
   }
+
+
   //CONSULTA COMENTARIO
   //LEER COMENTARIOS
   DeleteComments(idP: string) {
