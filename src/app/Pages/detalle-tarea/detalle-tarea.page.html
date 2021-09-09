@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{tareas.titulo}}</ion-title>
+    <ion-title>{{publiDetalle.titulo}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -16,7 +16,7 @@
       </button>
     </div>
     <ion-chip  style="background: rgba(77, 226, 194, 0.623); color: #115571; width: -webkit-fill-available;">
-      <ion-text class="ion-text-center titulo">{{tareas.titulo}}</ion-text>      
+      <ion-text class="ion-text-center titulo">{{publiDetalle.titulo}}</ion-text>      
     </ion-chip>
   </ion-item>
 
@@ -26,17 +26,17 @@
 
     <p><b>Materia: </b>{{nombreMateria}}</p>
 
-    <ion-label class="ion-text-capitalize"><b>Autor: </b>{{tareas.nameUser}} {{tareas.apellUser}}</ion-label>
+    <ion-label class="ion-text-capitalize"><b>Autor: </b>{{publiDetalle.nameUser}} {{publiDetalle.apellUser}}</ion-label>
     <br>
 
     <div class="ion-text-center">
       <img src="/assets/icon/viewfile.png" width="30%" alt="">
 
-      <button type="button" (click)="openFile(tareas.file)">
+      <button type="button" (click)="openFile(publiDetalle.file)">
         Descargar
       </button>
     </div>
-    <p>{{tareas.descripcion}} </p>
+    <p>{{publiDetalle.descripcion}} </p>
 
 
 
@@ -59,7 +59,7 @@
     </ion-chip> -->
 
 
-      <ion-chip (click)="presentPopover($event, tareas)">
+      <ion-chip (click)="presentPopover($event, publiDetalle)">
         <ion-icon name="ellipsis-horizontal"></ion-icon>
       </ion-chip>
 

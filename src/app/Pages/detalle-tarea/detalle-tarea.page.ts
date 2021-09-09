@@ -50,11 +50,29 @@ infPubli:publiFavoritoInterface[];
   favoritoAdd = false;
   materiaId: string;
   nombreMateria: string;
+  archivo:string;
 
   listComentarios: ComentariosInterface[];
 
   idUserPubli: string;
   userInfo:any;
+
+publiDetalle:PublicacionInterface={
+  id: '',
+  idUser: '',
+  idMateria: '',
+  idCarrera: '',
+  categoria: '',
+  fecha: Date,
+  likes: 0,
+  titulo: '',
+  descripcion: '',
+  nameUser: '',
+  apellUser: '',
+  file: '',
+  imagen: '',
+  userFoto: '',
+}
 
 
   constructor(
@@ -71,23 +89,17 @@ infPubli:publiFavoritoInterface[];
     public alertController: AlertController,
     public modalController: ModalController,
     private firestore: AngularFirestore,
+    private fireService: FirestoreService,
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.tareas = navigation?.extras?.state?.value;
-    //console.log('tareas cons:', this.tareas);
+   
     //Si no hay ID de tarea retorna
     if (typeof this.tareas === 'undefined') {
       this.router.navigate(['/menu/home']);
     }
     //
-    this.tareaId = this.tareas.id;
-    this.nombreTarea = this.tareas.titulo;
-    this.materiaId = this.tareas.idMateria;
-    this.idUserPubli = this.tareas.idUser
-    console.log('Tarea id:', this.tareaId);
-    //TRAER EL NOMBRE DE LA MATERIA
-    this.getMateria(this.materiaId);
-
+   
 
 
   }
@@ -105,9 +117,34 @@ infPubli:publiFavoritoInterface[];
         // console.log(this.idUser);
       }
     });
-
+this.getPublicacion(this.tareas.id);
 
   }
+
+  //CONSULTAR una sola Publicacion
+
+  getPublicacion(idTarea) {
+    this.fireService.getDoc<PublicacionInterface>('Publicaciones', idTarea).subscribe(res => {
+      if(res){
+        this.publiDetalle=res;
+
+        //console.log('esta es la publicacion con detalle:', this.publiDetalle);
+        this.tareaId = this.publiDetalle.id;
+        this.nombreTarea = this.publiDetalle.titulo;
+        this.materiaId = this.publiDetalle.idMateria;
+        this.idUserPubli = this.publiDetalle.idUser;
+        this.archivo=this.publiDetalle.file;
+           
+    
+        //TRAER EL NOMBRE DE LA MATERIA
+        this.getMateria(this.materiaId);
+    
+        
+      }
+   
+    });
+  }
+
 
 
   ///OBTENER INFO  USUARIO DE LA BDD
@@ -130,23 +167,17 @@ infPubli:publiFavoritoInterface[];
   //GUARDAR FAVORITOS
   addFavorite(favor:FavoritosInterface) {
     const publicI:  publiFavoritoInterface={
-      id: this.tareas.id,
-      titulo:this.tareas.titulo,
-      idMateria:this.tareas.idMateria,
+      id: this.publiDetalle.id,
+      titulo:this.publiDetalle.titulo,
+      nameMateria:this.nombreMateria,
+      file: this.archivo,
     }
 
     try {
       favor.id=this.serviceFS.getId();
       favor.idUser=this.idUser;
       favor.nameUser=this.userInfo.nombre;
-      favor.publicacion=[/* {
-        id:this.tareas.id,
-        titulo:this.tareas.titulo,
-        idMateria:this.tareas.idMateria
-      } */
-     publicI
-    
-    ]      
+      favor.publicacion=[publicI]      
       this.serviceFS.saveFavorito('Favoritos', favor, this.idUser, publicI);
       this.favoritoAdd = true;
     } catch (error) {

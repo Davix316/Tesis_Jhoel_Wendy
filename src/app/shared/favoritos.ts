@@ -2,9 +2,10 @@
 
 export interface publiFavoritoInterface{
   
-  id: string
-  titulo : string
-  idMateria:string
+  id: string;
+  titulo : string;
+  nameMateria:string;
+  file:string;
 }
 
 export interface FavoritosInterface {

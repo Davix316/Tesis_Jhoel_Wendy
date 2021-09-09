@@ -53,13 +53,7 @@ export class FavoritosPage implements OnInit {
   getFavoritos(codUser: string) {
     this.serviceFS.getFavorito(codUser).subscribe((ref: any) => {
       if (ref) {
-        this.publicacion = ref.publicacion;
-        //Buscando la info del fav en publicaciones
-        this.publicacion.forEach(element => {
-          this.getPublicacion(element.id);
-
-
-        });
+        this.publicacion = ref.publicacion;       
         this.favoritos=true;
       }
       else{
@@ -79,14 +73,7 @@ export class FavoritosPage implements OnInit {
     this.router.navigate(['/menu/detalle-tarea'], this.navigationExtras);
   }
 
-  //CONSULTAR public para mostrar detalle desde los favoritos
-
-  getPublicacion(idFavorito: string) {
-    this.fireService.getDoc<PublicacionInterface>('Publicaciones', idFavorito).subscribe(res => {
-      this.listaFavoritos.push(res);
-
-    });
-  }
+  
 
   //ABRIR ARCHIVO
   openFile(urlFile: string) {
