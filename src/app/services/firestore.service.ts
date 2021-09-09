@@ -89,8 +89,8 @@ export class FirestoreService {
   }
 
   //LEER UN SOLO DOCUMENTO
-
-  getDoc<tipo>(path: string, id: string) { // tipo es una variable cualquier auqe entra como argumento
+// tipo es una variable cualquier auqe entra como argumento (mi interfaz)
+  getDoc<tipo>(path: string, id: string) { 
     const collection = this.firestoreS.collection<tipo>(path);
     return collection.doc(id).valueChanges();
   }
@@ -100,5 +100,16 @@ export class FirestoreService {
     const collection = this.firestoreS.collection(path);
     return collection.doc(id).delete();
   }
+
+  //ELIMINAR UN FAVORITO
+  deleteFav(path: string, idDoc: string, objeto:any) {
+    this.firestoreS.collection(path).doc(idDoc).update({
+      publicacion: firebase.firestore.FieldValue.arrayRemove(objeto)
+    }).then(res=>{
+      console.log('se quito de tu lista de favoritos');
+    })
+   
+  }
+
 
 }

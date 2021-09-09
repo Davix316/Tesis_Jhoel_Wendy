@@ -11,9 +11,15 @@
 </ion-header>
 
 <ion-content>
+<ion-card [hidden]=favoritos>
+  <ion-card-content>
+    <ion-label> No hay Favoritos en su colección</ion-label>
+  </ion-card-content> 
+</ion-card>
 
   <div *ngFor="let fav of publicacion">
     <ion-card >
+    
       <ion-grid>
          <ion-row>
           <ion-col class="ion-align-self-center">
@@ -22,10 +28,10 @@
           <ion-col size="8"  class="ion-text-center">
             
             <h3>{{fav.titulo}}</h3>
-            
+           <!--  <ion-label>{{fav.fecha.toDate()|date:'EEEE, MMMM d, y'}}</ion-label> -->
             <ion-list>
-              <ion-button color="light" size="small"><ion-icon name="download"></ion-icon></ion-button>
-              <ion-button color="light"  size="small"><ion-icon  class="heart" name="heart-dislike"></ion-icon></ion-button>
+              <ion-button color="light" size="small" (click)="openFile(fav.file)" ><ion-icon name="download"></ion-icon></ion-button>
+              <ion-button color="light"  size="small" (click)="deleteFavorito(fav)"><ion-icon  class="heart" name="heart-dislike"></ion-icon></ion-button>
             </ion-list>
 
 

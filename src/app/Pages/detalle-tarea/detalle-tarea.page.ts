@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { FileTransfer, FileTransferObject } from '@ionic-native/file-transfer/ngx'; */
 import { PublicacionInterface } from 'src/app/shared/publicacion';
 import { Platform } from '@ionic/angular';
-import { FavoritosInterface } from 'src/app/shared/favoritos';
+import { FavoritosInterface, publiFavoritoInterface } from 'src/app/shared/favoritos';
 import { FirestoreService } from 'src/app/services/firestore.service';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
@@ -20,12 +20,6 @@ import { ReportarPage } from '../reportar/reportar.page';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ReportPublishPage } from '../report-publish/report-publish.page';
 
-interface publiFav {
-  
-  id: string
-  titulo : string
-  idMateria:string
-}
 
 @Component({
   selector: 'app-detalle-tarea',
@@ -48,7 +42,7 @@ export class DetalleTareaPage implements OnInit {
     nameUser:'',
     publicacion:{}
   };
-infPubli:publiFav[];
+infPubli:publiFavoritoInterface[];
 
 
   listaMateria: MateriasInterface[];
@@ -135,7 +129,7 @@ infPubli:publiFav[];
 
   //GUARDAR FAVORITOS
   addFavorite(favor:FavoritosInterface) {
-    const publicI:  publiFav={
+    const publicI:  publiFavoritoInterface={
       id: this.tareas.id,
       titulo:this.tareas.titulo,
       idMateria:this.tareas.idMateria,

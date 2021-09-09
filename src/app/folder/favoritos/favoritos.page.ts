@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-import { NavParams } from '@ionic/angular';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
-import { FavoritosInterface } from 'src/app/shared/favoritos';
+import { PublicacionInterface } from 'src/app/shared/publicacion';
+import { publiFavoritoInterface } from 'src/app/shared/favoritos';
+import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 
 
 
@@ -15,31 +16,33 @@ import { FavoritosInterface } from 'src/app/shared/favoritos';
 export class FavoritosPage implements OnInit {
 
   idUser: string;
-  listaFavoritos: any;
+  listaFavoritos = [];
 
-publicacion:any;
-
-//obtener id Clic=keado
-navigationExtras: NavigationExtras = {
-  state: {
-    value: null
-  }
-};
+  publicacion: any;
+  favoritos: boolean;
+  //obtener id Clic=keado
+  navigationExtras: NavigationExtras = {
+    state: {
+      value: null
+    }
+  };
 
 
   constructor(
     private serviceauth: FireauthService,
     private serviceFS: FirestoreService,
     private router: Router,
+    private fireService: FirestoreService,
+    private previewAnyFile: PreviewAnyFile,
   ) { }
 
   ngOnInit() {
-     //INFORMACION DE USUARIO ACTUAL
-     this.serviceauth.stateAuth().subscribe(user => {
+    //INFORMACION DE USUARIO ACTUAL
+    this.serviceauth.stateAuth().subscribe(user => {
       if (user != null) {
         //id de Usuario de fireAuth
         this.idUser = user.uid;
-        console.log('idUser de favortios:',this.idUser);
+        console.log('idUser de favortios:', this.idUser);
         this.getFavoritos(this.idUser);
       }
     });
@@ -47,21 +50,65 @@ navigationExtras: NavigationExtras = {
 
 
   //LEER COLECCION FAVORITOS //Se requiere Id de Usuario
-  getFavoritos(codUser: string){
-this.serviceFS.getFavorito(codUser).subscribe((ref:any)=>{
-   this.publicacion=ref.publicacion;
-console.log(this.publicacion);
+  getFavoritos(codUser: string) {
+    this.serviceFS.getFavorito(codUser).subscribe((ref: any) => {
+      if (ref) {
+        this.publicacion = ref.publicacion;
+        //Buscando la info del fav en publicaciones
+        this.publicacion.forEach(element => {
+          this.getPublicacion(element.id);
 
-})
+
+        });
+        this.favoritos=true;
+      }
+      else{
+        this.favoritos=false;
+        console.log('no hay lista de favoritos');
+        
+      }
+
+    })
 
   }
 
 
-//NAVIGATION EXTRAS
-infoTarea(item: any): void{
-  this.navigationExtras.state.value=item;
-    this.router.navigate(['/menu/detalle-tarea'],this.navigationExtras);
-}
+  //NAVIGATION EXTRAS
+  infoTarea(item: any): void {
+    this.navigationExtras.state.value = item;
+    this.router.navigate(['/menu/detalle-tarea'], this.navigationExtras);
+  }
+
+  //CONSULTAR public para mostrar detalle desde los favoritos
+
+  getPublicacion(idFavorito: string) {
+    this.fireService.getDoc<PublicacionInterface>('Publicaciones', idFavorito).subscribe(res => {
+      this.listaFavoritos.push(res);
+
+    });
+  }
+
+  //ABRIR ARCHIVO
+  openFile(urlFile: string) {
+    this.previewAnyFile.preview(urlFile).then(() => {
+
+    }, (error) => {
+      alert(JSON.stringify(error));
+    });
+  }
+
+  //ELIMINAR DE LA LISTA D FAVORITO
+  deleteFavorito(objPubli:publiFavoritoInterface) {
+    /* const objeto:publiFavoritoInterface={
+id: 'lAV3EPT66UiBc5uKb67D',
+idMateria: 'Pi8ZfcR6NawkeGVOfPB9',
+titulo: 'integrales'
+    } */
+    this.fireService.deleteFav('Favoritos', this.idUser,objPubli);
+  }
+
 
 }
+
+
 

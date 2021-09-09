@@ -21,11 +21,6 @@ export class PopinfoComponent implements OnInit {
   constructor(private popoverCtrl:PopoverController) { }
   
   ngOnInit() {
-    console.log('objeto comentario:', this.OinfoComent);
-    console.log('estoy logueado desde DT con:', this.idUserLog);
-    console.log(' el idUser de la Publi', this.idPublishUser);
-   
-    console.log('estoy logueado desde Coment con:', this.idUserLogC);
     
   } 
 
