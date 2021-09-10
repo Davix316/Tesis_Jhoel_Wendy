@@ -2,7 +2,7 @@
   <div>
     <div class="card">
       <div class="card-header" style="text-align: center;">
-        <h2>Estudiantes Bloqueados</h2>
+        <h2>Publicaciones Reportadas</h2>
       </div>
 
       <div class="card-body">
@@ -18,18 +18,22 @@
           <table class="table">
             <thead class="table-dark">
               <tr>
-                <th scope="col">Nombre</th>
+                <th scope="col">Nombre de estudiante</th>
+                <th scope="col">Motivo</th>
+                <th scope="col">Descripción</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody>
-              <tr class="table-info" *ngFor="let item of Usuarios$ | async">
-                <th scope="row">{{item.nombre}} {{item.apellido}}</th>
+              <tr class="table-info" *ngFor="let item of Reportes$ | async">
+                <th scope="row">{{item.nameUserOwner}}</th>
+                <th scope="row">{{item.motivo}}</th>
+                <th scope="row">{{item.descripcion}}</th>
                 <td role="group">
                   <button type="button" class="btn btn-outline-success m-1" (click)="onGoToSee(item)">
-                    <i class="cil-info" style="color: green;"> Ver Información</i>
+                    <i class="cil-info" style="color: green;">Ver publicación</i>
                   </button>
-
+                  
                   <button type="button" class="btn btn-outline-danger m-1" (click)="onGoToDelete(item.id)">
                     <i class="cil-trash" style="color: red;"> Eliminar</i>
                   </button>
@@ -38,6 +42,7 @@
             </tbody>
           </table>
         </div>
+
       </div>
     </div>
   </div>

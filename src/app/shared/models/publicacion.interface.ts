@@ -8,7 +8,8 @@ export interface Publicacion {
   fecha?: any;
   apellUser?: string;
   idUser?: string;
-  likes?: string;
+  likes?: number;
   nameUser?: string;
   titulo: string;
+  userFoto?: string;
 }

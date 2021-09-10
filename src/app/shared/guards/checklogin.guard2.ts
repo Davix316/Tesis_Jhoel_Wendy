@@ -21,8 +21,8 @@ export class CheckloginGuard2 implements CanActivate, OnInit {
   id: '',
   nombre: '',
   apellido: '',
-  telefono: '',
-  numUnico: '',
+  telefono: 0,
+  numUnico: 0,
   carreraNombre: '',
   email: '',
   password: '',
@@ -70,9 +70,8 @@ export class CheckloginGuard2 implements CanActivate, OnInit {
           this.admin.semestreRef=this.userLogIn.semestreRef;
           this.admin.foto=this.userLogIn.foto;
           this.admin.rol=this.userLogIn.rol;
-          console.log(doc.id, ' => ', doc.data());
 
-          console.log("JJAS",this.admin.rol);
+          console.log("Rol: ",this.admin.rol);
         });
     })
     .catch((error) => {

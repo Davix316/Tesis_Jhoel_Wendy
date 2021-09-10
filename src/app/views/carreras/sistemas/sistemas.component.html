@@ -60,7 +60,7 @@
 
                 <br>
 
-                <input type="text" class="form-control" placeholder="Horas" formControlName="numHoras"
+                <input type="number" class="form-control" placeholder="Horas" formControlName="numHoras"
                   [class]="isValidField('numHoras')">
                 <div class="invalid-feedback">
                   <span *ngIf="materiaForm.get('numHoras').errors?.required">

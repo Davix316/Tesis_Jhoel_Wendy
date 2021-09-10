@@ -34,6 +34,7 @@ export class MateriasComponent implements OnInit {
   idUserPubli='';
   nameUser='';
   apellUser='';
+  fotoUser='';
   fechaPubli= new Date();
   like='';
   id=this.publicacionesServ.getId();
@@ -44,8 +45,8 @@ export class MateriasComponent implements OnInit {
     id: '',
     nombre: '',
     apellido: '',
-    telefono: '',
-    numUnico: '',
+    telefono: 0,
+    numUnico: 0,
     carreraNombre: '',
     email: '',
     password: '',
@@ -115,6 +116,7 @@ export class MateriasComponent implements OnInit {
             this.nameUser=this.userLogIn.nombre;
             this.idUserPubli=this.userLogIn.id;
             this.apellUser=this.userLogIn.apellido;
+            this.fotoUser=this.userLogIn.foto;
           });
       })
       .catch((error) => {
@@ -150,7 +152,8 @@ export class MateriasComponent implements OnInit {
         publi.idUser=this.idUserPubli;
         publi.nameUser=this.nameUser;
         publi.apellUser=this.apellUser;
-        publi.likes='0';
+        publi.userFoto=this.fotoUser;
+        publi.likes=0;
         publi.id=this.id;
         publi.idCarrera=this.materia.idCarrera;
         publi.idMateria=this.materia.id;
@@ -161,8 +164,6 @@ export class MateriasComponent implements OnInit {
     console.log(error);
     }
   }
-
-
 
   obtenerPublicaciones(idM: string) {
     const path = 'Publicaciones';
@@ -177,6 +178,7 @@ export class MateriasComponent implements OnInit {
   }
 
   onGoToSee(item: any): void {
+
     this.navigationExtras.state.value = item;
     this.router.navigate(['carreras/archivo'], this.navigationExtras);
   }

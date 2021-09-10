@@ -52,6 +52,19 @@ export class StudentFormComponent implements OnInit {
   }
   
    onSave(adm): void {
+    if(adm.carreraNombre === "TS- Electromecánica" ){
+        adm.carreraId = "TkiP9dMmAXyoscir6GqF";
+    }else 
+    if(adm.carreraNombre === "TS- Redes y Telecomunicaciones" ){
+        adm.carreraId = "i6e9eP0YTsnowV8p8EKi";
+    }
+    else 
+    if(adm.carreraNombre === "TS- Agua y Saneamiento Ambiental" ){
+        adm.carreraId = "iw6XSHR2NiPPkwMSjKBM";
+    }else 
+    if(adm.carreraNombre === "TS- Desarrollo de Software" ){
+      adm.carreraId = "ph4kM1eyF6KoaieJqCr0";
+    }
 
     if (this.studentForm.valid) {
       console.log("valido")
@@ -61,8 +74,10 @@ export class StudentFormComponent implements OnInit {
       this.adminsSvc.onSaveStudent(student, studentId, adm.foto);
       this.studentForm.reset();
       this.router.navigate(['listStudent']);
+      console.log(this.studentForm.value);
     }else{
-      console.log("no valido")
+      console.log("no valido");
+      console.log(this.studentForm.value);
     }
   }
 
@@ -77,17 +92,19 @@ export class StudentFormComponent implements OnInit {
   }
 
   private initForm(): void {
+    
     this.studentForm = this.fb.group({
       nombre: ['', [Validators.required]],
       apellido: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
       password: ['', [Validators.required, Validators.minLength(5)]],
       carreraNombre: ['', [Validators.required]],
+      carreraId: ['ph4kM1eyF6KoaieJqCr0'],
       numUnico: ['', [Validators.required]],
       semestreRef: ['', [Validators.required]],
       telefono: ['', [Validators.required]],
       rol: ['Estudiante'],
-      foto:  ['', [Validators.required]],
+      foto:  [''],
     });
   }
 

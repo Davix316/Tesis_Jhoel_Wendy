@@ -3,7 +3,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Admin } from '../../models/admin.interface';
-import {AngularFireStorage} from '@angular/fire/storage';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { FirebaseauthService } from '../../../views/services/firebaseauth.service';
@@ -15,8 +15,8 @@ import { FirebaseauthService } from '../../../views/services/firebaseauth.servic
 })
 export class AdminFormComponent implements OnInit {
 
-  fotopath='';
-  fotoUser='';
+  fotopath = '';
+  fotoUser = '';
 
   admin: Admin;
   adminForm: FormGroup;
@@ -24,20 +24,20 @@ export class AdminFormComponent implements OnInit {
   private isEmail = /\S+@\S+\.\S+/;
 
   constructor(
-    private router: Router, 
-    private fb: FormBuilder, 
-    private adminsSvc: ThemeService, 
+    private router: Router,
+    private fb: FormBuilder,
+    private adminsSvc: ThemeService,
     private storage: AngularFireStorage,
-    private serviceAuth : FirebaseauthService, 
-    ) {
+    private serviceAuth: FirebaseauthService,
+  ) {
     const navigation = this.router.getCurrentNavigation();
     this.admin = navigation?.extras?.state?.value;
     this.initForm();
   }
 
   @ViewChild('FotoUrlUser') inputFoto: ElementRef;
-  progreso=false;
-  porcentaje=0;
+  progreso = false;
+  porcentaje = 0;
   porcentajesubida: Observable<number>;
   urlFoto: Observable<string>;
 
@@ -48,22 +48,35 @@ export class AdminFormComponent implements OnInit {
     } else {
       this.adminForm.patchValue(this.admin);
     }
-      this.fotoUser = this.admin.foto;
-      console.log("foto", this.fotoUser)
+    this.fotoUser = this.admin.foto;
+    console.log("foto", this.fotoUser)
   }
 
-   onSave(adm): void {
+  onSave(adm): void {
+    if (adm.carreraNombre === "TS- Electromecánica") {
+      adm.carreraId = "TkiP9dMmAXyoscir6GqF";
+    } else
+      if (adm.carreraNombre === "TS- Redes y Telecomunicaciones") {
+        adm.carreraId = "i6e9eP0YTsnowV8p8EKi";
+      }
+      else
+        if (adm.carreraNombre === "TS- Agua y Saneamiento Ambiental") {
+          adm.carreraId = "iw6XSHR2NiPPkwMSjKBM";
+        } else
+          if (adm.carreraNombre === "TS- Desarrollo de Software") {
+            adm.carreraId = "ph4kM1eyF6KoaieJqCr0";
+          }
 
     if (this.adminForm.valid) {
       adm.rol = "Administrador";
       console.log("valido");
       const admin = this.adminForm.value;
       const adminId = this.admin?.id || null;
-      adm.foto=this.inputFoto.nativeElement.value;
+      adm.foto = this.inputFoto.nativeElement.value;
       this.adminsSvc.onSaveAdmin(admin, adminId, adm.foto);
       this.adminForm.reset();
       this.router.navigate(['list']);
-    }else{
+    } else {
       console.log("no valido")
       console.log(this.adminForm.value)
     }
@@ -86,26 +99,26 @@ export class AdminFormComponent implements OnInit {
       email: ['', [Validators.required, Validators.pattern(this.isEmail)]],
       password: ['', [Validators.required, Validators.minLength(5)]],
       carreraNombre: ['', [Validators.required]],
-      carreraId: [''],
+      carreraId: ['ph4kM1eyF6KoaieJqCr0'],
       numUnico: ['', [Validators.required]],
       semestreRef: ['', [Validators.required]],
       telefono: ['', [Validators.required]],
       rol: ['Administrador'],
-      foto:  ['', [Validators.required]],
+      foto: ['', [Validators.required]],
     });
   }
 
-  uploadFoto(foto){
+  uploadFoto(foto) {
     //generar id Aleatorio para el archivo
-    const id= Math.random().toString(36).substring(2);
-    const file=foto.target.files[0];
-    this.fotopath='Perfil/'+ 'user_'+id;
-    const ref=this.storage.ref(this.fotopath);
-    const tarea= this.storage.upload(this.fotopath,file);
-    this.porcentajesubida= tarea.percentageChanges();
-    
-    tarea.snapshotChanges().pipe(finalize(()=>this.urlFoto=ref.getDownloadURL())).subscribe();
-    this.progreso=true;
+    const id = Math.random().toString(36).substring(2);
+    const file = foto.target.files[0];
+    this.fotopath = 'Perfil/' + 'user_' + id;
+    const ref = this.storage.ref(this.fotopath);
+    const tarea = this.storage.upload(this.fotopath, file);
+    this.porcentajesubida = tarea.percentageChanges();
+
+    tarea.snapshotChanges().pipe(finalize(() => this.urlFoto = ref.getDownloadURL())).subscribe();
+    this.progreso = true;
     //Cambia el porcentaje
     tarea.percentageChanges().subscribe((porcentaje) => {
       this.porcentaje = Math.round(porcentaje);
@@ -113,6 +126,6 @@ export class AdminFormComponent implements OnInit {
         this.progreso = false;
       }
     });
-    }
+  }
 
 }

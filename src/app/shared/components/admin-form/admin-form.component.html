@@ -68,7 +68,7 @@
                     <option select value="TS- Agua y Saneamiento Ambiental">TSASA - Agua y Saneamiento Ambiental</option>
                     <option value="TS- Desarrollo de Software">TSDS - Desarrollo de Software</option>
                     <option value="TS- Redes y Telecomunicaciones">TSRT - Redes y Telecomunicaciones</option>
-                    <option value="TS- Electromecánica ">TSEM - Electromecánica</option>
+                    <option value="TS- Electromecánica">TSEM - Electromecánica</option>
                   </select>
                   <div class="invalid-feedback">
                     <span *ngIf="adminForm.get('carreraNombre').errors?.required">
@@ -96,7 +96,7 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label>Numero único EPN: </label>
-                  <input type="text" class="form-control" placeholder="202030271" formControlName="numUnico"
+                  <input type="number" class="form-control" placeholder="202030271" formControlName="numUnico"
                     [class]="isValidField('numUnico')">
                   <div class="invalid-feedback">
                     <span *ngIf="adminForm.get('numUnico').errors?.required">
@@ -127,7 +127,7 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label>Teléfono o Celular: </label>
-                  <input type="text" class="form-control" placeholder="2877333 / 0987654321" formControlName="telefono"
+                  <input type="number" class="form-control" placeholder="2877333 / 0987654321" formControlName="telefono"
                     [class]="isValidField('telefono')">
                   <div class="invalid-feedback">
                     <span *ngIf="adminForm.get('telefono').errors?.required">

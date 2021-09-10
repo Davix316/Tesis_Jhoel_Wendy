@@ -5,7 +5,7 @@ export interface Comentario {
   fecha?: any;
   apellUser?: string;
   idUser?: string;
-  voto?: string;
+  voto?: number;
   nameUser?: string;
   fotoUser: string;
 }

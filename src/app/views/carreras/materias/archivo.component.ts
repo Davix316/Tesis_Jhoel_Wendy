@@ -6,6 +6,7 @@ import { Publicacion } from '../../../shared/models/publicacion.interface';
 import { Location } from '@angular/common';
 import { ComentariosService } from './../../services/comentarios.service';
 import { Comentario } from '../../../shared/models/comentario.interface';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   templateUrl: './archivo.component.html',
@@ -37,6 +38,7 @@ export class ArchivoComponent implements OnInit{
     private fb: FormBuilder,
     private _location: Location,
     private comentariosServ: ComentariosService,
+    public sanitizer: DomSanitizer,
   ) { 
     const navigation = this.router.getCurrentNavigation();
     this.publicacion = navigation?.extras?.state?.value;
@@ -53,6 +55,7 @@ export class ArchivoComponent implements OnInit{
     this.publicacionForm.patchValue(this.publicacion);
 
     this.obtenerComentarios(this.publicacion.id);
+
   }
 
   onSave(): void {
