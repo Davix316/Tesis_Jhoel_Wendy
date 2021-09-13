@@ -27,7 +27,7 @@ numberOfLikes = 0;
 numberOfDislikes = 0;
 listaComent: ComentariosInterface[];
 numComent:any;
-
+votoAdd=false;
 //obtener id Clic=keado
 navigationExtras: NavigationExtras = {
   state: {
@@ -143,7 +143,15 @@ countComments(idP: string){
 }
 
 addLike(publicacion:any){
-  this.fireService.saveLike('Publicaciones', publicacion.id);
+  if(!this.votoAdd){
+    this.fireService.saveLike('Publicaciones', publicacion.id,1);
+    this.votoAdd=true;
+  }  
+  else{
+    this.fireService.saveLike('Publicaciones', publicacion.id,-1);
+    this.votoAdd=false;
+  }
+  
 }
 
 

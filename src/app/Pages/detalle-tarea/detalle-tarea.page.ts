@@ -305,7 +305,7 @@ this.getPublicacion(this.tareas.id);
 
 //LIKE
 btnLike(Infpubli:any){
-  this.serviceFS.saveLike('Publicaciones', Infpubli.id);
+  this.serviceFS.saveLike('Publicaciones', Infpubli.id,1);
 }
 
 
