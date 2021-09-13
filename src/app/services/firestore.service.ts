@@ -111,11 +111,11 @@ export class FirestoreService {
   }
 
   //AGREGAR VOTO
-  saveVoto(path: string, idC: string) {
+  saveVoto(path: string, idC: string, voto:number ) {
     //const admin = require('firebase-admin');
     const votoref=this.firestoreS.collection(path).doc(idC);
     const res= votoref.update({
-      voto: firebase.firestore.FieldValue.increment(1)
+      voto: firebase.firestore.FieldValue.increment(voto)
     })
 
   }

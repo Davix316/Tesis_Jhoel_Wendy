@@ -76,6 +76,7 @@ navigationExtras: NavigationExtras = {
 };
 
 //voto: votoInterface[];
+votoAdd=false;
 
 public formComentario=new FormGroup({
   texto:new FormControl('',[Validators.required]),
@@ -308,8 +309,14 @@ console.log('retorno del modal', data.motivo); */
 //VOTOS
 
 votar(comentario:any){
-  //this.votosService.saveVoto('Votos',);
-  this.servFirestore.saveVoto('Comentarios',comentario.id);
+  if(!this.votoAdd){
+    this.firestoreService.saveVoto('Comentarios', comentario.id,1);
+    this.votoAdd=true;
+  }  
+  else{
+    this.firestoreService.saveVoto('Comentarios', comentario.id,-1);
+    this.votoAdd=false;
+  }
 }
 
 }
