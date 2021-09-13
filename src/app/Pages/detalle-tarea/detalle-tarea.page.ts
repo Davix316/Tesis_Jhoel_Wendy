@@ -65,6 +65,7 @@ publiDetalle:PublicacionInterface={
   categoria: '',
   fecha: Date,
   likes: 0,
+  disLikes:0,
   titulo: '',
   descripcion: '',
   nameUser: '',
@@ -260,7 +261,7 @@ this.getPublicacion(this.tareas.id);
 
     const popover = await this.popoverController.create({
       component: PopinfoComponent,
-      cssClass: 'my-custom-class',
+      cssClass: 'my-popover-class',
       event: ev,
       translucent: true,
       mode: 'ios',
@@ -302,7 +303,10 @@ this.getPublicacion(this.tareas.id);
     return await modal.present();
   }
 
-
+//LIKE
+btnLike(Infpubli:any){
+  this.serviceFS.saveLike('Publicaciones', Infpubli.id);
+}
 
 
 }

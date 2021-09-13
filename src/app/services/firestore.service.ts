@@ -5,7 +5,6 @@ import firebase from 'firebase';
 import { ComentariosInterface } from '../shared/comentarios';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -29,7 +28,7 @@ export class FirestoreService {
   }
 
 
-  //GUARDAR COLECCION
+  //GUARDAR COLECCION COMENTARIO
   saveCollection(comentario: ComentariosInterface, idP: string) {
     const id = idP || this.firestoreS.createId();
     comentario.id = id;
@@ -111,5 +110,24 @@ export class FirestoreService {
    
   }
 
+  //AGREGAR VOTO
+  saveVoto(path: string, idC: string) {
+    //const admin = require('firebase-admin');
+    const votoref=this.firestoreS.collection(path).doc(idC);
+    const res= votoref.update({
+      voto: firebase.firestore.FieldValue.increment(1)
+    })
+
+  }
+  saveLike(coleccion: string, idP: string){
+    const votoref=this.firestoreS.collection(coleccion).doc(idP);
+    const res= votoref.update({
+      likes: firebase.firestore.FieldValue.increment(1)
+    })
+  }
+
+  saveDislike(){
+    
+  }
 
 }

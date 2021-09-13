@@ -69,6 +69,20 @@ const routes: Routes = [
     path: 'editar-perfil',
     loadChildren: () => import('../Pages/auth/edit-perfil/edit-perfil.module').then(m => m.EditPerfilPageModule)
   },
+  {
+    path: 'reportar',
+    loadChildren: () => import('../Pages/reportar/reportar.module').then( m => m.ReportarPageModule)
+  },
+  {
+    path: 'report-publish',
+    loadChildren: () => import('../Pages/report-publish/report-publish.module').then( m => m.ReportPublishPageModule)
+  },
+  {
+    path: 'detalle-chat',
+    loadChildren: () => import('../Pages/detalle-chat/detalle-chat.module').then( m => m.DetalleChatPageModule)
+  },
+
+
 
 ];
 

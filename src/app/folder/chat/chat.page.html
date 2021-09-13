@@ -13,16 +13,19 @@
 <ion-content>
   <div lines="none" class="app-list"  >
 
+    
 
-<ion-card *ngFor="let chat of chatList" (click)="showConversationPage()">
+
+<ion-card *ngFor="let user of roomChat" (click)="infoUserChat(user)">
   <ion-item >
     <ion-avatar slot="start">
-      <img [src]="chat.user.avatar">
+      <img [src]="user.foto">
     </ion-avatar>
-    <ion-label>
-      <h2>{{ chat.user.name }}</h2>
-      <p>{{ chat.message.snippet }}</p>
-      <p item-end class="text-ellipsis">{{ chat.message.created }}</p>
+    <ion-label>    
+      <h2>{{ user.nombre}}</h2>     
+     
+      <p>El ultimo texto aqui</p>
+      <p item-end class="text-ellipsis">14:00 PM</p>
     </ion-label>
   </ion-item>
 

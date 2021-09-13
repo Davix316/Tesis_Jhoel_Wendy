@@ -100,7 +100,7 @@ navigationExtras: NavigationExtras = {
 
         this.publicaciones.forEach(element => {
           const idPubli=element.id
-          this.countComments(idPubli);
+         // this.countComments(idPubli);
                    
         });
 
@@ -117,17 +117,8 @@ navigationExtras: NavigationExtras = {
       this.router.navigate(['/menu/detalle-tarea'],this.navigationExtras);
   }
 
-  //LIKES
-  likeButtonClick(){
-    this.numberOfLikes++;
-  }
 
-  dislikeButtonClick(){
-    this.numberOfDislikes++;
-    this.numberOfLikes--;
-  }
-
-
+ 
 //PRESENTAR ALERTA LOGIN fallido
 async failToast(text) {
   const toast = await this.toastController.create({
@@ -144,11 +135,15 @@ countComments(idP: string){
   this.servFirestore.getCollection<ComentariosInterface>('Comentarios').subscribe(res=>{
     this.listaComent = res.filter(e=>idP===e.idPublicacion);
   this.numComent=this.listaComent.length;
-    console.log(' # comentarios:',this.listaComent.length  );
+   // console.log(' # comentarios:',this.listaComent.length  );
 
 
   }).unsubscribe;
 
+}
+
+addLike(publicacion:any){
+  this.fireService.saveLike('Publicaciones', publicacion.id);
 }
 
 

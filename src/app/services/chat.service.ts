@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Query } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from 'firebase';
@@ -12,71 +12,37 @@ import { chatInterface } from '../shared/chat';
 export class ChatService {
 
   appsRef: AngularFireList<any>;
-  
+  chats:AngularFireList<any[]>;
+
   constructor( private db: AngularFirestore,
     private realTime: AngularFireDatabase,
+    private firestore: AngularFirestore,
     ) { }
 
 
-  
-//GUARDAR COLECCION DE CHAT
-  
-saveCollectionChat(data: any, path: string, id: string){
-  var doc =this.db.collection(path).doc(id);
- var getDoc=doc.get().subscribe(doc=>{
-   if(!doc.exists){
-     console.log('No existe el documento');
-    
-     this.db.collection(path).doc(id).set(data)
-.then((docRef) => {
-    console.log('registro exitoso');
-   console.log(docRef);   
-   })
-.catch((error) => {
-    console.error('Error adding document: ', error);
-});
-     
-   }
-   else{
-    // console.log('document Dta', doc.data());
-     this.db.collection('Mensajes').doc(id).update({
-      chat: firebase.firestore.FieldValue.arrayUnion(data)
-    })
-    console.log('se actualizo el array');
-    
-     
-   }
-
- })
-  
-    
-      
-    }
-  
-
-
-
-
-//ACTUALIZAR MENSAJES EN EL ARREGLO
-updateCollectionChat(chat: chatInterface, idUSender:string){
-
-  this.db.collection('Mensajes').doc(idUSender).update({
-    chat: firebase.firestore.FieldValue.arrayUnion(chat)
-  })
-.then((docRef) => {
-    console.log('actualizaion exitoso');
-   })
-.catch((error) => {
-    console.error('Error adding document: ', error);
-});
-}
-
+ 
 
 //LEER MENSAJES DE REALTIME
 listarDatos() {
   this.appsRef = this.realTime.list('Mensajes');
 return this.appsRef;
+
+
 } 
+
+//LEER MENSAJES DE REALTIME
+listarChats() { 
+  const ref = firebase.database().ref('Mensajes');
+   return ref ;
+} 
+
+//LEER COLECCION USUARIOS
+
+getUsers<Interfaz>(coleccion: string) {
+  const collection = this.firestore.collection<Interfaz>(coleccion);
+  return collection.valueChanges();
+}
+
 
 
 //GENERAR ID aleatorio

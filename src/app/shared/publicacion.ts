@@ -6,6 +6,7 @@ export interface PublicacionInterface {
   categoria: string;
   fecha: any;
   likes: number;
+  disLikes:number;
   titulo: string;
   descripcion: string;
   nameUser: string;

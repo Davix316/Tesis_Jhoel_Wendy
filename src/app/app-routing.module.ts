@@ -23,16 +23,8 @@ const routes: Routes = [
   {
     path: 'reset-password',
     loadChildren: () => import('./Pages/auth/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
-  },  {
-    path: 'reportar',
-    loadChildren: () => import('./Pages/reportar/reportar.module').then( m => m.ReportarPageModule)
   },
-  {
-    path: 'report-publish',
-    loadChildren: () => import('./Pages/report-publish/report-publish.module').then( m => m.ReportPublishPageModule)
-  },
-
-
+  
 
 
 ];

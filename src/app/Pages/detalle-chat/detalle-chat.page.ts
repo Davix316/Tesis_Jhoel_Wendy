@@ -1,67 +1,45 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import  firebase from 'firebase';
-import { Interface } from 'readline';
-import { Observable } from 'rxjs';
+import firebase from 'firebase';
 import { ChatService } from 'src/app/services/chat.service';
 import { FireauthService } from 'src/app/services/fireauth.service';
-import { FirestoreService } from 'src/app/services/firestore.service';
 import { chatInterface } from 'src/app/shared/chat';
-import { ComentariosInterface } from 'src/app/shared/comentarios';
 import { UserInterface } from 'src/app/shared/user';
 
-
-
 @Component({
-  selector: 'app-conversacion',
-  templateUrl: './conversacion.page.html',
-  styleUrls: ['./conversacion.page.scss'],
+  selector: 'app-detalle-chat',
+  templateUrl: './detalle-chat.page.html',
+  styleUrls: ['./detalle-chat.page.scss'],
 })
-export class ConversacionPage implements OnInit {
-  public contactInfo: any = {
-      status: 'En linea'
-  };
-  
-  public showOptions: boolean = false;
-   
+export class DetalleChatPage implements OnInit {
 
-  detalleComentario: ComentariosInterface = null;
-  public mensajes:Observable<any[]>;
+  infUser: UserInterface=null;
+  idUReceptor:string;
+  nameUReceptor:string
+
+  chat: chatInterface[];
   idUSender: string;
+  userLog:string;
+
   public FormChat= new FormGroup({
     texto: new FormControl('', [Validators.required])
   });
-userLog:string;
-  idUReceptor:string;
-  nameUReceptor:string
-chat: chatInterface[];
-fechaM=new Date()
-conversacion=[];
 
-  constructor( private firestore: AngularFirestore,
+  constructor(private router: Router,
     private serviceauth: FireauthService,
-    private chatService: ChatService,
-    private router: Router,
-    ) { 
-this.mensajes=firestore.collection('Mensajes').valueChanges();
-
-////////////
+    private chatService: ChatService) { 
+    ////////////
 const navigation = this.router.getCurrentNavigation();
-this.detalleComentario = navigation?.extras?.state?.value;
-console.log('conversaion detalle:', this.detalleComentario);
-if (typeof this.detalleComentario === 'undefined') {
-  this.router.navigate(['/menu/detalle-tarea']);
+this.infUser = navigation?.extras?.state?.value;
+console.log('user detalle:', this.infUser);
+if (typeof this.infUser === 'undefined') {
+  this.router.navigate(['/menu/chat']);
 }
-this.idUReceptor=this.detalleComentario.idUser;
-this.nameUReceptor=this.detalleComentario.nameUser;
+this.idUReceptor=this.infUser.id;
+this.nameUReceptor=this.infUser.nombre;
 console.log(this.idUReceptor,'idUsuario receptor');
-
-
   }
-
-
 
   ngOnInit() {
      //INFORMACION DE USUARIO ACTUAL
@@ -90,16 +68,9 @@ console.log(this.idUReceptor,'idUsuario receptor');
       })
     })
 
+
   }
 
-
-  showOptionsToggle(value?: boolean) {
-    if (value !== undefined) {
-      this.showOptions = value;
-      return;
-    }
-    this.showOptions = !this.showOptions;
-  }
 
 
   //LEER MENSAJES
@@ -132,9 +103,6 @@ console.log(this.idUReceptor,'idUsuario receptor');
     }
 
   }
-
- 
-  
   
 
 }

@@ -19,7 +19,16 @@ import { PopoverController } from '@ionic/angular';
 import { PopinfoComponent } from 'src/app/componets/popinfo/popinfo.component';
 import { ModalController } from '@ionic/angular';
 import { ReportarPage } from '../reportar/reportar.page';
+import { VotosService } from 'src/app/services/votos.service';
 
+
+//INTERFAZ DE CARRERAS
+interface votoInterface {
+  id?: string;
+  idComentario: string;
+  idUser: string;
+  votos: number;
+  }
 
 @Component({
   selector: 'app-comentarios',
@@ -44,9 +53,7 @@ export class ComentariosComponent implements OnInit {
   id=this.servFirestore.getId();
   comentarios0 = true;
 
-  public formComentario=new FormGroup({
-    texto:new FormControl('',[Validators.required]),
-  });
+  
 
 images: any=[];
 
@@ -68,6 +75,12 @@ navigationExtras: NavigationExtras = {
   }
 };
 
+//voto: votoInterface[];
+
+public formComentario=new FormGroup({
+  texto:new FormControl('',[Validators.required]),
+});
+
 
   constructor(
     private router: Router,
@@ -80,6 +93,7 @@ navigationExtras: NavigationExtras = {
     public popoverController: PopoverController,
     private firestoreService:FirestoreService,
     public modalController: ModalController,
+    private votosService: VotosService,
 
     ) {
 
@@ -230,6 +244,7 @@ console.log('IDW: para visualizar', comentario.id );
   const popover = await this.popoverController.create({
     component: PopinfoComponent,
     translucent: true,
+    cssClass:'my-popover-class',
     event: ev,
     mode:'ios',
     componentProps: {    
@@ -290,7 +305,11 @@ console.log('retorno del modal', data.motivo); */
 }
 
 
+//VOTOS
 
- 
+votar(comentario:any){
+  //this.votosService.saveVoto('Votos',);
+  this.servFirestore.saveVoto('Comentarios',comentario.id);
+}
 
 }

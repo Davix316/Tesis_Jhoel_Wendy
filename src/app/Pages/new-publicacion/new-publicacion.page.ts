@@ -33,7 +33,8 @@ export class NewPublicacionPage implements OnInit {
   nameUser='';
   apellUser='';
   fechaPubli=new Date();
-  likes=2;
+  likes=0;
+  dislikes=0;
   filepath='';
 
 
@@ -135,6 +136,7 @@ try {
     publi.userFoto=this.fotoUser;
     publi.apellUser=this.apellUser;
     publi.likes=this.likes;
+    publi.disLikes=this.dislikes;
     publi.idCarrera=this.idCarr;
     publi.file=this.inputFile.nativeElement.value;
     this.publiServ.newPublicacion(publi,idPublicacion);

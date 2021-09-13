@@ -3,18 +3,16 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-
    
       <ion-avatar slot="start"  >
-        <img [src]="detalleComentario.fotoUser">
+        <img [src]="infUser.foto">
       </ion-avatar>
       <ion-title >
         <ion-label class="ion-text-start">
-          {{ detalleComentario.nameUser}}
-          <p><small class="text-muted">{{ contactInfo.status }}</small></p>
+          {{ infUser.nombre}}
+          <p><small class="text-muted">En linea</small></p>
         </ion-label>
-      </ion-title>
-    
+      </ion-title>    
 
 
   </ion-toolbar>
@@ -28,11 +26,11 @@
   <div class="chat-container">
 
     <div *ngFor="let message of chat">    
-      <div *ngIf="message.idUserSender==userLog && message.idUserReciver==detalleComentario.idUser
-       || message.idUserReciver==userLog && message.idUserSender==detalleComentario.idUser">
+      <div *ngIf="message.idUserSender==userLog && message.idUserReciver==infUser.id
+       || message.idUserReciver==userLog && message.idUserSender==infUser.id">
        <div class="chat-bubble"  [ngClass]="{'idUserSender': message.idUserSender==userLog, 'idUserReciver': message.idUserSender!=userLog}" >
       <h6 class="texto">{{ message.texto }}</h6>
-      <p>14:02</p>
+      <p>{{message.fecha}}</p>
     </div>
   </div>
     </div>
@@ -44,24 +42,23 @@
       {{detalleComentario.texto}}
     </ion-card-content>
   </ion-card> -->
-  <div class="chat-controls" [ngClass]="{'active': showOptions}">
+  <div class="chat-controls" >
     <form [formGroup]="FormChat" (ngSubmit)="saveMessage()">
     <ion-row class="bg-white">
       <ion-col size="9" class="ion-no-padding">
         <ion-list lines="none" class="ion-no-padding">
 
           <ion-item >
-            <ion-input placeholder="Escribe un mensaje" type="text" formControlName="texto" required (focus)="showOptionsToggle(false)"></ion-input>
+            <ion-input placeholder="Escribe un mensaje" type="text" formControlName="texto" required ></ion-input>
           </ion-item>
         </ion-list>
       </ion-col>
       <ion-col size="3" class="ion-no-padding">
         <p class="ion-text-center icon-controls controlbutton">
           <button >
-          <ion-icon style="color: #90edd9 !important;" smode="ios" name="send" class="text-primary"></ion-icon>
+          <ion-icon style="color: #90edd9 !important" smode="ios" name="send" class="text-primary"></ion-icon>
         </button>
-          <ion-icon mode="ios" name="add-circle" *ngIf="!showOptions" (click)="showOptionsToggle()"></ion-icon>
-          <ion-icon mode="ios" name="close-circle" *ngIf="showOptions" (click)="showOptionsToggle()"></ion-icon>
+         
         </p>
       </ion-col>
     </ion-row>
@@ -70,3 +67,4 @@
 
   
 </ion-content>
+

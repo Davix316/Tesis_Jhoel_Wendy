@@ -12,27 +12,28 @@
 
     <ion-grid>
        <ion-row >
-        <ion-col class="ion-align-self-center">
-          <img src="/assets/icon/pdf.png" alt="file.png">
+        <ion-col size="2" class="ion-align-self-center" (click)="infoTarea(item)"  style="font-size: 42px; color:#000000 ;">
+          <i class="far fa-file-alt"></i>
         </ion-col>
-        <ion-col size="8"  class="ion-text-center">
-          <b>titulo: {{item.titulo}}</b>
-          <ion-list>
-            <ion-button color="light" size="small"><ion-icon name="download"></ion-icon></ion-button>
-            <ion-button color="light"  size="small"><ion-icon  class="heart" name="heart-dislike"></ion-icon></ion-button>
-          </ion-list>
-
-
+        <ion-col size="6"  class="ion-text-center"  (click)="infoTarea(item)">
+          <b class="ion-text-uppercase">{{item.titulo}}</b>         
         </ion-col >
-        <ion-col size="2" class="ion-align-self-center"  >
-          <a (click)="infoTarea(item)">
-         <ion-icon name="arrow-forward"></ion-icon>
-        </a>
+
+        <ion-col size="4" class="ion-align-self-center"  >
+          <ion-buttons>
+            <ion-button>
+              <ion-button size="small"><ion-icon name="create"></ion-icon></ion-button>
+              <ion-button size="small"><ion-icon name="trash"></ion-icon></ion-button>
+            </ion-button>
+          </ion-buttons>
         </ion-col>
       </ion-row>
 
     </ion-grid>
 </ion-card>
+
+
+
 
 </ion-content>
 

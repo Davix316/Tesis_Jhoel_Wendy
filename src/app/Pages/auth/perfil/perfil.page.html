@@ -12,11 +12,12 @@
 
 <ion-content >
     <!-- Content -->
+    <div class="container">
     <div class="ion-float-right">
 
       <ion-text  color="light" routerLink="/menu/editar-perfil"><ion-icon name="settings"></ion-icon>Config</ion-text>
     </div>
-
+  </div>
     <ion-row>
 
       <ion-col>
@@ -31,30 +32,35 @@
 
     <ion-row class="bnt-perfil">
       <ion-col >
-
+        <ion-card class="ion-text-center buttonCard" style=" background: #91c6de;">
         <a routerLink="/menu/chat" class="ion-text-center">
           <i class="fas fa-comment"></i>
           <br>
           <ion-label>Mensajes</ion-label>
         </a>
+        </ion-card>
       </ion-col>
 
       <ion-col>
-        <a routerLink="/menu/mis-archivos" class="ion-text-center">
+        
+        <ion-card class="ion-text-center buttonCard" style=" background: darkseagreen;">
+        <a routerLink="/menu/mis-archivos" class="ion-text-center ">
           <i class="fas fa-file-alt"></i>
           <br>
           <ion-label>Archivos subidos</ion-label>
 
         </a>
+      </ion-card>
       </ion-col>
 
       <ion-col>
-
+        <ion-card class="ion-text-center buttonCard" style="background: #debc68">
         <a  routerLink="/menu/puntuacion" class="ion-text-center">
           <i class="fas fa-star"></i>
           <br>
           <ion-label>Puntuación</ion-label>
         </a>
+        </ion-card>
       </ion-col>
     </ion-row>
 

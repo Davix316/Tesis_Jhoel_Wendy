@@ -43,14 +43,19 @@
 
 
     <ion-segment>
-      <ion-chip>
+      <ion-chip (click)="btnLike(publiDetalle)">
         <ion-icon name="thumbs-up-outline"></ion-icon>
-        <ion-label>78</ion-label>
+        <ion-label>{{publiDetalle.likes}}</ion-label>
       </ion-chip>
+
+      <ion-chip>      
+        <ion-icon name="thumbs-down-outline"></ion-icon>
+        <ion-label>{{publiDetalle.disLikes}}</ion-label>     
+    </ion-chip>
 
       <ion-chip>
         <ion-icon name="chatbubble-outline"></ion-icon>
-        <ion-label>78</ion-label>
+        <ion-label>34</ion-label>
       </ion-chip>
 
 
