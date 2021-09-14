@@ -54,8 +54,8 @@
       </ion-col>
 
       <ion-col>
-        <ion-card class="ion-text-center buttonCard" style="background: #debc68">
-        <a  routerLink="/menu/puntuacion" class="ion-text-center">
+        <ion-card (click)="puntuacionUser(user)" class="ion-text-center buttonCard" style="background: #debc68">
+        <a   class="ion-text-center">
           <i class="fas fa-star"></i>
           <br>
           <ion-label>Puntuación</ion-label>
@@ -79,7 +79,7 @@
         </ion-item>
         <ion-item>
           <ion-label>Num.Unico</ion-label>
-          <ion-note slot="end">{{user.numeroUnico}}</ion-note>
+          <ion-note slot="end">{{user.numUnico}}</ion-note>
         </ion-item>
 
 

@@ -102,9 +102,7 @@ navigationExtras: NavigationExtras = {
           const idPubli=element.id
          // this.countComments(idPubli);
                    
-        });
-
-        
+        });        
 
     }).unsubscribe;
   }

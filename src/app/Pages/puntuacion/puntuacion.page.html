@@ -16,60 +16,76 @@
 
   <ion-col >
     
-    <div class="position-absolute top-0 start-50 translate-middle-x">
-    <ion-avatar class="ion-margin-start">
-      <img src="https://firebasestorage.googleapis.com/v0/b/tesis-3fc38.appspot.com/o/Perfil%2Fuser_rl9v22ywlf?alt=media&token=e5a9f789-718f-4e2f-a662-bf3f11f04bc6" alt="foto">
+   <div class="position-absolute top-0 start-50 translate-middle-x">
+     <ion-avatar class="ion-margin-start">
+      <img [src]="userInf.foto" alt="foto">
     </ion-avatar>
    
   </div>
-  <ion-label>Name User</ion-label>
+  <ion-label class="ion-text-capitalize">{{userInf.nombre}} {{userInf.apellido}}</ion-label> 
 
   <ion-icon name="star" style="font-size: 30px; color: rgb(221, 221, 77);"></ion-icon>
-  </ion-col>
+  </ion-col> 
 
   
 
 </ion-row>
 <br>
-<ion-list>
-  <ion-list-header>
-     <h2><b>Votos Obtenidos:</b> 12</h2>
-  </ion-list-header>
-  
+<ion-list-header>
+  <h2><b>Votos Obtenidos: </b>{{totalVotos}}</h2>
+</ion-list-header>
 
-  <ion-item>
-    <h4>5</h4>
-    <ion-icon name="star" ></ion-icon>
+<ion-card style="background: #90edd9 !important; color: #000000; border-radius: 10px;">
+  <ion-card-content >
+  <div *ngIf="totalVotos<50">
+    <ion-item >     
+      <img src="/assets/icon/lost.png" width="20%">
+   
     <ion-label>
-      <h2>Publicacion Name</h2>     
-      <p>Descripcion Comentario...</p>
+     
+    <p style="font-weight: bold;" >Se necesita <span style="font-size: 20px;">50</span> votos </p> 
+    <p>Aún no es Momento de Publicar</p>
     </ion-label>
-  </ion-item>
+  </ion-item>  
+ 
+  </div>
 
-  <ion-item>
-    <h4>2</h4>
-    <ion-icon name="star" ></ion-icon>
-    <ion-label>
-      <h2>Publicacion Name</h2>     
-      <p>Descripcion Comentario...</p>
-    </ion-label>
-  </ion-item>
 
-  <ion-item>
-    <h4>5</h4>
-    <ion-icon name="star" ></ion-icon>
-    <ion-label>
-      <h2>Publicacion Name</h2>     
-      <p>Descripcion Comentario...</p>
-    </ion-label>
-  </ion-item>
+  <div *ngIf="totalVotos>=50">
+    <ion-item>     
+        <img src="/assets/icon/win.png" width="20%">
+            
+      <ion-label>
+         <p style="font-weight: bold;" >Alcansaste los <span style="font-size: 20px;">50</span> votos </p> 
+        <p>Es momento de Publicar</p> 
+      </ion-label>
+      <ion-button shape="round" size="default" routerLink="/menu/new-publicacion"><ion-icon name="arrow-up"></ion-icon></ion-button>
+    </ion-item>  
 
-  
-</ion-list>
+  </div>
+</ion-card-content>
+</ion-card>
 
-<ion-chip style="background-color: #90edd9; color: #000000; height: 50px;">
- <b>Se necesita 50 pts</b> 
-  Aún no es Momento de Publicar
-</ion-chip>
-  
+
+<ion-grid >
+
+  <ion-row *ngFor="let item of listaComent">    
+
+    <ion-col size="2" >
+      <h4>{{item.voto}}</h4>
+    </ion-col>
+
+    <ion-col size="3" >
+     <img [src]="getImage()" alt="frog">
+    </ion-col>
+
+    <ion-col size="7" >
+      <div *ngFor="let publi of publicaciones">
+        <h4 *ngIf="item.idPublicacion==publi.id" class="ion-text-capitalize"  (click)="infoTarea(publi)">{{publi.titulo}}</h4> 
+      </div>
+      <p >{{item.texto}}</p>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
 </ion-content>

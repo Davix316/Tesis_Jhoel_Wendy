@@ -3,7 +3,7 @@ export interface UserInterface {
   nombre: string;
   apellido: string;
   telefono: number;
-  numeroUnico: number;
+  numUnico: number;
   carreraId: string;
   email: string;
   password: string;

@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit, Input, Output, ViewChild,ElementRef } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import firebase from 'firebase';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { UserInterface} from 'src/app/shared/user';
@@ -25,7 +25,7 @@ export class PerfilPage implements OnInit {
   nombre: '',
   apellido: '',
   telefono: 0,
-  numeroUnico: 0,
+  numUnico: 0,
   carreraNombre: '',
   carreraId:'',
   email: '',
@@ -39,7 +39,14 @@ export class PerfilPage implements OnInit {
 
   show: boolean;
 
-  constructor(private serviceauth: FireauthService, private firestore: AngularFirestore) {
+  navigationExtras: NavigationExtras = {
+    state: {
+      value: null
+    }
+  };
+
+  
+  constructor(private serviceauth: FireauthService, private firestore: AngularFirestore, private router: Router) {
     this.show = false;
   }
 
@@ -72,20 +79,9 @@ getuser(){
   .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         this.userLogIn=doc.data();
-        this.user.nombre=this.userLogIn.nombre;
-        this.user.apellido=this.userLogIn.apellido;
-        this.user.telefono=this.userLogIn.telefono;
-        this.user.numeroUnico=this.userLogIn.numUnico;
-        this.user.carreraNombre=this.userLogIn.carreraNombre;
-        this.user.email=this.userLogIn.email;
-        this.user.password=this.userLogIn.password;
-        this.user.semestreRef=this.userLogIn.semestreRef;
-        this.user.foto=this.userLogIn.foto;
-        this.user.rol=this.userLogIn.rol;
-        //this.user.nombre=this.userLogIn.nombre;
 
-          //console.log(doc.id, ' => ', doc.data());
-      });
+        this.user=this.userLogIn;
+        });
   })
   .catch((error) => {
       console.log('Error getting documents:' , error);
@@ -105,6 +101,13 @@ mostrarContrasena(input: any){
     console.log(this.show);
 
   }
+}
+
+
+//NAVIGATION EXTRAS
+puntuacionUser(item: any): void{
+  this.navigationExtras.state.value=item;
+    this.router.navigate(['/menu/puntuacion'],this.navigationExtras);
 }
 
 
