@@ -18,13 +18,12 @@
     
    <div class="position-absolute top-0 start-50 translate-middle-x">
      <ion-avatar class="ion-margin-start">
-      <img [src]="userInf.foto" alt="foto">
+      <img [src]="foto" alt="foto"> 
     </ion-avatar>
    
   </div>
-  <ion-label class="ion-text-capitalize">{{userInf.nombre}} {{userInf.apellido}}</ion-label> 
-
-  <ion-icon name="star" style="font-size: 30px; color: rgb(221, 221, 77);"></ion-icon>
+  <ion-label class="ion-text-capitalize">{{nombre}} {{apellido}}</ion-label> 
+  
   </ion-col> 
 
   
@@ -33,11 +32,12 @@
 <br>
 <ion-list-header>
   <h2><b>Votos Obtenidos: </b>{{totalVotos}}</h2>
+  <ion-icon name="star" style="font-size: 30px; color: rgb(221, 221, 77);"></ion-icon>
 </ion-list-header>
 
-<ion-card style="background: #90edd9 !important; color: #000000; border-radius: 10px;">
+<ion-card style="background: #90edd9 !important; color: #000000 !important; border-radius: 10px;">
   <ion-card-content >
-  <div *ngIf="totalVotos<50">
+  <div *ngIf="totalVotos<50 || comentarios0==true">
     <ion-item >     
       <img src="/assets/icon/lost.png" width="20%">
    
@@ -59,7 +59,10 @@
          <p style="font-weight: bold;" >Alcansaste los <span style="font-size: 20px;">50</span> votos </p> 
         <p>Es momento de Publicar</p> 
       </ion-label>
-      <ion-button shape="round" size="default" routerLink="/menu/new-publicacion"><ion-icon name="arrow-up"></ion-icon></ion-button>
+      
+      <button  class="text-center" size="default" routerLink="/menu/new-publicacion">
+        <ion-icon name="add-outline" class="iconb"></ion-icon>
+      </button>
     </ion-item>  
 
   </div>
@@ -76,7 +79,7 @@
     </ion-col>
 
     <ion-col size="3" >
-     <img [src]="getImage()" alt="frog">
+      <!-- <img [src]="getImage()" alt="frog">  -->
     </ion-col>
 
     <ion-col size="7" >

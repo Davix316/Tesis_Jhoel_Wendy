@@ -1,6 +1,10 @@
 ion-content{
+  
   --background: #115571;
-  --background: linear-gradient( #115571 0%, #88aab8 100%);
+  --background: linear-gradient( #115571 0%, #88aab8 100%); 
+  //--background: url('https://i.pinimg.com/736x/ce/b8/bf/ceb8bf1ff43f24a32215fe81aef6e9da.jpg') no-repeat center center / cover;
+
+  
 }
 small{
   text-transform: capitalize;
@@ -36,7 +40,35 @@ a{
   right: 0;
 }
 
-ion-button{
-  --background: #90edd9 !important;
-  color: #000000;
+
+ion-fab-button{
+  --color: black;
+}
+.eyeInf{
+  --background: rgb(144,237,217);
+  --background: radial-gradient(circle, rgba(144,237,217,1) 29%, rgba(17,85,113,1) 100%);
+}
+
+.coments{
+  --background: rgb(181,244,181);
+  --background: radial-gradient(circle, rgba(181,244,181,1) 29%, rgba(17,85,113,1) 100%);
+}
+
+.dislike{
+  --background: rgb(216,216,216);
+--background: radial-gradient(circle, rgba(216,216,216,1) 29%, rgba(17,85,113,1) 100%);
+
+}
+
+.like{
+  --background: rgb(117,152,238);
+--background: radial-gradient(circle, rgba(117,152,238,1) 29%, rgba(17,85,113,1) 100%);
+}
+
+ion-card{
+  border-radius: 20px;
+}
+.addPubli{
+  --background: rgb(255,255,255);
+  --background: radial-gradient(circle, rgba(255,255,255,1) 29%, rgba(94,246,209,1) 100%);
 }

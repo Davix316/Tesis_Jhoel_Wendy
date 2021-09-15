@@ -8,9 +8,9 @@
 </ion-header>
 
 <ion-content>
-  <ion-item lines="none">
+  <ion-item >
     <div slot="end" style="padding:0; margin: 0px">
-      <button (click)="addFavorite(favorito)" style="background: none; font-size:medium;">
+      <button (click)="addFavorite(favorito)" style="background: none; font-size:25px;">
         <ion-icon *ngIf="favoritoAdd==false" class="favoritoFalse" name="heart"></ion-icon>
         <ion-icon *ngIf="favoritoAdd==true" class="favoritoTrue" name="heart"></ion-icon>
       </button>
@@ -43,35 +43,33 @@
 
 
     <ion-segment>
-      <ion-chip (click)="btnLike(publiDetalle)">
+      <ion-fab-button class="like" size="small" icon-start (click)="btnLike(publiDetalle)">
         <ion-icon name="thumbs-up-outline"></ion-icon>
-        <ion-label>{{publiDetalle.likes}}</ion-label>
-      </ion-chip>
+        {{publiDetalle.likes}}
+      </ion-fab-button>
+     
 
-      <ion-chip>      
+      <ion-fab-button class="dislike" size="small" ion-button clear small icon-start >
         <ion-icon name="thumbs-down-outline"></ion-icon>
-        <ion-label>{{publiDetalle.disLikes}}</ion-label>     
-    </ion-chip>
+        <ion-label>{{publiDetalle.disLikes}}</ion-label>
+      </ion-fab-button>
+    
 
-      <ion-chip>
-        <ion-icon name="chatbubble-outline"></ion-icon>
-        <ion-label>34</ion-label>
-      </ion-chip>
+      <ion-fab-button class="coments" routerLink="/menu/detalle-tarea"  size="small" clear small icon-start>
+        <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+        <div>
+          <ion-label>#</ion-label>
+        </div>
+      </ion-fab-button>
 
-
-      <!-- <ion-chip>
-      <ion-icon name="heart-outline" (click)="addFavorite()"></ion-icon>
-    </ion-chip> -->
-
-
-      <ion-chip (click)="presentPopover($event, publiDetalle)">
-        <ion-icon name="ellipsis-horizontal"></ion-icon>
-      </ion-chip>
+      <ion-fab-button (click)="presentPopover($event, publiDetalle)" class="moreoption"  size="small" clear small icon-start>
+        <ion-icon name="ellipsis-horizontal"></ion-icon>       
+      </ion-fab-button>
 
     </ion-segment>
     <hr>
 
-    <app-comentarios></app-comentarios>
+    <app-comentarios ></app-comentarios>
 
     <div class="spacing"></div>
 

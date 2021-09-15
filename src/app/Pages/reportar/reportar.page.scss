@@ -1,9 +1,13 @@
 
-ion-content{
-    --background: rgb(136,170,184);
-    --background: linear-gradient(90deg, rgba(136,170,184,1) 64%, rgba(17,85,113,1) 100%);
+ion-content{  
+    --background: url('https://i.pinimg.com/736x/d9/b1/1f/d9b11f6199a21ab2dd5564d3c5c206d1.jpg') no-repeat center center / cover;
+  
+  }
+  
+  ion-card{
+    color: black;
   }
 
-  ion-card{
-      border-radius: 15px;
+  ion-button{
+   --background: #90edd9;
   }

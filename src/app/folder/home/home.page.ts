@@ -35,14 +35,18 @@ navigationExtras: NavigationExtras = {
   }
 };
 
+comentarios0:boolean;
+totalVotos:number;
+votos: any;
+
   constructor(
     private fireService: FirestoreService,
     private serviceauth: FireauthService,
     private firestore: AngularFirestore,
     private router: Router,
     public toastController: ToastController,
-    private servFirestore: FirestoreService,
     ){
+      
 
    }
 
@@ -54,7 +58,7 @@ navigationExtras: NavigationExtras = {
        this.idUser = user.uid;
        //console.log(this.idUser);
        this.getuser(this.idUser);
-       console.log("Num Coment=>", this.numComent);
+       this.getComentarios(this.idUser);
        
      }
    });
@@ -100,8 +104,6 @@ navigationExtras: NavigationExtras = {
 
         this.publicaciones.forEach(element => {
           const idPubli=element.id
-         // this.countComments(idPubli);
-                   
         });        
 
     }).unsubscribe;
@@ -128,18 +130,34 @@ async failToast(text) {
 }
 
 
-//Contar COMENTARIOS
-countComments(idP: string){
-  this.servFirestore.getCollection<ComentariosInterface>('Comentarios').subscribe(res=>{
-    this.listaComent = res.filter(e=>idP===e.idPublicacion);
-  this.numComent=this.listaComent.length;
-   // console.log(' # comentarios:',this.listaComent.length  );
+//OBTENER COMENTARIOS
+getComentarios(idU: string) {
 
+  this.fireService.getCollection<ComentariosInterface>('Comentarios').subscribe(res => {
+    this.listaComent = res.filter(e => idU === e.idUser);
+    if (this.listaComent.length === 0) {
+      this.comentarios0 = true;
+      this.totalVotos = 0;
+    }
+    else {
+      this.totalVotos = 0;
+      //console.log(this.listaComent);
+      this.comentarios0 = false;
+      this.listaComent.forEach(element => {
 
-  }).unsubscribe;
+        //SUMA LOS VOTOS
+        this.votos = element.voto;
+
+        this.totalVotos += this.votos;
+      });
+      //console.log('total:', this.totalVotos);
+
+    }
+  });
 
 }
 
+  
 addLike(publicacion:any){
   if(!this.votoAdd){
     this.fireService.saveLike('Publicaciones', publicacion.id,1);

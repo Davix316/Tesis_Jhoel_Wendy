@@ -1,5 +1,5 @@
 export interface UserInterface {
-  id?: string;
+  id: string;
   nombre: string;
   apellido: string;
   telefono: number;
@@ -8,7 +8,7 @@ export interface UserInterface {
   email: string;
   password: string;
   semestreRef: number;
-  foto?: string;
+  foto: string;
   rol: string;
   carreraNombre?: string;
 }

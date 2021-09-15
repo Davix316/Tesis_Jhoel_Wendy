@@ -3,14 +3,13 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import  firebase from 'firebase';
-import { Interface } from 'readline';
+
 import { Observable } from 'rxjs';
 import { ChatService } from 'src/app/services/chat.service';
 import { FireauthService } from 'src/app/services/fireauth.service';
-import { FirestoreService } from 'src/app/services/firestore.service';
 import { chatInterface } from 'src/app/shared/chat';
 import { ComentariosInterface } from 'src/app/shared/comentarios';
-import { UserInterface } from 'src/app/shared/user';
+
 
 
 
@@ -37,7 +36,6 @@ userLog:string;
   idUReceptor:string;
   nameUReceptor:string
 chat: chatInterface[];
-fechaM=new Date()
 conversacion=[];
 
   constructor( private firestore: AngularFirestore,
@@ -116,7 +114,7 @@ console.log(this.idUReceptor,'idUsuario receptor');
     var messagesRef=firebase.database().ref().child("Mensajes");
     if(this.FormChat.valid){ 
       var Mensaje={
-        fecha : new Date().getTime(),
+        fecha: new Date().getTime(),
         id:this.chatService.getId(),
         idUserReciver:this.idUReceptor,
         idUserSender:this.idUSender, 
@@ -134,7 +132,6 @@ console.log(this.idUReceptor,'idUsuario receptor');
   }
 
  
-  
   
 
 }

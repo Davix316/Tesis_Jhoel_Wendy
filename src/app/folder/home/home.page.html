@@ -46,41 +46,41 @@
 
     <ion-row>
       <ion-col size="3">
-        <ion-button size="small" icon-start (click)="addLike(item)">
+        <ion-fab-button class="like" size="small" icon-start (click)="addLike(item)">
           <ion-icon name="thumbs-up-outline"></ion-icon>
           {{item.likes}}
-        </ion-button>
+        </ion-fab-button>
       </ion-col>
 
       <ion-col size="3">
-        <ion-button size="small" ion-button clear small icon-start >
+        <ion-fab-button class="dislike" size="small" ion-button clear small icon-start >
           <ion-icon name="thumbs-down-outline"></ion-icon>
           <ion-label>{{item.disLikes}}</ion-label>
-        </ion-button>
+        </ion-fab-button>
       </ion-col>
 
       <ion-col size="3">
-        <ion-button routerLink="/menu/detalle-tarea" (click)="infoTarea(item)" size="small" clear small icon-start>
-          <ion-icon name="chatbubble-ellipses"></ion-icon>
-          <div *ngFor="let item of listaComent">
-            <ion-label>{{numComent}}</ion-label>
+        <ion-fab-button class="coments" routerLink="/menu/detalle-tarea"  (click)="infoTarea(item)" size="small" clear small icon-start>
+          <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+          <div>
+            <ion-label>#</ion-label>
           </div>
 
-        </ion-button>
+        </ion-fab-button>
       </ion-col>
 
 
       <ion-col center text-center size="3">
-        <ion-button (click)="infoTarea(item)" size="small" clear small icon-start>
+        <ion-fab-button class="eyeInf"  (click)="infoTarea(item)"  size="small"  ion-button clear small icon-start >
           <ion-icon name="eye-outline"></ion-icon>
-        </ion-button>
+        </ion-fab-button>
 
       </ion-col>
     </ion-row>
   </ion-card>
 
-  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button routerLink="/menu/new-publicacion">
+  <ion-fab *ngIf="totalVotos>=50" horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button class="addPubli" routerLink="/menu/new-publicacion">
       <ion-icon style=" color: #000000;" name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

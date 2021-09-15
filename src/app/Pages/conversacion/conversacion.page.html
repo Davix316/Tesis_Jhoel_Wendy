@@ -32,7 +32,7 @@
        || message.idUserReciver==userLog && message.idUserSender==detalleComentario.idUser">
        <div class="chat-bubble"  [ngClass]="{'idUserSender': message.idUserSender==userLog, 'idUserReciver': message.idUserSender!=userLog}" >
       <h6 class="texto">{{ message.texto }}</h6>
-      <p>14:02</p>
+      <p>{{message.fecha | date:'h:mm a'}}</p>
     </div>
   </div>
     </div>

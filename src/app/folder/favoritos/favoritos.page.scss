@@ -1,7 +1,15 @@
 ion-content{
-  --background:#115571 ;
+  --background: url('https://i.pinimg.com/736x/a2/1f/2a/a21f2ae4f4fde8b528f2d171bc1b7b35.jpg') no-repeat center center / cover;
+ 
 }
 
 .heart{
   color: rgb(230, 64, 64);
+}
+
+ion-card{
+
+  --background: #335676b0;
+  //--background: linear-gradient(145deg, rgba(144,237,217,1) 10%, rgba(17,85,113,0.7791491596638656) 99%);
+color: white;
 }

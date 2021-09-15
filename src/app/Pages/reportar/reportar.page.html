@@ -8,9 +8,9 @@
 
 
 <ion-content>
-  <form [formGroup]="formReport" (ngSubmit)="saveReporte(formReport.value)">
+  <form [formGroup]="formReport" (ngSubmit)="saveReporte(formReport.value)" class="ion-float-right">
   <ion-card>
-    <ion-card-content>
+    
       <ion-list>
         <ion-radio-group formControlName="motivo" required>
           <ion-list-header>
@@ -34,15 +34,15 @@
       
         </ion-radio-group>
       </ion-list>
-    </ion-card-content>
+    
   </ion-card>
   
 <ion-card>
-  <ion-card-content>
+  
     <h6>Otro</h6>
     <small>Describa otro motivo por el cual desea reportar</small>
     <ion-textarea class="form-control" formControlName="descripcion" required> </ion-textarea>
-  </ion-card-content>
+  
   <div class="ion-text-center">
   <ion-button shape="round" type="submit">Reportar</ion-button>
 </div>

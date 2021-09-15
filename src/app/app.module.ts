@@ -19,14 +19,6 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { File } from '@ionic-native/file/ngx';
 
 
-
-//import { FiltroPipe } from './pipes/filtro.pipe';
-/* import { PipesModule } from './pipes/pipes.module';
-import { File } from '@ionic-native/file/ngx';
-import { FileTransfer } from '@ionic-native/file-transfer/ngx';
-import { ImagePicker } from '@ionic-native/image-picker/ngx'; */
-
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],

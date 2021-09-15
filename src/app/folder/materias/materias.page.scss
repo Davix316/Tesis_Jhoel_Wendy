@@ -13,8 +13,10 @@ ion-segment{
   background-color: #f3f4ff;
 }
 ion-content{
-  --background:#88aab8
+  --background: url('https://i.pinimg.com/736x/90/24/b6/9024b60c2c1fa7153f565a311305bfe2.jpg') no-repeat center center / cover;
+ --color:white
 }
+
  ion-col, ion-card-content{
    padding: 0;
    margin: 0;

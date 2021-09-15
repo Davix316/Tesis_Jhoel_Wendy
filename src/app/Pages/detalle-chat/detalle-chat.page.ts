@@ -7,6 +7,7 @@ import { FireauthService } from 'src/app/services/fireauth.service';
 import { chatInterface } from 'src/app/shared/chat';
 import { UserInterface } from 'src/app/shared/user';
 
+
 @Component({
   selector: 'app-detalle-chat',
   templateUrl: './detalle-chat.page.html',
@@ -75,7 +76,9 @@ console.log(this.idUReceptor,'idUsuario receptor');
 
   //LEER MENSAJES
   getMessages(){
-  this.chatService.listarDatos().valueChanges().subscribe(data=>{
+  this.chatService.listarDatos().valueChanges().subscribe((data:any)=>{
+    console.log('fecha:', data);
+    
 
   })
   }
@@ -87,22 +90,19 @@ console.log(this.idUReceptor,'idUsuario receptor');
     var messagesRef=firebase.database().ref().child("Mensajes");
     if(this.FormChat.valid){ 
       var Mensaje={
-        fecha : new Date().getTime(),
+        fecha: new Date().getTime(),
         id:this.chatService.getId(),
         idUserReciver:this.idUReceptor,
         idUserSender:this.idUSender, 
-        texto: this.FormChat.value.texto,
-         
-        
+        texto: this.FormChat.value.texto, 
       }
-      console.log(Mensaje.fecha);
-      
+      console.log(Mensaje.fecha);      
       messagesRef.push(Mensaje)
       this.FormChat.reset();
-
     }
 
   }
+
   
 
 }

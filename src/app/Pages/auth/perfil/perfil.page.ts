@@ -106,7 +106,7 @@ mostrarContrasena(input: any){
 
 //NAVIGATION EXTRAS
 puntuacionUser(item: any): void{
-  this.navigationExtras.state.value=item;
+  this.navigationExtras.state.value=item; 
     this.router.navigate(['/menu/puntuacion'],this.navigationExtras);
 }
 
