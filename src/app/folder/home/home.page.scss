@@ -55,8 +55,8 @@ ion-fab-button{
 }
 
 .dislike{
-  --background: rgb(216,216,216);
---background: radial-gradient(circle, rgba(216,216,216,1) 29%, rgba(17,85,113,1) 100%);
+  --background: rgb(242,33,33);
+  --background: radial-gradient(circle, rgba(242,33,33,0.5970763305322129) 27%, rgba(17,85,113,1) 99%);
 
 }
 
@@ -69,6 +69,5 @@ ion-card{
   border-radius: 20px;
 }
 .addPubli{
-  --background: rgb(255,255,255);
-  --background: radial-gradient(circle, rgba(255,255,255,1) 29%, rgba(94,246,209,1) 100%);
+  --background: #fdcd53;
 }

@@ -1,5 +1,13 @@
 ion-content{
-    --background: url('https://i.pinimg.com/736x/ce/0f/0a/ce0f0ab1bed842030ec136d221cfa9dd.jpg')no-repeat center center / cover;
+    --background: url('https://i.pinimg.com/564x/c5/b3/48/c5b3481b3d024fc676d6913d0a70ecdb.jpg')no-repeat center center / cover;
   }
 
- 
+  ion-card{
+    color: black;
+  }
+
+  ion-button{
+   --background: #90edd9;
+   --color:black
+   
+  }

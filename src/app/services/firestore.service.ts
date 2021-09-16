@@ -129,5 +129,10 @@ export class FirestoreService {
   saveDislike(){
 
   }
+//ACTUALIZAR DOCUMENTOS
+  updateDoc(data: any, path: string, id: string){
+    const collection = this.firestoreS.collection(path);
+    return collection.doc(id).update(data);
+  }
 
 }
