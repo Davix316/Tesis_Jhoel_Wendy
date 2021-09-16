@@ -69,12 +69,15 @@ export const routes: Routes = [
       {
         path: 'list',
         loadChildren: () => import('./views/admin/list/list.module').then(m => m.ListModule), canActivate: [CheckloginGuard2],
-      },{
-        path: 'newAdmin', loadChildren: () => import('./views/admin/newAdmin/newAdmin.module').then(m => m.NewAdminModule),canActivate: [CheckloginGuard2],
+      },
+      {
+        path: 'newAdmin', 
+        loadChildren: () => import('./views/admin/newAdmin/newAdmin.module').then(m => m.NewAdminModule),canActivate: [CheckloginGuard2],
         data: {
           title: 'Nuevo Administrador'
         }},
-      { path: 'edit', loadChildren: () => import('./views/admin/edit/edit.module').then(m => m.EditModule),canActivate: [CheckloginGuard2],
+      { 
+        path: 'edit', loadChildren: () => import('./views/admin/edit/edit.module').then(m => m.EditModule),canActivate: [CheckloginGuard2],
       data: {
         title: 'Editar Administrador'
       } },

@@ -70,8 +70,6 @@ export class CheckloginGuard2 implements CanActivate, OnInit {
           this.admin.semestreRef=this.userLogIn.semestreRef;
           this.admin.foto=this.userLogIn.foto;
           this.admin.rol=this.userLogIn.rol;
-
-          console.log("Rol: ",this.admin.rol);
         });
     })
     .catch((error) => {
@@ -91,7 +89,7 @@ export class CheckloginGuard2 implements CanActivate, OnInit {
           return true;
         }
         else{
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['dashboard']);
           console.log('super Admin:', false);
         return false;
         }

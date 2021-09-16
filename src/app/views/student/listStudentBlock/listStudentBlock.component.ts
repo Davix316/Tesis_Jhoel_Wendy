@@ -33,7 +33,7 @@ export class ListStudentBlockComponent implements OnInit {
     if (confirmacion) {
     try {
       await this.adminsSvc.onDeleteStudentsBlock(studentId);
-      alert('Deleted');
+      alert('Eliminado de lista de bloqueados');
     } catch (err) {
       console.log(err);
     }

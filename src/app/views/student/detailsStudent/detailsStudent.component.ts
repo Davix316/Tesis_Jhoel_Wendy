@@ -44,7 +44,7 @@ export class DetailsStudentComponent implements OnInit {
     if (confirmacion) {
     try {
       await this.adminsSvc.onDeleteStudents(this.student?.id);
-      alert('Deleted');
+      alert('Estudiante Eliminado');
       this.onGoBackToList();
     } catch (err) {
       console.log(err);

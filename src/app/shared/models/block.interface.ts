@@ -7,5 +7,4 @@ export interface Bloqueo {
     motivo: string;
     dias: number;
     fechaI?: any;
-    fechaF?: any;
   }

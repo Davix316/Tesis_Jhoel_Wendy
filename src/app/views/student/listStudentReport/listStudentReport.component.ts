@@ -37,7 +37,7 @@ export class ListStudentReportComponent implements OnInit {
     const confirmacion = confirm('Esta seguro que desea eliminar el reporte');
     if (confirmacion) {
     try {
-      await this.adminsSvc.onDeleteStudentsBlock(reporteId);
+      await this.adminsSvc.onDeleteReport(reporteId);
       alert('Reporte Eliminado');
     } catch (err) {
       console.log(err);
@@ -46,7 +46,6 @@ export class ListStudentReportComponent implements OnInit {
 }
 
 onGoToSee(item: any): void {
-  console.log(item.idPoC);
   const p = item.idPoC;
   this.getPublicacion(p);
 }
@@ -59,8 +58,6 @@ getPublicacion(item){
           querySnapshot.forEach((doc) => {
             this.Publi=doc.data();
             this.idPubliSelect=this.Publi.id;
-            console.log( "Publi",this.Publi)
-
             this.navigationExtras.state.value = this.Publi;
             this.router.navigate(['carreras/archivo'], this.navigationExtras);
            });

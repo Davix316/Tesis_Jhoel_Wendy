@@ -138,15 +138,20 @@ export class MateriasComponent implements OnInit {
 
       this.materiaSvc.onSaveMateria2(materia, materiaId, idCarrera);
       this.materiaForm.reset();
-      this.router.navigate(['/carreras']);
+      this._location.back();
+
     } else {
       console.log("no valido")
     }
   }
 
   savePublicacion(publi: Publicacion){
+
+    if(publi.file==""){
+      alert('Cargue un archivo para la publicación');
+    }
+
     try {
-      console.log(this.publicacionForm.value);
       if(this.publicacionForm.valid){
         publi.fecha=this.fechaPubli;
         publi.idUser=this.idUserPubli;
@@ -159,6 +164,9 @@ export class MateriasComponent implements OnInit {
         publi.idMateria=this.materia.id;
         publi.file=this.inputFile.nativeElement.value;
         this.publicacionSvc.newPublicacion(publi,this.id);
+        console.log(this.publicacionForm.value);
+        this.publicacionForm.reset();
+        this._location.back();
       }
     } catch (error) {
     console.log(error);

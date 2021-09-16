@@ -44,12 +44,11 @@
                 </li>
                 <li class="list-group-item">
                   <h5>Fecha Inicial: </h5>
-                  <h6>{{fechaInicio.timestamp  | date: 'yyyy-MM-dd'}}</h6>
-                  <th>{{fechaInicio.timestamp | date: 'yyyy/MM/dd h:mm:ss a'}}</th>
+                  <h6>{{student.fechaI.toDate()}}</h6>
                 </li>
                 <li class="list-group-item">
-                  <h5>Fecha Inicial: </h5>
-                  <h6>{{student.fechaF}}</h6>
+                  <h5>Fecha Final: </h5>
+                  <h6>{{fechaFin}}</h6>
                 </li>
               </ul>
             </div>

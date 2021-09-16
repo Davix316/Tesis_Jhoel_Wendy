@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , ViewChild , ElementRef } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { NavigationExtras, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -7,6 +7,12 @@ import { Location } from '@angular/common';
 import { ComentariosService } from './../../services/comentarios.service';
 import { Comentario } from '../../../shared/models/comentario.interface';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
+import { FirebaseauthService } from '../../services/firebaseauth.service';
+
 
 @Component({
   templateUrl: './archivo.component.html',
@@ -14,6 +20,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 export class ArchivoComponent implements OnInit{
 
+  filepath='';
   Publicacion$ = this.datosSrv.publicaciones;
   Comentario$ = this.datosSrv.comentarios;
   publicacionForm: FormGroup;
@@ -23,6 +30,17 @@ export class ArchivoComponent implements OnInit{
   carreraId: string;
   materiaId: string;
   publicacionId: string;
+  carrera: string;
+  materia: string;
+  nameMateria: any;
+  idMat='';
+  email: string;
+  userLogIn: any;
+  idUserPubli='';
+  nameUser='';
+  apellUser='';
+  fotoUser='';
+  fechaPubli= new Date();
 
   textoBuscar='';
 
@@ -38,42 +56,93 @@ export class ArchivoComponent implements OnInit{
     private fb: FormBuilder,
     private _location: Location,
     private comentariosServ: ComentariosService,
-    public sanitizer: DomSanitizer,
+    //public sanitizer: DomSanitizer,
+    private firestore: AngularFirestore,
+    private storage: AngularFireStorage,
+    private serviceAuth: FirebaseauthService,
   ) { 
     const navigation = this.router.getCurrentNavigation();
     this.publicacion = navigation?.extras?.state?.value;
     this.initForm();
   }
 
+  @ViewChild('FileUrlUser') inputFile: ElementRef;
+  progreso=false;
+  porcentaje=0;
+  porcentajesubida: Observable<number>;
+  urlFile: Observable<string>;
+
   ngOnInit(): void {
+
+    this.serviceAuth.getCurrentUser().subscribe(user => {
+      this.email = user.email;
+      this.getAdmin();
+    })
 
     if (typeof this.publicacion === 'undefined') {
       this.router.navigate(['/carreras']);
     }
     console.log(this.publicacion.id)
-    console.log(this.publicacion.idMateria)
+    this.materia = this.publicacion.idMateria;
     this.publicacionForm.patchValue(this.publicacion);
 
     this.obtenerComentarios(this.publicacion.id);
+    this.getMateria(this.materia);
 
-  }
-
-  onSave(): void {
-
-    if (this.publicacionForm.valid) {
-      console.log("valido")
-      const publicacion = this.publicacionForm.value;
-      const publicacionId = this.publicacion?.id || null;
-      const idMateria = this.publicacion.idMateria || null;
-
-      this.datosSrv.onSavePublicacion(publicacion, publicacionId, idMateria);
-      this.publicacionForm.reset();
-      this.router.navigate(['/carreras']);
-    } else {
-      console.log("no valido"),
-        window.alert("Complete todos los campos")
+    if(this.publicacion.idCarrera=="TkiP9dMmAXyoscir6GqF"){
+      this.carrera = "TS- Electromecánica";
+    }else if(this.publicacion.idCarrera=="i6e9eP0YTsnowV8p8EKi"){
+      this.carrera = "TS- Redes y Telecomunicaciones";
+    }else if(this.publicacion.idCarrera=="iw6XSHR2NiPPkwMSjKBM"){
+      this.carrera = "TS- Agua y Saneamiento Ambiental";
+    }else if(this.publicacion.idCarrera=="ph4kM1eyF6KoaieJqCr0"){
+      this.carrera = "TS- Desarrollo de Software";
     }
   }
+
+  onSave(publi: Publicacion): void {
+
+    try {
+      if(this.publicacionForm.valid){
+        publi.fecha=this.fechaPubli;
+        publi.idUser=this.idUserPubli;
+        publi.nameUser=this.nameUser;
+        publi.apellUser=this.apellUser;
+        publi.userFoto=this.fotoUser;
+        publi.likes=0;
+        publi.categoria= this.publicacion.categoria;
+        const publicacionId = this.publicacion?.id || null;
+        publi.idCarrera=this.publicacion.idCarrera;
+        const idMateria=this.publicacion.idMateria;
+        publi.file=this.inputFile.nativeElement.value;
+        this.datosSrv.onSavePublicacion(publi, publicacionId, idMateria);
+        this.publicacionForm.reset();
+        this._location.back();
+      }
+
+    } catch (error) {
+    console.log(error);
+    }
+  }
+
+  public getAdmin() {
+
+    this.firestore.collection('Administradores').ref.where('email', '==', this.email)
+  
+        .get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              this.userLogIn=doc.data();
+              this.nameUser=this.userLogIn.nombre;
+              this.idUserPubli=this.userLogIn.id;
+              this.apellUser=this.userLogIn.apellido;
+              this.fotoUser=this.userLogIn.foto;
+            });
+        })
+        .catch((error) => {
+            console.log('Error getting documents:' , error);
+        });
+    }
 
   isValidField(field: string): string {
     const validatedField = this.publicacionForm.get(field);
@@ -101,6 +170,22 @@ export class ArchivoComponent implements OnInit{
     });
   }
 
+  public getMateria(mat) {
+
+    this.firestore.collection('Materias').ref.where('id', '==', mat)
+        .get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              this.nameMateria=doc.data();
+              this.idMat=this.nameMateria.nombre;
+              console.log(this.idMat);
+            });
+        })
+        .catch((error) => {
+            console.log('Error getting documents:' , error);
+        });
+    }
+
   async onGoToDelete(comentarioId: string): Promise<void> {
 
     const confirmacion = confirm('Esta seguro que desea eliminar el comentario');
@@ -118,4 +203,27 @@ export class ArchivoComponent implements OnInit{
   goBack() {
     this._location.back();
   }
+
+    //SUBIR ARCHIVO
+    uploadFile(pdf){
+      //generar id Aleatorio para el archivo
+      const id= Math.random().toString(36).substring(2);
+      const file=pdf.target.files[0];
+       this.filepath='Archivos/'+ this.nameUser+ '/'+'file_'+id;
+      const ref=this.storage.ref(this.filepath);
+      const tarea= this.storage.upload(this.filepath,file);
+      this.porcentajesubida= tarea.percentageChanges();
+      
+      
+      tarea.snapshotChanges().pipe(finalize(()=>this.urlFile=ref.getDownloadURL())).subscribe();
+      this.progreso=true;
+      //Cambia el porcentaje
+      tarea.percentageChanges().subscribe((porcentaje) => {
+        this.porcentaje = Math.round(porcentaje);
+        if (this.porcentaje === 100) {
+          this.progreso = false;
+        }
+      });
+      
+      }
 }

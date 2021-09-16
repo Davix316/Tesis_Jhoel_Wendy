@@ -103,12 +103,8 @@
 
               <div class="form-group col-md-6">
                 <input type="file" class="form-control" placeholder="Archivo.pdf" formControlName="file"
-                accept=".pdf ,.docx ,.xlsx"  [class]="isValidFieldP('file')" (change)="uploadFile($event)" >
-                <div class="invalid-feedback">
-                  <span *ngIf="publicacionForm.get('file').errors?.required">
-                    Este campo es requerido.
-                  </span>
-                </div>
+                accept=".pdf ,.docx ,.xlsx" (change)="uploadFile($event)" >
+                
                 <div class="spinner-border" role="status" *ngIf="progreso==true">
                   <span class="visually-hidden" >Cargando...</span>
                 </div>

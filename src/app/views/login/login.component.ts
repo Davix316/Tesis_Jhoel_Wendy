@@ -44,12 +44,15 @@ export class LoginComponent implements OnInit {
 
   loginUser(){
     let {usuarioF,passwordF} = this.myFormUser.value;
-    const user = this.serviceAuth.login(usuarioF,passwordF)
-    if(this.myFormUser.invalid){
-      this.errorMessage;
-      console.log("Inicio de Sesión fallido");
-      window.alert("Credenciales incorrectas")    
-    }
+
+      const user = this.serviceAuth.login(usuarioF,passwordF)
+      if(this.myFormUser.invalid){
+        this.errorMessage;
+        window.alert("Credenciales incorrectas");
+        this.myFormUser.reset();   
+      }
+ 
+      this.myFormUser.reset();   
   }
 
   async reset() {

@@ -55,7 +55,7 @@ export class ListStudentComponent implements OnInit {
     if (confirmacion) {
     try {
       await this.adminsSvc.onDeleteStudents(studentId);
-      alert('Deleted');
+      alert('Estudiante eliminado');
     } catch (err) {
       console.log(err);
     }

@@ -48,11 +48,13 @@ export class AdminFormComponent implements OnInit {
     } else {
       this.adminForm.patchValue(this.admin);
     }
+
     this.fotoUser = this.admin.foto;
-    console.log("foto", this.fotoUser)
+    console.log(this.fotoUser);
   }
 
   onSave(adm): void {
+
     if (adm.carreraNombre === "TS- Electromecánica") {
       adm.carreraId = "TkiP9dMmAXyoscir6GqF";
     } else
@@ -72,13 +74,12 @@ export class AdminFormComponent implements OnInit {
       console.log("valido");
       const admin = this.adminForm.value;
       const adminId = this.admin?.id || null;
-      adm.foto = this.inputFoto.nativeElement.value;
+      adm.foto = this.inputFoto.nativeElement.value;  
       this.adminsSvc.onSaveAdmin(admin, adminId, adm.foto);
       this.adminForm.reset();
       this.router.navigate(['list']);
     } else {
       console.log("no valido")
-      console.log(this.adminForm.value)
     }
   }
 
@@ -104,7 +105,7 @@ export class AdminFormComponent implements OnInit {
       semestreRef: ['', [Validators.required]],
       telefono: ['', [Validators.required]],
       rol: ['Administrador'],
-      foto: ['', [Validators.required]],
+      foto: [''],
     });
   }
 

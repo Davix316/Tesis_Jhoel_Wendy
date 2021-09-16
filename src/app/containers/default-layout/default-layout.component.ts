@@ -72,7 +72,6 @@ export class DefaultLayoutComponent {
             this.admin.foto=this.userLogIn.foto;
             this.admin.rol=this.userLogIn.rol;
 
-            console.log(this.admin.rol);
           });
       })
       .catch((error) => {

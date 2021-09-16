@@ -48,7 +48,6 @@ export class StudentFormComponent implements OnInit {
       this.studentForm.patchValue(this.student);
     }
     this.fotoUser = this.student.foto;
-    console.log("foto", this.fotoUser)
   }
   
    onSave(adm): void {
@@ -74,10 +73,8 @@ export class StudentFormComponent implements OnInit {
       this.adminsSvc.onSaveStudent(student, studentId, adm.foto);
       this.studentForm.reset();
       this.router.navigate(['listStudent']);
-      console.log(this.studentForm.value);
     }else{
       console.log("no valido");
-      console.log(this.studentForm.value);
     }
   }
 
@@ -103,7 +100,7 @@ export class StudentFormComponent implements OnInit {
       numUnico: ['', [Validators.required]],
       semestreRef: ['', [Validators.required]],
       telefono: ['', [Validators.required]],
-      rol: ['Estudiante'],
+      rol: ['estudiante'],
       foto:  [''],
     });
   }

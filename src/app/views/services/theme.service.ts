@@ -142,6 +142,17 @@ export class ThemeService {
     });
   }
 
+  onDeleteReport(reporteId: string): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const result = await this.reportesCollection.doc(reporteId).delete();
+        resolve(result);
+      } catch (err) {
+        reject(err.message);
+      }
+    });
+  }
+
   uploadImage(file: any, path: string, nombre: string): Promise<string> {
     return new Promise(resolve => {
 

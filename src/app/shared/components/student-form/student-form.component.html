@@ -7,7 +7,7 @@
 
       <div class="card-body">
 
-        <form class="mt-3 col-md-8 offset-md-2" (ngSubmit)="onSave(studentForm.value)" [formGroup]="studentForm">
+        <form class="mt-3 col-md-10 offset-md-2" (ngSubmit)="onSave(studentForm.value)" [formGroup]="studentForm" style="margin: auto;">
           <div class="row">
             <div class="col-md-3">
               <label>Foto: </label>
@@ -47,7 +47,7 @@
                 <div class="form-group col-md-6">
                   <label>Email: </label>
                   <input type="text" class="form-control" placeholder="correo01@epn.edu.ec" formControlName="email"
-                    [class]="isValidField('email')" disabled>
+                    [class]="isValidField('email')">
                   <div class="invalid-feedback">
                     <span *ngIf="studentForm.get('email').errors?.required">
                       Este campo es requerido.
@@ -80,7 +80,7 @@
                 <div class="form-group col-md-6">
                   <label>Constraseña: </label>
                   <input type="password" class="form-control" placeholder="una-contraseña" formControlName="password"
-                    [class]="isValidField('password')" disabled>
+                    [class]="isValidField('password')">
                   <div class="invalid-feedback">
                     <span *ngIf="studentForm.get('password').errors?.required">
                       Este campo es requerido y minimo 6 dígitos.
@@ -137,16 +137,7 @@
                 <div class="form-group col-md-6">
                   <label>El rol sera: </label>
                   <input type="text" class="form-control" placeholder="Estudiante" formControlName="rol"
-                   value="Estudiante" disabled>
-                </div>
-                <div class="form-group col-md-6">
-                  <label>Carrera: </label>
-                  <select class="form-control" formControlName="carreraId">
-                    <option select value="TS- Agua y Saneamiento Ambiental">TSASA - Agua y Saneamiento Ambiental</option>
-                    <option value="TS- Desarrollo de Software">TSDS - Desarrollo de Software</option>
-                    <option value="TS- Redes y Telecomunicaciones">TSRT - Redes y Telecomunicaciones</option>
-                    <option value="TS- Electromecánica ">TSEM - Electromecánica</option>
-                  </select>
+                   value="estudiante" disabled>
                 </div>
               </div>
 
