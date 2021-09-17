@@ -2,10 +2,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { NavigationExtras, Router } from '@angular/router';
+import { AlertController, ModalController } from '@ionic/angular';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { ComentariosInterface } from 'src/app/shared/comentarios';
 import { PublicacionInterface } from 'src/app/shared/publicacion';
 import { TareasInterface } from 'src/app/shared/tareas';
+import { EditPublicacionPage } from '../edit-publicacion/edit-publicacion.page';
 
 @Component({
   selector: 'app-mis-archivos',
@@ -19,7 +22,7 @@ export class MisArchivosPage implements OnInit {
   idPubliUser: string;
 
 misArchivos: PublicacionInterface[]=[];
-
+listComentarios: ComentariosInterface[];
 //obtener id Clic=keado
 navigationExtras: NavigationExtras = {
   state: {
@@ -32,7 +35,10 @@ navigationExtras: NavigationExtras = {
     private fireService: FirestoreService,
     private serviceauth: FireauthService,
     private firestore: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private modalController: ModalController,
+    private alertController: AlertController,
+    private fireStore: FirestoreService,
   ) {
 
   }
@@ -91,6 +97,65 @@ public getuser(uid: string) {
 
   }
 
+  //EDIT PUBLICACION
+async ModalEditPubli(infoPublicacion:any){
+  const modal = await this.modalController.create({
+    component: EditPublicacionPage,
+    cssClass: 'my-custom-class',
+    componentProps: {
+      ObjectPubli:infoPublicacion,
+      ObjectUser:this.userInfo,
+    }
+  });
+  return await modal.present();
+}
+
+async presentAlertConfirm(publicacionInf:any) {
+  const alert = await this.alertController.create({
+    cssClass: '.alerClass',
+    header: 'Alerta!',
+    mode:"ios",
+    message: 'Seguro desea Eliminar esta Publicación?',
+    buttons: [
+      {
+        text: 'Cancelar',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+        }
+      }, {
+        text: 'Si',
+        handler: () => {
+          this.fireStore.deleteDoc('Publicaciones', publicacionInf.id);
+          this.DeleteComments(publicacionInf.id);
+          this.router.navigate(["/menu/mis-archivos"]);
+          console.log('Confirm Okay');
+        }
+      }
+    ]
+  });
+
+  await alert.present();
+}
+
+//CONSULTA COMENTARIO
+  //LEER COMENTARIOS
+  DeleteComments(idP: string) {
+    this.fireStore.getCollection<ComentariosInterface>('Comentarios').subscribe(res => {
+      this.listComentarios = res.filter(e => idP === e.idPublicacion);
+      console.log("lista de comentarios", this.listComentarios);
+      for (let i = 0; i < this.listComentarios.length; i++) {
+        const idCom = this.listComentarios[i].id;
+        console.log('idComentario:', idCom);
+        this.fireStore.deleteDoc('Comentarios', idCom);
+
+
+      }
+
+    }).unsubscribe;
+
+  }
 
 
 }

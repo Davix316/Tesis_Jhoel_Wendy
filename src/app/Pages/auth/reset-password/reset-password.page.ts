@@ -48,6 +48,7 @@ async presentAlert() {
   const alert = await this.alertController.create({
     cssClass: 'my-custom-class',
     header: 'Mensaje enviado',
+    mode:"ios",
     message: 'Revisa la bandeja de entrada de tu correo electronico y cambia tu contraseña.',
     buttons: ['OK']
   });
@@ -60,6 +61,7 @@ async presentAlert() {
 async presentToast(text, color:string) {
   const toast = await this.toastController.create({
     message: text,
+    mode:"ios",
     duration: 2000,
     color: color
   });

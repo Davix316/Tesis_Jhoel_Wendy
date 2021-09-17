@@ -87,18 +87,20 @@ publiDetalle:PublicacionInterface={
     private previewAnyFile: PreviewAnyFile,
     public popoverController: PopoverController,
     private fireStore: FirestoreService,
-    public alertController: AlertController,
+    private alertController: AlertController,
     public modalController: ModalController,
     private firestore: AngularFirestore,
     private fireService: FirestoreService,
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.tareas = navigation?.extras?.state?.value;
+   console.log(this.tareas);
    
     //Si no hay ID de tarea retorna
     if (typeof this.tareas === 'undefined') {
       this.router.navigate(['/menu/home']);
     }
+    
     //
    
 
@@ -134,13 +136,14 @@ this.getPublicacion(this.tareas.id);
         this.nombreTarea = this.publiDetalle.titulo;
         this.materiaId = this.publiDetalle.idMateria;
         this.idUserPubli = this.publiDetalle.idUser;
-        this.archivo=this.publiDetalle.file;
-           
+        this.archivo=this.publiDetalle.file;          
     
         //TRAER EL NOMBRE DE LA MATERIA
-        this.getMateria(this.materiaId);
-    
+        this.getMateria(this.materiaId);   
         
+      }
+      else{
+        this.AlertPubliDelete('Publicación no disponible');    
       }
    
     });
@@ -226,11 +229,12 @@ this.getPublicacion(this.tareas.id);
 
   }
 
-  async presentAlertConfirm() {
+  async presentAlertConfirm(texto:string) {
     const alert = await this.alertController.create({
       cssClass: '.alerClass',
       header: 'Alerta!',
-      message: 'Seguro desea Eliminar esta Publicación?',
+      message: texto,
+      mode:"ios",
       buttons: [
         {
           text: 'Cancelar',
@@ -278,7 +282,7 @@ this.getPublicacion(this.tareas.id);
     try {
       const { data } = await popover.onDidDismiss();
       if (data.item == "Eliminar") {
-        this.presentAlertConfirm()
+        this.presentAlertConfirm('Seguro desea Eliminar esta Publicación?')
       }
       else if(data.item=="Reportar"){
         this.presentModal(publicacion);        
@@ -323,6 +327,31 @@ async ModalEditPubli(infoPublicacion:any){
     }
   });
   return await modal.present();
+}
+
+//ALERT PUBLICACION NO DISPONIBLE
+async AlertPubliDelete(texto:string) {
+  const alert = await this.alertController.create({
+    cssClass: 'my-custom-class',
+    header: 'Alert',
+    subHeader: '(⌣́_⌣̀)',
+    message: texto,    
+    mode:"ios",
+    buttons: [
+      {
+        text: 'OK',
+        handler: () => {
+          this.router.navigate(["/menu/favoritos"]);
+         
+        }
+      }
+    ]
+  });
+
+  await alert.present();
+
+  const { role } = await alert.onDidDismiss();
+  console.log('onDidDismiss resolved with role', role);
 }
 
 

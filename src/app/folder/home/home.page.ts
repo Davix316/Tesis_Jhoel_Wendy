@@ -124,6 +124,7 @@ async failToast(text) {
   const toast = await this.toastController.create({
     message: text,
     duration: 3000,
+    mode:"ios",
     color: 'danger'
   });
   toast.present();

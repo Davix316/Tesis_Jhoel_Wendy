@@ -86,11 +86,6 @@ export class FavoritosPage implements OnInit {
 
   //ELIMINAR DE LA LISTA D FAVORITO
   deleteFavorito(objPubli:publiFavoritoInterface) {
-    /* const objeto:publiFavoritoInterface={
-id: 'lAV3EPT66UiBc5uKb67D',
-idMateria: 'Pi8ZfcR6NawkeGVOfPB9',
-titulo: 'integrales'
-    } */
     this.fireService.deleteFav('Favoritos', this.idUser,objPubli);
   }
 

@@ -131,6 +131,7 @@ if(res){
       cssClass: 'my-custom-class',
       header: 'Alerta',
       message: 'Llene los campos!',
+      mode:"ios",
       buttons: ['OK']
     });
 

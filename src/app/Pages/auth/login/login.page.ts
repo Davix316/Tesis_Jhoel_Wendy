@@ -50,6 +50,7 @@ export class LoginPage implements OnInit {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Error',
+      mode:"ios",
       message: 'Llene los campos!',
       buttons: ['OK']
     });

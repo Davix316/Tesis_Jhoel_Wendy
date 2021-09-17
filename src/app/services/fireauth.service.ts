@@ -136,6 +136,7 @@ export class FireauthService {
       cssClass: 'my-custom-class',
       header: 'Usuario restringido',
       message: 'No es un usuario estudiante',
+      mode:"ios",
       buttons: ['OK']
     });
 
