@@ -5,6 +5,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore, fromCollectionRef, fromDocRef } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { FileUploadService } from 'src/app/services/file-upload.service';
@@ -53,7 +54,7 @@ export class NewPublicacionPage implements OnInit {
     private serviceauth: FireauthService,
     private publiServ: PublicacionService,
     private storage: AngularFireStorage,
-    private storageService: FileUploadService,
+    private toastController:ToastController
   ) {
 
   }
@@ -133,7 +134,9 @@ try {
     this.publiServ.newPublicacion(publi,idPublicacion);
       this.formPublicacion.reset();
     
-  } 
+  } else{
+    this.presentToast('Llene todos los campos','danger');
+  }
 
 } catch (error) {
 console.log(error);
@@ -172,5 +175,14 @@ console.log(this.listaCatego);
   })
 }
 
+//PRESENTAR ALERTA 
+async presentToast(text, color:string) {
+  const toast = await this.toastController.create({
+    message: text,
+    duration: 2000,
+    color: color
+  });
+  toast.present();
+}
 
 }

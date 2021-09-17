@@ -83,7 +83,9 @@
               <div id="info"></div>
             </ion-button>
 
-
+            <div  class="spinner-border text-info" role="status" *ngIf="progreso==true">
+              <span class="visually-hidden" >Loading...</span>
+            </div>
 
             <input #FileUrlUser type="hidden" [value]="urlFile |async" >
           </div>
