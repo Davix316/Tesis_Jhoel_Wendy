@@ -14,22 +14,16 @@
 
 <ion-row>
 
-  <ion-col >
-    
-   <div class="position-absolute top-0 start-50 translate-middle-x">
-     <ion-avatar class="ion-margin-start">
-      <img [src]="foto" alt="foto"> 
-    </ion-avatar>
-   
-  </div>
-  <ion-label class="ion-text-capitalize">{{nombre}} {{apellido}}</ion-label> 
-  
+  <ion-col>
+    <div style="text-align: center; bottom: 0; ">
+      <img [src]="foto" alt="foto" > 
+    </div>
+    <div style="text-align: center;">
+      <ion-label class="ion-text-capitalize">{{nombre}} {{apellido}}</ion-label> 
+    </div>
   </ion-col> 
-
-  
-
 </ion-row>
-<br>
+
 <ion-list-header>
   <h2><b>Votos Obtenidos: </b>{{totalVotos}}</h2>
   <ion-icon name="star" style="font-size: 30px; color: rgb(221, 221, 77);"></ion-icon>

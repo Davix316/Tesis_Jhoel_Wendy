@@ -56,7 +56,6 @@ export class PuntuacionPage implements OnInit {
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.userInf = navigation?.extras?.state?.value;
-    console.log('trae extraNav', this.userInf);
 
     //Si no hay ID de tarea retorna
     if (typeof this.userInf === 'undefined') {

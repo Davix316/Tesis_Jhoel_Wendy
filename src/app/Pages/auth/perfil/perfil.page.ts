@@ -59,7 +59,7 @@ try{
    console.log(r.uid);
    this.id=r.uid;
    //Llamado a la funcion de obtener usuario
-   this.getuser();
+   this.getuser(this.id);
 
   });
 }catch(error){
@@ -68,24 +68,15 @@ try{
 
 }
 
-getuser(){
+getuser(idUser: string){
   this.serviceauth.getCurrentUser().then(ref=>{
  console.log( '"foto:"',ref.photoURL);
 
   });
 
-  this.firestore.collection('Usuarios').ref.where('id', '==', this.id)
-  .get()
-  .then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        this.userLogIn=doc.data();
-
-        this.user=this.userLogIn;
-        });
-  })
-  .catch((error) => {
-      console.log('Error getting documents:' , error);
-  });
+  this.serviceauth.getDoc<UserInterface>('Usuarios', idUser).subscribe(res => {
+    this.user=res;    
+   });
 
 }
 //VISUALIZAR CONTRASEñA
@@ -110,6 +101,11 @@ puntuacionUser(item: any): void{
     this.router.navigate(['/menu/puntuacion'],this.navigationExtras);
 }
 
+//NAVIGATION EXTRAS edit perfil
+EditUser(item: any): void{
+  this.navigationExtras.state.value=item; 
+    this.router.navigate(['/menu/editar-perfil'],this.navigationExtras);
+}
 
 
 }
