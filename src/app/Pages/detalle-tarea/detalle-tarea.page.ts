@@ -16,9 +16,9 @@ import { MateriasInterface } from 'src/app/shared/materias';
 import { AlertController } from '@ionic/angular';
 import { ComentariosInterface } from 'src/app/shared/comentarios';
 import { ModalController } from '@ionic/angular';
-import { ReportarPage } from '../reportar/reportar.page';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ReportPublishPage } from '../report-publish/report-publish.page';
+import { EditPublicacionPage } from '../edit-publicacion/edit-publicacion.page';
 
 
 @Component({
@@ -230,7 +230,7 @@ this.getPublicacion(this.tareas.id);
     const alert = await this.alertController.create({
       cssClass: '.alerClass',
       header: 'Alerta!',
-      message: '<strong>Seguro desea Eliminar esta Publicación </strong>?',
+      message: 'Seguro desea Eliminar esta Publicación?',
       buttons: [
         {
           text: 'Cancelar',
@@ -284,6 +284,9 @@ this.getPublicacion(this.tareas.id);
         this.presentModal(publicacion);        
 
       }
+      else if(data.item=="Editar"){
+        this.ModalEditPubli(publicacion);
+      }
     } catch (error) {
       //console.log('bye');
     }
@@ -306,6 +309,20 @@ this.getPublicacion(this.tareas.id);
 //LIKE
 btnLike(Infpubli:any){
   this.serviceFS.saveLike('Publicaciones', Infpubli.id,1);
+}
+
+
+//EDIT PUBLICACION
+async ModalEditPubli(infoPublicacion:any){
+  const modal = await this.modalController.create({
+    component: EditPublicacionPage,
+    cssClass: 'my-custom-class',
+    componentProps: {
+      ObjectPubli:infoPublicacion,
+      ObjectUser:this.userInfo,
+    }
+  });
+  return await modal.present();
 }
 
 

@@ -4,12 +4,12 @@ ion-content{
 
 ion-button{
   --background: #115571;
-  color: white;
+  --color: white;
 }
 
-ion-button .hover{
-  --background:white ;
-  color: #115571;
+ion-button:hover{
+  --background:#90edd9 ;
+  --color: black;
 }
 
 ion-input{
@@ -21,6 +21,3 @@ ion-textarea{
 --height: 150px;
 }
 
-.negrita{
-  font-weight:bold;
-}

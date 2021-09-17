@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FireauthService } from 'src/app/services/fireauth.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reset-password',
@@ -14,18 +14,29 @@ export class ResetPasswordPage implements OnInit {
   email=new FormControl('',[Validators.required]);
   private formSubmitAttempt: boolean;
 
-  constructor(private fAuth: FireauthService, private route: Router, public alertController: AlertController) { }
+  constructor(
+    private fAuth: FireauthService, 
+    private route: Router, 
+    public alertController: AlertController,
+    private toastController: ToastController
+    ) { }
 
   ngOnInit() {
   }
 
   async onReset(){
     try{
-      const email=this.email.value;
-      await this.fAuth.resetPassword(email);
-      console.log('reset', email);
-      this.presentAlert();
-      this.route.navigate(['/login']);
+      if(this.email.valid){
+        const email=this.email.value;
+        await this.fAuth.resetPassword(email);
+        console.log('reset', email);
+        this.presentAlert();
+        this.route.navigate(['/login']);
+
+      }
+      else{
+        this.presentToast('Formato de email no válido','danger');
+      }   
 
     }catch(error){
       console.log('error', error);
@@ -44,12 +55,16 @@ async presentAlert() {
   await alert.present();
 
 }
-  //validacion de campos
-  /* isFieldInvalid(field: string) {
-    return (
-      (!this.resetForm.get(field).valid && this.resetForm.get(field).touched) ||
-      (this.resetForm.get(field).untouched && this.formSubmitAttempt)
-    );
-  } */
+
+//PRESENTAR ALERTA 
+async presentToast(text, color:string) {
+  const toast = await this.toastController.create({
+    message: text,
+    duration: 2000,
+    color: color
+  });
+  toast.present();
+}
+
 
 }

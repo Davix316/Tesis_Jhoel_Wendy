@@ -123,18 +123,12 @@
         </ion-item>
         <ion-row>
           <ion-col>
-            <ion-button  *ngIf="urlImage |async; else botondisable" type="submit" expand="block">Enviar</ion-button>
+            <ion-button  type="submit" expand="block">Enviar</ion-button>
           </ion-col>
 
         </ion-row>
 
-        <ng-template #botondisable >
-          <ion-row>
-            <ion-col>
-              <ion-button  disabled=true type="submit" expand="block">Enviar</ion-button>
-            </ion-col>
-          </ion-row>
-        </ng-template>
+      
 
 
         <div class="ion-text-center">

@@ -75,12 +75,21 @@ navigationExtras: NavigationExtras = {
   }
 };
 
+//actualizar
+noActualizado=true;
+
+public formUpdateC=new FormGroup({
+  comenActualizado:new FormControl('',[Validators.required]),
+});
+
 //voto: votoInterface[];
 votoAdd=false;
 
 public formComentario=new FormGroup({
   texto:new FormControl('',[Validators.required]),
 });
+
+
 
 
   constructor(
@@ -157,6 +166,7 @@ public formComentario=new FormGroup({
    //GUARDAR COMENTARIO EN LA BDD
    saveComentario(comn: ComentariosInterface){
     try {
+
       console.log(this.formComentario.value);
       if(this.formComentario.valid){
         const idComentario=comn.id || null;
@@ -170,6 +180,7 @@ public formComentario=new FormGroup({
 
         this.servFirestore.saveCollection(comn,idComentario);
         this.formComentario.reset();
+        this.noActualizado=true;
       }
     } catch (error) {
     console.log(error);
@@ -188,7 +199,6 @@ getComments(idP: string){
     else{
       this.comentarios0=false;
     }
-
   }).unsubscribe;
 
 }
@@ -274,6 +284,13 @@ try {
    
 
  }
+ else if(data.item=="Editar"){
+  
+ this.updateComentario(comentario);
+  //console.log(comentario.id);
+  
+
+}
 } catch (error) {
   //console.log('bye desde comentarios');
   
@@ -303,6 +320,19 @@ async presentModal(infoComentario:any) {
 /* const{data}=await modal.onDidDismiss();
 console.log('retorno del modal', data.motivo); */
 
+}
+//ACTUALIZAR COMENTARIO
+updateComentario(interfaz:any){ 
+  if(interfaz.id==interfaz.id){
+this.noActualizado=false;
+  }
+  else{
+    this.noActualizado=true;
+  }
+  console.log('cometario id:', interfaz.id);
+  
+  this.firestoreService.updateDoc(interfaz,'Comentarios', interfaz.id);
+  
 }
 
 

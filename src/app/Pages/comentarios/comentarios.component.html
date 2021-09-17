@@ -28,11 +28,13 @@
           </ion-chip>
         </ion-col>
       </ion-row>
+
       <ion-row>
-        <ion-label class="ion-text-wrap comentario"> {{item.texto}} &nbsp;</ion-label>
+        <!-- Actualizar comentario -->        
+
+        <ion-input class="ion-text-wrap comentario" value={{item.texto}} [disabled]="noActualizado">&nbsp;</ion-input>
+       
         <small>({{item.fecha.toDate()|date:'M/d/yy, h:mm a'}})</small>
-
-
       </ion-row>
 
       <ion-row>

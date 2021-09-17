@@ -129,7 +129,7 @@ if(res){
   async presentAlert() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Error',
+      header: 'Alerta',
       message: 'Llene los campos!',
       buttons: ['OK']
     });

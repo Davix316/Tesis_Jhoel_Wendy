@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { FirestoreService } from 'src/app/services/firestore.service';
 
 interface reportPubliInterface {
@@ -36,6 +36,7 @@ public formReport=new FormGroup({
   constructor(
     private modalController: ModalController,
     private firestore: FirestoreService,
+    public toastController: ToastController
     ) { }
 
   ngOnInit() {
@@ -68,6 +69,9 @@ saveReporte(report: reportPubliInterface){
         motivo: this.formReport.value.motivo
       })
     }
+    else{
+      this.presentToast('No deje campos vacíos','danger');
+    }
     
   } catch (error) {
     console.log(error);
@@ -75,5 +79,15 @@ saveReporte(report: reportPubliInterface){
   }
   }
     
+
+  //PRESENTAR ALERTA 
+async presentToast(text, color:string) {
+  const toast = await this.toastController.create({
+    message: text,
+    duration: 2000,
+    color: color
+  });
+  toast.present();
+}
 
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { FireauthService } from './services/fireauth.service';
 @Component({
   selector: 'app-root',
@@ -37,7 +38,7 @@ export class AppComponent {
     
  
   ];
-  constructor(private serviceauth: FireauthService, public router: Router) {}
+  constructor(private serviceauth: FireauthService, public router: Router, ) {}
 
   //CERRAR SESION
  onlogout(){
@@ -45,5 +46,8 @@ export class AppComponent {
   this.router.navigate(['/login']);
 
 }
+
+
+  
 
 }

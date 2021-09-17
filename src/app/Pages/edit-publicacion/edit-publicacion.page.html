@@ -1,9 +1,99 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>edit-publicacion</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-item style="background: none;">
+  <ion-title>Reportar</ion-title>
+  <button slot="end" (click)="salirModal()" style="background: none; color: blue;"> <b>Cerrar</b> </button>
+</ion-item>
 
 <ion-content>
-por editar
+
+  <form [formGroup]="formEditPubli" (ngSubmit)="updatePublicacion(formEditPubli.value)">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle class="negrita text-primary">Seleccione la materia</ion-card-subtitle>
+
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <ion-item>
+          <ion-label position="floating">Materia</ion-label>
+          <br>
+          <ion-select ok-text="Ok" cancel-text="Cancelar" formControlName="idMateria"  required >
+            <div *ngFor="let item of listaMaterias">
+              <ion-select-option class="ion-text-capitalize" value={{item.id}}>{{item.nombre}}</ion-select-option>
+            </div>
+
+          </ion-select>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle class="negrita text-primary">Seleccione una categoria</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <ion-radio-group required formControlName="categoria" required>
+
+          <ion-item *ngFor=" let catego of listaCatego">
+            <ion-label>{{catego.nombre}}</ion-label>
+            <ion-radio slot="start" value={{catego.nombre}}></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle class="negrita text-primary">Ingrese un titulo y una descripcion corta</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating" class="titulo negrita text-primary">Titulo</ion-label>
+          <ion-input type="text" formControlName="titulo" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating" class="titulo negrita text-primary">Descripcion</ion-label>
+          <ion-textarea rows="5" formControlName="descripcion" required></ion-textarea>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <div class="mb-3">
+            <label for="formFileSm" class="form-label negrita text-primary">Suba un Archivo</label>
+
+            <div class="text-center">
+              <i class="far fa-file-alt" style="font-size: 42px; color:#000000 ;"></i>
+              <a href={{ObjectPubli.file}} target="_blank" style="text-decoration: none;"> Ver Archivo</a>
+            </div>
+
+            <ion-button class="subir">
+              <label for="file-upload" >
+                <i class="fas fa-cloud-upload-alt"></i> Cambiar archivo
+              </label>
+              <input id="file-upload" (change)="uploadFile($event)" type="file" formControlName="file" style='display: none'/>
+              <div id="info"></div>
+            </ion-button>
+
+
+
+            <input #FileUrlUser type="hidden" [value]="urlFile |async" >
+          </div>
+        </ion-item>
+
+        <ion-button type="submit" expand="block" class="boton negrita">Actualizar</ion-button>
+      </ion-card-content>
+
+    </ion-card>
+
+
+  </form>
 </ion-content>

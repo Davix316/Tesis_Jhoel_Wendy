@@ -24,5 +24,11 @@ materias: any;
     //console.log('collecc', collection);
     return collection.valueChanges();
   }
+//Categorias
+  getCatego<Tipo>(path: string){
+    const collection = this.firestore.collection<Tipo>(path);
+    //console.log('collecc', collection);
+    return collection.valueChanges();
+  }
 
 }

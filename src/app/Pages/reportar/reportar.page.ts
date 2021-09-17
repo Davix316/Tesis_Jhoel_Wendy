@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { FirestoreService } from 'src/app/services/firestore.service';
 
 interface reporteInterface {
@@ -34,7 +34,9 @@ export class ReportarPage implements OnInit {
 
   
   constructor(private modalController: ModalController,
-    private firestore: FirestoreService) { }
+    private firestore: FirestoreService,
+    public toastController: ToastController
+    ) { }
 
   ngOnInit() {
     
@@ -50,7 +52,6 @@ this.modalController.dismiss();
 //GUARDAR REPORTE
 
 saveReporte(report: reporteInterface){
-try {
   if(this.formReport.valid){
 
 report.id=this.firestore.getId();
@@ -66,14 +67,23 @@ const idReporte=report.id;
     this.modalController.dismiss({
       motivo: this.formReport.value.motivo
     })
+  }else{
+    
+    this.presentToast('No deje campos vacíos','danger');
+
   }
   
-} catch (error) {
-  console.log(error);
-  
-}
+
 }
 
-
+//PRESENTAR ALERTA 
+async presentToast(text, color:string) {
+  const toast = await this.toastController.create({
+    message: text,
+    duration: 2000,
+    color: color
+  });
+  toast.present();
+}
 
 }

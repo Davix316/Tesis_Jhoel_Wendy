@@ -46,7 +46,7 @@ export class NewPublicacionPage implements OnInit {
     file:new FormControl(null,[Validators.required]),
   });
 
-
+  listaCatego:any;
   constructor(
     private materiasServ: MateriasService,
     private firestore: AngularFirestore,
@@ -76,6 +76,7 @@ urlFile: Observable<string>;
         this.getuser(this.idUser);
       }
     });
+    this.getCatego();
 
   }
 
@@ -107,20 +108,10 @@ urlFile: Observable<string>;
 
   //OBTENER MATERIAS DEL Usuario
   obtenerMaterias(idC: string) {
-
     const path = 'Materias';
     this.materiasServ.getCollection<MateriasInterface>(path).subscribe(res => {
 
       this.listaMaterias = res.filter(e => idC === e.idCarrera);
-
-      //console.log(this.listaMaterias);
-
-     /*  this.listaMaterias.forEach(element => {
-        this.carreraId = element.id;
-        //console.log(element.id);
-      }); */
-
-
     });
   }
 
@@ -172,6 +163,14 @@ tarea.percentageChanges().subscribe((porcentaje) => {
 
 }
 
+//LEER CATEGORIA
+getCatego(){
+  this.materiasServ.getCatego('Categoria').subscribe(res=>{
+this.listaCatego=res;
+console.log(this.listaCatego);
+
+  })
+}
 
 
 }
