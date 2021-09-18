@@ -55,12 +55,12 @@ export class AppComponent {
     });
   }
  */
-  //CERRAR SESION
+ /*  //CERRAR SESION
   onlogout(){
   this.serviceauth.logout();
-  this.router.navigate(['/login']);
+  this.router.navigate(['/login']); 
 
-} 
+} */
 
 
 
