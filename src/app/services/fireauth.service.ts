@@ -70,7 +70,7 @@ export class FireauthService {
         //Actualizar perfil
         if (userResponse) {
           userResponse.user.updateProfile({
-            displayName: usuario.nombre,
+            displayName: usuario.nombre+'-'+usuario.apellido,
             photoURL: usuario.foto
           });
         }
@@ -101,6 +101,7 @@ export class FireauthService {
 
   //RETORNA UID DE USUARIO
   stateAuth() {
+    
     return this.fAuth.authState;
   }
 

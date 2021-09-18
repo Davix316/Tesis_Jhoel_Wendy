@@ -10,7 +10,7 @@
 <ion-content>
   <ion-item >
     <div slot="end" style="padding:0; margin: 0px">
-      <button (click)="addFavorite(favorito)" style="background: none; font-size:25px;">
+      <button (click)="addFavorite(favorito)"  style="background: none; font-size:25px;">
         <ion-icon *ngIf="favoritoAdd==false" class="favoritoFalse" name="heart"></ion-icon>
         <ion-icon *ngIf="favoritoAdd==true" class="favoritoTrue" name="heart"></ion-icon>
       </button>
@@ -43,28 +43,28 @@
 
 
     <ion-segment>
-      <ion-fab-button class="like" size="small" icon-start (click)="btnLike(publiDetalle)">
+      <ion-button class="like" shape="round" size="small"  icon-start (click)="btnLike(publiDetalle)">
         <ion-icon name="thumbs-up-outline"></ion-icon>
         {{publiDetalle.likes}}
-      </ion-fab-button>
+      </ion-button>
      
 
-      <ion-fab-button class="dislike" size="small" ion-button clear small icon-start >
+      <ion-button shape="round" class="dislike"  size="small" ion-button clear small icon-start >
         <ion-icon name="thumbs-down-outline"></ion-icon>
         <ion-label>{{publiDetalle.disLikes}}</ion-label>
-      </ion-fab-button>
+      </ion-button>
     
 
-      <ion-fab-button class="coments" routerLink="/menu/detalle-tarea"  size="small" clear small icon-start>
+      <ion-button shape="round" class="coments" routerLink="/menu/detalle-tarea" size="small"  clear small icon-start>
         <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
         <div>
           <ion-label>#</ion-label>
         </div>
-      </ion-fab-button>
+      </ion-button>
 
-      <ion-fab-button (click)="presentPopover($event, publiDetalle)" class="moreoption"  size="small" clear small icon-start>
+      <ion-button shape="round" (click)="presentPopover($event, publiDetalle)"  size="small" clear small icon-start>
         <ion-icon name="ellipsis-horizontal"></ion-icon>       
-      </ion-fab-button>
+      </ion-button>
 
     </ion-segment>
     <hr>

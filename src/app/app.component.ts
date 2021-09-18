@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { FireauthService } from './services/fireauth.service';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -38,14 +40,29 @@ export class AppComponent {
     
  
   ];
+  nombreUser:string;
   constructor(private serviceauth: FireauthService, public router: Router, ) {}
 
+
+  /* ngOnInit() {
+    //INFORMACION DE USUARIO ACTUAL
+    this.serviceauth.stateAuth().subscribe(user => {
+      if (user != null) {
+        this.nombreUser=user.displayName;
+        console.log("displayName", user.displayName);
+        
+      }
+    });
+  }
+ */
   //CERRAR SESION
- onlogout(){
+  onlogout(){
   this.serviceauth.logout();
   this.router.navigate(['/login']);
 
-}
+} 
+
+
 
 
   

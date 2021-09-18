@@ -73,7 +73,7 @@
           <ion-item>
             <div class="mb-3">
               <label for="formFileSm" class="form-label negrita text-primary">Suba un Archivo</label>
-              <input class=" form-control-sm" id="formFileSm" accept=".pdf ,.docx ,.xlsx, .zip"
+              <input class=" form-control-sm" id="formFileSm" 
                 type="file" (change)="uploadFile($event)"  formControlName="file" required>
                <!--  Spinner progreso animada -->
                <div  class="spinner-border text-dark" role="status" *ngIf="progreso==true">

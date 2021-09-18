@@ -1,9 +1,7 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit, Input, Output, ViewChild,ElementRef } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { NavigationExtras, Router } from '@angular/router';
-import firebase from 'firebase';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { UserInterface} from 'src/app/shared/user';
 
@@ -46,11 +44,14 @@ export class PerfilPage implements OnInit {
   };
 
   
-  constructor(private serviceauth: FireauthService, private firestore: AngularFirestore, private router: Router) {
+  constructor(private serviceauth: FireauthService, private router: Router) {
     this.show = false;
   }
 
   ngOnInit() {
+    console.log('hola de regreso');
+    
+  
     //ROL DE USUARIO AUTENTICADO
 try{
   this.serviceauth.getCurrentUser().then(r=>{
@@ -69,11 +70,7 @@ try{
 }
 
 getuser(idUser: string){
-  this.serviceauth.getCurrentUser().then(ref=>{
- console.log( '"foto:"',ref.photoURL);
-
-  });
-
+ 
   this.serviceauth.getDoc<UserInterface>('Usuarios', idUser).subscribe(res => {
     this.user=res;    
    });

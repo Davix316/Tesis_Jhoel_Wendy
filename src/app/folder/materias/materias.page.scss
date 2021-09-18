@@ -13,7 +13,8 @@ ion-segment{
   background-color: #f3f4ff;
 }
 ion-content{
-  --background: url('https://i.pinimg.com/736x/90/24/b6/9024b60c2c1fa7153f565a311305bfe2.jpg') no-repeat center center / cover;
+  --background: #115571;
+  --background: linear-gradient( #115571 0%, #88aab8 100%); 
  --color:white
 }
 
@@ -29,5 +30,9 @@ small{
 }
 
 ion-card{
-  box-shadow: 5px 5px #ccece5;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+ion-searchbar{
+  --border-radius: 20px;
 }

@@ -20,15 +20,16 @@ export class MisArchivosPage implements OnInit {
   userInfo: any;
   idUser: string;
   idPubliUser: string;
+  archivos0:boolean;
 
-misArchivos: PublicacionInterface[]=[];
-listComentarios: ComentariosInterface[];
-//obtener id Clic=keado
-navigationExtras: NavigationExtras = {
-  state: {
-    value: null
-  }
-};
+  misArchivos: PublicacionInterface[] = [];
+  listComentarios: ComentariosInterface[];
+  //obtener id Clic=keado
+  navigationExtras: NavigationExtras = {
+    state: {
+      value: null
+    }
+  };
 
 
   constructor(
@@ -55,91 +56,93 @@ navigationExtras: NavigationExtras = {
 
   }
 
-///OBTENER INFO  USUARIO DE LA BDD
-public getuser(uid: string) {
-  const docRef = this.firestore.collection('Usuarios').doc(uid);
-  docRef.get().toPromise().then((doc) => {
-    if (doc.exists) {
-      //console.log('infoUser', doc.data());
-      this.userInfo = doc.data();
-      this.idPubliUser=this.userInfo.id;
-      //console.log(this.userInfo.id);
-      //console.log('publiUserId',this.idPubliUser);
+  ///OBTENER INFO  USUARIO DE LA BDD
+  public getuser(uid: string) {
+    const docRef = this.firestore.collection('Usuarios').doc(uid);
+    docRef.get().toPromise().then((doc) => {
+      if (doc.exists) {
+        //console.log('infoUser', doc.data());
+        this.userInfo = doc.data();
+        this.idPubliUser = this.userInfo.id;
+        //console.log(this.userInfo.id);
+        //console.log('publiUserId',this.idPubliUser);
 
-      this.getPublicacion(this.idPubliUser);
-    } else {
-      // doc.data() will be undefined in this case
-      console.log('"no existe el usuario"');
-    }
-  }).catch((error) => {
-    console.log('erro', error);
-  });
+        this.getPublicacion(this.idPubliUser);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log('"no existe el usuario"');
+      }
+    }).catch((error) => {
+      console.log('erro', error);
+    });
 
-}
+  }
 
 
-  getPublicacion(idU: string){
+  getPublicacion(idU: string) {
     this.fireService.getCollection<PublicacionInterface>('Publicaciones').subscribe(res => {
-      this.misArchivos = res.filter(e=>idU===e.idUser
-        );
-        /* res.forEach(element => {
-          element.fecha;
-          console.log(element.fecha.toDateString());
-        });*/
-        console.log('e',this.misArchivos);
+      this.misArchivos = res.filter(e => idU === e.idUser
+      );
+      if(this.misArchivos.length==0){
+        this.archivos0=true;
+      }
+      else{
+        this.archivos0=false;
+      }
+      console.log('e', this.misArchivos);
     }).unsubscribe;
   }
 
   //INFORMACION DE LA TAREA CLICKEADA
-  infoTarea(item: any): void{
-    this.navigationExtras.state.value=item;
-      this.router.navigate(['/menu/detalle-tarea'],this.navigationExtras);
+  infoTarea(item: any): void {
+    this.navigationExtras.state.value = item;
+    this.router.navigate(['/menu/detalle-tarea'], this.navigationExtras);
 
   }
 
   //EDIT PUBLICACION
-async ModalEditPubli(infoPublicacion:any){
-  const modal = await this.modalController.create({
-    component: EditPublicacionPage,
-    cssClass: 'my-custom-class',
-    componentProps: {
-      ObjectPubli:infoPublicacion,
-      ObjectUser:this.userInfo,
-    }
-  });
-  return await modal.present();
-}
-
-async presentAlertConfirm(publicacionInf:any) {
-  const alert = await this.alertController.create({
-    cssClass: '.alerClass',
-    header: 'Alerta!',
-    mode:"ios",
-    message: 'Seguro desea Eliminar esta Publicación?',
-    buttons: [
-      {
-        text: 'Cancelar',
-        role: 'cancel',
-        cssClass: 'secondary',
-        handler: (blah) => {
-          console.log('Confirm Cancel: blah');
-        }
-      }, {
-        text: 'Si',
-        handler: () => {
-          this.fireStore.deleteDoc('Publicaciones', publicacionInf.id);
-          this.DeleteComments(publicacionInf.id);
-          this.router.navigate(["/menu/mis-archivos"]);
-          console.log('Confirm Okay');
-        }
+  async ModalEditPubli(infoPublicacion: any) {
+    const modal = await this.modalController.create({
+      component: EditPublicacionPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        ObjectPubli: infoPublicacion,
+        ObjectUser: this.userInfo,
       }
-    ]
-  });
+    });
+    return await modal.present();
+  }
 
-  await alert.present();
-}
+  async presentAlertConfirm(publicacionInf: any) {
+    const alert = await this.alertController.create({
+      cssClass: '.alerClass',
+      header: 'Alerta!',
+      mode: "ios",
+      message: 'Seguro desea Eliminar esta Publicación?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Si',
+          handler: () => {
+            this.fireStore.deleteDoc('Publicaciones', publicacionInf.id);
+            this.DeleteComments(publicacionInf.id);
+            this.router.navigate(["/menu/mis-archivos"]);
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
 
-//CONSULTA COMENTARIO
+    await alert.present();
+  }
+
+  //CONSULTA COMENTARIO
   //LEER COMENTARIOS
   DeleteComments(idP: string) {
     this.fireStore.getCollection<ComentariosInterface>('Comentarios').subscribe(res => {

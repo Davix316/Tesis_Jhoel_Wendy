@@ -77,7 +77,7 @@ console.log(this.idUReceptor,'idUsuario receptor');
   //LEER MENSAJES
   getMessages(){
   this.chatService.listarDatos().valueChanges().subscribe((data:any)=>{
-    console.log('fecha:', data);
+   // console.log('fecha:', data);
     
 
   })
@@ -102,6 +102,8 @@ console.log(this.idUReceptor,'idUsuario receptor');
     }
 
   }
+
+  
 
   
 

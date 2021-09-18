@@ -50,8 +50,9 @@
         <ion-col size="6" *ngFor="let item of listaMaterias |filtro: textoBuscar let i = index">
 
             <ion-card  (click)="detalleMateria(item)">
+              <ion-badge class="ion-text-start" style="background-color: #90edd9; color: #000000;margin: 6px;">{{i+1}}</ion-badge>
+
               <ion-card-content >
-                <ion-badge class="ion-text-start" style="background-color: #90edd9; color: #000000;">{{i+1}}</ion-badge>
                 <div class="ion-text-center">
                   <ion-avatar>
                     <img src="/assets/img/logo.png">

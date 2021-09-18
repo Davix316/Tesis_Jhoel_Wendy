@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/prefer-for-of */
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { TareasService } from 'src/app/services/tareas.service';
 import { MateriasInterface } from 'src/app/shared/materias';
 import { PublicacionInterface } from 'src/app/shared/publicacion';
@@ -30,7 +31,9 @@ navigationExtras: NavigationExtras = {
   }
 };
 
-  constructor(private tarService: TareasService, private router: Router) {
+  constructor(private tarService: TareasService, private router: Router, 
+    private previewAnyFile: PreviewAnyFile,
+    ) {
 
     const navigation = this.router.getCurrentNavigation();
     this.tareas = navigation?.extras?.state?.value;
@@ -91,6 +94,13 @@ navigationExtras: NavigationExtras = {
 
   }
 
+ //ABRIR ARCHIVO
+ openFile(urlFile: string) {
+  this.previewAnyFile.preview(urlFile).then(() => {
 
+  }, (error) => {
+    alert(JSON.stringify(error));
+  });
+}
 
 }

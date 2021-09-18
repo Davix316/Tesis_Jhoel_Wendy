@@ -57,30 +57,10 @@ button{
 ion-button{
   background: none;
 }
-ion-fab-button{
-  --color: black;
-}
-.eyeInf{
-  --background: rgb(144,237,217);
-  --background: radial-gradient(circle, rgba(144,237,217,1) 29%, rgba(17,85,113,1) 100%);
+ion-button{
+  --color: white;
+  --background: #115571;
 }
 
-.coments{
-  --background: rgb(181,244,181);
-  --background: radial-gradient(circle, rgba(181,244,181,1) 29%, rgba(17,85,113,1) 100%);
-}
 
-.dislike{
-  --background: rgb(242,33,33);
-  --background: radial-gradient(circle, rgba(242,33,33,0.5970763305322129) 27%, rgba(17,85,113,1) 99%);
 
-}
-
-.like{
-  --background: rgb(117,152,238);
---background: radial-gradient(circle, rgba(117,152,238,1) 29%, rgba(17,85,113,1) 100%);
-}
-
-.moreoption{
-  --background: #90edd9;
-}

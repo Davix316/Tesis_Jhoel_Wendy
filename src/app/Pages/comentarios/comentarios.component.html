@@ -83,11 +83,12 @@
 <form [formGroup]="formComentario" (ngSubmit)="saveComentario(formComentario.value)">
   <div class="fixed">
 
-    <ion-item>
+    <ion-item  lines="none">
+
       <ion-chip style="width: -webkit-fill-available;">
         <ion-input type="text" formControlName="texto" placeholder="Escribe un comentario..." required></ion-input>
       </ion-chip>
-      <button style="background: none; ">
+      <button class="controlbutton">
         <ion-icon mode="ios" name="send" class="text-primary" style="color: #90edd9 !important;"></ion-icon>
       </button>
     </ion-item>

@@ -49,14 +49,13 @@ changeFoto=false;
     private toastController: ToastController,
     private fireStore: FirestoreService,
     private storage: AngularFireStorage,
-    private serviceauth: FireauthService
     ) {
     const navigation = this.router.getCurrentNavigation();
     this.userInf = navigation?.extras?.state?.value;
     
 
     //Si no hay ID de tarea retorna
-    if (typeof this.userInf === 'undefined') {
+    if (typeof this.userInf ==='undefined') {
       this.router.navigate(['/menu/perfil']);
     }
    
@@ -91,7 +90,7 @@ changeFoto=false;
   });
   }
 
-  //ACTUALIZAR PUBLI
+  //ACTUALIZAR USER
 updateUsuario(user: UserInterface){
   if(this.formEditUser.valid){
     user.email=this.userInf.email;
@@ -108,8 +107,9 @@ updateUsuario(user: UserInterface){
       user.foto=this.inputImageUser.nativeElement.value;
     } 
      this.fireStore.updateDoc(user,'Usuarios',this.idUser)
-     this.presentToast('Publicación Actualizada','success');
+     this.presentToast('Perfil Actualizado','success');
      this.router.navigate(['/menu/perfil']);
+     
   }else{
     this.presentToast('No deje campos Vacios','danger');
     

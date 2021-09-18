@@ -8,6 +8,8 @@
       </ion-header>
   
       <ion-content>
+        <ion-label class="nombreUser"><ion-icon name="caret-forward"></ion-icon> {{nombreUser}}</ion-label>
+  
         <ion-list>
           <ion-menu-toggle auto-hide="false" *ngFor="let nav of option">
             <ion-item  lines="none"
@@ -29,7 +31,7 @@
           </ion-item>
   
         </ion-list>
-  
+       
       </ion-content>
     </ion-menu>
   
