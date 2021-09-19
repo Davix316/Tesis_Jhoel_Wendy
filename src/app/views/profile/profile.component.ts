@@ -16,11 +16,12 @@ import {AngularFireStorage} from '@angular/fire/storage';
 
 export class ProfileComponent implements OnInit{
  
-  admin1: Admin;
+  fotopath = '';
+  fotoUser = '';
+
   adminForm: FormGroup;
+
   private isEmail = /\S+@\S+\.\S+/;
-  fotoUser='';
-  fotopath='';
 
   email: string;
   userLogIn: any;
@@ -28,9 +29,10 @@ export class ProfileComponent implements OnInit{
   id: '',
   nombre: '',
   apellido: '',
-  telefono: '',
-  numUnico: '',
+  telefono: 0,
+  numUnico: 0,
   carreraNombre: '',
+  carreraId: '',
   email: '',
   password: '',
   semestreRef: '',
@@ -50,19 +52,26 @@ export class ProfileComponent implements OnInit{
      }
 
   @ViewChild('FotoUrlUser') inputFoto: ElementRef;
+  @ViewChild('nombreUsuario') inputNombres: ElementRef;
+  @ViewChild('apellidoUsuario') inputApellidos: ElementRef;
+  @ViewChild('carreraUsuario') inputCarrera: ElementRef;
+  @ViewChild('numUnicoUsuario') inputNumunico: ElementRef;
+  @ViewChild('semestreUsuario') inputSemestre: ElementRef;
+  @ViewChild('telefonoUsuario') inputTelefono: ElementRef;
   progreso=false;
   porcentaje=0;
   porcentajesubida: Observable<number>;
   urlFoto: Observable<string>;
 
 
-     ngOnInit() {
+     ngOnInit():void {
 
       this.serviceAuth.getCurrentUser().subscribe(user => {
         this.email = user.email;
         this.getAdmin();
-      this.fotoUser = this.admin.foto;
+        
       })
+
     }
 
     getAdmin(){
@@ -76,11 +85,12 @@ export class ProfileComponent implements OnInit{
             this.admin.apellido=this.userLogIn.apellido;
             this.admin.telefono=this.userLogIn.telefono;
             this.admin.numUnico=this.userLogIn.numUnico;
-            this.admin.carreraNombre=this.userLogIn.carrera;
+            this.admin.carreraNombre=this.userLogIn.carreraNombre;
             this.admin.email=this.userLogIn.email;
             this.admin.password=this.userLogIn.password;
             this.admin.semestreRef=this.userLogIn.semestreRef;
             this.admin.foto=this.userLogIn.foto;
+            this.fotoUser = this.userLogIn.foto;
             this.admin.rol=this.userLogIn.rol;
             this.admin.id = this.userLogIn.id;
             //console.log(doc.id, ' => ', doc.data());
@@ -93,6 +103,20 @@ export class ProfileComponent implements OnInit{
 
     onSave(adm): void {
 
+      if (adm.carreraNombre === "TS- Electromecánica") {
+        adm.carreraId = "TkiP9dMmAXyoscir6GqF";
+      } else
+        if (adm.carreraNombre === "TS- Redes y Telecomunicaciones") {
+          adm.carreraId = "i6e9eP0YTsnowV8p8EKi";
+        }
+        else
+          if (adm.carreraNombre === "TS- Agua y Saneamiento Ambiental") {
+            adm.carreraId = "iw6XSHR2NiPPkwMSjKBM";
+          } else
+            if (adm.carreraNombre === "TS- Desarrollo de Software") {
+              adm.carreraId = "ph4kM1eyF6KoaieJqCr0";
+            }
+
       console.log(this.adminForm.value);
 
       if (this.adminForm.valid) {
@@ -100,8 +124,53 @@ export class ProfileComponent implements OnInit{
         console.log("valido")
         const admin1 = this.adminForm.value;
         const adminId = this.admin?.id || null;
-        adm.foto=this.inputFoto.nativeElement.value;
         const adminEmail = this.admin?.email || null;
+
+        if(this.inputFoto.nativeElement.value===""){
+          adm.foto =  this.fotoUser;
+        }else{
+          adm.foto = this.inputFoto.nativeElement.value;  
+        }
+
+        if(this.inputNombres.nativeElement.value===""){
+          adm.nombre = this.admin.nombre;
+        }else{
+          adm.nombre = this.inputNombres.nativeElement.value;
+        }
+
+        if(this.inputApellidos.nativeElement.value===""){
+          adm.apellido = this.admin.apellido;
+        }else{
+          adm.apellido = this.inputApellidos.nativeElement.value;
+        }
+
+        if(this.inputCarrera.nativeElement.value===""){
+          adm.carreraNombre = this.admin.carreraNombre;
+        }else{
+          adm.carreraNombre = this.inputCarrera.nativeElement.value;
+        }
+
+        if(this.inputNumunico.nativeElement.value===""){
+          adm.numUnico = this.admin.numUnico;
+        }else{
+          adm.numUnico = this.inputNumunico.nativeElement.value;
+        }
+
+        if(this.inputSemestre.nativeElement.value===""){
+          adm.semestreRef = this.admin.semestreRef;
+        }else{
+          adm.semestreRef = this.inputSemestre.nativeElement.value;
+        }
+
+        if(this.inputTelefono.nativeElement.value===""){
+          adm.telefono = this.admin.telefono;
+        }else{
+          adm.telefono = this.inputTelefono.nativeElement.value;
+        }
+
+        adm.password = this.admin.password;
+        adm.email = this.admin.email;
+        
         this.adminsSvc.onSaveAdmin2(admin1, adminId, adminEmail, adm.foto);
         this.router.navigate(['perfil']);
       
@@ -110,18 +179,19 @@ export class ProfileComponent implements OnInit{
       }
     }
 
-
     private initForm(): void {
       this.adminForm = this.fb.group({
         nombre: [''],
         apellido: [''],
-        password: ['', [Validators.minLength(5)]],
+        email: [''],
+        password: [''],
         carreraNombre: [''],
+        carreraId: ['ph4kM1eyF6KoaieJqCr0'],
         numUnico: [''],
         semestreRef: [''],
         telefono: [''],
         rol: ['Administrador'],
-        foto: '',
+        foto: [''],
       });
     }
 

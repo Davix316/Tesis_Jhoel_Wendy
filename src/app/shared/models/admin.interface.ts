@@ -2,13 +2,13 @@ export interface Admin {
     id?: string;
     nombre: string;
     apellido: string;
-    numUnico: string;
+    numUnico: number;
     carreraId?: string;
     carreraNombre?: string;
     semestreRef?: string;
     email: string;
     password: string;
-    telefono: string;
+    telefono: number;
     foto?: string;
     rol?: string;
   }

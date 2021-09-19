@@ -2,10 +2,9 @@ export interface Bloqueo {
     id?: string;
     nombre?: string;
     apellido?: string;
-    numUnico?: string;
+    numUnico?: number;
     email?: string;
     motivo: string;
-    dias: string;
+    dias: number;
     fechaI?: any;
-    fechaF?: any;
   }

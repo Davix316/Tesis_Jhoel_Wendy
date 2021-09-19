@@ -42,6 +42,10 @@ export class ListStudentComponent implements OnInit {
     this.router.navigate(['listStudentBlock']);
   }
 
+  onGoToReport(){
+    this.router.navigate(['listStudentReport']);
+  }
+
   onGoToBlock(item: any): void{
     this.navigationExtras.state.value = item;
     this.router.navigate(['blockStudent'], this.navigationExtras);  }
@@ -51,7 +55,7 @@ export class ListStudentComponent implements OnInit {
     if (confirmacion) {
     try {
       await this.adminsSvc.onDeleteStudents(studentId);
-      alert('Deleted');
+      alert('Estudiante eliminado');
     } catch (err) {
       console.log(err);
     }

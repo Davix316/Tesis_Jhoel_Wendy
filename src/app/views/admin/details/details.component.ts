@@ -39,11 +39,11 @@ export class DetailsComponent implements OnInit {
 
   async onGoToDelete(): Promise<void> {
 
-    const confirmacion = confirm('Esta seguro');
+    const confirmacion = confirm('Esta seguro de eliminar este usuario');
     if (confirmacion) {
     try {
       await this.adminsSvc.onDeleteAdmins(this.admin?.id);
-      alert('Deleted');
+      alert('Usuario eliminado');
       this.onGoBackToList();
     } catch (err) {
       console.log(err);

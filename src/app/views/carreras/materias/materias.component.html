@@ -23,7 +23,7 @@
                             </select>
                             <br>
                             <label for="exampleFormControlInput2">Horas: </label>
-                            <input type="text" class="form-control" formControlName="numHoras" style="width: 50%;">
+                            <input type="number" class="form-control" formControlName="numHoras" style="width: 50%;">
                             <br>
                             <div class="row">
                                 <div class="col-md-12">
@@ -103,12 +103,8 @@
 
               <div class="form-group col-md-6">
                 <input type="file" class="form-control" placeholder="Archivo.pdf" formControlName="file"
-                accept=".pdf ,.docx ,.xlsx"  [class]="isValidFieldP('file')" (change)="uploadFile($event)" >
-                <div class="invalid-feedback">
-                  <span *ngIf="publicacionForm.get('file').errors?.required">
-                    Este campo es requerido.
-                  </span>
-                </div>
+                accept=".pdf ,.docx ,.xlsx" (change)="uploadFile($event)" >
+                
                 <div class="spinner-border" role="status" *ngIf="progreso==true">
                   <span class="visually-hidden" >Cargando...</span>
                 </div>
@@ -117,6 +113,9 @@
                 <br>
 
                 <input type="hidden" class="form-control" placeholder="Likes: 0" formControlName="likes"
+                  value="0" disabled>
+
+                  <input type="hidden" class="form-control" placeholder="Likes: 0" formControlName="disLikes"
                   value="0" disabled>
 
               </div>

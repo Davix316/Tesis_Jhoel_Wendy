@@ -55,7 +55,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <h5>Ingrese los días a ser bloqueado: </h5>
-                    <input type="text" class="form-control" placeholder="30" formControlName="dias"
+                    <input type="number" class="form-control" placeholder="30" formControlName="dias"
                       [class]="isValidField('dias')">
                     <div class="invalid-feedback">
                       <span *ngIf="studentBlockForm.get('dias').errors?.required">
@@ -72,7 +72,6 @@
                     <input type="hidden" class="form-control" placeholder="30" formControlName="numUnico" disabled>
                     <input type="hidden" class="form-control" placeholder="30" formControlName="email" disabled>
                     <input type="hidden" class="form-control" placeholder="30" formControlName="fechaI" disabled>
-                    <input type="hidden" class="form-control" placeholder="30" formControlName="fechaF" disabled>
                   </div>
                 </div>
 

@@ -11,7 +11,9 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { Materia } from '../../shared/models/materia.interface';
 import { Publicacion } from '../../shared/models/publicacion.interface';
+import { Comentario } from '../../shared/models/comentario.interface';
 import { Bloqueo } from '../../shared/models/block.interface';
+import { Reporte } from '../../shared/models/reporte.interface';
 import { FirebaseauthService } from '../../../app/views/services/firebaseauth.service';
 
 
@@ -25,6 +27,8 @@ export class ThemeService {
   studentsBlock: Observable<Admin[]>;
   materias: Observable<Materia[]>;
   publicaciones: Observable<Publicacion[]>;
+  comentarios: Observable<Comentario[]>;
+  reportes: Observable<Reporte[]>;
 
   photo: any;
   currentUser: any;
@@ -38,6 +42,8 @@ export class ThemeService {
   private studentsBlockCollection: AngularFirestoreCollection<Admin>;
   private materiasCollection: AngularFirestoreCollection<Materia>;
   private publicacionesCollection: AngularFirestoreCollection<Publicacion>;
+  private comentariosCollection: AngularFirestoreCollection<Comentario>;
+  private reportesCollection: AngularFirestoreCollection<Reporte>;
 
 
   constructor(
@@ -52,11 +58,15 @@ export class ThemeService {
     this.studentsBlockCollection = afs.collection<Admin>('Bloqueos');
     this.materiasCollection = afs.collection<Materia>('Materias');
     this.publicacionesCollection = afs.collection<Publicacion>('Publicaciones');
+    this.comentariosCollection = afs.collection<Comentario>('Comentarios');
+    this.reportesCollection = afs.collection<Reporte>('Reportes');
     this.getAdmins();
     this.getStudents();
     this.getStudentsBloqueados();
     this.getMaterias();
     this.getPublicaciones();
+    this.getComentarios();
+    this.getReportes();
   }
 
 
@@ -96,6 +106,18 @@ export class ThemeService {
     });
   }
 
+  onDeleteComentarios(comentarioId: string): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const result = await this.comentariosCollection.doc(comentarioId).delete();
+        resolve(result);
+
+      } catch (err) {
+        reject(err.message);
+      }
+    });
+  }
+
   onDeleteStudents(studentId: string): Promise<void> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -114,6 +136,17 @@ export class ThemeService {
         const result = await this.studentsBlockCollection.doc(studentId).delete();
         resolve(result);
 
+      } catch (err) {
+        reject(err.message);
+      }
+    });
+  }
+
+  onDeleteReport(reporteId: string): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const result = await this.reportesCollection.doc(reporteId).delete();
+        resolve(result);
       } catch (err) {
         reject(err.message);
       }
@@ -196,6 +229,7 @@ export class ThemeService {
 
 
   onSaveStudent(student: Admin, studentId: string, foto:string): Promise<void> {
+
 
     return new Promise(async (resolve, reject) => {
       try {
@@ -335,6 +369,20 @@ export class ThemeService {
     this.publicaciones = this.publicacionesCollection.snapshotChanges().pipe(
       map(actions => 
         actions.map(a => a.payload.doc.data() as Publicacion))
+    );
+  }
+
+  private getComentarios(): void {
+    this.comentarios = this.comentariosCollection.snapshotChanges().pipe(
+      map(actions => 
+        actions.map(a => a.payload.doc.data() as Comentario))
+    );
+  }
+
+  private getReportes(): void {
+    this.reportes = this.reportesCollection.snapshotChanges().pipe(
+      map(actions => 
+        actions.map(a => a.payload.doc.data() as Reporte))
     );
   }
 }

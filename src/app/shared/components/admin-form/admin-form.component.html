@@ -7,22 +7,17 @@
 
       <div class="card-body">
 
-        <form class="mt-3 col-md-8 offset-md-2" (ngSubmit)="onSave(adminForm.value)" [formGroup]="adminForm">
+        <form class="mt-3 col-md-10 offset-md-2" (ngSubmit)="onSave(adminForm.value)" [formGroup]="adminForm" style="margin: auto;">
           <div class="row">
             <div class="col-md-3">
               <label>Foto: </label>
               <img [src]="fotoUser" alt="Suba una foto" width="100%">
-              <input type="file" class="form-control" placeholder="Suba una foto" formControlName="foto"
-              accept=".png ,.jpg"  [class]="isValidField('foto')" (change)="uploadFoto($event)" >
-              <div class="invalid-feedback">
-                <span *ngIf="adminForm.get('foto').errors?.required">
-                  Este campo es requerido.
-                </span>
-              </div>
+              <input type="file" class="form-control" placeholder="Suba una foto" formControlName="foto" value="{{fotoUser}}"
+              accept=".png ,.jpg" (change)="uploadFoto($event)" >
               <div class="spinner-border" role="status" *ngIf="progreso==true">
                 <span class="visually-hidden" >Cargando...</span>
               </div>
-              <input #FotoUrlUser  type="text" [value]="urlFoto |async" >
+              <input #FotoUrlUser  type="hidden" [value]="urlFoto |async">
           </div>
   
             <div class="col-md-9">
@@ -37,6 +32,7 @@
                     </span>
                   </div>
                 </div>
+
                 <div class="form-group col-md-6">
                   <label>Apellidos: </label>
                   <input type="text" class="form-control" placeholder="Peña Herrera" formControlName="apellido"
@@ -47,7 +43,9 @@
                     </span>
                   </div>
                 </div>
+
               </div>
+              
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label>Email: </label>
@@ -68,7 +66,7 @@
                     <option select value="TS- Agua y Saneamiento Ambiental">TSASA - Agua y Saneamiento Ambiental</option>
                     <option value="TS- Desarrollo de Software">TSDS - Desarrollo de Software</option>
                     <option value="TS- Redes y Telecomunicaciones">TSRT - Redes y Telecomunicaciones</option>
-                    <option value="TS- Electromecánica ">TSEM - Electromecánica</option>
+                    <option value="TS- Electromecánica">TSEM - Electromecánica</option>
                   </select>
                   <div class="invalid-feedback">
                     <span *ngIf="adminForm.get('carreraNombre').errors?.required">
@@ -96,7 +94,7 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label>Numero único EPN: </label>
-                  <input type="text" class="form-control" placeholder="202030271" formControlName="numUnico"
+                  <input type="number" class="form-control" placeholder="202030271" formControlName="numUnico"
                     [class]="isValidField('numUnico')">
                   <div class="invalid-feedback">
                     <span *ngIf="adminForm.get('numUnico').errors?.required">
@@ -127,7 +125,7 @@
                 </div>
                 <div class="form-group col-md-6">
                   <label>Teléfono o Celular: </label>
-                  <input type="text" class="form-control" placeholder="2877333 / 0987654321" formControlName="telefono"
+                  <input type="number" class="form-control" placeholder="2877333 / 0987654321" formControlName="telefono"
                     [class]="isValidField('telefono')">
                   <div class="invalid-feedback">
                     <span *ngIf="adminForm.get('telefono').errors?.required">
@@ -141,7 +139,7 @@
                 <div class="form-group col-md-6">
                   <label>El rol sera: </label>
                   <input type="text" class="form-control" placeholder="Administrador"
-                   value="Administrador" disabled>´
+                   value="Administrador" disabled>
                 </div>
               </div>
 

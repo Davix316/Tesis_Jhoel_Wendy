@@ -10,41 +10,50 @@
           <div class="row">
             <div class="col-md-4">
               <div class="card" style="width: 100%;">
-                <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png" alt="Card image cap">
+                <img class="card-img-top"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png"
+                  alt="Card image cap">
               </div>
             </div>
             <div class="col-md-4">
               <ul class="list-group list-group-flush">
-            
+
                 <li class="list-group-item">
-                  <h5>Nombre Completo: </h5><h6>{{student.nombre}} {{student.apellido}}</h6>
+                  <h5>Nombre Completo: </h5>
+                  <h6>{{student.nombre}} {{student.apellido}}</h6>
                 </li>
                 <li class="list-group-item">
-                  <h5>Correo: </h5><h6>{{student.email}}</h6>
+                  <h5>Correo: </h5>
+                  <h6>{{student.email}}</h6>
                 </li>
                 <li class="list-group-item">
-                  <h5>Días: </h5><h6>{{student.dias}}</h6>
+                  <h5>Días: </h5>
+                  <h6>{{student.dias}}</h6>
                 </li>
                 <li class="list-group-item">
-                  <h5>Motivos: </h5><h6>{{student.motivo}}</h6>
+                  <h5>Motivos: </h5>
+                  <h6>{{student.motivo}}</h6>
                 </li>
               </ul>
             </div>
             <div class="col-md-4">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                  <h5>Código Único: </h5><h6>{{student.numUnico}}</h6>
+                  <h5>Código Único: </h5>
+                  <h6>{{student.numUnico}}</h6>
                 </li>
                 <li class="list-group-item">
-                  <h5>Fecha Inicial: </h5><h6>{{student.fechaI}}</h6>
+                  <h5>Fecha Inicial: </h5>
+                  <h6>{{student.fechaI.toDate()}}</h6>
                 </li>
                 <li class="list-group-item">
-                  <h5>Fecha Inicial: </h5><h6>{{student.fechaF}}</h6>
+                  <h5>Fecha Final: </h5>
+                  <h6>{{fechaFin}}</h6>
                 </li>
               </ul>
             </div>
           </div>
-          
+
         </div>
         <br>
         <button type="button" class="btn btn-primary mt-2" (click)="onGoBackToList()">

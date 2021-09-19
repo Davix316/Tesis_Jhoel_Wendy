@@ -13,7 +13,7 @@ import { AmbientalComponent } from './ambiental/ambiental.component';
 import { ElectromecanicaComponent } from './electromecanica/electromecanica.component';
 import { MateriasComponent } from './materias/materias.component';
 import { ArchivoComponent } from './materias/archivo.component';
-import { NewArchivoComponent } from './materias/new-archivo.component';
+import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
 
 @NgModule({
   imports: [
@@ -22,7 +22,8 @@ import { NewArchivoComponent } from './materias/new-archivo.component';
     ChartsModule,
     BsDropdownModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PdfViewerModule,
   ],
   declarations: [ 
     CarrerasComponent, 
@@ -32,7 +33,6 @@ import { NewArchivoComponent } from './materias/new-archivo.component';
     ElectromecanicaComponent, 
     MateriasComponent, 
     ArchivoComponent, 
-    NewArchivoComponent 
   ]
 })
 export class CarrerasModule { }

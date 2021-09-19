@@ -9,14 +9,15 @@ import { P500Component } from './views/error/500.component';
 import { ForgotPasswordComponent } from './views/forgot-password/forgot-password.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
-import { ResetPasswordComponent } from './views/reset-password/reset-password.component';
 import { CheckloginGuard } from './shared/guards/checklogin.guard';
 import { CheckloginGuard2 } from './shared/guards/checklogin.guard2';
 
 
 export const routes: Routes = [
   {
-    path: 'forgot', component:ForgotPasswordComponent},
+    path: 'forgot', 
+    component:ForgotPasswordComponent
+  },
   {
     path: '',
     redirectTo: 'login',
@@ -44,13 +45,6 @@ export const routes: Routes = [
     }
   },
   {
-    path: 'reset-password',
-    component: ResetPasswordComponent,
-    data: {
-      title: 'Reset Password'
-    }
-  },
-  {
     path: 'register',
     component: RegisterComponent,
     data: {
@@ -75,12 +69,15 @@ export const routes: Routes = [
       {
         path: 'list',
         loadChildren: () => import('./views/admin/list/list.module').then(m => m.ListModule), canActivate: [CheckloginGuard2],
-      },{
-        path: 'newAdmin', loadChildren: () => import('./views/admin/newAdmin/newAdmin.module').then(m => m.NewAdminModule),canActivate: [CheckloginGuard2],
+      },
+      {
+        path: 'newAdmin', 
+        loadChildren: () => import('./views/admin/newAdmin/newAdmin.module').then(m => m.NewAdminModule),canActivate: [CheckloginGuard2],
         data: {
           title: 'Nuevo Administrador'
         }},
-      { path: 'edit', loadChildren: () => import('./views/admin/edit/edit.module').then(m => m.EditModule),canActivate: [CheckloginGuard2],
+      { 
+        path: 'edit', loadChildren: () => import('./views/admin/edit/edit.module').then(m => m.EditModule),canActivate: [CheckloginGuard2],
       data: {
         title: 'Editar Administrador'
       } },
@@ -96,6 +93,10 @@ export const routes: Routes = [
       {
         path: 'listStudentBlock',
         loadChildren: () => import('./views/student/listStudentBlock/listStudentBlock.module').then(m => m.ListStudentBlockModule), canActivate: [CheckloginGuard2],
+      },
+      {
+        path: 'listStudentReport',
+        loadChildren: () => import('./views/student/listStudentReport/listStudentReport.module').then(m => m.ListStudentReportModule), canActivate: [CheckloginGuard2],
       },
       {
         path: 'newStudent', loadChildren: () => import('./views/student/newStudent/newStudent.module').then(m => m.NewStudentModule), canActivate: [CheckloginGuard2],

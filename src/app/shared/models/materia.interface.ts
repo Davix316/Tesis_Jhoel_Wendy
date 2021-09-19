@@ -3,5 +3,5 @@ export interface Materia {
     idCarrera: string;
     nivel: string;
     nombre: string;
-    numHoras: string;
+    numHoras: number;
   }

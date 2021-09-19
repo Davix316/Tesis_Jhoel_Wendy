@@ -19,7 +19,6 @@ export class BlockStudentComponent implements OnInit {
   motivoBlock= '';
   diasBlock= '';
   fechaBlockI= new Date();
-  fechaBlockF= new Date();
 
   navigationExtras: NavigationExtras = {
     state: {
@@ -56,7 +55,6 @@ export class BlockStudentComponent implements OnInit {
         block.numUnico=this.student.numUnico;
         block.email=this.student.email;
         block.fechaI=this.fechaBlockI;
-        block.fechaF=this.fechaBlockF;
         this.adminsSvc.newBlock(block,this.id);
         this.router.navigate(['listStudent']);
         console.log(block.dias);
@@ -85,7 +83,6 @@ export class BlockStudentComponent implements OnInit {
       motivo: ['', [Validators.required]],
       dias: ['', [Validators.required]],
       fechaI: [''],
-      fechaF: [''],
     });
   }
 

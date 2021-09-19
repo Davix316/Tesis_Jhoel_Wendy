@@ -34,8 +34,10 @@ export class MateriasComponent implements OnInit {
   idUserPubli='';
   nameUser='';
   apellUser='';
+  fotoUser='';
   fechaPubli= new Date();
   like='';
+  dislike='';
   id=this.publicacionesServ.getId();
 
   email: string;
@@ -44,8 +46,8 @@ export class MateriasComponent implements OnInit {
     id: '',
     nombre: '',
     apellido: '',
-    telefono: '',
-    numUnico: '',
+    telefono: 0,
+    numUnico: 0,
     carreraNombre: '',
     email: '',
     password: '',
@@ -115,6 +117,7 @@ export class MateriasComponent implements OnInit {
             this.nameUser=this.userLogIn.nombre;
             this.idUserPubli=this.userLogIn.id;
             this.apellUser=this.userLogIn.apellido;
+            this.fotoUser=this.userLogIn.foto;
           });
       })
       .catch((error) => {
@@ -136,33 +139,41 @@ export class MateriasComponent implements OnInit {
 
       this.materiaSvc.onSaveMateria2(materia, materiaId, idCarrera);
       this.materiaForm.reset();
-      this.router.navigate(['/carreras']);
+      this._location.back();
+
     } else {
       console.log("no valido")
     }
   }
 
   savePublicacion(publi: Publicacion){
+
+    if(publi.file==""){
+      alert('Cargue un archivo para la publicación');
+    }
+
     try {
-      console.log(this.publicacionForm.value);
       if(this.publicacionForm.valid){
         publi.fecha=this.fechaPubli;
         publi.idUser=this.idUserPubli;
         publi.nameUser=this.nameUser;
         publi.apellUser=this.apellUser;
-        publi.likes='0';
+        publi.userFoto=this.fotoUser;
+        publi.likes=0;
+        publi.disLikes=0;
         publi.id=this.id;
         publi.idCarrera=this.materia.idCarrera;
         publi.idMateria=this.materia.id;
         publi.file=this.inputFile.nativeElement.value;
         this.publicacionSvc.newPublicacion(publi,this.id);
+        console.log(this.publicacionForm.value);
+        this.publicacionForm.reset();
+        this._location.back();
       }
     } catch (error) {
     console.log(error);
     }
   }
-
-
 
   obtenerPublicaciones(idM: string) {
     const path = 'Publicaciones';
@@ -177,6 +188,7 @@ export class MateriasComponent implements OnInit {
   }
 
   onGoToSee(item: any): void {
+
     this.navigationExtras.state.value = item;
     this.router.navigate(['carreras/archivo'], this.navigationExtras);
   }
@@ -226,6 +238,7 @@ export class MateriasComponent implements OnInit {
       idUser: [this.idUserPubli],
       file: ['', [Validators.required]],
       likes: ['0'],
+      disLikes: ['0'],
       categoria: ['Tarea', [Validators.required]],
       titulo: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],

@@ -2,7 +2,7 @@
   <div>
     <div class="card">
       <div class="card-header" style="text-align: center;">
-        <h2>Estudiantes</h2>
+        <h2><i class="cil-people"></i> Estudiantes</h2>
       </div>
 
       <div class="card-body">
@@ -10,7 +10,10 @@
           <div class="col-md-6">
             <button type="button" class="btn btn-success" (click)="onGoToNew()">Agregar Nuevo</button>
           </div>
-          <div class="col-md-6" style="text-align: right;">
+          <div class="col-md-3" style="text-align: right;">
+            <button type="button" class="btn btn-dark" (click)="onGoToReport()">Publicaciones Reportadas</button>
+          </div>
+          <div class="col-md-3" style="text-align: right;">
             <button type="button" class="btn btn-dark" (click)="onGoToBlock2()">Estudiantes Bloqueados</button>
           </div>
         </div>
