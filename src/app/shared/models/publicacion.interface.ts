@@ -9,6 +9,7 @@ export interface Publicacion {
   apellUser?: string;
   idUser?: string;
   likes?: number;
+  disLikes?: number;
   nameUser?: string;
   titulo: string;
   userFoto?: string;

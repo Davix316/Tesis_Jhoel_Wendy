@@ -21,6 +21,8 @@ import { FirebaseauthService } from '../../services/firebaseauth.service';
 export class ArchivoComponent implements OnInit{
 
   filepath='';
+  fileuser ='';
+
   Publicacion$ = this.datosSrv.publicaciones;
   Comentario$ = this.datosSrv.comentarios;
   publicacionForm: FormGroup;
@@ -98,6 +100,9 @@ export class ArchivoComponent implements OnInit{
     }else if(this.publicacion.idCarrera=="ph4kM1eyF6KoaieJqCr0"){
       this.carrera = "TS- Desarrollo de Software";
     }
+
+    this.fileuser = this.publicacion.file;
+
   }
 
   onSave(publi: Publicacion): void {
@@ -110,11 +115,18 @@ export class ArchivoComponent implements OnInit{
         publi.apellUser=this.apellUser;
         publi.userFoto=this.fotoUser;
         publi.likes=0;
+        publi.disLikes =0;
         publi.categoria= this.publicacion.categoria;
         const publicacionId = this.publicacion?.id || null;
         publi.idCarrera=this.publicacion.idCarrera;
         const idMateria=this.publicacion.idMateria;
-        publi.file=this.inputFile.nativeElement.value;
+
+        if(this.inputFile.nativeElement.value===""){
+          publi.file =  this.fileuser;
+        }else{
+          publi.file=this.inputFile.nativeElement.value; 
+        }
+
         this.datosSrv.onSavePublicacion(publi, publicacionId, idMateria);
         this.publicacionForm.reset();
         this._location.back();

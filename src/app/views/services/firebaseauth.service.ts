@@ -24,22 +24,25 @@ export class FirebaseauthService {
 
   login(email: string, password: string) {
     this.afAuth.signInWithEmailAndPassword(email, password)
+
       .then((response) => {
+
         this.firestore.collection('Administradores').ref.where('email', '==', response.user.email).onSnapshot(snap => {
           snap.forEach(userRef => {
             this.currentUser = userRef.data();
-            console.log('ROLE CURRENT', this.currentUser.rol);
+            if(userRef.data()){
+              console.log('ROLE CURRENT', this.currentUser.rol);
             if (this.currentUser.rol === 'Administrador' || this.currentUser.rol === 'SuperAdministrador') {
               this.router.navigate(['dashboard']);
             }
-            else {
+            }else {
               window.alert("No es Administrador")
-              console.log('no es admin');
             }
           });
         });
       }
-      );
+      ).catch(err=>window.alert(err.message))
+
   }
 
   async register(email: string, password: string) {

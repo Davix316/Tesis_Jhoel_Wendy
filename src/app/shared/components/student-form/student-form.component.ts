@@ -69,7 +69,13 @@ export class StudentFormComponent implements OnInit {
       console.log("valido")
       const student = this.studentForm.value;
       const studentId = this.student?.id || null;
-      adm.foto=this.inputFoto.nativeElement.value;
+
+      if(this.inputFoto.nativeElement.value===""){
+        adm.foto =  this.fotoUser;
+      }else{
+        adm.foto = this.inputFoto.nativeElement.value;  
+      }
+
       this.adminsSvc.onSaveStudent(student, studentId, adm.foto);
       this.studentForm.reset();
       this.router.navigate(['listStudent']);

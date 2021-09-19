@@ -74,7 +74,13 @@ export class AdminFormComponent implements OnInit {
       console.log("valido");
       const admin = this.adminForm.value;
       const adminId = this.admin?.id || null;
-      adm.foto = this.inputFoto.nativeElement.value;  
+
+      if(this.inputFoto.nativeElement.value===""){
+        adm.foto =  this.fotoUser;
+      }else{
+        adm.foto = this.inputFoto.nativeElement.value;  
+      }
+
       this.adminsSvc.onSaveAdmin(admin, adminId, adm.foto);
       this.adminForm.reset();
       this.router.navigate(['list']);

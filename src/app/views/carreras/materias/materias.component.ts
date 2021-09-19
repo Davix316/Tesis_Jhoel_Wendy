@@ -37,6 +37,7 @@ export class MateriasComponent implements OnInit {
   fotoUser='';
   fechaPubli= new Date();
   like='';
+  dislike='';
   id=this.publicacionesServ.getId();
 
   email: string;
@@ -159,6 +160,7 @@ export class MateriasComponent implements OnInit {
         publi.apellUser=this.apellUser;
         publi.userFoto=this.fotoUser;
         publi.likes=0;
+        publi.disLikes=0;
         publi.id=this.id;
         publi.idCarrera=this.materia.idCarrera;
         publi.idMateria=this.materia.id;
@@ -236,6 +238,7 @@ export class MateriasComponent implements OnInit {
       idUser: [this.idUserPubli],
       file: ['', [Validators.required]],
       likes: ['0'],
+      disLikes: ['0'],
       categoria: ['Tarea', [Validators.required]],
       titulo: ['', [Validators.required]],
       descripcion: ['', [Validators.required]],
