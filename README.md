@@ -81,8 +81,17 @@ El sistema web se encuentra almacenado en el hosting de Firebase en la siguiente
 |Para recuperar la contraseña, el administrador debe ingresar su correo y le llegará un email para restablecer dicha contraseña. ![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/web/images/recuperar_web.jpg)|
 
 ### 7. Despliegue
+Despliegue del sistema web en el Hosting de Firebase.
+
+![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/hosting.PNG)
 
 ```
+- npm install -g firebase-tools
+- firebase login
+- ng build
+- firebase init
+- firebase deploy
+
 ```
 
 ### 8. Instalación
@@ -94,16 +103,10 @@ El sistema web se encuentra almacenado en el hosting de Firebase en la siguiente
 |Ejecutar proyecto  `ng serve -o`|Ejecutar proyecto  `ionic serve -l`|
 
 
-
-
-
-
-
-
 ### 9. Anexos 
 
  Enlace al video :movie_camera:
  
-  [![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/video.png)](https://youtu.be/XIPEvncjB04)
+  [![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/video.png)](https://www.youtube.com/watch?v=811bt30UzR4)
   
 
