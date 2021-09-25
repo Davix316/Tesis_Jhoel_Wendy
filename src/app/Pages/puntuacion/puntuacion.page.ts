@@ -2,9 +2,11 @@ import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/co
 import { NavigationExtras, Router } from '@angular/router';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { VotosService } from 'src/app/services/votos.service';
 import { ComentariosInterface } from 'src/app/shared/comentarios';
 import { PublicacionInterface } from 'src/app/shared/publicacion';
 import { UserInterface } from 'src/app/shared/user';
+import { VotosInterface } from 'src/app/shared/votos';
 
 @Component({
   selector: 'app-puntuacion',
@@ -24,6 +26,7 @@ export class PuntuacionPage implements OnInit {
   foto: string;
   nombre: string;
   apellido: string
+  arrayVoto=[];
 
   public frog = [
     { src: '/assets/icon/png/001-award.png' },
@@ -49,10 +52,13 @@ export class PuntuacionPage implements OnInit {
     }
   };
 
+  VotosTotal:VotosInterface[];
+
   constructor(private serviceFS: FirestoreService,
     private serviceauth: FireauthService, private router: Router,
     private fireService: FirestoreService,
     private cdRef: ChangeDetectorRef,
+    private serviceVoto: VotosService,
   ) {
     const navigation = this.router.getCurrentNavigation();
     this.userInf = navigation?.extras?.state?.value;
@@ -73,7 +79,8 @@ export class PuntuacionPage implements OnInit {
     this.serviceauth.stateAuth().subscribe(user => {
       if (user != null) {
         //user.uid;
-        this.getComentarios(user.uid)
+        //this.getComentarios(user.uid)
+        this.getVotos(user.uid);
       }
     });
 
@@ -83,7 +90,33 @@ export class PuntuacionPage implements OnInit {
 
   }
 
+//OBTENER VOTOS
+getVotos(idU: string){
+this.serviceVoto.getVotos<VotosInterface>('Votos').subscribe(res=>{
+  this.VotosTotal=res.filter(e=>idU===e.idOwnerComentario)
+  if (this.VotosTotal.length === 0) {
+    this.comentarios0 = true;
+    this.totalVotos = 0;
+  } 
+  else {
+   // console.log("lista:",this.VotosTotal);
+    this.arrayVoto=[];
+    this.totalVotos = 0;
+    //console.log(this.listaComent);
+    this.comentarios0 = false;
+    this.VotosTotal.forEach(element => {
+      console.log(element.voto);
+      this.arrayVoto= this.arrayVoto.concat(element.voto)
+      this.totalVotos=this.arrayVoto.length
 
+    });
+    
+    console.log('numero Voto:', this.totalVotos);
+   
+  }
+
+})
+}
 
   //OBTENER COMENTARIOS
   getComentarios(idU: string) {

@@ -3,6 +3,7 @@ import { snapshotChanges } from '@angular/fire/database';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { NavigationExtras, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { element } from 'protractor';
 import { ChatService } from 'src/app/services/chat.service';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -44,6 +45,8 @@ export class ChatPage implements OnInit {
   public roomChat: Array<any> = [];
   encontradoRes: boolean;
   encontradoSen: boolean;
+elemento:any; 
+
   constructor(
     private navCtrl: NavController,
     private serviceauth: FireauthService,
@@ -67,10 +70,10 @@ export class ChatPage implements OnInit {
   }
 
   ngOnInit() {
-    
- 
+     
     //Llamado a la funcion:
     this.getUsers();
+    this.elemento=document.getElementById('app-mensajes')
   }
 
 
@@ -133,6 +136,10 @@ console.log('ids de usuarios:', this.chatsUser);
           });
          
         })
+
+        for(let ch of this.roomChat){
+
+        }
 
 
       } //fin del if res

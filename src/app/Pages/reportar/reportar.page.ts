@@ -67,6 +67,7 @@ const idReporte=report.id;
     this.modalController.dismiss({
       motivo: this.formReport.value.motivo
     })
+    this.presentToast('Reporte enviado','success')
   }else{
     
     this.presentToast('No deje campos vacíos','danger');

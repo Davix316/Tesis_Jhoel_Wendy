@@ -37,7 +37,7 @@ userLog:string;
   nameUReceptor:string
 chat: chatInterface[];
 conversacion=[];
-
+elemento: any;
   constructor( private firestore: AngularFirestore,
     private serviceauth: FireauthService,
     private chatService: ChatService,
@@ -78,7 +78,9 @@ console.log(this.idUReceptor,'idUsuario receptor');
     ///OBTENER MENSAJES
     this.getMessages();
     this.chatService.listarDatos().snapshotChanges().subscribe(data=>{
-      //console.log('data:', data);
+      setTimeout( ()=>{
+        this.elemento.scrollTop = this.elemento.scrollHeight;
+        },20);
       
       this.chat=[];
       data.forEach(item=>{
@@ -87,6 +89,9 @@ console.log(this.idUReceptor,'idUsuario receptor');
         this.chat.push(a as chatInterface);
       })
     })
+
+    this.elemento = document.getElementById('app-mensajes');
+    
 
   }
 

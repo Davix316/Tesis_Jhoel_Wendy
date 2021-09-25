@@ -38,10 +38,22 @@ export class FolderPage  {
     
  
   ];
+  nombreUser: string;
 
 
   constructor(private serviceauth: FireauthService, public router: Router,) { }
+  gOnInit() {
+    //INFORMACION DE USUARIO ACTUAL
+    this.serviceauth.stateAuth().subscribe(user => {
+      if (user != null) {
+        this.nombreUser=user.displayName;
+        console.log("displayName", user.displayName);
+        
+      }
+    });
+  }
 
+  
   //CERRAR SESION
   onlogout(){
     this.serviceauth.logout();

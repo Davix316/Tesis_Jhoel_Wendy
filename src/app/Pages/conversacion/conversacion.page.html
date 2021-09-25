@@ -25,7 +25,7 @@
 <ion-content class="bg" >
 
 
-  <div class="chat-container">
+  <div class="chat-container" id="app-mensajes">
 
     <div *ngFor="let message of chat">    
       <div *ngIf="message.idUserSender==userLog && message.idUserReciver==detalleComentario.idUser

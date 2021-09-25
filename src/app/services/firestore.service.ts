@@ -110,15 +110,8 @@ export class FirestoreService {
    
   }
 
-  //AGREGAR VOTO
-  saveVoto(path: string, idC: string, voto:number ) {
-    //const admin = require('firebase-admin');
-    const votoref=this.firestoreS.collection(path).doc(idC);
-    const res= votoref.update({
-      voto: firebase.firestore.FieldValue.increment(voto)
-    })
-
-  }
+  
+  //LIKES EN LAS PUBLICACIONES
   saveLike(coleccion: string, idP: string, like:number){
     const votoref=this.firestoreS.collection(coleccion).doc(idP);
     const res= votoref.update({
@@ -129,6 +122,8 @@ export class FirestoreService {
   saveDislike(){
 
   }
+
+  
 //ACTUALIZAR DOCUMENTOS
   updateDoc(data: any, path: string, id: string){
     const collection = this.firestoreS.collection(path);

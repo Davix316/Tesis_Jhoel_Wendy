@@ -91,7 +91,8 @@ publiDetalle:PublicacionInterface={
     public modalController: ModalController,
     private firestore: AngularFirestore,
     private fireService: FirestoreService,
-  ) {
+  ) 
+  {
     const navigation = this.router.getCurrentNavigation();
     this.tareas = navigation?.extras?.state?.value;
    console.log(this.tareas);
@@ -99,8 +100,7 @@ publiDetalle:PublicacionInterface={
     //Si no hay ID de tarea retorna
     if (typeof this.tareas === 'undefined') {
       this.router.navigate(['/menu/home']);
-    }
-    
+    }    
     //
    
 
@@ -221,6 +221,7 @@ this.getPublicacion(this.tareas.id);
         const idCom = this.listComentarios[i].id;
         console.log('idComentario:', idCom);
         this.fireStore.deleteDoc('Comentarios', idCom);
+        this.fireStore.deleteDoc('Votos',idCom)
 
 
       }
@@ -248,6 +249,7 @@ this.getPublicacion(this.tareas.id);
           handler: () => {
             this.fireStore.deleteDoc('Publicaciones', this.tareaId);
             this.DeleteComments(this.tareaId);
+
             this.router.navigate(["/menu/home"]);
             console.log('Confirm Okay');
           }
@@ -313,6 +315,8 @@ this.getPublicacion(this.tareas.id);
 //LIKE
 btnLike(Infpubli:any){
   this.serviceFS.saveLike('Publicaciones', Infpubli.id,1);
+  console.log('add');
+  
 }
 
 
@@ -341,7 +345,7 @@ async AlertPubliDelete(texto:string) {
       {
         text: 'OK',
         handler: () => {
-          this.router.navigate(["/menu/favoritos"]);
+          this.router.navigate(["/menu/home"]);
          
         }
       }

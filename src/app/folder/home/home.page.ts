@@ -27,7 +27,7 @@ numberOfLikes = 0;
 numberOfDislikes = 0;
 listaComent: ComentariosInterface[];
 numComent:any;
-votoAdd=false;
+//votoAdd=false;
 //obtener id Clic=keado
 navigationExtras: NavigationExtras = {
   state: {
@@ -93,8 +93,9 @@ votos: any;
 
   getPublicacion(idC: string){
     this.fireService.getCollection<PublicacionInterface>('Publicaciones').subscribe(res => {
-      this.publicaciones = res.filter(e=>idC===e.idCarrera
-        );       
+      this.publicaciones = res.filter(e=>idC===e.idCarrera);      
+      console.log(this.publicaciones);
+       
         if(this.publicaciones.length===0){
           this.publicaciones0=true;
         }else{
@@ -102,11 +103,7 @@ votos: any;
 
         }
 
-        this.publicaciones.forEach(element => {
-          const idPubli=element.id
-        });        
-
-    }).unsubscribe;
+    });
   }
 
 
@@ -159,15 +156,18 @@ getComentarios(idU: string) {
 }
 
   
-addLike(publicacion:any){
-  if(!this.votoAdd){
+addLike(id:string){
+  this.fireService.saveLike('Publicaciones', id,1);
+  console.log('votoAdd');
+  
+  /* if(!this.votoAdd){
     this.fireService.saveLike('Publicaciones', publicacion.id,1);
     this.votoAdd=true;
   }  
   else{
     this.fireService.saveLike('Publicaciones', publicacion.id,-1);
     this.votoAdd=false;
-  }
+  } */
   
 }
 

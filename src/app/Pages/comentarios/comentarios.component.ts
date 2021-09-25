@@ -7,7 +7,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
 import { interval, Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+import { finalize, subscribeOn } from 'rxjs/operators';
 //import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -20,15 +20,8 @@ import { PopinfoComponent } from 'src/app/componets/popinfo/popinfo.component';
 import { ModalController } from '@ionic/angular';
 import { ReportarPage } from '../reportar/reportar.page';
 import { VotosService } from 'src/app/services/votos.service';
+import { VotosInterface } from 'src/app/shared/votos';
 
-
-//INTERFAZ DE CARRERAS
-interface votoInterface {
-  id?: string;
-  idComentario: string;
-  idUser: string;
-  votos: number;
-  }
 
 @Component({
   selector: 'app-comentarios',
@@ -82,14 +75,16 @@ public formUpdateC=new FormGroup({
   comenActualizado:new FormControl('',[Validators.required]),
 });
 
-//voto: votoInterface[];
-votoAdd=false;
+listaVoto: VotosInterface[];
+//votoAdd=false;
 
 public formComentario=new FormGroup({
   texto:new FormControl('',[Validators.required]),
 });
-
-
+  elemento: HTMLElement;
+  totalVotos: number;
+  votos0=true;
+  arrayVoto:any;
 
 
   constructor(
@@ -116,7 +111,7 @@ public formComentario=new FormGroup({
     }
     //
     this.tareaId = this.publi.id;
-    console.log(' Comentarios-> Tarea id:', this.tareaId);
+    //console.log(' Comentarios-> Tarea id:', this.tareaId);
   }
 
 
@@ -138,8 +133,11 @@ public formComentario=new FormGroup({
         }
       });
 
+      this.elemento = document.getElementById('app-comentarios');
       //Leer comentarios por publicacion
       this.getComments(this.tareaId);
+      this.getVoto();
+      
 
   }
 
@@ -198,6 +196,8 @@ getComments(idP: string){
     }
     else{
       this.comentarios0=false;
+     
+     
     }
   }).unsubscribe;
 
@@ -274,7 +274,7 @@ try {
     console.log('codigoUsuario:', this.codUser); 
     
     this.firestoreService.deleteDoc("Comentarios",comentario.id)
-    
+    this.firestoreService.deleteDoc("Votos",comentario.id)
   }
 
  else if(data.item=="Reportar"){
@@ -321,6 +321,8 @@ async presentModal(infoComentario:any) {
 console.log('retorno del modal', data.motivo); */
 
 }
+
+
 //ACTUALIZAR COMENTARIO
 updateComentario(interfaz:any){ 
   if(interfaz.id==interfaz.id){
@@ -338,15 +340,44 @@ this.noActualizado=false;
 
 //VOTOS
 
-votar(comentario:any){
-  if(!this.votoAdd){
-    this.firestoreService.saveVoto('Comentarios', comentario.id,1);
-    this.votoAdd=true;
-  }  
-  else{
-    this.firestoreService.saveVoto('Comentarios', comentario.id,-1);
-    this.votoAdd=false;
+votar(comentario:any){  
+  const  idUser=this.codUser;  
+  const votos:VotosInterface={
+    id:this.firestoreService.getId(),
+    idComentario:comentario.id,
+    idOwnerComentario:comentario.idUser,
+    voto:[idUser]
+  } 
+  console.log(votos);  
+  this.votosService.saveVoto(comentario.id, votos,idUser);
+ 
+}
+
+
+//ELIMINAR MI VOTO  
+deleteVoto(id:string){
+  const  idUser=this.codUser 
+  this.votosService.deleteVoto(id,idUser);
+}
+
+
+getVoto(){
+  this.votosService.getVotos<VotosInterface>('Votos').subscribe(res=>{
+  if(res){
+    this.listaVoto=res;
+    this.votos0=false;
+  
+    
+  }else{
+    this.votos0=true
   }
+
+
+ 
+  })
+ 
+  
+
 }
 
 }

@@ -46,7 +46,7 @@
 
     <ion-row>
       <ion-col size="3">
-        <ion-button class="like" shape="round" size="small" icon-start (click)="addLike(item)">
+        <ion-button class="like" shape="round" size="small" icon-start (click)="addLike(item.id)">
           <ion-icon name="thumbs-up-outline"></ion-icon>
           {{item.likes}}
         </ion-button>
@@ -63,7 +63,7 @@
         <ion-button class="coments" shape="round" routerLink="/menu/detalle-tarea"  (click)="infoTarea(item)" size="small" clear small icon-start>
           <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
           <div>
-            <ion-label>#</ion-label>
+            <ion-label>3</ion-label>
           </div>
 
         </ion-button>
@@ -78,7 +78,7 @@
       </ion-col>
     </ion-row>
   </ion-card>
-
+<div style="margin-bottom: 50px;"></div>
   <ion-fab *ngIf="totalVotos>=50" horizontal="end" vertical="bottom" slot="fixed">
     <ion-fab-button class="addPubli" routerLink="/menu/new-publicacion">
       <ion-icon style=" color: #000000;" name="add-outline"></ion-icon>

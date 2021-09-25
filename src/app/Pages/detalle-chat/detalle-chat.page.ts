@@ -26,7 +26,9 @@ export class DetalleChatPage implements OnInit {
   public FormChat= new FormGroup({
     texto: new FormControl('', [Validators.required])
   });
+  elemento: any;
 
+  
   constructor(private router: Router,
     private serviceauth: FireauthService,
     private chatService: ChatService) { 
@@ -56,31 +58,39 @@ console.log(this.idUReceptor,'idUsuario receptor');
       }
     });
 
-    ///OBTENER MENSAJES
+    
+    //OBTENER MENSAJES
+    this.elemento = document.getElementById('app-mensajes');
     this.getMessages();
-    this.chatService.listarDatos().snapshotChanges().subscribe(data=>{
-      //console.log('data:', data);
-      
-      this.chat=[];
-      data.forEach(item=>{
-        let a = item.payload.toJSON(); 
-        a['id'] = item.key;
-        this.chat.push(a as chatInterface);
-      })
-    })
+    
 
-
+    
   }
 
 
 
   //LEER MENSAJES
   getMessages(){
-  this.chatService.listarDatos().valueChanges().subscribe((data:any)=>{
-   // console.log('fecha:', data);
+    this.chatService.listarDatos().snapshotChanges().subscribe(data=>{
+      //console.log('data:', data);
+      //foco del mensaje
+      setTimeout( ()=>{
+        this.elemento.scrollTop = this.elemento.scrollHeight;
+        },20);
+
+      this.chat=[];
+      data.forEach(item=>{
+        let a = item.payload.toJSON(); 
+        a['id'] = item.key;
+        
+        this.chat.push(a as chatInterface);
+        
+      })
+      
+    })
     
 
-  })
+ 
   }
 
 

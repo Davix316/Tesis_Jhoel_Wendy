@@ -15,9 +15,12 @@
         <ion-icon *ngIf="favoritoAdd==true" class="favoritoTrue" name="heart"></ion-icon>
       </button>
     </div>
-    <ion-chip  style="background: rgba(77, 226, 194, 0.623); color: #115571; width: -webkit-fill-available;">
-      <ion-text class="ion-text-center titulo">{{publiDetalle.titulo}}</ion-text>      
-    </ion-chip>
+    <ion-card  style="background: rgba(77, 226, 194, 0.623); color: #115571; width: -webkit-fill-available;">
+      <ion-card-content>
+        <ion-text class="ion-text-center titulo">{{publiDetalle.titulo}}</ion-text>      
+
+      </ion-card-content>
+    </ion-card>
   </ion-item>
 
 

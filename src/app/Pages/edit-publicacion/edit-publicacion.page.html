@@ -59,7 +59,7 @@
 
         <ion-item>
           <ion-label position="floating" class="titulo negrita text-primary">Descripcion</ion-label>
-          <ion-textarea rows="5" formControlName="descripcion" required></ion-textarea>
+          <ion-textarea rows="5" formControlName="descripcion" required  ></ion-textarea>
         </ion-item>
       </ion-card-content>
     </ion-card>
@@ -84,7 +84,7 @@
             </ion-button>
 
             <div  class="spinner-border text-dark" role="status" *ngIf="progreso==true">
-              <span class="visually-hidden" >Loading...</span>
+              <span class="visually-hidden" ></span>
             </div>
 
             <input #FileUrlUser type="hidden" [value]="urlFile |async" >
