@@ -79,7 +79,7 @@ export class PuntuacionPage implements OnInit {
     this.serviceauth.stateAuth().subscribe(user => {
       if (user != null) {
         //user.uid;
-        //this.getComentarios(user.uid)
+        this.getComentarios(user.uid)
         this.getVotos(user.uid);
       }
     });
@@ -120,29 +120,9 @@ this.serviceVoto.getVotos<VotosInterface>('Votos').subscribe(res=>{
 
   //OBTENER COMENTARIOS
   getComentarios(idU: string) {
-
     this.serviceFS.getCollection<ComentariosInterface>('Comentarios').subscribe(res => {
-      this.listaComent = res.filter(e => idU === e.idUser);
-      if (this.listaComent.length === 0) {
-        this.comentarios0 = true;
-        this.totalVotos = 0;
-      }
-      else {
-        this.totalVotos = 0;
-        //console.log(this.listaComent);
-        this.comentarios0 = false;
-        this.listaComent.forEach(element => {
-
-          //SUMA LOS VOTOS
-          this.votos = element.voto;
-
-          this.totalVotos += this.votos;
-        });
-        //console.log('total:', this.totalVotos);
-
-      }
+      this.listaComent = res.filter(e => idU === e.idUser);      
     });
-
   }
 
 

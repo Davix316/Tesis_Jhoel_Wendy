@@ -69,7 +69,11 @@
   <ion-row *ngFor="let item of listaComent">    
 
     <ion-col size="2" >
-      <h4>{{item.voto}}</h4>
+      <span *ngFor="let voto of VotosTotal">
+        <span *ngIf="item.id==voto.idComentario">
+     <h4>{{voto.voto.length}}</h4> 
+    </span>
+  </span>
     </ion-col>
 
     <ion-col size="3" >
