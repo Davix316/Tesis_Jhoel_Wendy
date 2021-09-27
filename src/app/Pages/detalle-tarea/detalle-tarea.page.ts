@@ -46,7 +46,7 @@ infPubli:publiFavoritoInterface[];
 
 
   listaMateria: MateriasInterface[];
-
+favAdd:boolean;
   favoritoAdd = false;
   materiaId: string;
   nombreMateria: string;
@@ -75,7 +75,7 @@ publiDetalle:PublicacionInterface={
   userFoto: '',
 }
 
-
+listaFavoritos:any;
   constructor(
     private domSanit: DomSanitizer,
     private router: Router,
@@ -97,6 +97,7 @@ publiDetalle:PublicacionInterface={
     this.tareas = navigation?.extras?.state?.value;
    console.log(this.tareas);
    
+        
     //Si no hay ID de tarea retorna
     if (typeof this.tareas === 'undefined') {
       this.router.navigate(['/menu/home']);
@@ -118,9 +119,12 @@ publiDetalle:PublicacionInterface={
         this.idUser = user.uid;
         this.getuser(this.idUser);
         // console.log(this.idUser);
+        this.getFavorito(this.idUser); 
+        
       }
     });
 this.getPublicacion(this.tareas.id);
+
 
   }
 
@@ -358,5 +362,25 @@ async AlertPubliDelete(texto:string) {
   console.log('onDidDismiss resolved with role', role);
 }
 
+//LEER SI ES FAVORITO
+
+getFavorito(idUsuario){
+  this.fireStore.getFavorito(idUsuario).subscribe(res=>{
+  if(res){
+   this.listaFavoritos=res   
+   console.log(this.tareas.id);
+   console.log(this.listaFavoritos);   
+   
+  const search=this.listaFavoritos.publicacion.find(ref=>ref.id===this.tareas.id);
+  if(search){
+this.favAdd=true
+  }else{
+    this.favAdd=false
+  }
+     console.log('include', search);
+ 
+  }
+  }) 
+}
 
 }
