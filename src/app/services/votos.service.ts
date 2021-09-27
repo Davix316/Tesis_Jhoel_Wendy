@@ -26,11 +26,6 @@ save1Voto(path: string, interf: any, idC: string) {
 
 //AGREGAR VOTO
 saveVoto( idC: string, interf:any, userId:string){ 
- /*  const votoref=this.firestore.collection(path).doc(idC);
-  const res= votoref.update({
-    voto: firebase.firestore.FieldValue.increment(voto)
-  }).then((ref)=>{ */
-    
   var doc = this.firestore.collection("Votos").doc(idC);
   doc.get().subscribe((docData) => {
     if (docData.exists) {
@@ -40,7 +35,6 @@ saveVoto( idC: string, interf:any, userId:string){
         voto: firebase.firestore.FieldValue.arrayUnion(userId) //voto es el atributo a actualizarse
       })
       console.log('se actualizo');
-
     } else {
       console.log('documento no existe');
       this.firestore.collection("Votos").doc(idC).set(interf)

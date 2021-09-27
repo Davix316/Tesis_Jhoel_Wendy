@@ -36,38 +36,41 @@
  -->
           <small>({{item.fecha.toDate()|date:'M/d/yy, h:mm a'}})</small>
         </ion-row>
-    
 
-        <ion-row  class="ion-text-center">
-         
 
-              <ion-col size="3" >
-                <button (click)="votar(item)" style="background: none; ">
-                  <ion-label class="btnComm" style="font-size: 12px;">
-                   
-                    <i class="far fa-star"></i>
-                    <span *ngFor="let voto of listaVoto">
-                      <span *ngIf="item.id==voto.idComentario">
+        <ion-row class="ion-text-center">
+
+
+          <ion-col size="3">
+            <button (click)="votar(item)" style="background: none;">
+              <ion-label class="btnComm" style="font-size: 12px;"> 
+
+                <span *ngFor="let voto of listaVoto">                  
+                  <span *ngIf="item.id==voto.idComentario">  
+                                 
+                    <i class="fas fa-star" [ngClass]="{'votoAdd':voto.voto.includes(codUser)}"></i>
                     {{voto.voto.length}}
                   </span>
                 </span>
-                    &nbsp; Votar                 
-                  </ion-label>
-                </button>
-              </ion-col>
 
-              <ion-col size="4">
-                <span *ngFor="let voto of listaVoto">
-                  <span *ngIf="item.id==voto.idComentario">
+                &nbsp; Votar
+              </ion-label>
+            </button>
+          </ion-col>
+
+
+          <ion-col size="4">
+            <span *ngFor="let voto of listaVoto">
+              <span *ngIf="item.id==voto.idComentario">
                 <ion-label class="btnComm " style="font-size: 12px;" (click)="deleteVoto(item.id)" [hidden]=votos0
-                  *ngIf="voto.voto.length > 0">
+                  *ngIf="voto.voto.length > 0 && voto.voto.includes(codUser) ">
                   <i class="fas fa-star-half-alt"></i> Quitar voto
                 </ion-label>
               </span>
             </span>
-              </ion-col>
+          </ion-col>
 
-            
+
 
           <ion-col size="3">
             <button (click)="infoUserChat(item)" *ngIf="item.idUser!=codUser" style="background: none;">
@@ -85,7 +88,7 @@
             </button>
           </ion-col>
 
-      
+
 
         </ion-row>
       </ion-list>

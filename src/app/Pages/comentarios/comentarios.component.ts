@@ -83,9 +83,9 @@ public formComentario=new FormGroup({
 });
   elemento: HTMLElement;
   totalVotos: number;
-  votos0=true;
+  votos0:boolean;
   arrayVoto:any;
-
+votoAdd:any;
 
   constructor(
     private router: Router,
@@ -350,6 +350,7 @@ votar(comentario:any){
   } 
   console.log(votos);  
   this.votosService.saveVoto(comentario.id, votos,idUser);
+  this.votoAdd=true;
  
 }
 
@@ -365,19 +366,14 @@ getVoto(){
   this.votosService.getVotos<VotosInterface>('Votos').subscribe(res=>{
   if(res){
     this.listaVoto=res;
-    this.votos0=false;
-  
-    
+    this.votos0=false;  
   }else{
-    this.votos0=true
+    this.votos0=true;
   }
-
-
- 
-  })
- 
-  
-
+  }) 
 }
+
+
+
 
 }
