@@ -12,6 +12,8 @@
     <div slot="end" style="padding:0; margin: 0px" >
       <button (click)="addFavorite(favorito)"  style="background: none; font-size:25px;">
         <ion-icon *ngIf="favAdd==false" class="favoritoFalse" name="heart"></ion-icon> 
+      </button>
+      <button (click)="deleteFavorito()"  style="background: none; font-size:25px;">
         <ion-icon *ngIf="favAdd==true" class="favoritoTrue" name="heart"></ion-icon> 
       </button>
     </div>

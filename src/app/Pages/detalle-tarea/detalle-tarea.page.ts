@@ -194,6 +194,17 @@ this.getPublicacion(this.tareas.id);
     }
 
   }
+  //ELIMINAR DE LA LISTA D FAVORITO
+deleteFavorito() {
+  const publicI:  publiFavoritoInterface={
+    id: this.publiDetalle.id,
+    titulo:this.publiDetalle.titulo,
+    nameMateria:this.nombreMateria,
+    file: this.archivo,
+  }
+  this.fireService.deleteFav('Favoritos', this.idUser,publicI);
+}
+
 
   //ABRIR ARCHIVO
   openFile(urlFile: string) {
@@ -367,20 +378,18 @@ async AlertPubliDelete(texto:string) {
 getFavorito(idUsuario){
   this.fireStore.getFavorito(idUsuario).subscribe(res=>{
   if(res){
-   this.listaFavoritos=res   
-   console.log(this.tareas.id);
-   console.log(this.listaFavoritos);   
-   
+   this.listaFavoritos=res
   const search=this.listaFavoritos.publicacion.find(ref=>ref.id===this.tareas.id);
   if(search){
 this.favAdd=true
   }else{
     this.favAdd=false
   }
-     console.log('include', search);
  
   }
   }) 
 }
+
+
 
 }
