@@ -21,6 +21,7 @@ import { ModalController } from '@ionic/angular';
 import { ReportarPage } from '../reportar/reportar.page';
 import { VotosService } from 'src/app/services/votos.service';
 import { VotosInterface } from 'src/app/shared/votos';
+import { EditComentarioPage } from '../edit-comentario/edit-comentario.page';
 
 
 @Component({
@@ -70,10 +71,6 @@ navigationExtras: NavigationExtras = {
 
 //actualizar
 noActualizado=true;
-
-public formUpdateC=new FormGroup({
-  comenActualizado:new FormControl('',[Validators.required]),
-});
 
 listaVoto: VotosInterface[];
 //votoAdd=false;
@@ -324,18 +321,22 @@ console.log('retorno del modal', data.motivo); */
 
 
 //ACTUALIZAR COMENTARIO
-updateComentario(interfaz:any){ 
-  if(interfaz.id==interfaz.id){
-this.noActualizado=false;
+
+  async updateComentario(obj: any) {
+    const modal = await this.modalController.create({
+      component: EditComentarioPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        ObjComentario:obj,
+       ObjUComen: this.userInfo,
+      }
+    });
+    return await modal.present();
   }
-  else{
-    this.noActualizado=true;
-  }
-  console.log('cometario id:', interfaz.id);
+ 
+ // this.firestoreService.updateDoc(interfaz,'Comentarios', interfaz.id);
   
-  this.firestoreService.updateDoc(interfaz,'Comentarios', interfaz.id);
-  
-}
+
 
 
 //VOTOS

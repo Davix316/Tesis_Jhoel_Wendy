@@ -23,7 +23,11 @@ const routes: Routes = [
   {
     path: 'reset-password',
     loadChildren: () => import('./Pages/auth/reset-password/reset-password.module').then( m => m.ResetPasswordPageModule)
+  },  {
+    path: 'edit-comentario',
+    loadChildren: () => import('./Pages/edit-comentario/edit-comentario.module').then( m => m.EditComentarioPageModule)
   },
+
   
 
 

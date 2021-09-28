@@ -78,6 +78,11 @@
                 <i class="fas fa-comment-dots"></i> Chat
               </ion-label>
             </button>
+            <button (click)="updateComentario(item)" *ngIf="item.idUser==codUser" style="background: none;">
+              <ion-label class="btnComm" style="font-size: 12px;">
+                <ion-icon name="create"></ion-icon> Editar
+              </ion-label>
+            </button>
           </ion-col>
 
           <ion-col size="2">

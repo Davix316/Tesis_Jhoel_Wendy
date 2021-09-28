@@ -58,7 +58,7 @@ elemento:any;
       if (user != null) {
         this.idUSender = user.uid;
         this.userLog = user.uid;
-        console.log('user logueado', this.idUSender);
+        //console.log('user logueado', this.idUSender);
 
         ///OBTENER MENSAJES
         this.getChat(this.userLog);
@@ -87,7 +87,7 @@ elemento:any;
     this.chatService.listarChats().orderByChild('idUserSender').equalTo(idUser).on('child_added', (res) => {
       // console.log('real=>', res.val());   
       const resultado=res.val().idUserReciver
-      console.log('reciver:', resultado);
+      //console.log('reciver:', resultado);
       this.chats.push(resultado)
   
 
@@ -97,12 +97,12 @@ elemento:any;
     this.chatService.listarChats().orderByChild('idUserReciver').equalTo(idUser).on('child_added', (snap) => {
       // console.log('real=>', snap.val()); 
       const valor=snap.val().idUserSender; 
-     console.log('sender:', valor);
+     //console.log('sender:', valor);
      this.chats.push(valor)
   
     })
 
-    console.log('chat', this.chats);
+    //console.log('chat', this.chats);
     
    
 
@@ -119,19 +119,19 @@ elemento:any;
         this.chatsUser.push(elemento);
       }
     }
-console.log('ids de usuarios:', this.chatsUser);    
+//console.log('ids de usuarios:', this.chatsUser);    
 
 
       if (res) {
         this.usuarios = res;
-        console.log('usuario=>', this.usuarios);
+        //console.log('usuario=>', this.usuarios);
 
         
         this.chatsUser.forEach(chat => {
           res.forEach(user => {
             if (chat==user.id) {
               this.roomChat.push(user);
-              console.log('chateo con:', user.nombre);             
+             // console.log('chateo con:', user.nombre);             
             }
           });
          
