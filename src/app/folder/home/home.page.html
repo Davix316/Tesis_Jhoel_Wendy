@@ -44,28 +44,42 @@
       <p>{{item.descripcion}}</p>
     </ion-card-content>
 
+
     <ion-row>
       <ion-col size="3">
-        <ion-button class="like" shape="round" size="small" icon-start (click)="addLike(item.id)">
+        <ion-button class="like" shape="round" size="small" icon-start (click)="addLike(item)" >
           <ion-icon name="thumbs-up-outline"></ion-icon>
-          {{item.likes}}
+          <span *ngFor="let voto of VotosPubli">                  
+            <span *ngIf="item.id===voto.idPublicacion" >
+              {{voto.voto.length}}
+            </span>
+          </span>
         </ion-button>
+
       </ion-col>
 
       <ion-col size="3">
-        <ion-button class="dislike" shape="round" size="small" ion-button clear small icon-start >
+        <ion-button class="dislike" shape="round" size="small" ion-button clear small icon-start  (click)="addDislike(item)">
           <ion-icon name="thumbs-down-outline"></ion-icon>
-          <ion-label>{{item.disLikes}}</ion-label>
+          <span *ngFor="let voto of VotosPubli">                  
+            <span *ngIf="item.id===voto.idPublicacion">
+            {{voto.dislike.length}}
+            </span>
+          </span>
         </ion-button>
       </ion-col>
+      
 
       <ion-col size="3">
-        <ion-button class="coments" shape="round" routerLink="/menu/detalle-tarea"  (click)="infoTarea(item)" size="small" clear small icon-start>
+        <ion-button class="coments" shape="round"  size="small" clear small icon-start>
           <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-          <div>
-            <ion-label>3</ion-label>
+          
+          
+            <div>
+              <ion-label >              
+                {{totalComentarios}}
+               </ion-label>           
           </div>
-
         </ion-button>
       </ion-col>
 

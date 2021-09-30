@@ -8,29 +8,30 @@
 </ion-header>
 
 <ion-content>
-  <ion-item >
-    <div slot="end" style="padding:0; margin: 0px" >
-      <button (click)="addFavorite(favorito)"  style="background: none; font-size:25px;">
-        <ion-icon *ngIf="favAdd==false" class="favoritoFalse" name="heart"></ion-icon> 
+  <ion-item>
+    <div slot="end" style="padding:0; margin: 0px">
+      <button (click)="addFavorite(favorito)" style="background: none; font-size:25px;">
+        <ion-icon *ngIf="favAdd==false" class="favoritoFalse" name="heart"></ion-icon>
       </button>
-      <button (click)="deleteFavorito()"  style="background: none; font-size:25px;">
-        <ion-icon *ngIf="favAdd==true" class="favoritoTrue" name="heart"></ion-icon> 
+      <button (click)="deleteFavorito()" style="background: none; font-size:25px;">
+        <ion-icon *ngIf="favAdd==true" class="favoritoTrue" name="heart"></ion-icon>
       </button>
     </div>
-    <ion-card  style="background: rgba(77, 226, 194, 0.623); color: #115571; width: -webkit-fill-available;">
+    <ion-card style="background: rgba(77, 226, 194, 0.623); color: #115571; width: -webkit-fill-available;">
       <ion-card-content>
-        <ion-text class="ion-text-center titulo">{{publiDetalle.titulo}}</ion-text>     
+        <ion-text class="ion-text-center titulo">{{publiDetalle.titulo}}</ion-text>
       </ion-card-content>
     </ion-card>
   </ion-item>
 
 
-  <div class="container">   
+  <div class="container">
 
 
     <p><b>Materia: </b>{{nombreMateria}}</p>
 
-    <ion-label class="ion-text-capitalize"><b>Autor: </b>{{publiDetalle.nameUser}} {{publiDetalle.apellUser}}</ion-label>
+    <ion-label class="ion-text-capitalize"><b>Autor: </b>{{publiDetalle.nameUser}} {{publiDetalle.apellUser}}
+    </ion-label>
     <br>
 
     <div class="ion-text-center">
@@ -47,33 +48,36 @@
 
 
     <ion-segment>
-      <ion-button class="like" shape="round" size="small"  icon-start (click)="btnLike(publiDetalle)">
+      <ion-button class="like" shape="round" size="small" icon-start (click)="btnLike(publiDetalle)">
         <ion-icon name="thumbs-up-outline"></ion-icon>
-        {{publiDetalle.likes}}
+        {{totalLikes}}
       </ion-button>
-     
 
-      <ion-button shape="round" class="dislike"  size="small" ion-button clear small icon-start >
+
+      <ion-button shape="round" class="dislike" size="small" ion-button clear small icon-start
+        (click)="btnDislike(publiDetalle)">
         <ion-icon name="thumbs-down-outline"></ion-icon>
-        <ion-label>{{publiDetalle.disLikes}}</ion-label>
+        <ion-label>
+          {{totaldislike}}
+        </ion-label>
       </ion-button>
-    
 
-      <ion-button shape="round" class="coments" routerLink="/menu/detalle-tarea" size="small"  clear small icon-start>
+
+      <ion-button shape="round" class="coments" routerLink="/menu/detalle-tarea" size="small" clear small icon-start>
         <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
         <div>
-          <ion-label>#</ion-label>
+          <ion-label>{{totalComent}}</ion-label>
         </div>
       </ion-button>
 
-      <ion-button shape="round" (click)="presentPopover($event, publiDetalle)"  size="small" clear small icon-start>
-        <ion-icon name="ellipsis-horizontal"></ion-icon>       
+      <ion-button shape="round" (click)="presentPopover($event, publiDetalle)" size="small" clear small icon-start>
+        <ion-icon name="ellipsis-horizontal"></ion-icon>
       </ion-button>
 
     </ion-segment>
     <hr>
 
-    <app-comentarios ></app-comentarios>
+    <app-comentarios></app-comentarios>
 
     <div class="spacing"></div>
 

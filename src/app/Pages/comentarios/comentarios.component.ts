@@ -117,9 +117,6 @@ votoAdd:any;
 
   ngOnInit() {
 
-    
-    
-
       //INFORMACION DE USUARIO ACTUAL
       this.serviceauth.stateAuth().subscribe(user => {
         if (user != null) {
@@ -162,7 +159,7 @@ votoAdd:any;
    saveComentario(comn: ComentariosInterface){
     try {
 
-      console.log(this.formComentario.value);
+      //console.log(this.formComentario.value);
       if(this.formComentario.valid){
         const idComentario=comn.id || null;
         comn.fecha=this.fechaComen;

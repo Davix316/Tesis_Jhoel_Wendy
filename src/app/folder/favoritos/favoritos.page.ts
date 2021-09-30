@@ -42,7 +42,7 @@ export class FavoritosPage implements OnInit {
       if (user != null) {
         //id de Usuario de fireAuth
         this.idUser = user.uid;
-        console.log('idUser de favortios:', this.idUser);
+        //console.log('idUser de favortios:', this.idUser);
         this.getFavoritos(this.idUser);
       }
     });
@@ -58,7 +58,7 @@ export class FavoritosPage implements OnInit {
       }
       else{
         this.favoritos=false;
-        console.log('no hay lista de favoritos');
+        //console.log('no hay lista de favoritos');
         
       }
 

@@ -105,13 +105,13 @@ this.serviceVoto.getVotos<VotosInterface>('Votos').subscribe(res=>{
     //console.log(this.listaComent);
     this.comentarios0 = false;
     this.VotosTotal.forEach(element => {
-      console.log(element.voto);
+      //console.log(element.voto);
       this.arrayVoto= this.arrayVoto.concat(element.voto)
       this.totalVotos=this.arrayVoto.length
 
     });
     
-    console.log('numero Voto:', this.totalVotos);
+   // console.log('numero Voto:', this.totalVotos);
    
   }
 

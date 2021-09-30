@@ -5,3 +5,9 @@ export interface VotosInterface {
     voto:[ idUser:string]
 }
 
+export interface VotosInterfacePubli {
+    id?: string;
+    idPublicacion: string; 
+    idOwnerPublic:string;
+    voto:[ idUser:string]
+}

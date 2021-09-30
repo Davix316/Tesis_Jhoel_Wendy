@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import { Component, OnInit,  } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 /* import { File } from '@ionic-native/file/ngx';
@@ -19,6 +19,8 @@ import { ModalController } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ReportPublishPage } from '../report-publish/report-publish.page';
 import { EditPublicacionPage } from '../edit-publicacion/edit-publicacion.page';
+import { VotosService } from 'src/app/services/votos.service';
+import { VotosInterfacePubli } from 'src/app/shared/votos';
 
 
 @Component({
@@ -38,44 +40,53 @@ export class DetalleTareaPage implements OnInit {
   nombreTarea: string;
   favorito: FavoritosInterface = {
     id: this.serviceFS.getId(),
-    idUser: '',    
-    nameUser:'',
-    publicacion:{}
+    idUser: '',
+    nameUser: '',
+    publicacion: {}
   };
-infPubli:publiFavoritoInterface[];
+  infPubli: publiFavoritoInterface[];
 
 
   listaMateria: MateriasInterface[];
-favAdd:boolean;
+  favAdd: boolean;
   favoritoAdd = false;
   materiaId: string;
   nombreMateria: string;
-  archivo:string;
+  archivo: string;
 
   listComentarios: ComentariosInterface[];
 
   idUserPubli: string;
-  userInfo:any;
+  userInfo: any;
 
-publiDetalle:PublicacionInterface={
-  id: '',
-  idUser: '',
-  idMateria: '',
-  idCarrera: '',
-  categoria: '',
-  fecha: Date,
-  likes: 0,
-  disLikes:0,
-  titulo: '',
-  descripcion: '',
-  nameUser: '',
-  apellUser: '',
-  file: '',
-  imagen: '',
-  userFoto: '',
-}
+  publiDetalle: PublicacionInterface = {
+    id: '',
+    idUser: '',
+    idMateria: '',
+    idCarrera: '',
+    categoria: '',
+    fecha: Date,
+    likes: 0,
+    disLikes: 0,
+    titulo: '',
+    descripcion: '',
+    nameUser: '',
+    apellUser: '',
+    file: '',
+    imagen: '',
+    userFoto: '',
+  }
 
-listaFavoritos:any;
+  listaFavoritos: any;
+  listaComent: ComentariosInterface[];
+  totalComent: number;
+  votoAdd = false;
+
+  VotosPubli: any;
+  totalLikes: number;
+  totaldislike: number;
+
+
   constructor(
     private domSanit: DomSanitizer,
     private router: Router,
@@ -91,19 +102,19 @@ listaFavoritos:any;
     public modalController: ModalController,
     private firestore: AngularFirestore,
     private fireService: FirestoreService,
-  ) 
-  {
+    private serviceVoto: VotosService,
+  ) {
     const navigation = this.router.getCurrentNavigation();
     this.tareas = navigation?.extras?.state?.value;
-   console.log(this.tareas);
-   
-        
+    console.log(this.tareas.id);
+
+
     //Si no hay ID de tarea retorna
     if (typeof this.tareas === 'undefined') {
       this.router.navigate(['/menu/home']);
-    }    
-    //
-   
+    }
+
+
 
 
   }
@@ -119,12 +130,13 @@ listaFavoritos:any;
         this.idUser = user.uid;
         this.getuser(this.idUser);
         // console.log(this.idUser);
-        this.getFavorito(this.idUser); 
-        
+        this.getFavorito(this.idUser);
+
       }
     });
-this.getPublicacion(this.tareas.id);
-
+    this.getPublicacion(this.tareas.id);
+    this.numComentarios(this.tareas.id);
+    this.getVoto(this.tareas.id);
 
   }
 
@@ -132,24 +144,24 @@ this.getPublicacion(this.tareas.id);
 
   getPublicacion(idTarea) {
     this.fireService.getDoc<PublicacionInterface>('Publicaciones', idTarea).subscribe(res => {
-      if(res){
-        this.publiDetalle=res;
+      if (res) {
+        this.publiDetalle = res;
 
         //console.log('esta es la publicacion con detalle:', this.publiDetalle);
         this.tareaId = this.publiDetalle.id;
         this.nombreTarea = this.publiDetalle.titulo;
         this.materiaId = this.publiDetalle.idMateria;
         this.idUserPubli = this.publiDetalle.idUser;
-        this.archivo=this.publiDetalle.file;          
-    
+        this.archivo = this.publiDetalle.file;
+
         //TRAER EL NOMBRE DE LA MATERIA
-        this.getMateria(this.materiaId);   
-        
+        this.getMateria(this.materiaId);
+
       }
-      else{
-        this.AlertPubliDelete('Publicación no disponible');    
+      else {
+        this.AlertPubliDelete('Publicación no disponible');
       }
-   
+
     });
   }
 
@@ -159,10 +171,10 @@ this.getPublicacion(this.tareas.id);
   public getuser(uid: string) {
     const docRef = this.firestore.collection('Usuarios').doc(uid);
     docRef.get().toPromise().then((doc) => {
-      if (doc.exists){
+      if (doc.exists) {
         //console.log('infoUser', doc.data());
         this.userInfo = doc.data();
-       
+
       } else {
         console.log('"no existe el usuario"');
       }
@@ -173,19 +185,19 @@ this.getPublicacion(this.tareas.id);
   }
 
   //GUARDAR FAVORITOS
-  addFavorite(favor:FavoritosInterface) {
-    const publicI:  publiFavoritoInterface={
+  addFavorite(favor: FavoritosInterface) {
+    const publicI: publiFavoritoInterface = {
       id: this.publiDetalle.id,
-      titulo:this.publiDetalle.titulo,
-      nameMateria:this.nombreMateria,
+      titulo: this.publiDetalle.titulo,
+      nameMateria: this.nombreMateria,
       file: this.archivo,
     }
 
     try {
-      favor.id=this.serviceFS.getId();
-      favor.idUser=this.idUser;
-      favor.nameUser=this.userInfo.nombre;
-      favor.publicacion=[publicI]      
+      favor.id = this.serviceFS.getId();
+      favor.idUser = this.idUser;
+      favor.nameUser = this.userInfo.nombre;
+      favor.publicacion = [publicI]
       this.serviceFS.saveFavorito('Favoritos', favor, this.idUser, publicI);
       this.favoritoAdd = true;
     } catch (error) {
@@ -195,15 +207,15 @@ this.getPublicacion(this.tareas.id);
 
   }
   //ELIMINAR DE LA LISTA D FAVORITO
-deleteFavorito() {
-  const publicI:  publiFavoritoInterface={
-    id: this.publiDetalle.id,
-    titulo:this.publiDetalle.titulo,
-    nameMateria:this.nombreMateria,
-    file: this.archivo,
+  deleteFavorito() {
+    const publicI: publiFavoritoInterface = {
+      id: this.publiDetalle.id,
+      titulo: this.publiDetalle.titulo,
+      nameMateria: this.nombreMateria,
+      file: this.archivo,
+    }
+    this.fireService.deleteFav('Favoritos', this.idUser, publicI);
   }
-  this.fireService.deleteFav('Favoritos', this.idUser,publicI);
-}
 
 
   //ABRIR ARCHIVO
@@ -236,7 +248,7 @@ deleteFavorito() {
         const idCom = this.listComentarios[i].id;
         console.log('idComentario:', idCom);
         this.fireStore.deleteDoc('Comentarios', idCom);
-        this.fireStore.deleteDoc('Votos',idCom)
+        this.fireStore.deleteDoc('Votos', idCom)
 
 
       }
@@ -245,12 +257,12 @@ deleteFavorito() {
 
   }
 
-  async presentAlertConfirm(texto:string) {
+  async presentAlertConfirm(texto: string) {
     const alert = await this.alertController.create({
       cssClass: '.alerClass',
       header: 'Alerta!',
       message: texto,
-      mode:"ios",
+      mode: "ios",
       buttons: [
         {
           text: 'Cancelar',
@@ -278,7 +290,7 @@ deleteFavorito() {
 
   //MOSTRAR POPOVER PARA ELIMINAR Y REPORTAR PUBLICACION
 
-  async presentPopover(ev: any, publicacion:any) {
+  async presentPopover(ev: any, publicacion: any) {
 
     const popover = await this.popoverController.create({
       component: PopinfoComponent,
@@ -301,11 +313,11 @@ deleteFavorito() {
       if (data.item == "Eliminar") {
         this.presentAlertConfirm('Seguro desea Eliminar esta Publicación?')
       }
-      else if(data.item=="Reportar"){
-        this.presentModal(publicacion);        
+      else if (data.item == "Reportar") {
+        this.presentModal(publicacion);
 
       }
-      else if(data.item=="Editar"){
+      else if (data.item == "Editar") {
         this.ModalEditPubli(publicacion);
       }
     } catch (error) {
@@ -315,81 +327,126 @@ deleteFavorito() {
   }
 
 
-  async presentModal(infoPubli:any) {
+  async presentModal(infoPubli: any) {
     const modal = await this.modalController.create({
       component: ReportPublishPage,
       cssClass: 'my-custom-class',
       componentProps: {
-       ObjPublicacion:infoPubli,
-       ObjUReport: this.userInfo,
+        ObjPublicacion: infoPubli,
+        ObjUReport: this.userInfo,
       }
     });
     return await modal.present();
   }
 
-//LIKE
-btnLike(Infpubli:any){
-  this.serviceFS.saveLike('Publicaciones', Infpubli.id,1);
-  console.log('add');
-  
-}
-
-
-//EDIT PUBLICACION
-async ModalEditPubli(infoPublicacion:any){
-  const modal = await this.modalController.create({
-    component: EditPublicacionPage,
-    cssClass: 'my-custom-class',
-    componentProps: {
-      ObjectPubli:infoPublicacion,
-      ObjectUser:this.userInfo,
+  btnLike(itemPubli: any) {
+    const idUser = this.idUser;
+    const votos = {
+      id: this.fireService.getId(),
+      idPublicacion: itemPubli.id,
+      idOwnerPublic: itemPubli.idUser,
+      voto: [idUser],
+      dislike: [],
     }
-  });
-  return await modal.present();
-}
+    console.log(votos);
+    this.serviceVoto.saveVoto(itemPubli.id, votos, idUser);
+    this.serviceVoto.deleteDislike(itemPubli.id, idUser);
+    this.votoAdd = true;
+  }
 
-//ALERT PUBLICACION NO DISPONIBLE
-async AlertPubliDelete(texto:string) {
-  const alert = await this.alertController.create({
-    cssClass: 'my-custom-class',
-    header: 'Alert',
-    subHeader: '(⌣́_⌣̀)',
-    message: texto,    
-    mode:"ios",
-    buttons: [
-      {
-        text: 'OK',
-        handler: () => {
-          this.router.navigate(["/menu/home"]);
-         
-        }
+  btnDislike(infPubli: any) {
+    const idUser = this.idUser
+    const votos = {
+      id: this.fireService.getId(),
+      idPublicacion: infPubli.id,
+      idOwnerPublic: infPubli.idUser,
+      voto: [],
+      dislike: [idUser],
+    }
+    this.serviceVoto.saveDislike(infPubli.id, votos, idUser)
+    this.serviceVoto.deleteVoto(infPubli.id, idUser);
+
+  }
+  //Count Votos en las publicaciones
+  getVoto(idPubli: string) {
+    this.fireService.getDoc('Votos', idPubli).subscribe(res => {
+      if (res) {
+        this.VotosPubli = res;
+        this.totalLikes = this.VotosPubli.voto.length;
+        this.totaldislike = this.VotosPubli.dislike.length;
+
+
       }
-    ]
-  });
+    })
 
-  await alert.present();
-
-  const { role } = await alert.onDidDismiss();
-  console.log('onDidDismiss resolved with role', role);
-}
-
-//LEER SI ES FAVORITO
-
-getFavorito(idUsuario){
-  this.fireStore.getFavorito(idUsuario).subscribe(res=>{
-  if(res){
-   this.listaFavoritos=res
-  const search=this.listaFavoritos.publicacion.find(ref=>ref.id===this.tareas.id);
-  if(search){
-this.favAdd=true
-  }else{
-    this.favAdd=false
   }
- 
+
+
+
+  //EDIT PUBLICACION
+  async ModalEditPubli(infoPublicacion: any) {
+    const modal = await this.modalController.create({
+      component: EditPublicacionPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        ObjectPubli: infoPublicacion,
+        ObjectUser: this.userInfo,
+      }
+    });
+    return await modal.present();
   }
-  }) 
-}
+
+  //ALERT PUBLICACION NO DISPONIBLE
+  async AlertPubliDelete(texto: string) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Alert',
+      subHeader: '(⌣́_⌣̀)',
+      message: texto,
+      mode: "ios",
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            this.router.navigate(["/menu/home"]);
+
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
+
+  //LEER SI ES FAVORITO
+
+  getFavorito(idUsuario) {
+    this.fireStore.getFavorito(idUsuario).subscribe(res => {
+      if (res) {
+        this.listaFavoritos = res
+        const search = this.listaFavoritos.publicacion.find(ref => ref.id === this.tareas.id);
+        if (search) {
+          this.favAdd = true
+        } else {
+          this.favAdd = false
+        }
+
+      }
+    })
+  }
+
+  //Contar Comentarios
+  numComentarios(idPubli: string) {
+    this.fireService.getCollection<ComentariosInterface>('Comentarios').subscribe(res => {
+      this.listaComent = res.filter(e => idPubli == e.idPublicacion);
+      this.totalComent = this.listaComent.length;
+
+    })
 
 
+  }
 
 }

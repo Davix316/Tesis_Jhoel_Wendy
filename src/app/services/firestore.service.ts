@@ -111,16 +111,12 @@ export class FirestoreService {
   }
 
   
-  //LIKES EN LAS PUBLICACIONES
-  saveLike(coleccion: string, idP: string, like:number){
+  
+  saveDislike(coleccion: string, idP: string, dislike:number,){
     const votoref=this.firestoreS.collection(coleccion).doc(idP);
-    const res= votoref.update({
-      likes: firebase.firestore.FieldValue.increment(like)
+    votoref.update({
+      disLikes: firebase.firestore.FieldValue.increment(dislike)
     })
-  }
-
-  saveDislike(){
-
   }
 
   
