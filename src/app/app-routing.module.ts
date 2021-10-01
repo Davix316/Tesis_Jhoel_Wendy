@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'edit-comentario',
     loadChildren: () => import('./Pages/edit-comentario/edit-comentario.module').then( m => m.EditComentarioPageModule)
   },
+  {
+    path: 'informacion',
+    loadChildren: () => import('./componets/informacion/informacion.module').then( m => m.InformacionPageModule)
+  },
 
   
 

@@ -25,14 +25,21 @@
   <hr>
         <ion-list >
           <ion-item  lines="none" class="logout" type="button">
-            <ion-icon slot="start" name="log-out-outline"></ion-icon>
+            <ion-icon slot="start" name="log-out"></ion-icon>
             <a (click)="onlogout()" >Salir</a>
   
-          </ion-item>
+          </ion-item>        
   
         </ion-list>
+      
        
       </ion-content>
+      <ion-footer>
+        <ion-item lines="none"  type="button" class="ion-float-right">
+          <ion-icon name="information-circle"></ion-icon>
+          <a routerLink="/informacion" style="text-decoration: none;">Info.</a>    
+        </ion-item>
+      </ion-footer>
     </ion-menu>
   
   
