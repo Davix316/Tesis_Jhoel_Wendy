@@ -17,7 +17,7 @@ export class InformacionPage implements OnInit {
 
   async infoOption1() {
     const comentarPT="Comentar Publicaciones"
-    const comentarPD="Ingresa en cada publicacion escribe un comentario, habilitas mostrar comentarios y observa el comentario publicado"
+    const comentarPD="Ingresa en cada publicación  escribe un comentario, habilitas mostrar comentarios y observa el comentario publicado"
     
     const actionSheet = await this.actionSheetController.create({
       header: comentarPT,
@@ -66,7 +66,7 @@ export class InformacionPage implements OnInit {
     
     const actionSheet = await this.actionSheetController.create({
       header: 'Calificar Publicaciones',
-      subHeader: 'El usuario puede dar like o dislike en cada publicacion, los likes no cuentan en la acumulacion de puntos del estudiante',
+      subHeader: 'El usuario puede dar like o dislike en cada publicación , los likes no cuentan en la acumulación  de puntos del estudiante',
      mode:'ios',
       buttons: [
          {
@@ -87,7 +87,7 @@ export class InformacionPage implements OnInit {
    
     const actionSheet = await this.actionSheetController.create({
       header: 'Visualizar materias',
-      subHeader: 'El listado de materias se presenta según  la carrera con la que haya registrado el estudiante, estas a su vez se pueden filtrar por semestres',
+      subHeader: 'El listado de materias se presenta según  la carrera registrada por el estudiante, estas a su vez se pueden filtrar por semestres',
      mode:'ios',
       buttons: [
          {
@@ -108,7 +108,7 @@ export class InformacionPage implements OnInit {
     
     const actionSheet = await this.actionSheetController.create({
       header: 'Visualizar tareas, cuestionarios, proyectos, etc. dentro de cada materia',
-      subHeader: 'El usuario puede ingresar dentro de cada materia y visualizar las publicaciones ordenadas por categorias segun las indicadas anteriormente',
+      subHeader: 'El usuario puede ingresar dentro de cada materia y visualizar las publicaciones ordenadas por categorías según las indicadas anteriormente',
      mode:'ios',
       buttons: [
          {
@@ -130,7 +130,7 @@ export class InformacionPage implements OnInit {
     
     const actionSheet = await this.actionSheetController.create({
       header: 'Descargar archivos',
-      subHeader: 'Una tarea publicada debe incluir un archivo sea este pdf, word o excel, estos archivos pueden ser descargados en el teléfono',
+      subHeader: 'Una tarea publicada debe incluir un archivo sea pdf, word o excel, estos archivos pueden ser descargados en el teléfono',
      mode:'ios',
       buttons: [
          {
@@ -174,7 +174,7 @@ export class InformacionPage implements OnInit {
    
     const actionSheet = await this.actionSheetController.create({
       header: 'Agregar una publicación  a favoritos.',
-      subHeader: 'Una publicación se le agrega a favoritos accediendo al detalle de la publicación y dando clic sobre el icono -heart- y se elimina dando nuevamente clic en el mismo icono o desde el menu en la opcion favoritos',
+      subHeader: 'Una publicación se le agrega a favoritos accediendo al detalle de la publicación y dando clic sobre el icono -heart- y se elimina dando nuevamente clic en el mismo icono o ingresando a favoritos desde el menú',
      mode:'ios',
       buttons: [
          {
@@ -196,7 +196,7 @@ export class InformacionPage implements OnInit {
    
     const actionSheet = await this.actionSheetController.create({
       header: 'Reportar Comentarios o Publicaciones',
-      subHeader: 'Un estudiante puede reportar un comentario ubicándose en él, dando clic en el icono … seleccionando la opción reportar y llenar el formulario del motivo del reporte.',
+      subHeader: 'Un estudiante puede reportar un comentario ubicándose en él, dando clic en el icono (...) seleccionando la opción reportar y llenar el formulario del motivo del reporte.',
      mode:'ios',
       buttons: [
          {
@@ -240,7 +240,7 @@ export class InformacionPage implements OnInit {
     
     const actionSheet = await this.actionSheetController.create({
       header: 'Ver mis puntos',
-      subHeader: 'Puedes ver tus puntos acumulados desde la opción mis puntos en el perfil personal ',
+      subHeader: 'Puedes ver tus puntos acumulados desde el perfil personal en la opción mis puntos',
      mode:'ios',
       buttons: [
          {
