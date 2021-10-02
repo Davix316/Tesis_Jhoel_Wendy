@@ -1,0 +1,7 @@
+{
+  "name": "PK-tesis",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
