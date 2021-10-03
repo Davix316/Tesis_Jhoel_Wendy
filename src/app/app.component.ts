@@ -1,18 +1,53 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { FireauthService } from './services/fireauth.service';
+
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  public appPages = [
-    { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
+  active = '';
+  option = [
+    {
+      name: 'Publicaciones',
+      link: '/menu/home',
+      icon: 'newspaper',
+    },
+    {
+      name: 'Materias',
+      link: '/menu/materias',
+      icon: 'book'
+    },
+    {
+      name: 'Favoritos',
+      link: '/menu/favoritos',
+      icon: 'heart'
+    },
+    {
+      name: 'Chat',
+      link: '/menu/chat',
+      icon: 'chatbubble'
+    },
+    {
+      name: 'Perfil',
+      link: '/menu/perfil',
+      icon: 'person'
+    },
+    
+ 
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+  nombreUser:string;
+  constructor(private serviceauth: FireauthService, public router: Router) {}
+
+
+  
+
+
+
+  
+
 }

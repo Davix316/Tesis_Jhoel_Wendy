@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Publicaciones</ion-title>
+
+    <!-- Hamburger -->
+    <ion-buttons slot="start">
+      <ion-menu-button id="main-content" autoHide="false"></ion-menu-button>
+
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content *ngIf="publicaciones0">
+      <label> No hay publicaciones en su Carrera</label>
+    </ion-card-content>
+  </ion-card>
+  <ion-card *ngFor="let item of publicaciones">
+
+    <ion-item>
+      <ion-avatar>
+        <img [src]="item.userFoto">
+      </ion-avatar>
+      <small><b>{{item.nameUser}} {{item.apellUser}}</b> </small>
+      <ion-text slot="end" color="secondary" class="fechaPubli"> {{item.fecha.toDate() | date:'MMM d, y'}} <br>
+        {{item.fecha.toDate()|date:'h:mm a'}}</ion-text>
+    </ion-item>
+
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <div class="ion-text-center" (click)="infoTarea(item)"><b>{{item.titulo}}</b></div>
+      </ion-col>
+
+    </ion-row>
+
+
+    <div class="text-center" style="font-size: 42px; color:#000000 ;" (click)="infoTarea(item)">
+      <i class="far fa-file-alt"></i>
+    </div>
+
+    <ion-card-content>
+      <p>{{item.descripcion}}</p>
+    </ion-card-content>
+
+
+    <ion-row>
+      <ion-col size="3">
+        <ion-button class="like" shape="round" size="small" icon-start (click)="addLike(item)" >
+          <ion-icon name="thumbs-up-outline"></ion-icon>
+          <span *ngFor="let voto of VotosPubli">                  
+            <span *ngIf="item.id===voto.idPublicacion" >
+              {{voto.voto.length}}
+            </span>
+          </span>
+        </ion-button>
+
+      </ion-col>
+
+      <ion-col size="3">
+        <ion-button class="dislike" shape="round" size="small" ion-button clear small icon-start  (click)="addDislike(item)">
+          <ion-icon name="thumbs-down-outline"></ion-icon>
+          <span *ngFor="let voto of VotosPubli">                  
+            <span *ngIf="item.id===voto.idPublicacion">
+            {{voto.dislike.length}}
+            </span>
+          </span>
+        </ion-button>
+      </ion-col>
+      
+
+      <ion-col size="3">
+        <ion-button class="coments" shape="round"  size="small" clear small icon-start>
+          <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
+          
+          
+            <div>
+              <ion-label >              
+                {{totalComentarios}}
+               </ion-label>           
+          </div>
+        </ion-button>
+      </ion-col>
+
+
+      <ion-col size="3">
+        <ion-button class="eyeInf" shape="round" (click)="infoTarea(item)"  size="small"  ion-button clear small icon-start >
+          <ion-icon name="eye-outline"></ion-icon>
+        </ion-button>
+
+      </ion-col>
+    </ion-row>
+  </ion-card>
+<div style="margin-bottom: 50px;"></div>
+  <ion-fab *ngIf="totalVotos>=50" horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button class="addPubli" routerLink="/menu/new-publicacion">
+      <ion-icon style=" color: #000000;" name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

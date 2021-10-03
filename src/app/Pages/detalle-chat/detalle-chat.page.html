@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+   
+      <ion-avatar slot="start"  >
+        <img [src]="infUser.foto">
+      </ion-avatar>
+      <ion-title >
+        <ion-label class="ion-text-start">
+          {{ infUser.nombre}}
+          <p><small class="text-muted">En linea</small></p>
+        </ion-label>
+      </ion-title>    
+
+
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content class="bg" >
+
+
+  <div class="chat-container" id="app-mensajes" >
+
+    <div *ngFor="let message of chat">    
+      <div *ngIf="message.idUserSender==userLog && message.idUserReciver==infUser.id
+       || message.idUserReciver==userLog && message.idUserSender==infUser.id">
+       <div class="chat-bubble"  [ngClass]="{'idUserSender': message.idUserSender==userLog, 'idUserReciver': message.idUserSender!=userLog}" >
+      <h6 class="texto">{{ message.texto }}</h6>
+      <p>{{message.fecha |date:'h:mm a'}} </p>
+    </div>
+  </div>
+    </div>
+
+  </div>
+
+  <!-- <ion-card>           
+    <ion-card-content >
+      {{detalleComentario.texto}}
+    </ion-card-content>
+  </ion-card> -->
+  <div class="chat-controls" >
+    <form [formGroup]="FormChat" (ngSubmit)="saveMessage()">
+    <ion-row class="bg-white">
+      <ion-col size="9" class="ion-no-padding">
+        <ion-list lines="none" class="ion-no-padding">
+
+          <ion-item >
+            <ion-input placeholder="Escribe un mensaje" type="text" formControlName="texto" required ></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col size="3" class="ion-no-padding">
+        <p class="ion-text-center icon-controls controlbutton">
+          <button >
+          <ion-icon style="color: #90edd9 !important" smode="ios" name="send" class="text-primary"></ion-icon>
+        </button>
+         
+        </p>
+      </ion-col>
+    </ion-row>
+  </form>
+  </div>
+
+  
+</ion-content>
+

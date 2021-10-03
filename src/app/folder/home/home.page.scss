@@ -1,0 +1,63 @@
+ion-content{
+  
+  --background: #115571;
+  --background: linear-gradient( #115571 0%, #88aab8 100%); 
+  //--background: url('https://i.pinimg.com/736x/ce/b8/bf/ceb8bf1ff43f24a32215fe81aef6e9da.jpg') no-repeat center center / cover;
+
+  
+}
+small{
+  text-transform: capitalize;
+}
+.fechaPubli{
+  font-size: 10px;
+}
+
+ion-button{
+border-radius: 10px;
+}
+
+
+
+p {
+  max-height: 2.5rem;/*line-height por nº de líneas*/
+  overflow: hidden;
+}
+p::after {
+  content:'...';
+  color: blue;
+  position: absolute;
+  top:2rem ;/*max-height menos 1 line-height*/
+  right: 1.5rem;
+
+}
+
+
+a{
+  text-decoration: none;
+  position: absolute;
+  bottom:0 ;
+  right: 0;
+}
+
+
+ion-fab-button{
+  --color: black;
+}
+
+ion-card{
+  border-radius: 20px;
+}
+.addPubli{
+  --background: #fdcd53;
+}
+ion-button{
+  color: #ffffff;
+  --background: #115571;
+
+}
+
+.votoAdd{  
+    color: black;
+    background: #90edd9;  
+}

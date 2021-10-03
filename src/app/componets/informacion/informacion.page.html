@@ -1,0 +1,205 @@
+
+<ion-content>
+  <div class="container">
+    <div class="ion-text-center">
+      <img src="https://firebasestorage.googleapis.com/v0/b/tesis-3fc38.appspot.com/o/infoApp%2Flogo.png?alt=media&token=94f95225-ca69-400a-ae87-0915a3aef01b" alt="">
+
+    </div>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Acerca de:</ion-card-subtitle>
+        <ion-card-title ><b>PEER-KNOW</b></ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content class="ion-text-justify">
+        PEER-KNOW es una aplicación móovil para estudiantes de la ESFOT aquí pueden 
+        subir tareas resueltas o no, publicar cuestionarios, 
+        realizar preguntas, contribuir con respuestas dentro de cada publicacion y establecer una comunicación privada entre 
+        estudiantes.
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-card>
+      <ion-item>
+        <ion-icon name="person-circle"></ion-icon>
+        <ion-label><b>Modo de Ingreso</b></ion-label>
+        <ion-label  slot="end">
+          <img src="https://firebasestorage.googleapis.com/v0/b/tesis-3fc38.appspot.com/o/infoApp%2Ficon.png?alt=media&token=35ac15dc-8302-49f4-bfbb-4a27781082fc" width="30px" alt="">
+        </ion-label>
+      </ion-item>
+    
+      <ion-card-content class="ion-text-justify">
+        El estudiante que ingrese por primera luego de registrarse, no puede publicar ningún contenido, el estudiante únicamente puede comentar en las publicaciones realizadas por los administradores desde la página web.
+      </ion-card-content>
+    </ion-card>
+    
+    <ion-card>
+      <ion-item>
+        <img src="https://cdn-icons-png.flaticon.com/512/3240/3240848.png" width="35px" alt="">
+        <ion-label><b>Entonces que puedo hacer?</b></ion-label>
+     
+      </ion-item>
+
+      <ion-item  class="ion-activated" (click)="infoOption1()">
+        <ion-icon name="chatbubble"></ion-icon>
+        <ion-label>Comentar publicaciones</ion-label>
+        <ion-note slot="end" >
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-note>
+      </ion-item>
+    
+      <ion-item class="ion-activated" (click)="infoOption2()">
+        <ion-icon name="star"></ion-icon>
+        <ion-label>Calificar  comentarios </ion-label>
+        <ion-note slot="end" >
+          <ion-icon name="chevron-forward-outline"></ion-icon>      
+        </ion-note>
+      </ion-item>
+      
+      <ion-item class="ion-activated" (click)="infoOption3()">
+        <ion-icon name="thumbs-up"></ion-icon>
+        <ion-label>Calificar publicaciones</ion-label>
+        <ion-note slot="end" >
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-note>
+      </ion-item>
+    
+      <ion-item class="ion-activated" (click)="infoOption4()">
+        <ion-icon name="albums"></ion-icon>
+        <ion-label>Visualizar materias</ion-label>
+        <ion-note slot="end" >
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-note>
+      </ion-item>
+
+      <ion-item class="ion-activated" (click)="infoOption5()">
+        <ion-icon name="book"></ion-icon>
+        <ion-label>Ver tareas, cuestionarios, proyectos </ion-label>
+        <ion-note slot="end" >
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-note>
+      </ion-item>
+
+      <ion-item class="ion-activated" (click)="infoOption6()">
+        <ion-icon name="arrow-down-circle"></ion-icon>
+        <ion-label>Descargar archivos</ion-label>
+        <ion-note slot="end" >
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-note>
+      </ion-item>
+    
+      <ion-item class="ion-activated" (click)="infoOption7()">
+        <ion-icon name="chatbubble-ellipses"></ion-icon>
+        <ion-label>Chatear</ion-label>
+        <ion-note slot="end" >
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-note>
+      </ion-item>
+  
+
+      <ion-item class="ion-activated" (click)="infoOption8()">
+        <ion-icon name="heart"></ion-icon>
+        <ion-label>Agregar a favoritos</ion-label>
+        <ion-note slot="end" >
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-note>
+      </ion-item >
+
+    
+
+      <ion-item class="ion-activated" (click)="infoOption9()">
+        <ion-icon name="hammer"></ion-icon>
+        <ion-label>Reportar comentarios y...</ion-label>
+        <ion-note slot="end" >
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-note>
+      </ion-item>
+
+      <ion-item class="ion-activated" (click)="infoOption10()">
+        <ion-icon name="cloud-upload"></ion-icon>
+        <ion-label>Subir mis tareas</ion-label>
+        <ion-note slot="end" >
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-note>
+      </ion-item>
+
+      <ion-item class="ion-activated" (click)="infoOption11()">
+        <ion-icon name="star-half"></ion-icon>
+        <ion-label>Ver mis puntos</ion-label>
+        <ion-note slot="end" >
+          <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-note>
+      </ion-item>    
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-icon name="menu"></ion-icon>
+        <ion-label><b>Más opciones</b></ion-label>
+      </ion-item>
+    
+      <ion-card-content class="ion-text-justify">
+        <div class="d-flex align-items-start">
+          <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Menú</button>
+            <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Ver comentarios</button>
+            <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Filtrar Materias</button>
+            <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Editar Perfil</button>
+            <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-add" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Publicar tareas</button>
+            <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-edit" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Editar, eliminar, reportar</button>
+
+          </div>
+          <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <p>El menú de opciones esta disponible desde cualquier página deslizando el dedo de izquierda a derecha.</p>
+            <img src="https://firebasestorage.googleapis.com/v0/b/tesis-3fc38.appspot.com/o/infoApp%2Fmenu.PNG?alt=media&token=e05b4d33-6977-4715-b23c-da155a9f76ed" alt="" width="100px">
+            </div>
+            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"> 
+              <p>Los comentarios en cada publicacion se los puede visualizar deslizando el toggle</p>
+            <img src="https://firebasestorage.googleapis.com/v0/b/tesis-3fc38.appspot.com/o/infoApp%2Fcoment.png?alt=media&token=3e474cb6-d573-465f-8207-b0281f2034be" alt="" >
+            </div>
+            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+              <p>La lista de materias de las puede filtrar por semestres del 1 al 5.</p>
+              <img src="https://firebasestorage.googleapis.com/v0/b/tesis-3fc38.appspot.com/o/infoApp%2FfiltrarMat.png?alt=media&token=b92cbfac-6574-4519-bcb1-3eb0ba398eb0" alt="" width="100px">
+            </div>
+            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+              <p>Puede editar el perfil del usuario desde la opción editar.</p>
+              <img src="https://firebasestorage.googleapis.com/v0/b/tesis-3fc38.appspot.com/o/infoApp%2Fedit.png?alt=media&token=2cd7e7aa-c0ac-43ca-b12a-d7e2a5585888" alt="" width="70%">
+              
+              <img src="https://firebasestorage.googleapis.com/v0/b/tesis-3fc38.appspot.com/o/infoApp%2Fperfiled.PNG?alt=media&token=9f37af1c-7a09-4911-8795-ac13c03d2e4c" alt="" width="70%">
+            </div>
+
+            <div class="tab-pane fade" id="v-pills-add" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+              <p>Una vez el usuario haya reunido 50 votos sumando todos los comentarios se le habilitará  un botón de color amarillo en la pagina de inicio de la aplicación</p>
+              <img src="https://firebasestorage.googleapis.com/v0/b/tesis-3fc38.appspot.com/o/infoApp%2FaddTarea.PNG?alt=media&token=07464461-99af-4d6f-b741-6f52c1e0130e" alt="" width="50%">
+            </div>
+
+            <div class="tab-pane fade" id="v-pills-edit" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+              <p>Un comentario de lo puede editar, eliminar o reportar del mismo modo se lo hace una publicación</p>
+              <img src="https://firebasestorage.googleapis.com/v0/b/tesis-3fc38.appspot.com/o/infoApp%2Feditar%20comentario.PNG?alt=media&token=591c2c98-4c68-4489-96f8-5037e041953a" alt="" width="50%">
+            </div>
+
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-footer>  
+      <div class="ion-text-center" >
+        <h6 color="dark">Realizado por Jhoel Amagua y Wendy Soto </h6>
+        <ion-note>-Octubre 2021-</ion-note>  
+        <img src="https://firebasestorage.googleapis.com/v0/b/tesis-3fc38.appspot.com/o/infoApp%2FiconP.png?alt=media&token=5dee9411-1a67-4b6f-87ca-a8d19322cf16" alt="" width="30px"> 
+      </div>    
+          
+    </ion-footer>
+
+
+
+   
+
+    
+
+  </div>
+
+
+</ion-content>

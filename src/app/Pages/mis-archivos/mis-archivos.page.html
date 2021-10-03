@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Archivo Subidos</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="archivos0==true">
+    <ion-card-content>
+      <label>No hay archivos Subidos</label>
+    </ion-card-content>
+    
+  </ion-card>
+  <ion-card *ngFor="let item of misArchivos">
+
+    <ion-grid>
+       <ion-row >
+        <ion-col size="2" class="ion-align-self-center" (click)="infoTarea(item)"  style="font-size: 42px; color:#ffffff ;">
+          <i class="far fa-file-alt"></i>
+        </ion-col>
+        <ion-col size="6"  class="ion-text-center"  (click)="infoTarea(item)">
+          <h5>{{item.titulo}}</h5>  
+        </ion-col >
+
+        <ion-col size="4" class="ion-align-self-center"  >
+          <ion-button  color="light"  (click)="ModalEditPubli(item)">
+            <ion-icon name="create" style="font-size: 20px;"></ion-icon>
+          </ion-button>
+          <ion-button color="light" (click)="presentAlertConfirm(item)" >
+            <ion-icon name="trash" style="font-size: 20px;"></ion-icon>                 
+          </ion-button>
+         
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+</ion-card>
+
+
+
+
+</ion-content>
+

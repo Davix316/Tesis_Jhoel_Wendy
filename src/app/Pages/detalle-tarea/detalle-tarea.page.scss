@@ -1,0 +1,66 @@
+
+
+ion-icon{
+  --color-checked:red;
+}
+h2{
+  font-weight: bold;
+}
+
+input{
+  border: none;
+}
+
+.titulo{
+  font-weight: bold;
+}
+
+
+.spacing{
+
+  height: 40px;
+
+  }
+
+  .favoritoFalse{
+    color: rgba(83, 81, 87, 0.397);
+  }
+  .favoritoTrue{
+color: rgba(255, 0, 0, 0.616);
+  }
+.deletePubli{
+  color: rgb(245, 50, 50);
+}
+
+.popover-content {
+  background: #222;
+}
+
+/* Works - pass "my-custom-class" in cssClass to increase specificity */
+.alerClass .popover-content {
+  background: rgb(212, 65, 65);
+}
+
+.alerClass {
+  background: #dd8b8b !important;
+  color: #ffffff;
+}
+
+
+button{
+  background-color: #115571;
+    color: #ffffff;
+    height: 30px;
+    border-radius: 8px;
+}
+
+ion-button{
+  background: none;
+}
+ion-button{
+  --color: white;
+  --background: #115571;
+}
+
+
+

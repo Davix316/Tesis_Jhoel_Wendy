@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar>
+    
+    <ion-buttons slot="start">
+    
+      <ion-back-button slot="start"></ion-back-button>
+      <ion-title>Puntuación</ion-title>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<!-- Content -->
+
+<ion-row>
+
+  <ion-col>
+    <div style="text-align: center; bottom: 0; ">
+      <img [src]="foto" alt="foto" class="perfil" > 
+    </div>
+    <div style="text-align: center;">
+      <ion-label class="ion-text-capitalize">{{nombre}} {{apellido}}</ion-label> 
+    </div>
+  </ion-col> 
+</ion-row>
+
+<ion-list-header>
+  <h2><b>Votos Obtenidos: </b>{{totalVotos}}</h2>
+  <ion-icon name="star" style="font-size: 30px; color: rgb(221, 221, 77);"></ion-icon>
+</ion-list-header>
+
+<ion-card style="background: #90edd9 !important; color: #000000 !important; border-radius: 10px;">
+  <ion-card-content >
+  <div *ngIf="totalVotos<50 || comentarios0==true">
+    <ion-item >     
+      <img src="/assets/icon/lost.png" width="20%">
+   
+    <ion-label>
+     
+    <p style="font-weight: bold;" >Se necesita <span style="font-size: 20px;">50</span> votos </p> 
+    <p>Aún no es Momento de Publicar</p>
+    </ion-label>
+  </ion-item>  
+ 
+  </div>
+
+
+  <div *ngIf="totalVotos>=50">
+    <ion-item>     
+        <img src="/assets/icon/win.png" width="20%">
+            
+      <ion-label>
+         <p style="font-weight: bold;" >Alcansaste los <span style="font-size: 20px;">50</span> votos </p> 
+        <p>Es momento de Publicar</p> 
+      </ion-label>
+      
+      <button  class="text-center" size="default" routerLink="/menu/new-publicacion">
+        <ion-icon name="add-outline" class="iconb"></ion-icon>
+      </button>
+    </ion-item>  
+
+  </div>
+</ion-card-content>
+</ion-card>
+
+
+<ion-grid >
+
+  <ion-row *ngFor="let item of listaComent">    
+
+    <ion-col size="2" >
+      <span *ngFor="let voto of VotosTotal">
+        <span *ngIf="item.id==voto.idComentario">
+     <h4>{{voto.voto.length}}</h4> 
+    </span>
+  </span>
+    </ion-col>
+
+    <ion-col size="3" >
+      <img [src]="getImage()" alt="frog"> 
+    </ion-col>
+
+    <ion-col size="7" >
+      <div *ngFor="let publi of publicaciones">
+        <h4 *ngIf="item.idPublicacion==publi.id" class="ion-text-capitalize"  (click)="infoTarea(publi)">{{publi.titulo}}</h4> 
+      </div>
+      <p >{{item.texto}}</p>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+</ion-content>

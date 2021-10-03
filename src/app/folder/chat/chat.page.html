@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Chat</ion-title>
+
+    <!-- Hamburger -->
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div lines="none" class="app-list">
+
+    
+
+
+<ion-card *ngFor="let user of roomChat" (click)="infoUserChat(user)">
+  <ion-item >
+    <ion-avatar slot="start">
+      <img [src]="user.foto">
+    </ion-avatar>
+    <ion-label>    
+      <h2>{{ user.nombre}}</h2>     
+     
+      <!-- <p>El ultimo texto aqui</p> -->
+      <p item-end class="text-ellipsis">14:00 PM</p>
+    </ion-label>
+  </ion-item>
+
+</ion-card>
+  </div>
+
+
+
+</ion-content>

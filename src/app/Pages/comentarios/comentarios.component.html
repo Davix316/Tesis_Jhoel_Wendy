@@ -1,0 +1,148 @@
+<div *ngIf="comentarios0==true " class="warning ion-text-center"> Aun no hay comentarios en esta Publicación. Se el
+  primero en comentarla</div>
+
+<ion-row>
+  <ion-col size="8">
+    <small *ngIf="toggleValue==false">Ver Comentarios</small>
+    <small *ngIf="toggleValue==true">Ocultar Comentarios</small>
+  </ion-col>
+  <ion-col size="4">
+
+    <ion-toggle [(ngModel)]="toggleValue" color="secondary"></ion-toggle>
+  </ion-col>
+</ion-row>
+
+<div id="app-comentarios">
+  <div *ngIf="toggleValue==true">
+    <div *ngFor="let item of listacoment">
+      <ion-list>
+        <ion-row>
+          <ion-col>
+            <ion-chip [ngClass]="{'userLog': codUser==item.idUser}">
+              <ion-avatar>
+                <img [src]="item.fotoUser">
+              </ion-avatar>
+              <ion-label>{{item.nameUser}} {{item.apellUser}}</ion-label>
+              <ion-note></ion-note>
+            </ion-chip>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <!-- Actualizar comentario -->
+          <ion-label class="ion-text-wrap comentario">{{item.texto}} &nbsp;</ion-label>
+
+          <!--        <ion-input class="ion-text-wrap comentario" value= [disabled]="noActualizado">&nbsp;</ion-input>
+ -->
+          <small>({{item.fecha.toDate()|date:'M/d/yy, h:mm a'}})</small>
+        </ion-row>
+
+
+        <ion-row class="ion-text-center">
+
+
+          <ion-col size="4">
+            <button (click)="votar(item)" style="background: none;">
+              <ion-label class="btnComm" style="font-size: 12px;"> 
+
+                <span *ngFor="let voto of listaVoto">                  
+                  <span *ngIf="item.id==voto.idComentario">  
+                                 
+                    <i class="fas fa-star" [ngClass]="{'votoAdd':voto.voto.includes(codUser)}"></i>
+                    {{voto.voto.length}}
+                  </span>
+                </span>
+
+                &nbsp; Votar
+              </ion-label>
+            </button>
+          </ion-col>
+
+
+          <ion-col size="4">
+            <span *ngFor="let voto of listaVoto">
+              <span *ngIf="item.id==voto.idComentario">
+                <ion-label class="btnComm " style="font-size: 12px;" (click)="deleteVoto(item.id)" [hidden]=votos0
+                  *ngIf="voto.voto.length > 0 && voto.voto.includes(codUser) ">
+                  <i class="fas fa-star-half-alt"></i> Quitar voto
+                </ion-label>
+              </span>
+            </span>
+          </ion-col>
+
+
+
+          <ion-col size="2">
+            <button (click)="infoUserChat(item)" *ngIf="item.idUser!=codUser" style="background: none;">
+              <ion-label class="btnComm" style="font-size: 12px;">
+                <i class="fas fa-comment-dots"></i> Chat
+              </ion-label>
+            </button>
+            <button (click)="updateComentario(item)" *ngIf="item.idUser==codUser" style="background: none;">
+              <ion-label class="btnComm" style="font-size: 12px;">
+                <ion-icon name="create"></ion-icon> Editar
+              </ion-label>
+            </button>
+          </ion-col>
+
+          <ion-col size="2">
+            <button (click)="presentPopover($event, item)" style="background: none;">
+              <ion-label class="btnComm" style="font-size: 12px;">
+                <i class="fas fa-ellipsis-h"></i>
+              </ion-label>
+            </button>
+          </ion-col>
+
+
+
+        </ion-row>
+      </ion-list>
+
+    </div>
+  </div>
+
+</div>
+
+
+<form [formGroup]="formComentario" (ngSubmit)="saveComentario(formComentario.value)">
+  <div class="fixed">
+
+    <ion-item lines="none">
+
+      <ion-chip style="width: -webkit-fill-available;">
+        <ion-input type="text" formControlName="texto" placeholder="Escribe un comentario..." required></ion-input>
+      </ion-chip>
+      <button class="controlbutton">
+        <ion-icon mode="ios" name="send" class="text-primary" style="color: #90edd9 !important;"></ion-icon>
+      </button>
+    </ion-item>
+
+
+
+
+    <!--   <ion-fab horizontal="start" vertical="bottom" slot="fixed" >
+    <ion-fab-button color>
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button color="light">
+        <ion-icon name="attach"></ion-icon>
+      </ion-fab-button>
+
+      <ion-fab-button color="light">
+        <ion-button  (click)="imagePicker()"><ion-icon  name="image-outline"></ion-icon></ion-button>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab> -->
+    <!-- <div class="mb-3">
+    <label for="formFileSm" class="form-label">Small file input example</label>
+    <input class="form-control form-control-sm" id="formFileSm" type="file">
+  </div> -->
+
+
+
+
+  </div>
+
+
+</form>

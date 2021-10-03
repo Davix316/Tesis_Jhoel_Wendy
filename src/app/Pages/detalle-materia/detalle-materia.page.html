@@ -1,0 +1,245 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> {{materiaName}}</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment [(ngModel)]="segment" mode="ios" style="background: #b0bdba65;">
+
+    <ion-segment-button value="first">
+      <ion-label>Task</ion-label>
+      <ion-icon name="book"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="second">
+      <ion-label>Query</ion-label>
+      <ion-icon name="help-outline"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="third">
+      <ion-label>Form</ion-label>
+      <ion-icon name="clipboard"></ion-icon>
+    </ion-segment-button>
+
+    <ion-segment-button value="four">
+      <ion-label>Project</ion-label>
+      <ion-icon name="analytics"></ion-icon>
+    </ion-segment-button>
+
+  </ion-segment>
+
+
+  <!-- TAREAS -->
+
+  <div [ngSwitch]="segment">
+    <div *ngSwitchCase="'first'">
+     
+      <ion-card *ngIf="tareas0">
+        <ion-card-content>
+          <label>No hay Tareas Publicadas</label>
+        </ion-card-content>
+        
+      </ion-card>
+
+
+
+      <ng-container *ngFor="let item of listaTareas">
+        <ion-card  *ngIf="item.categoria=='Tarea'">
+          
+            <ion-grid>
+            <ion-row >
+
+              <ion-col class="ion-align-self-center">
+                <div class="text-center" style="font-size: 42px; color:#ffffff ;" >
+                  <i class="far fa-file-alt"></i>
+                </div>
+              </ion-col>
+              <ion-col size="8" class="ion-text-center">
+                <h5>{{item.titulo}}</h5>
+                <ion-label>{{item.fecha.toDate() | date:'EEEE, MMMM d, y'}}</ion-label>
+                
+                 
+                             
+  
+  
+              </ion-col>
+              <ion-col size="2" class="ion-align-self-center">
+                
+                  <ion-button  color="light"  routerLink="/menu/detalle-tarea" (click)="infoTarea(item)">
+                    <ion-icon name="arrow-forward" style="font-size: 20px;"></ion-icon>
+                  </ion-button>
+                  <ion-button color="light" (click)="openFile(item.file)" >
+                    <ion-icon name="cloud-download" style="font-size: 20px;"></ion-icon>                 
+                  </ion-button>
+
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+         
+        </ion-card>
+      </ng-container>
+      
+
+    </div>
+
+<!-- PREGUNTAS -->
+<div *ngSwitchCase="'second'">
+     
+  <ion-card *ngIf="tareas0">
+    <ion-card-content>
+      <label>No hay Preguntas</label>
+    </ion-card-content>
+    
+  </ion-card>
+
+
+
+  <ng-container *ngFor="let item of listaTareas">
+    <ion-card  *ngIf="item.categoria=='Pregunta'">
+      
+        <ion-grid>
+        <ion-row >
+
+          <ion-col class="ion-align-self-center">
+            <div class="text-center" style="font-size: 42px; color:#ffffff ;" >
+              <i class="far fa-file-alt"></i>
+            </div>
+          </ion-col>
+          <ion-col size="8" class="ion-text-center">
+            <h5>{{item.titulo}}</h5>
+            <ion-label>{{item.fecha.toDate() | date:'EEEE, MMMM d, y'}}</ion-label>
+            
+             
+                         
+
+
+          </ion-col>
+          <ion-col size="2" class="ion-align-self-center">
+            
+              <ion-button  color="light"  routerLink="/menu/detalle-tarea" (click)="infoTarea(item)">
+                <ion-icon name="arrow-forward" style="font-size: 20px;"></ion-icon>
+              </ion-button>
+              <ion-button color="light" (click)="openFile(item.file)" >
+                <ion-icon name="cloud-download" style="font-size: 20px;"></ion-icon>                 
+              </ion-button>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+     
+    </ion-card>
+  </ng-container>
+  
+
+</div>
+
+    <!-- CUESTIONARIOS -->
+    <div *ngSwitchCase="'third'">
+
+      
+        <ion-card *ngIf="cuestionarios0">
+          <ion-card-content>
+            <label>No hay Cuestionarios Publicados</label>
+          </ion-card-content>
+          
+        </ion-card>
+
+
+
+        <ng-container *ngFor="let item of listaTareas">
+          <ion-card  *ngIf="item.categoria=='Cuestionario'">
+            
+            <ion-grid>
+              <ion-row >
+  
+                <ion-col class="ion-align-self-center">
+                  <div class="text-center" style="font-size: 42px; color:#ffffff ;" >
+                    <i class="far fa-file-alt"></i>
+                  </div>
+                </ion-col>
+                <ion-col size="8" class="ion-text-center">
+                  <h5>{{item.titulo}}</h5>
+                  <ion-label>{{item.fecha.toDate() | date:'EEEE, MMMM d, y'}}</ion-label>
+                  
+                   
+                               
+    
+    
+                </ion-col>
+                <ion-col size="2" class="ion-align-self-center">
+                  
+                    <ion-button  color="light"  routerLink="/menu/detalle-tarea" (click)="infoTarea(item)">
+                      <ion-icon name="arrow-forward" style="font-size: 20px;"></ion-icon>
+                    </ion-button>
+                    <ion-button color="light" (click)="openFile(item.file)" >
+                      <ion-icon name="cloud-download" style="font-size: 20px;"></ion-icon>                 
+                    </ion-button>
+  
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card>
+        </ng-container>
+        
+       
+
+    </div>
+
+
+    <!-- PROYECTOS -->
+
+    <div *ngSwitchCase="'four'">
+      <ion-card *ngIf="proyectos0">
+        <ion-card-content>
+          <label>No hay Proyectos Publicados</label>
+        </ion-card-content>
+        
+      </ion-card>
+
+
+
+      <ng-container *ngFor="let item of listaTareas">
+        <ion-card  *ngIf="item.categoria=='Proyecto'">
+         
+          <ion-grid>
+            <ion-row >
+
+              <ion-col class="ion-align-self-center">
+                <div class="text-center" style="font-size: 42px; color:#ffffff ;" >
+                  <i class="far fa-file-alt"></i>
+                </div>
+              </ion-col>
+              <ion-col size="8" class="ion-text-center">
+                <h5>{{item.titulo}}</h5>
+                <ion-label>{{item.fecha.toDate() | date:'EEEE, MMMM d, y'}}</ion-label>
+                
+                 
+                             
+  
+  
+              </ion-col>
+              <ion-col size="2" class="ion-align-self-center">
+                
+                  <ion-button  color="light"   (click)="infoTarea(item)">
+                    <ion-icon name="arrow-forward" style="font-size: 20px;"></ion-icon>
+                  </ion-button>
+                  <ion-button color="light" (click)="openFile(item.file)" >
+                    <ion-icon name="cloud-download" style="font-size: 20px;"></ion-icon>                 
+                  </ion-button>
+
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ng-container>
+      
+
+    </div>
+
+  </div>
+
+
+</ion-content>

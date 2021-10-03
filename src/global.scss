@@ -24,3 +24,23 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+//@import './theme/chappionic.scss';
+:root {
+    /* Set the background of the entire app */
+  
+  
+    /* Set the font family of the entire app */
+    --ion-font-family: -apple-system, BlinkMacSystemFont, "Raleway", "Roboto", sans-serif;
+  }
+  ion-toolbar{
+    --background: radial-gradient(circle, rgba(136,170,184,1) 0%, rgba(17,85,113,1) 100%);
+    color: #ffffff !important;
+  }
+  .my-popover-class{
+    --backdrop-opacity:0.5;
+  }
+  ion-card{
+    border-radius: 20px;
+  }

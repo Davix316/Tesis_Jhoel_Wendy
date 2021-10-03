@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Perfil</ion-title>
+
+    <!-- Hamburger -->
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Content -->
+  <div class="container">
+    <div class="ion-float-right" style="position: fixed; right: 3%;top: 9%;">
+      <ion-text (click)="EditUser(user)">
+        <ion-icon name="create"></ion-icon>Editar
+      </ion-text>
+    </div>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      <img [src]="user.foto" alt="" >
+
+
+    </ion-row>
+
+    <ion-row class="bnt-perfil">
+      <ion-col>
+        <ion-card class="ion-text-center buttonCard" style=" background: #91c6de;">
+          <a routerLink="/menu/chat" class="ion-text-center">
+            <i class="fas fa-comment"></i>
+            <br>
+            <ion-label>Mensajes</ion-label>
+          </a>
+        </ion-card>
+      </ion-col>
+
+      <ion-col>
+
+        <ion-card class="ion-text-center buttonCard" style=" background: darkseagreen;">
+          <a routerLink="/menu/mis-archivos" class="ion-text-center ">
+            <i class="fas fa-file-alt"></i>
+            <br>
+            <ion-label>Archivos subidos</ion-label>
+
+          </a>
+        </ion-card>
+      </ion-col>
+
+      <ion-col>
+        <ion-card (click)="puntuacionUser(user)" class="ion-text-center buttonCard" style="background: #debc68">
+          <a class="ion-text-center">
+            <i class="fas fa-star"></i>
+            <br>
+            <ion-label>Puntuación</ion-label>
+          </a>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card>
+    <ion-card-header>
+      <ion-chip>
+        <ion-label>{{usuario}}</ion-label>
+      </ion-chip>
+
+      <ion-card-title class="ion-text-capitalize">{{user.nombre}} {{user.apellido}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Telefono</ion-label>
+        <ion-note slot="end">{{user.telefono}}</ion-note>
+      </ion-item>
+      <ion-item>
+        <ion-label>Num.Unico</ion-label>
+        <ion-note slot="end">{{user.numUnico}}</ion-note>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label>Carrera</ion-label>
+        <ion-note slot="end">{{user.carreraNombre}}</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Semestre</ion-label>
+        <ion-note slot="end">{{user.semestreRef}}</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Clave</ion-label>
+        <a (click)="mostrarContrasena(input)" name="password-checked">
+          <ion-icon [hidden]="!show" name="eye-outline"></ion-icon>
+          <ion-icon [hidden]="show" name="eye-off-outline"></ion-icon>
+        </a>
+      </ion-item>
+      <ion-input disabled=true #input slot="end" type="password" value="{{user.password}}"></ion-input>
+
+
+
+
+    </ion-card-content>
+
+  </ion-card>
+
+
+</ion-content>

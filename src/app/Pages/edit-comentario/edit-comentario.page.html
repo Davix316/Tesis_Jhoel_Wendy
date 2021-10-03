@@ -1,0 +1,18 @@
+<ion-item style="background: none;">
+  <ion-title>Editar</ion-title>
+  <button slot="end" (click)="salirModal()" style="background: none; color: blue;"> <b>Cancelar</b> </button>
+</ion-item>
+
+<ion-content>
+  <div class="container">
+    <form [formGroup]="formEditComentario" (ngSubmit)="saveComentario(formEditComentario.value)">
+ <ion-card style="background: #e0e0e0;">
+    <ion-textarea rows="3"  value={{ObjComentario.texto}} type="text"  formControlName="texto" required></ion-textarea>
+  </ion-card>
+<div class="ion-text-center">
+    <ion-button type="submit"  shape="round" style="--background:#115571 ;">Actualizar</ion-button>
+  </div>
+</form>
+  </div>
+
+</ion-content>

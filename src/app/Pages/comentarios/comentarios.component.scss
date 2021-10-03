@@ -1,0 +1,44 @@
+
+
+
+.comentario{
+  font-size:12px ;
+  }
+
+  .fixed {
+    right: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+   }
+
+   .btnComm{
+    font-size:11px ;
+   }
+   .warning{
+    font-size:10px ;
+   }
+   small{
+     color: blue;
+   }
+
+ion-toggle{
+  color: rgba(77, 226, 194, 0.623);
+}
+
+.userLog{
+  background:rgba(77, 226, 194, 0.623) ;
+}
+
+.controlbutton{
+  background: none; 
+  font-size: 30px;
+  color: #90edd9 !important;
+}
+button{
+  background: none;
+}
+.votoAdd{
+  color: rgb(252, 219, 31);
+}

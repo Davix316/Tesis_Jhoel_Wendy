@@ -18,19 +18,25 @@ import { PreviewAnyFile } from '@ionic-native/preview-any-file/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { File } from '@ionic-native/file/ngx';
 
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
-   //importar librerias
-   AngularFireAuthModule,
-   AngularFireDatabaseModule,
-   AngularFireModule.initializeApp(environment.firebaseConfig),
-   AngularFireStorageModule,
-   FormsModule,
-   ReactiveFormsModule
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    //importar librerias
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    AngularFirestore,PreviewAnyFile, ImagePicker, File
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
