@@ -44,7 +44,7 @@ export class InformacionPage implements OnInit {
     const actionSheet = await this.actionSheetController.create({
       header: 'Calificar comentarios',
       subHeader: 'Votar o calificar el comentario de un compañero es importante, asi un estudiante va acumulando puntos.'+
-      '   Se Requiere acumular 50 puntos para empezar a publicar tareas. Un estudiante solo podra votar una sola vez en cada comentario',
+      '   Se Requiere acumular 50 puntos para empezar a publicar tareas. Un estudiante solo puede votar una sola vez en cada comentario',
      mode:'ios',
       buttons: [
          {
@@ -66,7 +66,7 @@ export class InformacionPage implements OnInit {
     
     const actionSheet = await this.actionSheetController.create({
       header: 'Calificar Publicaciones',
-      subHeader: 'El usuario puede dar like o dislike en cada publicación , los likes no cuentan en la acumulación  de puntos del estudiante',
+      subHeader: 'El usuario puede dar like o dislike en cada publicación, los likes no cuentan en la acumulación  de puntos del estudiante',
      mode:'ios',
       buttons: [
          {
@@ -196,7 +196,7 @@ export class InformacionPage implements OnInit {
    
     const actionSheet = await this.actionSheetController.create({
       header: 'Reportar Comentarios o Publicaciones',
-      subHeader: 'Un estudiante puede reportar un comentario ubicándose en él, dando clic en el icono (...) seleccionando la opción reportar y llenar el formulario del motivo del reporte.',
+      subHeader: 'Un estudiante puede reportar un comentario ubicándose en él, dando clic en el icono (...) seleccionando la opción reportar y llenando el formulario del motivo del reporte.',
      mode:'ios',
       buttons: [
          {
