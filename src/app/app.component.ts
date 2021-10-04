@@ -44,8 +44,6 @@ export class AppComponent {
   constructor(private serviceauth: FireauthService, public router: Router) {}
 
 
-  
-
 
 
   

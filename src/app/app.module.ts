@@ -35,7 +35,7 @@ import { File } from '@ionic-native/file/ngx';
     ReactiveFormsModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AngularFirestore,PreviewAnyFile, ImagePicker, File
+    AngularFirestore,PreviewAnyFile, ImagePicker, File, 
   ],
   bootstrap: [AppComponent],
 })
