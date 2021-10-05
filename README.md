@@ -36,7 +36,7 @@ La estructura que tienen los datos alojados en Firebase se ven de la siguiente m
 El sistema web se encuentra almacenado en el hosting de Firebase en la siguiente url: 
 :pushpin: https://tesis-3fc38.web.app/  o su última version en la rama web de este repositorio. 
 
-:iphone: La aplicacion móvil disponible para la plataforma de Android  se encuentra almacenada en su última versión en la rama votos de este repositorio
+:iphone: La aplicacion móvil disponible para la plataforma de Android  se encuentra almacenada en su última versión en la rama despliegue de este repositorio
 | **SplashScreen** :pager: | Sistema :computer: | 
 | ------------- | ------------- | 
 |![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/splash.png) |![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/webLogin.jpg)|
