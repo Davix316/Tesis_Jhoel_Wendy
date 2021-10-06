@@ -16,6 +16,9 @@ import {AngularFireStorage} from '@angular/fire/storage';
 
 export class ProfileComponent implements OnInit{
  
+  mostrar: Boolean = false;
+  mensaje_enlace: String = 'Editar Información';
+
   fotopath = '';
   fotoUser = '';
 
@@ -72,6 +75,16 @@ export class ProfileComponent implements OnInit{
         
       })
 
+    }
+
+    mostrarOcultar(){
+      if(this.mostrar){
+        this.mensaje_enlace = "Editar Información";
+        this.mostrar = false;
+      }else{
+        this.mensaje_enlace = "Ocultar Edición";
+        this.mostrar = true;
+      }
     }
 
     getAdmin(){

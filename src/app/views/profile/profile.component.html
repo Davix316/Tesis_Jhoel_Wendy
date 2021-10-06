@@ -1,108 +1,161 @@
 <div class="animated fadeIn">
   <div>
+
     <div class="card">
       <div class="card-header" style="text-align: center;">
-        <h2><i class="cil-user"></i> PERFIL</h2>
+        <h2><i class="cil-user"></i> Información de Perfil</h2>
       </div>
-      <div class="card-body">
-
-        <form class="mt-3 col-md-12" (ngSubmit)="onSave(adminForm.value)" [formGroup]="adminForm">
+      <div class="card-body" style="padding-bottom: 0px;">
+        <div class="card-body" style="padding-bottom: 0px;">
           <div class="row">
-            <div class="col-md-3">
-              <label>Foto: </label>
-              <img [src]="fotoUser" alt="Suba una foto" width="100%">
-                  <input type="file" class="form-control" formControlName="foto"  placeholder="Suba una foto"
-                  value="{{fotoUser}}" accept=".png ,.jpg" (change)="uploadFoto($event)" >
-                  <div class="spinner-border" role="status" *ngIf="progreso==true">
-                    <span class="visually-hidden" >Cargando...</span>
-                  </div>
-                  <input #FotoUrlUser  type="hidden" [value]="urlFoto |async" >
+            <div class="col-md-4">
+              <div class="card" style="width: 80%;">
+                <img class="card-img-top" [src]="fotoUser" alt="Sin foto">
+              </div>
             </div>
-
-            <div class="col-md-9">
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label>Nombres: </label>
-                  <input type="text" class="form-control" placeholder="{{admin.nombre}}" formControlName="nombre"
-                   #nombreUsuario>                
-                </div>
-
-               <div class="form-group col-md-6">
-                  <label>Apellidos: </label>
-                  <input type="text" class="form-control" placeholder="{{admin.apellido}}" formControlName="apellido"
-                    #apellidoUsuario>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label>Email: </label>
-                  <input type="text" class="form-control" placeholder="{{admin.email}}" formControlName="email" disabled>
-                  <span>El email no puede ni debe ser cambiado ya que es único.</span>
-                </div>
-
-                <div class="form-group col-md-6">
-                  <label>Carrera: </label>
-                  <select id="carreraNombre" class="form-control" formControlName="carreraNombre" #carreraUsuario>
-                    <option value="TS- Agua y Saneamiento Ambiental">TSASA - Agua y Saneamiento Ambiental</option>
-                    <option value="TS- Desarrollo de Software">TSDS - Desarrollo de Software</option>
-                    <option value="TS- Redes y Telecomunicaciones">TSRT - Redes y Telecomunicaciones</option>
-                    <option value="TS- Electromecánica">TSEM - Electromecánica</option>
-                  </select>
-                  <input type="text" placeholder="{{admin.carreraNombre}}" disabled style="width: 100%;">
-                </div>
-              </div>
-
-              <div class="form-row">
-               
-                <div class="form-group col-md-6">
-                  <label>Constraseña: </label>
-                  <input type="password" class="form-control" placeholder="*********" formControlName="password" disabled>
-                  <span>Para cambiar su contraseña diríjase al Login; opción restablecer contraseña.</span>
-                </div>
-
-                <div class="form-group col-md-6">
-                  <label>Numero único EPN: </label>
-                  <input type="text" class="form-control" placeholder="{{admin.numUnico}}" formControlName="numUnico"
-                   #numUnicoUsuario>
-                </div>
-    
-              </div>
-
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label>Semestre de referencia: </label>
-                  <select id="semestreRef" class="form-control" formControlName="semestreRef"
-                    #semestreUsuario>
-                    <option value="1">1ro</option>
-                    <option value="2">2do</option>
-                    <option value="3">3ro</option>
-                    <option value="4">4to</option>
-                    <option value="5">5to</option>
-                    <option value="6">Egresado o Graduado</option>
-                  </select>
-                  <input type="text" placeholder="{{admin.semestreRef}} Semestre" disabled style="width: 100%;">
-                </div>
-                <div class="form-group col-md-6">
-                  <label>Teléfono o Celular: </label>
-                  <input type="number" class="form-control" placeholder="{{admin.telefono}}" formControlName="telefono"
-                    #telefonoUsuario>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <input type="text" class="form-control" value="Administrador" formControlName="rol"
-                  disabled>
-                </div>
-              </div>
-
+            <div class="col-md-4">
+              <ul class="list-group list-group-flush">
+            
+                <li class="list-group-item">
+                  <h5>Nombre Completo: </h5><h6>{{admin.nombre}} {{admin.apellido}}</h6>
+                </li>
+                <li class="list-group-item">
+                  <h5>Correo: </h5><h6>{{admin.email}}</h6>
+                </li>
+                <li class="list-group-item">
+                  <h5>Carrera y semestre: </h5><h6>{{admin.carreraNombre}} / {{admin.semestreRef}} semestre</h6>
+                </li>
+              </ul>
+            </div>
+            <div class="col-md-4">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+                  <h5>Código Único: </h5><h6>{{admin.numUnico}}</h6>
+                </li>
+                <li class="list-group-item">
+                  <h5>Teléfono: </h5><h6>{{admin.telefono}}</h6>
+                </li>
+              </ul>
             </div>
           </div>
+        </div>
+        <br>
 
-          <button type="submit" class="btn bg-success btn-block text-light" style="width: 30%; margin: auto;">Guardar</button>
-        </form>
       </div>
     </div>
+
+    <div style="text-align: center; padding-bottom: 20px;">
+      <button class="btn btn-info" >
+        <a href="/#/perfil" (click)="mostrarOcultar()" style="color: white; font-size: large;">{{mensaje_enlace}}</a>
+      </button>
+    </div>
+
+    <div *ngIf="mostrar">
+      <div class="card" >
+        <div class="card-header" style="text-align: center;">
+          <h2><i class="cil-pencil"></i> Editar Perfil</h2>
+        </div>
+        <div class="card-body">
+  
+          <form class="mt-3 col-md-12" (ngSubmit)="onSave(adminForm.value)" [formGroup]="adminForm">
+            <div class="row">
+              <div class="col-md-3">
+                <label>Foto: </label>
+                <img [src]="fotoUser" alt="Suba una foto" width="100%">
+                    <input type="file" class="form-control" formControlName="foto"  placeholder="Suba una foto"
+                    value="{{fotoUser}}" accept=".png ,.jpg" (change)="uploadFoto($event)" >
+                    <div class="spinner-border" role="status" *ngIf="progreso==true">
+                      <span class="visually-hidden" >Cargando...</span>
+                    </div>
+                    <input #FotoUrlUser  type="hidden" [value]="urlFoto |async" >
+              </div>
+  
+              <div class="col-md-9">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Nombres: </label>
+                    <input type="text" class="form-control" placeholder="{{admin.nombre}}" formControlName="nombre"
+                     #nombreUsuario>                
+                  </div>
+  
+                 <div class="form-group col-md-6">
+                    <label>Apellidos: </label>
+                    <input type="text" class="form-control" placeholder="{{admin.apellido}}" formControlName="apellido"
+                      #apellidoUsuario>
+                  </div>
+                </div>
+  
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Email: </label>
+                    <input type="text" class="form-control" placeholder="{{admin.email}}" formControlName="email" disabled>
+                    <span>El email no puede ni debe ser cambiado ya que es único.</span>
+                  </div>
+  
+                  <div class="form-group col-md-6">
+                    <label>Carrera: </label>
+                    <select id="carreraNombre" class="form-control" formControlName="carreraNombre" #carreraUsuario>
+                      <option value="TS- Agua y Saneamiento Ambiental">TSASA - Agua y Saneamiento Ambiental</option>
+                      <option value="TS- Desarrollo de Software">TSDS - Desarrollo de Software</option>
+                      <option value="TS- Redes y Telecomunicaciones">TSRT - Redes y Telecomunicaciones</option>
+                      <option value="TS- Electromecánica">TSEM - Electromecánica</option>
+                    </select>
+                    <input type="text" placeholder="{{admin.carreraNombre}}" disabled style="width: 100%;">
+                  </div>
+                </div>
+  
+                <div class="form-row">
+                 
+                  <div class="form-group col-md-6">
+                    <label>Constraseña: </label>
+                    <input type="password" class="form-control" placeholder="*********" formControlName="password" disabled>
+                    <span>Para cambiar su contraseña diríjase al Login; opción restablecer contraseña.</span>
+                  </div>
+  
+                  <div class="form-group col-md-6">
+                    <label>Numero único EPN: </label>
+                    <input type="text" class="form-control" placeholder="{{admin.numUnico}}" formControlName="numUnico"
+                     #numUnicoUsuario>
+                  </div>
+      
+                </div>
+  
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label>Semestre de referencia: </label>
+                    <select id="semestreRef" class="form-control" formControlName="semestreRef"
+                      #semestreUsuario>
+                      <option value="1">1ro</option>
+                      <option value="2">2do</option>
+                      <option value="3">3ro</option>
+                      <option value="4">4to</option>
+                      <option value="5">5to</option>
+                      <option value="6">Egresado o Graduado</option>
+                    </select>
+                    <input type="text" placeholder="{{admin.semestreRef}} Semestre" disabled style="width: 100%;">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>Teléfono o Celular: </label>
+                    <input type="number" class="form-control" placeholder="{{admin.telefono}}" formControlName="telefono"
+                      #telefonoUsuario>
+                  </div>
+                </div>
+  
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <input type="text" class="form-control" value="Administrador" formControlName="rol"
+                    disabled>
+                  </div>
+                </div>
+  
+              </div>
+            </div>
+  
+            <button type="submit" class="btn bg-success btn-block text-light" style="width: 30%; margin: auto;">Guardar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    
   </div>
 </div>

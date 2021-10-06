@@ -16,11 +16,11 @@ export class CheckloginGuard implements CanActivate {
       map(auth=> {
         if(!auth){
           this.router.navigate(['/login']);
-          console.log('autenticado:', false);
+          //console.log('autenticado:', false);
         return false;
         }
         else{
-          console.log('autenticado:', true);
+          //console.log('autenticado:', true);
           return true;
         }
       })
