@@ -9,7 +9,6 @@ import { AlertController } from '@ionic/angular';
 import { FireauthService } from 'src/app/services/fireauth.service';
 import { UserInterface} from 'src/app/shared/user';
 import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/storage';
-import { ToastController } from '@ionic/angular';
 import { MateriasService } from 'src/app/services/materias.service';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -51,12 +50,12 @@ export class RegisterPage implements OnInit {
     semestreRef: new FormControl('',[Validators.required]),
     foto: new FormControl('',[Validators.required]),
     carreraNombre:new FormControl(''),
+    privacidad:new FormControl(null ,[Validators.required]),
   });
 
 // VIEW PASSWORD
 
 show: boolean;
-
 
   constructor(
     public authService: FireauthService,
@@ -118,7 +117,7 @@ getCarrera(){
 this.materiasServ.getCarreras<Carreras>('Carreras').subscribe(res=>{
 if(res){
   this.listacarrera=res;
-  console.log('carreras',this.listacarrera);
+  //console.log('carreras',this.listacarrera);
 }
 });
 }
@@ -179,6 +178,10 @@ tarea.percentageChanges().subscribe((porcentaje) => {
       this.show=false;
       console.log(this.show);
     }
+  }
+
+  checked(){
+    console.log('Nuevo estado:' );
   }
 
 }

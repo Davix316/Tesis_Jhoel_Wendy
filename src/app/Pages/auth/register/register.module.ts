@@ -17,6 +17,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RegisterPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [RegisterPage]
+  declarations: [RegisterPage,]
 })
 export class RegisterPageModule {}
