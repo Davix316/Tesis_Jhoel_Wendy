@@ -97,7 +97,7 @@ Despliegue del sistema web en el Hosting de Firebase.
 ### 8. Instalación
 | **Sistema Web** 💻 | **Aplicación móvil** 📱 | 
 | ------------- | ------------- |
-|Clonar este repositorio  `git clone https://github.com/wendysoto/Tesis_Jhoel_Wendy.git`| Descargar de la Play Store o clonar este repositorio  `git clone https://github.com/wendysoto/Tesis_Jhoel_Wendy.git`|
+|Clonar este repositorio  `git clone https://github.com/wendysoto/Tesis_Jhoel_Wendy.git`| Descargar de la [Play Store](https://play.google.com/store/apps/details?id=peerknow.tareasApp) o clonar este repositorio  `git clone https://github.com/wendysoto/Tesis_Jhoel_Wendy.git`|
 |Ubicarse en la rama main  `git checkout nombreRama`|Ubicarse en la rama chats  `git checkout nombreRama`|
 |Instalar dependencias  `npm install`|Instalar dependencias  `npm install`|
 |Ejecutar proyecto  `ng serve -o`|Ejecutar proyecto  `ionic serve -l`|
