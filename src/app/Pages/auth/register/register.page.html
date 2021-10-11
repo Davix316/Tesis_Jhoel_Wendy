@@ -135,7 +135,9 @@
         <ion-row>
           <ion-col class="ion-text-center">
             <ion-checkbox color="primary" formControlName="privacidad"></ion-checkbox>
-            <a routerLink="/terminos"> Aceptar términos y Condiciones</a>
+            <ion-label>
+            <a (click)="presentModal()" ><ion-text color="primary"><u> Aceptar términos y Condiciones</u></ion-text> </a>
+          </ion-label>
             <br>
             <br>
             <ion-button type="submit" expand="block" [disabled]="myFormUser.get('privacidad').value==false">Guardar

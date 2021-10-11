@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-terminos',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TerminosPage implements OnInit {
 
-  constructor() { }
+  constructor( private modalController: ModalController,) { }
 
   ngOnInit() {
   }
+
+//CERRAR MODAL
+salirModal(){
+  this.modalController.dismiss();
+    }
 
 }

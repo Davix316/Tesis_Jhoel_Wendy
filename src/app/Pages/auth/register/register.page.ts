@@ -12,7 +12,8 @@ import { AngularFireStorage, AngularFireStorageModule } from '@angular/fire/stor
 import { MateriasService } from 'src/app/services/materias.service';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-
+import { ModalController } from '@ionic/angular';
+import { TerminosPage } from 'src/app/componets/terminos/terminos.page';
 
 
 //INTERFAZ DE CARRERAS
@@ -63,6 +64,7 @@ show: boolean;
     private alertController: AlertController,
     private storage: AngularFireStorage,
     private materiasServ: MateriasService,
+    public modalController: ModalController,
     ) {
       this.show = false;
     }
@@ -180,8 +182,12 @@ tarea.percentageChanges().subscribe((porcentaje) => {
     }
   }
 
-  checked(){
-    console.log('Nuevo estado:' );
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: TerminosPage,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
   }
 
 }

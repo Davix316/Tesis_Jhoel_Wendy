@@ -96,8 +96,8 @@
       "cordova-plugin-preview-any-file": {}
     },
     "platforms": [
-      "android",
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }
