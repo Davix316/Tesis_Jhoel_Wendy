@@ -21,7 +21,7 @@
 - [x] [Google Play Console](https://play.google.com/console/about/)
 - [x] [Git](https://github.com/)
 ### 2. Casos de Uso
-![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/Casos%20de%20Uso.PNG)
+![myimage-alt-tag](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/movil/images/casoUso.PNG)
 ### 3. Arquitectura y Estructura
 - Arquitectura: 
 A continuación se muestra las Arquitecturas; la primera del sistema web, y la segunda de la aplicación móvil:
@@ -104,6 +104,7 @@ Despliegue del sistema web en el Hosting de Firebase.
 
 
 ### 9. Anexos 
+Enlace al Manual tecnico [url](https://github.com/wendysoto/Tesis_Jhoel_Wendy/blob/documentacion/Manual-tecnico_SotoWendy_AmaguaJhoel.pdf)
 
  Enlace al video :movie_camera:
  
