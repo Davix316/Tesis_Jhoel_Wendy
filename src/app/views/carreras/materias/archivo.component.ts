@@ -84,7 +84,7 @@ export class ArchivoComponent implements OnInit{
     if (typeof this.publicacion === 'undefined') {
       this.router.navigate(['/carreras']);
     }
-    console.log(this.publicacion.id)
+    //console.log(this.publicacion.id)
     this.materia = this.publicacion.idMateria;
     this.publicacionForm.patchValue(this.publicacion);
 
@@ -190,7 +190,7 @@ export class ArchivoComponent implements OnInit{
             querySnapshot.forEach((doc) => {
               this.nameMateria=doc.data();
               this.idMat=this.nameMateria.nombre;
-              console.log(this.idMat);
+              //console.log(this.idMat);
             });
         })
         .catch((error) => {

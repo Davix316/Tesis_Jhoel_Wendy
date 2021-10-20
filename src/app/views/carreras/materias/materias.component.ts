@@ -99,8 +99,8 @@ export class MateriasComponent implements OnInit {
     if (typeof this.materia === 'undefined') {
       this.router.navigate(['/carreras']);
     }
-    console.log(this.materia.id)
-    console.log(this.materia.idCarrera)
+    //console.log(this.materia.id)
+    //console.log(this.materia.idCarrera)
     this.materiaForm.patchValue(this.materia);
 
     this.obtenerPublicaciones(this.materia.id);

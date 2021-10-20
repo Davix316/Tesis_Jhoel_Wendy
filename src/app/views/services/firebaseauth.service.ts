@@ -31,7 +31,7 @@ export class FirebaseauthService {
           snap.forEach(userRef => {
             this.currentUser = userRef.data();
             if(userRef.data()){
-              console.log('ROLE CURRENT', this.currentUser.rol);
+              //console.log('ROLE CURRENT', this.currentUser.rol);
             if (this.currentUser.rol === 'Administrador' || this.currentUser.rol === 'SuperAdministrador') {
               this.router.navigate(['dashboard']);
             }
