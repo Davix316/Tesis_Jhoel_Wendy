@@ -106,7 +106,7 @@
                 accept=".pdf ,.docx ,.xlsx" (change)="uploadFile($event)" >
                 
                 <div class="spinner-border" role="status" *ngIf="progreso==true">
-                  <span class="visually-hidden" >Cargando...</span>
+                  <span class="visually-hidden" ></span>
                 </div>
                 <input #FileUrlUser  type="hidden" [value]="urlFile |async" >
 

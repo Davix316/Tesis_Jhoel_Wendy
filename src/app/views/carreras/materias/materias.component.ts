@@ -248,12 +248,12 @@ export class MateriasComponent implements OnInit {
   //SUBIR ARCHIVO
   uploadFile(pdf){
   //generar id Aleatorio para el archivo
-  const id= Math.random().toString(36).substring(2);
   const file=pdf.target.files[0];
-   this.filepath='Archivos/'+ this.nameUser+ '/'+'file_'+id;
-  const ref=this.storage.ref(this.filepath);
-  const tarea= this.storage.upload(this.filepath,file);
-  this.porcentajesubida= tarea.percentageChanges();
+      const filename = pdf.target.files[0].name;
+       this.filepath='Archivos/'+ this.nameUser+'/'+filename;
+      const ref=this.storage.ref(this.filepath);
+      const tarea= this.storage.upload(this.filepath,file);
+      this.porcentajesubida= tarea.percentageChanges();
   
   
   tarea.snapshotChanges().pipe(finalize(()=>this.urlFile=ref.getDownloadURL())).subscribe();

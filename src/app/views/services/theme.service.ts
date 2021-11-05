@@ -34,6 +34,7 @@ export class ThemeService {
   currentUser: any;
   token: string;
   idDoc: string;
+  usuarioID: string;
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
 
@@ -230,19 +231,39 @@ export class ThemeService {
 
   onSaveStudent(student: Admin, studentId: string, foto:string): Promise<void> {
 
+    console.log("id: ", studentId);
 
-    return new Promise(async (resolve, reject) => {
-      try {
-        const id = studentId || this.afs.createId();
-        const data = { id, foto, ...student };
-        const result = await this.studentsCollection.doc(id).set(data);
-        this.afAuth.createUserWithEmailAndPassword(student.email, student.password);
-        resolve(result);
-        window.alert('Estudiante registrado');
-      } catch (err) {
-        reject(err.message);
-      }
-    });
+    if(studentId == null){
+      return new Promise(async (resolve, reject) => {
+        try {
+          this.afAuth.createUserWithEmailAndPassword(student.email, student.password)
+          .then((userResponse) => {
+            this.usuarioID = userResponse.user.uid;
+  
+          const id = this.usuarioID;
+          const data = { id, foto, ...student };
+          const result = this.studentsCollection.doc(id).set(data);
+          resolve(result);
+          window.alert('Estudiante registrado');
+          })
+        } catch (err) {
+          reject(err.message);
+        }
+      });
+    }else{
+      return new Promise(async (resolve, reject) => {
+        try {
+          const id = studentId;
+          const data = { id, foto, ...student };
+          const result = await this.studentsCollection.doc(id).set(data);
+          this.afAuth.createUserWithEmailAndPassword(student.email, student.password);
+          resolve(result);
+          window.alert('Estudiante registrado');
+        } catch (err) {
+          reject(err.message);
+        }
+      });
+    }
   }
 
   onSaveMateria2(materia: Materia, materiaId: string, idCarr: string): Promise<void> {
